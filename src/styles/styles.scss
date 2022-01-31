@@ -1,0 +1,16 @@
+@import './reset.scss';
+@import './fonts.scss';
+@import './colors.scss';
+
+app-root {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(48,68,66);
+    color: #fff;
+}

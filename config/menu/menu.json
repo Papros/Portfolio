@@ -1,0 +1,114 @@
+{
+    "mainMenu" : {
+        "cardConfig": [
+            {   
+                "targetURL": "https://facebook.com",
+                "imageURL": "pattern2.jpg",
+                "text": "",
+                "background": "",
+                "height": 1,
+                "width": 1,
+                "row": 1,
+                "column": 1,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 1,
+                "width": 3,
+                "row": 3,
+                "column": 1,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 1,
+                "width": 5,
+                "row": 1,
+                "column": 3,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 2,
+                "width": 1,
+                "row": 2,
+                "column": 2,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 2,
+                "width": 3,
+                "row": 1,
+                "column": 1,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 2,
+                "width": 4,
+                "row": 1,
+                "column": 2,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 4,
+                "width": 1,
+                "row": 2,
+                "column": 1,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 3,
+                "width": 3,
+                "row": 1,
+                "column": 2,
+                "isVisible": true,
+                "isActive": true
+            },
+            {
+                "targetURL": "https://wykop.pl",
+                "imageURL": "pattern1.jpg",
+                "text": "",
+                "background": "",
+                "height": 4,
+                "width": 4,
+                "row": 2,
+                "column": 1,
+                "isVisible": true,
+                "isActive": true
+            }
+        ]
+    }
+}
