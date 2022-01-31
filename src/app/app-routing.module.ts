@@ -5,6 +5,9 @@ const routes: Routes = [{
   path: '',
   pathMatch: 'full',
   redirectTo: '/menu',
+}, {
+  path: '**',
+  redirectTo: '/',
 }];
 
 @NgModule({
