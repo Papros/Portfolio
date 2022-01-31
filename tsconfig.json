@@ -23,7 +23,8 @@
       "dom"
     ],
     "paths": {
-      "@app":["src/app"]
+      "@app/app-module": ["src/app/modules/app/app.module.ts"],
+      "@app/pages/main-menu": ["src/app/modules/app/pages/index"],
     }
   },
   "angularCompilerOptions": {
