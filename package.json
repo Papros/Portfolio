@@ -4,8 +4,8 @@
   "type": "module",
   "homepage": "https://papros.github.io/Portfolio/",
   "scripts": {
-    "full-deploy": "npm run build & npm run deploy",
-    "deploy": "gh-pages -d dist/portfolio",
+    "full-deploy": "ng build --prod --base-href \"https://papros.github.io/Portfolio/\" & npm run deploy",
+    "deploy": "npx angular-cli-ghpages --dir=dist/portfolio",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -33,6 +33,7 @@
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.0",
     "gh-pages": "^3.2.3",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
