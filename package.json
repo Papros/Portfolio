@@ -1,12 +1,12 @@
 {
   "name": "portfolio",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "node scripts/gh-pages-deploy.js"
   },
   "private": true,
   "dependencies": {
