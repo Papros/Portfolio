@@ -5,7 +5,7 @@
   "homepage": "https://papros.github.io/Portfolio/",
   "scripts": {
     "full-deploy": "npm run build & npm run deploy",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
