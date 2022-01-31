@@ -4,7 +4,7 @@ import { NoPreloading, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: '/${home}',
+  redirectTo: '/menu',
 }];
 
 @NgModule({
