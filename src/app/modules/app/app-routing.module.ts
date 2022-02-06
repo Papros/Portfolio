@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NoPreloading, RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './enums';
+import { MainMenuComponent } from './pages';
 
 const routes: Routes = [{
   path: '',
@@ -8,7 +9,8 @@ const routes: Routes = [{
   redirectTo: `/${ AppRoutes.MainMenu }`,
 }, {
   path: AppRoutes.MainMenu,
-  loadChildren: async () => (await import('@app/pages/main-menu')).MainMenuComponent,
+  component: MainMenuComponent
+  //loadChildren: async () => (await import('@app/pages/main-menu')).MainMenuComponent,
 }, {
   path: '**',
   redirectTo: '/',
@@ -16,7 +18,7 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: true,
+    enableTracing: false,
     relativeLinkResolution: 'corrected',
     preloadingStrategy: NoPreloading,
   })],

@@ -16,6 +16,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "target": "es2017",
     "module": "es2020",
     "lib": [
@@ -23,8 +25,13 @@
       "dom"
     ],
     "paths": {
+      "@app/config/menu": ["config/menu/menu.json"],
+      "@app/providers": ["src/app/modules/app/ioc/providers.ts"],
       "@app/app-module": ["src/app/modules/app/app.module.ts"],
       "@app/pages/main-menu": ["src/app/modules/app/pages/index"],
+      "@app/shared/config": ["src/app/modules/shared/config/index"],
+      "@app/shared/logger": ["src/app/modules/shared/logger/index"],
+      "@app/shared/tile-menu": ["src/app/modules/shared/tile-menu/index"],
     }
   },
   "angularCompilerOptions": {

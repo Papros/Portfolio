@@ -1,0 +1,15 @@
+
+h3 {
+  padding: 1% 2%;
+  margin-top: 5px;
+  color: #ffffff;
+  background-color: rgba(30, 30, 30, 0.4);
+  width: 100%;
+  overflow: hidden;
+}
+  
+:hover {
+  h3 {
+    background-color: rgba(30, 30, 30, 0.6);
+  }
+}
