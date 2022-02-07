@@ -1,4 +1,18 @@
 
+:host {
+  border: 10px #ffffff;
+  display: block;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  
+}
+
+:host:hover {
+  filter: brightness(160%);
+}
+
 h3 {
   padding: 1% 2%;
   margin-top: 5px;
