@@ -1,6 +1,5 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
-import { ConfigService } from ".";
-import { CONFIG_SERVICE } from "./config.module.types";
+import { CONFIG_SERVICE, ConfigService } from ".";
 
 @NgModule()
 export class ConfigModule {

@@ -1,3 +1,4 @@
 export enum AppRoutes {
-    MainMenu = "menu",
+    MainMenu = "main-menu",
+    AboutMe = 'about-me'
 }

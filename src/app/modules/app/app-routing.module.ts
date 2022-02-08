@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { NoPreloading, RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './enums';
-import { MainMenuComponent } from './pages';
+import { 
+  MainMenuPageComponent,
+  AboutMePageComponent
+ } from './pages';
 
 const routes: Routes = [{
   path: '',
@@ -9,8 +12,11 @@ const routes: Routes = [{
   redirectTo: `/${ AppRoutes.MainMenu }`,
 }, {
   path: AppRoutes.MainMenu,
-  component: MainMenuComponent
+  component: MainMenuPageComponent
   //loadChildren: async () => (await import('@app/pages/main-menu')).MainMenuComponent,
+}, {
+  path: AppRoutes.AboutMe,
+  component: AboutMePageComponent
 }, {
   path: '**',
   redirectTo: '/',

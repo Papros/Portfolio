@@ -4,20 +4,18 @@ import { ILoggerService, LOGGER_SERVICE } from '@app/shared/logger';
 import { ITileConfig } from '@app/shared/tile-menu';
 
 @Component({
-  selector: 'main-menu-page',
-  templateUrl: './main-menu-page.component.html',
-  styleUrls: ['./main-menu-page.component.scss'] 
+  selector: 'about-me-page',
+  templateUrl: './about-me-page.component.html',
+  styleUrls: ['./about-me-page.component.scss'] 
 })
-export class MainMenuPageComponent implements OnInit, OnDestroy {
-  private readonly loggerPrefix = 'MainMenuComponent';
-  public readonly tileConfig: ITileConfig[];
+export class AboutMePageComponent implements OnInit, OnDestroy {
+  private readonly loggerPrefix = 'AboutMePageComponent';
 
   constructor(
     @Inject(CONFIG_SERVICE) private readonly configService: IConfigservice,
     @Inject(LOGGER_SERVICE) private readonly logger: ILoggerService,
   ){
-    this.tileConfig = this.configService.fetch().mainMenu.tileConfig;
-    this.logger.debug(`Found ${ this.tileConfig.length } tiles`, this.loggerPrefix);
+      
   }
 
   public ngOnDestroy(): void {

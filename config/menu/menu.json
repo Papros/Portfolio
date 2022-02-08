@@ -25,7 +25,7 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
+                "behavior": "hide"
             },
             {
                 "targetURL": "https://wykop.pl",
@@ -54,7 +54,7 @@
                 "behavior": "none"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "about-me",
                 "imageURL": "pattern3.jpg",
                 "text": "Tile [4]",
                 "background": "",
@@ -64,7 +64,7 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
+                "behavior": "link"
             },
             {
                 "targetURL": "https://wykop.pl",

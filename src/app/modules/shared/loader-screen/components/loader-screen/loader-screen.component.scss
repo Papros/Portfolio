@@ -1,0 +1,120 @@
+@import 'src/styles/colors.scss';
+
+:host {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    .loader-container {
+        width: 100%;
+        height: 100%;
+        display: block;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+
+        .circle-animation {
+            width: 20vh;
+            border-radius: 15vh;
+            border: 10px solid #465926;
+            height: 20vh;
+            animation-name: loading-circle;
+            animation-timing-function: linear;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+
+        .loading-bar-animation {
+            border: 3px #565656 solid;
+            width: 60vw;
+            height: 10vh;
+            overflow: hidden;
+            border-radius: 1vh;
+            padding: 3px;
+
+            .animation-item {
+                border-radius: 1vh;
+                width: 10%;
+                height: 100%;
+                background-color: #465926;
+                display: block;
+
+                animation-name: loading-bar;
+                animation-timing-function: linear;
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+            }
+        }
+
+        .transparent-icon-animation {
+            width: 40vh;
+            height: 40vh;
+            border-radius: 40% 10%;
+            background-color:  #465926;;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+
+            animation-name: transparent-icon;
+            animation-timing-function: linear;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+
+            .animation-item {
+                width: 10vh;
+                height: 10vh;
+                border-radius: 40% 10%;
+                background-color: #667946;
+            }
+        }
+
+        .rotating-circle-animation {
+            width: 60vh;
+            border-radius: 50%;
+            height: 60vh;
+            background: linear-gradient( 
+                $transparent 0%,  
+                $accent-color 50%,
+                $transparent 100%, 
+                );
+
+            animation-name: rotating-circle;
+            animation-timing-function: linear;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+
+            justify-content: center;
+            display: flex;
+            align-items: center;
+
+            .animation-item {
+                width: 80%;
+                height: 80%;
+                border-radius: 50%;
+                background-color: $background-color;
+            }
+        }
+    }
+}
+
+@keyframes loading-circle {
+    0% { width: 1vh; height: 1vh; }
+    50% { width: 30vh; height: 30vh; }
+    100% { width: 1vh; height: 1vh;}
+}
+
+@keyframes loading-bar {
+    from { margin-left: -10%;}
+    to { margin-left: 100%; }
+}
+
+@keyframes transparent-icon {
+    0% { opacity: 1;}
+    50% {opacity: 0.1;}
+    100% {opacity: 1;}
+}
+
+@keyframes rotating-circle {
+    from { transform: rotate(0deg); }
+    to {transform: rotate(360deg);}
+}

@@ -1,29 +1,33 @@
 
 :host {
-  border: 10px #ffffff;
-  display: block;
   border-radius: 5px;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  
 }
 
 :host:hover {
   filter: brightness(160%);
-}
+  transition: filter 0.25s ease-out;
 
-h3 {
-  padding: 1% 2%;
-  margin-top: 5px;
-  color: #ffffff;
-  background-color: rgba(30, 30, 30, 0.4);
-  width: 100%;
-  overflow: hidden;
-}
-  
-:hover {
   h3 {
-    background-color: rgba(30, 30, 30, 0.6);
+    filter: brightness(60%);
+    background-color: rgba(10, 10, 10, 0.6);
   }
 }
+
+.inner-child-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  h3 {
+    padding: 1% 2%;
+    margin-top: 5px;
+    color: #ffffff;
+    background-color: rgba(30, 30, 30, 0.4);
+    width: 100%;
+    overflow: hidden;
+  }
+}
+

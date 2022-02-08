@@ -1,21 +1,29 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { SafeStyle } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { TileBehavior } from '../..';
 import { ITileConfig } from '../../interfaces';
 
 @Component({
   selector: 'tile-menu-item',
   templateUrl: './tile-menu-item.component.html',
   styleUrls: ['./tile-menu-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TileMenuItemComponent implements OnInit {
 
   @HostBinding('style') baseStyle: SafeStyle;
+
+  @HostListener('click') onClick(){
+    this.handleClick();
+  }
   
   @Input()
   public options!: ITileConfig;
 
-  constructor(){
+  constructor(
+    private readonly router: Router,
+  ){
     this.options = {
       targetURL: '',
       imageURL: '',
@@ -31,11 +39,15 @@ export class TileMenuItemComponent implements OnInit {
     this.baseStyle = this.getStyles();
   }
 
-  ngOnInit(): void {
-    this.baseStyle = this.getStyles();
+  public ngOnInit(): void {
+    this.updateStyles();
   }
 
-  public getStyles() {
+  private updateStyles(additionalStyles?: SafeStyle): void {
+    this.baseStyle = this.getStyles(additionalStyles);
+  }
+
+  private getStyles(additionalStyles?: SafeStyle): SafeStyle {
     return ( this.options ?
     {
       'cursor': this.options.isActive ? 'pointer' : 'default',
@@ -45,8 +57,32 @@ export class TileMenuItemComponent implements OnInit {
       'grid-column-start': this.options.column,
       'grid-column-end': `span ${this.options.width}`,
       'grid-row-start': this.options.row,
-      'grid-row-end': (this.options.row + this.options.height)
+      'grid-row-end': (this.options.row + this.options.height),
     } : 
     {});
   }
+ 
+  private handleClick(): void {
+    switch(this.options.behavior) {
+      case TileBehavior.Grow: 
+        break;
+      case TileBehavior.Hide:
+        this.options.isVisible = false;
+        this.updateStyles();
+        break;
+      case TileBehavior.Link:
+        if (new RegExp('^(http)?').test(this.options.targetURL)) {
+          window.location.href = this.options.targetURL
+        } else {
+          this.router.navigate([this.options.targetURL]).finally();
+        }
+        break;
+      case TileBehavior.TurnOver:
+        break;
+      case TileBehavior.None:
+      default:
+        break;
+    }
+  }
+
 }

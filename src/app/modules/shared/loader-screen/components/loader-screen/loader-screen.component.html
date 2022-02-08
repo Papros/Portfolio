@@ -1,0 +1,13 @@
+<div class="loader-container" [ngSwitch]="loaderType">
+
+    <div *ngSwitchCase="LoaderType.GrowingCircle" class="circle-animation"><div class="animation-item"></div></div>
+
+    <div *ngSwitchCase="LoaderType.LoadingBar" class="loading-bar-animation"><div class="animation-item"></div></div>
+
+    <div *ngSwitchCase="LoaderType.TransparentIcon" class="transparent-icon-animation"><div class="animation-item"></div></div>
+
+    <div *ngSwitchCase="LoaderType.RotatingCircle" class="rotating-circle-animation"><div class="animation-item"></div></div>
+
+    <div *ngSwitchDefault class="loading-bar"><div class="circle-animation"></div></div>
+
+</div>
