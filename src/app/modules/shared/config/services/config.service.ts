@@ -22,7 +22,7 @@ export class ConfigService implements IConfigservice {
     }
 
     getConfig(): IConfig {
-        return this.config;
+        return this.config || this.fetch();
     }
     
 }

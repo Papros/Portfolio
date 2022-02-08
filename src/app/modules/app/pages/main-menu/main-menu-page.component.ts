@@ -16,7 +16,7 @@ export class MainMenuPageComponent implements OnInit, OnDestroy {
     @Inject(CONFIG_SERVICE) private readonly configService: IConfigservice,
     @Inject(LOGGER_SERVICE) private readonly logger: ILoggerService,
   ){
-    this.tileConfig = this.configService.fetch().mainMenu.tileConfig;
+    this.tileConfig = this.configService.getConfig().mainMenu.tileConfig;
     this.logger.debug(`Found ${ this.tileConfig.length } tiles`, this.loggerPrefix);
   }
 

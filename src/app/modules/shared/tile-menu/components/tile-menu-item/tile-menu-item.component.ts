@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input, OnInit } from '@angular/core';
 import { SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TileBehavior } from '../..';
+import { LoaderToken } from '../../../loader/enums';
+import { ILoaderService } from '../../../loader/interfaces';
+import { LOADER_SERVICE } from '../../../loader/loader.module.types';
 import { ITileConfig } from '../../interfaces';
 
 @Component({
@@ -23,6 +26,7 @@ export class TileMenuItemComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
+    @Inject(LOADER_SERVICE) private readonly loaderService: ILoaderService,
   ){
     this.options = {
       targetURL: '',
@@ -74,7 +78,11 @@ export class TileMenuItemComponent implements OnInit {
         if (new RegExp('^(http)?').test(this.options.targetURL)) {
           window.location.href = this.options.targetURL
         } else {
-          this.router.navigate([this.options.targetURL]).finally();
+          this.router.navigate([this.options.targetURL])
+          .then( () => this.loaderService.show(LoaderToken.RootLoader, 'router'))
+          .finally(
+            () => this.loaderService.hide(LoaderToken.RootLoader, 'router')
+          );
         }
         break;
       case TileBehavior.TurnOver:

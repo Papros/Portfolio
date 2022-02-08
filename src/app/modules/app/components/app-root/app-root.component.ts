@@ -21,6 +21,5 @@ export class AppRootComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.register(LoaderToken.RootLoader);
-    this.loaderService.show(LoaderToken.RootLoader, 'ticker');
   }
 }
