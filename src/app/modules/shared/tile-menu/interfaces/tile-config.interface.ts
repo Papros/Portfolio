@@ -9,6 +9,7 @@ export interface ITileConfig {
     column: number;
     width: number;
     height: number;
+    iconURL?: string;
     isVisible?: boolean;
     isActive?: boolean;
     behavior?: TileBehavior; 

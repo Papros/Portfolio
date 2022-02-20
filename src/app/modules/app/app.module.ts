@@ -6,6 +6,8 @@ import { LoggerModule } from '@app/shared/logger';
 import { TileMenuModule } from '@app/shared/tile-menu';
 import { LoaderModule } from '@app/shared/loader';
 import { LoaderScreenModule } from '@app/shared/loader-screen';
+import { TranslationModule } from '@app/shared/translation';
+import { StorageModule } from '@app/shared/storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppRootComponent } from './components/app-root/app-root.component';
 import { 
@@ -28,6 +30,8 @@ import {
     LoggerModule.forRoot(),
     ConfigModule.forRoot(),
     LoaderModule.forRoot(),
+    StorageModule.forRoot(),
+    TranslationModule
   ],
   providers: PROVIDERS,
   bootstrap: [AppRootComponent]

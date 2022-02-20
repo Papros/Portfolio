@@ -7,12 +7,17 @@
 }
 
 :host:hover {
-  filter: brightness(160%);
+  filter: brightness(120%);
   transition: filter 0.25s ease-out;
 
-  h3 {
+  .tile-title {
     filter: brightness(60%);
     background-color: rgba(10, 10, 10, 0.6);
+
+    .material-icons, h3 {
+      color: #ffffff;
+      filter: brightness(200%);
+    }
   }
 }
 
@@ -21,13 +26,21 @@
   width: 100%;
   height: 100%;
 
-  h3 {
+  .tile-title {
     padding: 1% 2%;
     margin-top: 5px;
     color: #ffffff;
-    background-color: rgba(30, 30, 30, 0.4);
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(30, 30, 30, 0.5);
     width: 100%;
     overflow: hidden;
+    align-items: center;
+    
+    .material-icons{
+      flex: min;
+      padding-right: 15px;
+    }
   }
 }
 

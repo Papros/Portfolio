@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy, Output } 
 import { LoaderScreenType } from '../..';
 
 @Component({
-  selector: 'loader-screen',
+  selector: 'app-loader-screen',
   templateUrl: './loader-screen.component.html',
   styleUrls: ['./loader-screen.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

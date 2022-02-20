@@ -31,6 +31,7 @@ export class TileMenuItemComponent implements OnInit {
     this.options = {
       targetURL: '',
       imageURL: '',
+      iconURL: '',
       background: '',
       text: '',
       row: 0,

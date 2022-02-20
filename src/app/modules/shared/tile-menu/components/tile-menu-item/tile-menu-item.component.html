@@ -1,3 +1,6 @@
 <div class="inner-child-container">
-    <h3>{{options.text}}</h3>
+    <div class="tile-title" *ngIf="!!options.text"> 
+        <i class="material-icons" *ngIf="!!options.iconURL">{{options.iconURL}}</i>
+        <h3>{{options.text}}</h3>
+    </div>
 </div>

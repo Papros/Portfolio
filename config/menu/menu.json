@@ -4,72 +4,78 @@
             {   
                 "targetURL": "https://facebook.com",
                 "imageURL": "",
-                "text": "Tile [0]",
+                "iconURL": "settings",
+                "text": "Ustawienia",
                 "background": "#559334",
                 "row": 1,
                 "column": 1,
                 "width": 1,
-                "height": 1,
+                "height": 2,
                 "isVisible": true,
                 "isActive": false,
                 "behavior": "none"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "",
                 "imageURL": "pattern1.jpg",
-                "text": "Tile [1]",
+                "iconURL": "thumb_up",
+                "text": "Socials",
                 "background": "",
                 "row": 1,
                 "column": 2,
                 "width": 3,
                 "height": 1,
                 "isVisible": true,
-                "isActive": true,
-                "behavior": "hide"
+                "isActive": false,
+                "behavior": "none"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "projects/other",
                 "imageURL": "pattern2.jpg",
-                "text": "Tile [2]",
+                "iconURL": "precision_manufacturing",
+                "text": "Inne projekty",
                 "background": "#ac6264",
                 "row": 1,
                 "column": 5,
                 "width": 1,
                 "height": 3,
                 "isVisible": true,
-                "isActive": false,
-                "behavior": "none"
+                "isActive": true,
+                "behavior": "link"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "about-me",
                 "imageURL": "pattern1.jpg",
-                "text": "Tile [3]",
+                "iconURL": "person",
+                "text": "O mnie",
                 "background": "#772377",
-                "row": 2,
+                "row": 3,
                 "column": 1,
                 "width": 2,
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
-            },
-            {
-                "targetURL": "about-me",
-                "imageURL": "pattern3.jpg",
-                "text": "Tile [4]",
-                "background": "",
-                "row": 2,
-                "column": 3,
-                "width": 1,
-                "height": 1,
-                "isVisible": true,
-                "isActive": true,
                 "behavior": "link"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "about",
+                "imageURL": "pattern3.jpg",
+                "iconURL": "beenhere",
+                "text": "O stronie",
+                "background": "",
+                "row": 2,
+                "column": 2,
+                "width": 2,
+                "height": 1,
+                "isVisible": true,
+                "isActive": true,
+                "behavior": "grow"
+            },
+            {
+                "targetURL": "projects",
                 "imageURL": "",
-                "text": "Tile [5]",
+                "iconURL": "architecture",
+                "text": "Projekty",
                 "background": "#873456",
                 "row": 2,
                 "column": 4,
@@ -77,25 +83,13 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
+                "behavior": "link"
             },
             {
-                "targetURL": "https://wykop.pl",
-                "imageURL": "pattern3.jpg",
-                "text": "Tile [6]",
-                "background": "",
-                "row": 4,
-                "column": 1,
-                "width": 2,
-                "height": 1,
-                "isVisible": true,
-                "isActive": true,
-                "behavior": "none"
-            },
-            {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "",
                 "imageURL": "pattern1.jpg",
-                "text": "Tile [7]",
+                "iconURL": "",
+                "text": "",
                 "background": "",
                 "row": 3,
                 "column": 3,
@@ -103,12 +97,13 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
+                "behavior": "turn-over"
             },
             {
-                "targetURL": "https://wykop.pl",
+                "targetURL": "contacts",
                 "imageURL": "pattern3.jpg",
-                "text": "Tile [8]",
+                "iconURL": "alternate_email",
+                "text": "Contats",
                 "background": "",
                 "row": 4,
                 "column": 4,
@@ -116,7 +111,7 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "none"
+                "behavior": "grow"
             }
         ]
     }

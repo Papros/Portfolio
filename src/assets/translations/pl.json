@@ -1,0 +1,27 @@
+{
+    "mainMenuPage": {
+        "tile": {
+            "title": "Menu"
+        }
+    },
+    "settingsPage": {
+        "tile": {
+            "title": "Ustawienia"
+        }
+    },
+    "aboutPage": {
+        "tile": {
+            "title": "O stronie"
+        }
+    },
+    "aboutMePage": {
+        "tile": {
+            "title": "O mnie"
+        }
+    },
+    "contactsPage": {
+        "tile": {
+            "title": "Kontakt"
+        }
+    }
+}

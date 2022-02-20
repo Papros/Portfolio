@@ -34,6 +34,8 @@
       "@app/shared/loader": ["src/app/modules/shared/loader/index"],
       "@app/shared/tile-menu": ["src/app/modules/shared/tile-menu/index"],
       "@app/shared/loader-screen": ["src/app/modules/shared/loader-screen/index"],
+      "@app/shared/translation": ["src/app/modules/shared/translation/index"],
+      "@app/shared/storage": ["src/app/modules/shared/storage/index"],
     }
   },
   "angularCompilerOptions": {
