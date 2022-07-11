@@ -1,3 +1,4 @@
+import { PredefinedComponent } from "../enums/predefined-component.enum";
 import { TileBehavior } from "../enums/tile-behavior.enum";
 
 export interface ITileConfig {
@@ -13,4 +14,5 @@ export interface ITileConfig {
     isVisible?: boolean;
     isActive?: boolean;
     behavior?: TileBehavior; 
+    component?: PredefinedComponent;
 }

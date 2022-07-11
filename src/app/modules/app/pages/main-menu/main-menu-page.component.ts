@@ -4,7 +4,7 @@ import { ILoggerService, LOGGER_SERVICE } from '@app/shared/logger';
 import { ITileConfig } from '@app/shared/tile-menu';
 
 @Component({
-  selector: 'main-menu-page',
+  selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
   styleUrls: ['./main-menu-page.component.scss'] 
 })

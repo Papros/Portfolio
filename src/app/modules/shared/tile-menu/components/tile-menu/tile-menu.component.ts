@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 import { ITileConfig } from '../../interfaces';
 
 @Component({
-  selector: 'tile-menu',
+  selector: 'app-tile-menu',
   templateUrl: './tile-menu.component.html',
   styleUrls: ['./tile-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

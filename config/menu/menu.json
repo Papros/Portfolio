@@ -1,9 +1,9 @@
-{
+{   
     "mainMenu" : {
         "tileConfig": [
             {   
                 "targetURL": "https://facebook.com",
-                "imageURL": "",
+                "imageURL": "pattern1.jpg",
                 "iconURL": "settings",
                 "text": "Ustawienia",
                 "background": "#559334",
@@ -13,13 +13,14 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": false,
-                "behavior": "none"
+                "behavior": "turn-over",
+                "component": "settings"
             },
             {
                 "targetURL": "",
                 "imageURL": "pattern1.jpg",
                 "iconURL": "thumb_up",
-                "text": "Socials",
+                "text": "Social Media",
                 "background": "",
                 "row": 1,
                 "column": 2,
@@ -27,13 +28,14 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": false,
-                "behavior": "none"
+                "behavior": "none",
+                "component": "none"
             },
             {
                 "targetURL": "projects/other",
                 "imageURL": "pattern2.jpg",
                 "iconURL": "precision_manufacturing",
-                "text": "Inne projekty",
+                "text": "Doświadczenie",
                 "background": "#ac6264",
                 "row": 1,
                 "column": 5,
@@ -41,13 +43,14 @@
                 "height": 3,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "link"
+                "behavior": "link",
+                "component": "none"
             },
             {
-                "targetURL": "about-me",
-                "imageURL": "pattern1.jpg",
-                "iconURL": "person",
-                "text": "O mnie",
+                "targetURL": "projects",
+                "imageURL": "",
+                "iconURL": "architecture",
+                "text": "Projekty",
                 "background": "#772377",
                 "row": 3,
                 "column": 1,
@@ -55,7 +58,8 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "link"
+                "behavior": "link",
+                "component": "none"
             },
             {
                 "targetURL": "about",
@@ -69,13 +73,14 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "grow"
+                "behavior": "grow",
+                "component": "none"
             },
             {
-                "targetURL": "projects",
-                "imageURL": "",
-                "iconURL": "architecture",
-                "text": "Projekty",
+                "targetURL": "about-me",
+                "imageURL": "pattern1.jpg",
+                "iconURL": "person",
+                "text": "O mnie",
                 "background": "#873456",
                 "row": 2,
                 "column": 4,
@@ -83,7 +88,8 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "link"
+                "behavior": "link",
+                "component": "none"
             },
             {
                 "targetURL": "",
@@ -97,13 +103,14 @@
                 "height": 2,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "turn-over"
+                "behavior": "none",
+                "component": "none"
             },
             {
                 "targetURL": "contacts",
                 "imageURL": "pattern3.jpg",
                 "iconURL": "alternate_email",
-                "text": "Contats",
+                "text": "Kontakt",
                 "background": "",
                 "row": 4,
                 "column": 4,
@@ -111,8 +118,14 @@
                 "height": 1,
                 "isVisible": true,
                 "isActive": true,
-                "behavior": "grow"
+                "behavior": "turn-over",
+                "component": "contact"
             }
         ]
+    },
+    "defaultLanguage": "PL",
+    "personalData": {
+        "phone": 123456789,
+        "email": "email@gmail.com"
     }
 }

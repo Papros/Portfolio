@@ -29,6 +29,8 @@
       "@app/providers": ["src/app/modules/app/ioc/providers.ts"],
       "@app/app-module": ["src/app/modules/app/app.module.ts"],
       "@app/pages": ["src/app/modules/app/pages/index"],
+      "@app/features/settingpanel": ["src/app/modules/features/settings-panel/index"],
+      "@app/features/contact": ["src/app/modules/features/contact/index"],
       "@app/shared/config": ["src/app/modules/shared/config/index"],
       "@app/shared/logger": ["src/app/modules/shared/logger/index"],
       "@app/shared/loader": ["src/app/modules/shared/loader/index"],

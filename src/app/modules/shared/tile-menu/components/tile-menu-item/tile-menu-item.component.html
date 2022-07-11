@@ -1,6 +1,40 @@
-<div class="inner-child-container">
+<div class="inner-child-container"
+    (click)="handleClick()" 
+    [@.disabled]="!isAnimated" >
+
+    <ng-container *ngIf="isAnimated else nonAnimated">
+       <div class="tile-container" 
+        [style] = "getStyles()" 
+        [@cardFlip]="postAnimation ? 'postAnimationState' : 'preAnimationState'">
+
+            <div class="animation-state-container pre-animation-state">
+                <ng-container *ngTemplateOutlet="default"></ng-container>
+            </div>
+    
+            <div class="animation-state-container post-animation-state">
+                <ng-container *ngTemplateOutlet="custom"></ng-container>
+            </div>
+
+        </div> 
+    </ng-container>
+    
+</div>
+
+<ng-template #nonAnimated>
+    <div [style] = "getStyles()" class="tile-container">
+        <ng-container *ngIf="!!options.component else custom">
+            <ng-container *ngTemplateOutlet="default"></ng-container>
+        </ng-container> 
+    </div> 
+</ng-template>
+
+<ng-template #default>
     <div class="tile-title" *ngIf="!!options.text"> 
         <i class="material-icons" *ngIf="!!options.iconURL">{{options.iconURL}}</i>
         <h3>{{options.text}}</h3>
     </div>
-</div>
+</ng-template>
+
+<ng-template #custom>
+    <app-settings-panel></app-settings-panel>
+</ng-template>
