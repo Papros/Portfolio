@@ -3,19 +3,18 @@
     [@.disabled]="!isAnimated" >
 
     <ng-container *ngIf="isAnimated else nonAnimated">
-       <div class="tile-container" 
-        [style] = "getStyles()" 
-        [@cardFlip]="postAnimation ? 'postAnimationState' : 'preAnimationState'">
+        <div class="tile-container" 
+            [style] = "getStyles()" 
+            [@cardFlip]="postAnimation ? 'postAnimationState' : 'preAnimationState'">
 
-            <div class="animation-state-container pre-animation-state">
-                <ng-container *ngTemplateOutlet="default"></ng-container>
-            </div>
-    
-            <div class="animation-state-container post-animation-state">
-                <ng-container *ngTemplateOutlet="custom"></ng-container>
-            </div>
+        <div class="animation-state-container pre-animation-state">
+            <ng-container *ngTemplateOutlet="default"></ng-container>
+        </div>
 
-        </div> 
+        <div class="animation-state-container post-animation-state">
+            <ng-container *ngTemplateOutlet="custom"></ng-container>
+        </div>
+    </div> 
     </ng-container>
     
 </div>
@@ -23,7 +22,7 @@
 <ng-template #nonAnimated>
     <div [style] = "getStyles()" class="tile-container">
         <ng-container *ngIf="!!options.component else custom">
-            <ng-container *ngTemplateOutlet="default"></ng-container>
+            <ng-container *ngTemplateOutlet="custom"></ng-container>
         </ng-container> 
     </div> 
 </ng-template>
@@ -36,5 +35,11 @@
 </ng-template>
 
 <ng-template #custom>
-    <app-settings-panel></app-settings-panel>
+        <ng-container [ngSwitch] = "options.component" >
+            <app-settings-panel *ngSwitchCase = "componentType.Settings" ></app-settings-panel>
+            <app-contacts-info *ngSwitchCase = "componentType.Contact" ></app-contacts-info>
+            <ng-container *ngSwitchDefault>
+                <ng-container *ngTemplateOutlet="default"></ng-container>
+            </ng-container>
+        </ng-container>
 </ng-template>

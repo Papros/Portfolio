@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inj
 import { SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ILoaderService, LoaderToken, LOADER_SERVICE } from '@app/shared/loader';
-import { ITileConfig, TileBehavior } from '@app/shared/tile-menu';
+import { ITileConfig, PredefinedComponent, TileBehavior, TitleType } from '@app/shared/tile-menu';
 import { Animations } from './tile-menu-item.animations';
 
 @Component({
@@ -20,6 +20,9 @@ export class TileMenuItemComponent implements OnInit {
   public postAnimation = false;
   public isAnimated = false;
   public isCustom = false;
+
+  public componentType = PredefinedComponent;
+  public titleType = TitleType;
 
   @HostBinding('style')
   public hostStyle: SafeStyle;

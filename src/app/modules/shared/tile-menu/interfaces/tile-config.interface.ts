@@ -1,3 +1,4 @@
+import { TitleType } from "../enums";
 import { PredefinedComponent } from "../enums/predefined-component.enum";
 import { TileBehavior } from "../enums/tile-behavior.enum";
 
@@ -15,4 +16,5 @@ export interface ITileConfig {
     isActive?: boolean;
     behavior?: TileBehavior; 
     component?: PredefinedComponent;
+    titleType?: TitleType;
 }

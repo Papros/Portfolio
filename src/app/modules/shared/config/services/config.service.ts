@@ -1,28 +1,33 @@
 import { Inject, Injectable } from "@angular/core";
 import { ILoggerService, LOGGER_SERVICE } from "@app/shared/logger";
 import { IConfig, IConfigservice } from "../interfaces";
-import appConfig from '@app/config/menu';
-import { ITileConfig } from "../../tile-menu/interfaces";
+import { AppConfig } from '@app/config/menu';
+import { BehaviorSubject, Observable } from "rxjs";
+import { Language } from "@app/shared/translation";
 
 @Injectable()
 export class ConfigService implements IConfigservice {
-    private readonly loggerPrefix = 'ConfigService';
-    private config: IConfig;
 
+    public Config$: BehaviorSubject<IConfig>;
+
+    private readonly loggerPrefix = 'ConfigService';
+    
     public constructor(
         @Inject(LOGGER_SERVICE) private readonly logger: ILoggerService,
     ){
-        this.config = JSON.parse(JSON.stringify(appConfig));
+        this.Config$ = new BehaviorSubject<IConfig>(
+            {mainMenu:{ tileConfig: [] }, defaultLanguage:Language.EN, personalData: {}}
+            );
     }
     
     fetch(): IConfig {
-        this.logger.debug(`Fetching config data`, this.loggerPrefix)
-        this.config = appConfig as unknown as IConfig;
-        return this.config;
+        this.logger.debug(`Fetching config data`, this.loggerPrefix);
+        this.Config$.next(AppConfig as IConfig);
+        return this.Config$.getValue();
     }
 
     getConfig(): IConfig {
-        return this.config || this.fetch();
+        return this.Config$.getValue();
     }
     
 }

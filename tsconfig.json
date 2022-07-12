@@ -25,7 +25,7 @@
       "dom"
     ],
     "paths": {
-      "@app/config/menu": ["config/menu/menu.json"],
+      "@app/config/menu": ["config/menu/menu"],
       "@app/providers": ["src/app/modules/app/ioc/providers.ts"],
       "@app/app-module": ["src/app/modules/app/app.module.ts"],
       "@app/pages": ["src/app/modules/app/pages/index"],

@@ -15,10 +15,10 @@ export const Animations = {
             transform: 'rotateY(180deg)',
         })),
         transition(`${ AnimationState.PreAnimation } => ${ AnimationState.PostAnimation }`, [
-            animate('1500ms')
+            animate('600ms')
         ]),
         transition(`${ AnimationState.PostAnimation } => ${ AnimationState.PreAnimation }`, [
-            animate('1000ms')
+            animate('300ms')
         ]),
     ])
 }
