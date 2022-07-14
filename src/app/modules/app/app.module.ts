@@ -14,6 +14,9 @@ import {
   MainMenuPageComponent,
   AboutMePageComponent,
 } from './pages';
+import { SettingsPanelModule } from '@app/features/settingpanel';
+import { ContactsInfoModule } from '@app/features/contact';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -24,9 +27,12 @@ import {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     TileMenuModule,
     LoaderScreenModule,
+    SettingsPanelModule,
+    ContactsInfoModule,
     LoggerModule.forRoot(),
     ConfigModule.forRoot(),
     LoaderModule.forRoot(),

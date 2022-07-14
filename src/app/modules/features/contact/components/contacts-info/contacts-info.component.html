@@ -1,0 +1,24 @@
+<div class="contact-grid">
+
+    <div class="main-info">
+        <div class="contact-item" *ngIf="(personalData$ | async)">
+            <i class="material-icons">mail</i>
+            <p>{{ (personalData$ | async)?.phoneNumber }}</p>
+        </div>
+
+        <div class="one-flex"></div>
+
+        <div class="contact-item" *ngIf="(personalData$ | async)">
+            <i class="material-icons">call</i>
+            <p>{{ (personalData$ | async)?.email }}</p>
+        </div> 
+    </div>
+
+    <div class="vertical-line"></div>
+
+    <div class="sub-info">
+        <p>Poniedziałek - Piątek</p> 
+        <p>11:00 - 19:00</p>
+    </div>
+
+</div>

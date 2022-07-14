@@ -18,9 +18,6 @@ const routes: Routes = [{
   path: AppRoutes.AboutMe,
   component: AboutMePageComponent
 }, {
-  path: AppRoutes.AboutPortfolio,
-  component: AboutMePageComponent
-}, {
   path: AppRoutes.Projects,
   component: AboutMePageComponent
 }, {
