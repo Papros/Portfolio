@@ -22,7 +22,7 @@
             "input": "apps/portfolio/public"
           }
         ],
-        "styles": ["apps/portfolio/src/styles.scss"],
+        "styles": ["apps/portfolio/src/styles/styles.scss"],
         "scripts": []
       },
       "configurations": {
