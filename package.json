@@ -5,7 +5,7 @@
   "scripts": {
     "start-local": "nx serve portfolio",
     "test": "nx run-many --target=test --all --parallel",
-    "test-coverage": "nx run-many --target=test --all --code-coverage"
+    "test-coverage": "nx run-many --target=test --all --code-coverage --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {

@@ -18,6 +18,9 @@
       "@portfolio/curriculum-vitae-module": [
         "libs/portfolio/modules/curriculum-vitae-module/src/index.ts"
       ],
+      "@portfolio/grid-layout": [
+        "libs/portfolio/layouts/grid-layout/src/index.ts"
+      ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ]
