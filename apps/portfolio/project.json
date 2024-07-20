@@ -23,7 +23,8 @@
           }
         ],
         "styles": ["apps/portfolio/src/styles/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "baseHref": "/portfolio/"
       },
       "configurations": {
         "production": {

@@ -14,6 +14,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -24,10 +25,14 @@ jobs:
       - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
 
       # Cache node_modules
+      - name: Set up Node.js
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
+
+      - name: Install dependencies
+      - run: npm install
 
       - run: npm ci --legacy-peer-deps
       - uses: nrwl/nx-set-shas@v4
@@ -37,3 +42,12 @@ jobs:
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       - run: npx nx affected -t lint test build
       - run: npx nx affected --parallel 1 -t e2e-ci
+
+      - name: Build Angular project
+      - run: npm run nx -- build your-angular-app --prod
+
+      - name: Deploy to GitHub Pages
+      - uses: peaceiris/actions-gh-pages@v3
+      - with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/apps/portfolio
