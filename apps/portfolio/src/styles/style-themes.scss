@@ -1,0 +1,138 @@
+$app-theme: (
+  default: (
+    generic-gradient: (
+      color1: #251989,
+      color2: #9c007f,
+      color3: #de2d68,
+      color4: #ff7251,
+      color5: #ffb74b,
+      color6: #f9f871,
+    ),
+    matching-gradient: (
+      color1: #251989,
+      color2: #004db8,
+      color3: #0076d2,
+      color4: #009cd7,
+      color5: #00c0ce,
+      color6: #00e1bf,
+    ),
+    text: (
+      primary: #000000,
+      secondary: #454545,
+      reversed: #ffffff,
+      disabled: #9a9a9a,
+    ),
+    spot-palette: (
+      color1: #251989,
+      color2: #655585,
+      color3: #f8ebff,
+      color4: #66baa7,
+    ),
+    highlight-palette: (
+      color1: #251989,
+      color2: #9a88bc,
+      color3: #fffade,
+      color4: #e8d5b5,
+    ),
+    neighbor-palette: (
+      color1: #251989,
+      color2: #7bb4c4,
+      color3: #008399,
+      color4: #324a51,
+    ),
+  ),
+  default2: (
+    generic-gradient: (
+      color1: #251989,
+      // Deep indigo: Background base
+      color2: #8a0075,
+      // Rich magenta: Adds depth
+      color3: #d32f5e,
+      // Vibrant crimson: A warm transition
+      color4: #ff6a44,
+      // Bright orange: Bold accent
+      color5: #ffb347,
+      // Soft amber: Warm highlight
+      color6: #f9e76a // Gentle yellow: Brings balance,,,,,,
+    ),
+    matching-gradient: (
+      color1: #251989,
+      // Deep indigo: Anchor color
+      color2: #0057a3,
+      // Cool blue: Brighter than original
+      color3: #0077c0,
+      // Vibrant azure: A strong mid-tone
+      color4: #00a1d5,
+      // Bright teal: Energized touch
+      color5: #00c5c9,
+      // Tropical cyan: Fresh and vibrant
+      color6: #00e8b5 // Aqua mint: Soft, lively highlight,,,,,,
+    ),
+    text: (
+      primary: #121212,
+      // Deep gray-black: Easy on the eyes
+      secondary: #555555,
+      // Balanced gray: Works well in shadows
+      reversed: #ffffff,
+      // Crisp white: For light text
+      disabled: #b0b0b0 // Light gray: Improved legibility,,,,,,
+    ),
+    spot-palette: (
+      color1: #251989,
+      // Deep indigo: Anchor color
+      color2: #5e4d82,
+      // Muted violet: Gentle variation
+      color3: #ede1ff,
+      // Light lavender: Soft spot highlight
+      color4: #60b99f // Soft teal: Contrasting spot color,,,,,,
+    ),
+    highlight-palette: (
+      color1: #251989,
+      // Deep indigo: Consistent base
+      color2: #8f7db5,
+      // Soft lavender: Harmonized accent
+      color3: #fff7c2,
+      // Light cream: Gentle warmth
+      color4: #e3c8a8 // Muted beige: Subtle, earthy tone,,,,,,
+    ),
+    neighbor-palette: (
+      color1: #251989,
+      // Deep indigo: Unifying base
+      color2: #78b3bf,
+      // Cool aquamarine: Balances warm tones
+      color3: #007890,
+      // Deep teal: Bold contrast
+      color4: #2c3e47 // Slate blue-gray: Grounding neighbor,,,,,,
+    ),
+  ),
+);
+
+// Variable to store the active theme
+$active-theme: default;
+
+// Mixin to set the global theme
+@function set-theme($theme-name) {
+  $active-theme: $theme-name !global;
+}
+
+// Mixin to retrieve a color
+@function get-color($path...) {
+  @if map-has-key($themes, $active-theme) {
+    $theme-map: map-get($themes, $active-theme);
+    $color: map-get($theme-map, nth($path, 1));
+
+    @if length($path) > 1 {
+      @each $key in rest($path) {
+        @if map-has-key($color, $key) {
+          $color: map-get($color, $key);
+        } @else {
+          @error "Key `#{path}` : `#{$key}` not found in the theme `#{$active-theme}`.";
+        }
+      }
+    }
+
+    @return $color;
+  } @else {
+    @error "Theme `#{$active-theme}` not found.";
+  }
+}

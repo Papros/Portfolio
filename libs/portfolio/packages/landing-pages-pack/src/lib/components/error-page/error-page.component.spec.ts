@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GridLayoutComponent } from './grid-layout.component';
+import { ErrorPageComponent } from './error-page.component';
 
-describe('GridLayoutComponent', () => {
-  let component: GridLayoutComponent;
-  let fixture: ComponentFixture<GridLayoutComponent>;
+describe('ErrorPageComponent', () => {
+  let component: ErrorPageComponent;
+  let fixture: ComponentFixture<ErrorPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GridLayoutComponent],
+      imports: [ErrorPageComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GridLayoutComponent);
+    fixture = TestBed.createComponent(ErrorPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

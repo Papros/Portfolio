@@ -1,7 +1,7 @@
 {
-  "name": "grid-layout",
+  "name": "landing-pages-pack",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/portfolio/layouts/grid-layout/src",
+  "sourceRoot": "libs/portfolio/packages/landing-pages-pack/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/portfolio/layouts/grid-layout/jest.config.ts"
+        "jestConfig": "libs/portfolio/packages/landing-pages-pack/jest.config.ts"
       }
     },
     "lint": {

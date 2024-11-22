@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+@import './style-themes.scss';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+}
+
+div {
+  box-sizing: border-box;
+  display: block;
+}
+
+* {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
+.header-font {
+  font-family: 'Montserrat', sans-serif;
+}
+
+// Scrollbar
+
+// - FIREFOX
+* {
+  scrollbar-color: #666 #aaa;
+  scrollbar-width: thin;
+}
+// - CHROMIUM
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+}
+// END OF SCROLLBAR SECTION

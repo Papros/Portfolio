@@ -1,1 +1,1 @@
-export * from './lib/shared-pack/shared-pack.component';
+export * from './lib/shared-pack.module';

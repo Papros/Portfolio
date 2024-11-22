@@ -45,6 +45,11 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/angular:ng-packagr-lite": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "plugins": [
@@ -76,7 +81,7 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "scss"
     }
   },
   "nxCloudAccessToken": "YWYzMjM2OGItZDBiNS00YjBlLWEzNWQtNTAyN2UzZDhmMjVjfHJlYWQtd3JpdGU="

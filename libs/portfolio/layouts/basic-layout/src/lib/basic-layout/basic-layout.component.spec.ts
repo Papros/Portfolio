@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedPackComponent } from './shared-pack.component';
+import { BasicLayoutComponent } from './basic-layout.component';
 
-describe('SharedPackComponent', () => {
-  let component: SharedPackComponent;
-  let fixture: ComponentFixture<SharedPackComponent>;
+describe('BasicLayoutComponent', () => {
+  let component: BasicLayoutComponent;
+  let fixture: ComponentFixture<BasicLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedPackComponent],
+      imports: [BasicLayoutComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SharedPackComponent);
+    fixture = TestBed.createComponent(BasicLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

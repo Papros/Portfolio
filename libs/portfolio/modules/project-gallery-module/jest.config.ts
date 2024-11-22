@@ -1,9 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'grid-layout',
+  displayName: 'project-gallery-module',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/portfolio/layouts/grid-layout',
+  coverageDirectory:
+    '../../../../coverage/libs/portfolio/modules/project-gallery-module',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
