@@ -15,17 +15,20 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@portfolio/basic-layout": [
-        "libs/portfolio/layouts/basic-layout/src/index.ts"
+      "@portfolio/about-me-module": [
+        "libs/portfolio/modules/about-me-module/src/index.ts"
       ],
-      "@portfolio/curriculum-vitae-module": [
-        "libs/portfolio/modules/curriculum-vitae-module/src/index.ts"
+      "@portfolio/default-layout": [
+        "libs/portfolio/layouts/default-layout/src/index.ts"
+      ],
+      "@portfolio/full-page-layout": [
+        "libs/portfolio/layouts/full-page-layout/src/index.ts"
       ],
       "@portfolio/landing-pages-pack": [
         "libs/portfolio/packages/landing-pages-pack/src/index.ts"
       ],
-      "@portfolio/project-gallery-module": [
-        "libs/portfolio/modules/project-gallery-module/src/index.ts"
+      "@portfolio/main-menu-module": [
+        "libs/portfolio/modules/main-menu-module/src/index.ts"
       ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"

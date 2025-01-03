@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
+  selector: 'lib-full-page-layout',
   standalone: true,
-  selector: 'app-root',
-  templateUrl: './app.component.html',
   imports: [CommonModule, RouterModule],
-  styleUrl: './app.component.scss',
+  templateUrl: './full-page-layout.component.html',
+  styleUrl: './full-page-layout.component.css',
 })
-export class AppComponent {}
+export class FullPageLayoutComponent {}
