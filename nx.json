@@ -50,6 +50,9 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "e2e-ci--**/*": {
+      "dependsOn": ["^portfolio:build"]
     }
   },
   "plugins": [
@@ -84,5 +87,6 @@
       "style": "scss"
     }
   },
-  "nxCloudAccessToken": "YWYzMjM2OGItZDBiNS00YjBlLWEzNWQtNTAyN2UzZDhmMjVjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "YWYzMjM2OGItZDBiNS00YjBlLWEzNWQtNTAyN2UzZDhmMjVjfHJlYWQtd3JpdGU=",
+  "useLegacyCache": true
 }

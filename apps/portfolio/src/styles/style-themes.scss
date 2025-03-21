@@ -53,7 +53,8 @@ $app-theme: (
       // Bright orange: Bold accent
       color5: #ffb347,
       // Soft amber: Warm highlight
-      color6: #f9e76a // Gentle yellow: Brings balance,,,,,,
+      color6: #f9e76a
+        // Gentle yellow: Brings balance,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
     matching-gradient: (
       color1: #251989,
@@ -66,7 +67,8 @@ $app-theme: (
       // Bright teal: Energized touch
       color5: #00c5c9,
       // Tropical cyan: Fresh and vibrant
-      color6: #00e8b5 // Aqua mint: Soft, lively highlight,,,,,,
+      color6: #00e8b5
+        // Aqua mint: Soft, lively highlight,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
     text: (
       primary: #121212,
@@ -75,7 +77,8 @@ $app-theme: (
       // Balanced gray: Works well in shadows
       reversed: #ffffff,
       // Crisp white: For light text
-      disabled: #b0b0b0 // Light gray: Improved legibility,,,,,,
+      disabled: #b0b0b0
+        // Light gray: Improved legibility,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
     spot-palette: (
       color1: #251989,
@@ -84,7 +87,8 @@ $app-theme: (
       // Muted violet: Gentle variation
       color3: #ede1ff,
       // Light lavender: Soft spot highlight
-      color4: #60b99f // Soft teal: Contrasting spot color,,,,,,
+      color4: #60b99f
+        // Soft teal: Contrasting spot color,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
     highlight-palette: (
       color1: #251989,
@@ -93,7 +97,8 @@ $app-theme: (
       // Soft lavender: Harmonized accent
       color3: #fff7c2,
       // Light cream: Gentle warmth
-      color4: #e3c8a8 // Muted beige: Subtle, earthy tone,,,,,,
+      color4: #e3c8a8
+        // Muted beige: Subtle, earthy tone,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
     neighbor-palette: (
       color1: #251989,
@@ -102,7 +107,8 @@ $app-theme: (
       // Cool aquamarine: Balances warm tones
       color3: #007890,
       // Deep teal: Bold contrast
-      color4: #2c3e47 // Slate blue-gray: Grounding neighbor,,,,,,
+      color4: #2c3e47
+        // Slate blue-gray: Grounding neighbor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
     ),
   ),
 );
@@ -116,17 +122,18 @@ $active-theme: default;
 }
 
 // Mixin to retrieve a color
-@function get-color($path...) {
-  @if map-has-key($themes, $active-theme) {
-    $theme-map: map-get($themes, $active-theme);
-    $color: map-get($theme-map, nth($path, 1));
+@function get-color($first, $path...) {
+  @if map-has-key($app-theme, $active-theme) {
+    $theme-map: map-get($app-theme, $active-theme);
+    $color: map-get($theme-map, $first);
 
-    @if length($path) > 1 {
-      @each $key in rest($path) {
+    @if length($path) > 0 {
+      @each $key in $path {
+        @debug $key;
         @if map-has-key($color, $key) {
           $color: map-get($color, $key);
         } @else {
-          @error "Key `#{path}` : `#{$key}` not found in the theme `#{$active-theme}`.";
+          @error "Key `#{$key}` not found in the theme `#{$active-theme}`.";
         }
       }
     }

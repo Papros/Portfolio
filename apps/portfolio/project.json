@@ -20,11 +20,18 @@
           {
             "glob": "**/*",
             "input": "apps/portfolio/public"
-          }
+          },
+          "apps/portfolio/src/assets"
         ],
-        "styles": ["apps/portfolio/src/styles/styles.scss"],
+        "styles": [
+          "apps/portfolio/src/styles/styles.scss",
+          "apps/portfolio/src/styles/style-themes.scss"
+        ],
         "scripts": [],
-        "baseHref": "/portfolio/"
+        "baseHref": "/portfolio/",
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/portfolio/src/styles"]
+        }
       },
       "configurations": {
         "production": {

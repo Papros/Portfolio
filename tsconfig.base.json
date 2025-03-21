@@ -32,7 +32,8 @@
       ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
-      ]
+      ],
+      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
     }
   },
   "exclude": ["node_modules", "tmp"]

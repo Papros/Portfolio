@@ -1,0 +1,11 @@
+<div class="overlay-menu-container">
+  {{ label }} <mat-icon>{{ icon }}</mat-icon>
+  <ng-container *ngIf="isMenuOpen">
+    <div class="option-container" *ngFor="let option of options">
+      <div class="menu-option" (click)="option.callback()">
+        {{ option.label }}
+      </div>
+    </div>
+  </ng-container>
+  <button (click)="toggle()">TOGGLE</button>
+</div>

@@ -1,10 +1,16 @@
 @import './style-themes.scss';
+@import './styles-overlay.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
 }
