@@ -51,13 +51,8 @@ export class FullPageLayoutComponent implements OnInit {
       true,
       [AttachedComponentBackdrop.Transparent],
       () => {
-        console.log('callback');
         this.isOpen.next(OverlayMenuState.CLOSED);
       }
     );
-  }
-
-  toggle() {
-    this.isOpen.next(OverlayMenuState.TOGGLE);
   }
 }

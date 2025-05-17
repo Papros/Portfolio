@@ -1,0 +1,174 @@
+@import 'style-themes';
+
+.cv-container {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: 100%;
+
+  .side-section {
+    flex: 1;
+    background-color: #566973;
+    color: #f0f0f0;
+
+    .cv-photo {
+      padding: 10%;
+    }
+
+    .info-container {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 10px;
+
+      .info-section {
+        &:first-of-type {
+          padding-top: 0;
+        }
+
+        padding-top: 30px;
+
+        .info-section-title {
+          display: block;
+          font-weight: bolder;
+          width: 100%;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+
+        .info-section-data {
+          display: block;
+          width: 100%;
+          padding-left: 8px;
+
+          .single-data-row {
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .main-section {
+    flex: 4;
+    padding: 20px 200px 10px 20px;
+    overflow-y: auto;
+
+    .cv-title {
+      .main-title {
+        display: block;
+        width: 100%;
+        font-size: 40px;
+        text-transform: capitalize;
+      }
+
+      .subtitle {
+        display: block;
+        width: 100%;
+        font-size: 20px;
+        color: #a5abad;
+        text-transform: uppercase;
+      }
+    }
+
+    .info-section-title {
+      display: block;
+      font-weight: bolder;
+      width: 100%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+
+    .info-section {
+      padding-left: 12px;
+
+      display: flex;
+      flex-direction: row;
+
+      .entry-title {
+        flex: 1;
+      }
+
+      .entry-desc {
+        padding-left: 6px;
+        flex: 10;
+      }
+
+      &.education-section {
+        .entry-title {
+          flex: 3;
+        }
+      }
+
+      &.work-section {
+        display: block;
+
+        .work-entry {
+          padding-bottom: 16px;
+          width: 100%;
+
+          .work-entry-title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+
+            .company-name {
+              font-weight: 500;
+              font-size: 18px;
+            }
+
+            .company-position {
+              font-style: italic;
+              padding-left: 8px;
+              font-size: 15px;
+            }
+
+            .date-range {
+              margin-left: auto;
+              font-style: italic;
+              color: #a5abad;
+            }
+          }
+
+          .used-skill {
+            padding-left: 8px;
+
+            span {
+              font-size: 13px;
+              font-weight: 300;
+              padding-right: 4px;
+            }
+          }
+
+          .work-desc {
+            padding-left: 12px;
+            span {
+              display: block;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .cv-container {
+    .main-section {
+      padding-right: 40px;
+    }
+  }
+}
