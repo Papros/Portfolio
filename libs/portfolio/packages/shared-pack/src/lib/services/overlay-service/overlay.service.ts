@@ -71,11 +71,9 @@ export class OverlayService implements OnDestroy {
               'button, a, input, textarea, select, label, [data-ignore-backdrop]'
             )
           ) {
-            console.log('Backdrop ignored');
             return;
           }
 
-          console.log('Backdrop ', event.target);
           backdropCallback();
         },
       });

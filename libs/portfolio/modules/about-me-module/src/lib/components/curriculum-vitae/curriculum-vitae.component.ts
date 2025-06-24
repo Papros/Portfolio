@@ -41,7 +41,7 @@ export class CurriculumVitaeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    return;
   }
 
   onImageError(event: Event) {

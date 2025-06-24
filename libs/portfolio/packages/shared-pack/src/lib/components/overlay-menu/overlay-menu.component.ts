@@ -28,10 +28,15 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   bulkSubscription$ = new Subscription();
 
+  private hideTimeout: any;
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.isMenuOpen = false;
+    this.cdr.markForCheck();
+
     const stateSub$ = this.menuState.subscribe({
       next: (state: OverlayMenuState) => {
         switch (state) {
@@ -52,11 +57,29 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
     this.bulkSubscription$.add(stateSub$);
   }
 
+  onMouseEnter(): void {
+    clearTimeout(this.hideTimeout);
+    this.isMenuOpen = true;
+  }
+
+  onMouseLeave(): void {
+    clearTimeout(this.hideTimeout);
+    this.hideTimeout = setTimeout(() => {
+      this.isMenuOpen = false;
+      this.cdr.markForCheck();
+    }, 1500);
+  }
+
+  runCallback(option: OverlayMenuOption): void {
+    option.callback?.();
+  }
+
   toggle() {
     this.menuState.next(OverlayMenuState.TOGGLE);
   }
 
   ngOnDestroy(): void {
     this.bulkSubscription$?.unsubscribe();
+    clearTimeout(this.hideTimeout);
   }
 }

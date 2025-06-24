@@ -1,6 +1,6 @@
-import { Component, OnInit, signal, Signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Navigation, Router, RouterModule } from '@angular/router';
 import {
   AttachedComponentBackdrop,
   OverlayMenuComponent,
@@ -16,15 +16,40 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './full-page-layout.component.html',
   styleUrl: './full-page-layout.component.css',
 })
-export class FullPageLayoutComponent implements OnInit {
-  private isOpen = new BehaviorSubject<OverlayMenuState>(OverlayMenuState.OPEN);
+export class FullPageLayoutComponent implements OnInit, OnDestroy {
+  private isOpen = new BehaviorSubject<OverlayMenuState>(
+    OverlayMenuState.CLOSED
+  );
 
   overlayMenuOptions: OverlayMenuOption[] = [
     {
       label: 'MENU',
       icon: 'home',
       callback: () => {
-        console.log('MENU WORKS1');
+        console.log('menu-callback');
+        this.router.navigateByUrl('/menu');
+        console.log('last navigation: ', this.router.navigated);
+      },
+    },
+    {
+      label: 'MENU',
+      icon: 'home',
+      callback: () => {
+        console.log('second-callback');
+      },
+    },
+    {
+      label: 'MENU',
+      icon: 'home',
+      callback: () => {
+        console.log('second-callback');
+      },
+    },
+    {
+      label: 'MENU',
+      icon: 'home',
+      callback: () => {
+        console.log('second-callback');
       },
     },
     {
@@ -36,7 +61,7 @@ export class FullPageLayoutComponent implements OnInit {
     },
   ];
 
-  constructor(private overlayService: OverlayService) {}
+  constructor(private overlayService: OverlayService, private router: Router) {}
 
   ngOnInit(): void {
     this.overlayService.closeAll();
@@ -54,5 +79,10 @@ export class FullPageLayoutComponent implements OnInit {
         this.isOpen.next(OverlayMenuState.CLOSED);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.overlayService.closeAll();
+    this.isOpen.complete();
   }
 }
