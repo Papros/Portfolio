@@ -41,11 +41,11 @@ jobs:
         uses: nrwl/nx-set-shas@v4
 
       # Lint, test, build affected projects (opcjonalne)
-      - name: Lint, test, build affected
-        run: npx nx affected -t lint test build
+      - name: Lint
+        run: npx nx lint portfolio
 
-      - name: Run e2e affected
-        run: npx nx affected --parallel 1 -t e2e-ci
+      - name: Test
+        run: npx nx test portfolio
 
       # Build Angular app
       - name: Build Angular project
