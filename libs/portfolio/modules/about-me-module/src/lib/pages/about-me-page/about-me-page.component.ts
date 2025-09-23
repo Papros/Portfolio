@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CurriculumVitaeComponent } from '../../components/curriculum-vitae/curriculum-vitae.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CurriculumVitaeComponent } from '@portfolio/about-me-module';
 
 @Component({
   selector: 'lib-about-me-page',

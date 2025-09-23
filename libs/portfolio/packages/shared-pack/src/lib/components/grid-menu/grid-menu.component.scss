@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+}
+
+.custom-grid {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #457b9d;
+  color: white;
+  text-align: center;
+  padding: 4px;
+  word-break: break-word;
+}

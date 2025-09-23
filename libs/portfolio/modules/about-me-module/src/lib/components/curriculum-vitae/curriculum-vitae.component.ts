@@ -9,7 +9,6 @@ import { cvDefault } from './default.data';
 import {
   CamelCaseFormatPipe,
   PhoneNumberFormatPipe,
-  UpperCaseFormatPipe,
 } from '@portfolio/shared-pack';
 
 @Component({
@@ -18,7 +17,6 @@ import {
     CommonModule,
     MatIconModule,
     PhoneNumberFormatPipe,
-    UpperCaseFormatPipe,
     CamelCaseFormatPipe,
   ],
   templateUrl: './curriculum-vitae.component.html',
