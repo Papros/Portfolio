@@ -20,8 +20,8 @@ jobs:
           fetch-depth: 0
 
       # Nx Cloud CI start (opcjonalne)
-      - name: Start Nx Cloud CI
-        run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
+      # - name: Start Nx Cloud CI
+      #   run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
 
       # Setup Node.js
       - name: Set up Node.js
