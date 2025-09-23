@@ -19,10 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Nx Cloud CI start (opcjonalne)
-      # - name: Start Nx Cloud CI
-      #   run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
-
       # Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -42,10 +38,10 @@ jobs:
 
       # Lint, test, build affected projects (opcjonalne)
       - name: Lint
-        run: npx nx lint portfolio
+        run: npx nx lint portfolio --skip-nx-cloud
 
       - name: Test
-        run: npx nx test portfolio
+        run: npx nx test portfolio --skip-nx-cloud
 
       # Build Angular app
       - name: Build Angular project
