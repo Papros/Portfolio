@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build": "npx nx build portfolio --configuration=production",
     "start-local": "nx serve portfolio",
     "test": "nx run-many --target=test --all --parallel",
     "test-coverage": "nx run-many --target=test --all --code-coverage --watch=false --browsers=ChromeHeadless"
