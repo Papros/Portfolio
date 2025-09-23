@@ -11,6 +11,7 @@ import { GridSlotDirective } from './grid-slot.directive';
 
 @Component({
   selector: 'lib-grid-menu',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './grid-menu.component.html',
   styleUrl: './grid-menu.component.scss',
@@ -24,7 +25,9 @@ export class GridMenuComponent implements AfterContentInit {
   private slotMap = new Map<string, GridSlotDirective>();
 
   ngAfterContentInit(): void {
-    this.slots.forEach((slot) => this.slotMap.set(slot.gridSlot, slot));
+    this.slots.forEach((slot) => this.slotMap.set(slot.libGridSlot, slot));
+    console.log(this.slotMap);
+    console.log(this.slots);
   }
 
   getSlotTemplate(id: string) {

@@ -6,6 +6,7 @@ import { IconService } from '@portfolio/shared-pack';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   styleUrl: './app.component.scss',
 })

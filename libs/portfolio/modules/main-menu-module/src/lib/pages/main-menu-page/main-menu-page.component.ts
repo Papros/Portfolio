@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridLabelOptions, GridMenuComponent } from '@portfolio/shared-pack';
+import { GridMenuComponent, GridSlotDirective } from '@portfolio/shared-pack';
 
 @Component({
   selector: 'lib-main-menu-page',
-  imports: [CommonModule, GridMenuComponent],
+  standalone: true,
+  imports: [CommonModule, GridMenuComponent, GridSlotDirective],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })

@@ -13,6 +13,7 @@ import {
 
 @Component({
   selector: 'lib-curriculum-vitae',
+  standalone: true,
   imports: [
     CommonModule,
     MatIconModule,

@@ -33,13 +33,6 @@ export const appRoutes: Routes = [
             (m) => m.NotReadyLandingPageComponent
           ),
       },
-      {
-        path: 'cv',
-        loadComponent: () =>
-          import('@portfolio/about-me-module').then(
-            (m) => m.AboutMePageComponent
-          ),
-      },
     ],
   },
   {

@@ -1,5 +1,5 @@
 <div
-  class="custom-grid grid gap-2 bg-gray-100 p-4"
+  class="custom-grid grid gap-2 p-4"
   [style.gridTemplateColumns]="'repeat(' + menuConfig.gridWidth + ', 1fr)'"
   [style.gridTemplateRows]="'repeat(' + menuConfig.gridHeight + ', 1fr)'"
 >
@@ -13,10 +13,9 @@
       opacity: item.options.visible ? 1 : 0.3
     }"
   >
-    <ng-container
-      *ngIf="getSlotTemplate(item.id) as tpl; else fallback"
-      [ngTemplateOutlet]="tpl"
-    ></ng-container>
+    <ng-container *ngIf="getSlotTemplate(item.id) as tpl; else fallback">
+      <ng-container *ngTemplateOutlet="getSlotTemplate(item.id)"></ng-container>
+    </ng-container>
 
     <ng-template #fallback>
       <span

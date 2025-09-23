@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'lib-full-page-layout',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './full-page-layout.component.html',
   styleUrl: './full-page-layout.component.css',
