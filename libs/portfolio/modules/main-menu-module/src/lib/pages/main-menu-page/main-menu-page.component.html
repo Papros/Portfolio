@@ -13,8 +13,58 @@
       </a>
     </ng-template>
 
+    <ng-template libGridSlot="about">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="componentGallery">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="gameGallery">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="widgetWeather">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="widgetChart">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="widgetTrivia">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="achievements">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="contact">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="easterEgg">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="easterEgg">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
+    <ng-template libGridSlot="brick">
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+    </ng-template>
+
     <ng-template libGridSlot="cv">
       <a href="/portfolio/cv"> CV </a>
     </ng-template>
   </lib-grid-menu>
 </div>
+
+<ng-template #underDevelopment>
+  <div class="under-development">
+    <span class="label">Under development</span>
+  </div>
+</ng-template>
