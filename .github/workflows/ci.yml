@@ -45,7 +45,7 @@ jobs:
 
       # Build Angular app
       - name: Build Angular project
-        run: npx nx build portfolio --configuration=production --base-href="/portfolio/"
+        run: npx nx build portfolio --configuration=production --base-href="/Portfolio/"
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
