@@ -9,17 +9,28 @@ import {
   NavigationBarComponent,
   SimpleMenuComponent,
 } from '@portfolio/shared-pack';
+import { ComponentDetailsComponent } from './lib/components/component-details/component-details.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ComponentsGalleryComponent } from './lib/components/components-gallery/components-gallery.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ComponentDemoPageComponent,
-    children: [{ path: ':component', component: ComponentDemoPageComponent }],
+    children: [
+      { path: '', component: ComponentsGalleryComponent },
+      { path: ':component', component: ComponentDetailsComponent },
+    ],
   },
 ];
 
 @NgModule({
-  declarations: [DemoCardComponent, ComponentDemoPageComponent],
+  declarations: [
+    DemoCardComponent,
+    ComponentDemoPageComponent,
+    ComponentDetailsComponent,
+    ComponentsGalleryComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -27,6 +38,7 @@ const routes: Routes = [
     SimpleMenuComponent,
     MatSidenavModule,
     MatButtonModule,
+    MatTabsModule,
   ],
 })
 export class ComponentDemoModule {}

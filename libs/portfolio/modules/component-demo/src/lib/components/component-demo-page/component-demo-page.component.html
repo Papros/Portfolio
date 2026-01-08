@@ -12,34 +12,7 @@
     </mat-drawer>
 
     <mat-drawer-content class="component-demo-content">
-      <ng-content *ngIf="componentDetails; else demoCardList"></ng-content>
-
-      <ng-template #demoCardList>
-        <div class="component-demo-card-list">
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-          <lib-demo-card></lib-demo-card>
-        </div>
-      </ng-template>
+      <router-outlet></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
 

@@ -11,20 +11,12 @@ import { Router } from '@angular/router';
 export class ComponentDemoPageComponent {
   componentMenuList: SimpleMenuAction[] = [
     {
-      label: 'Test',
-      navigation: 'test',
+      label: 'Button',
+      navigation: 'button',
     },
     {
       label: 'Test2',
       navigation: 'test2',
-    },
-    {
-      label: 'Test3',
-      navigation: 'test3',
-    },
-    {
-      label: 'Test4',
-      navigation: 'test4',
     },
   ];
 
