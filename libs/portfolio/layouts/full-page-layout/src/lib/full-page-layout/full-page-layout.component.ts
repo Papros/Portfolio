@@ -15,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './full-page-layout.component.html',
-  styleUrl: './full-page-layout.component.css',
+  styleUrl: './full-page-layout.component.scss',
 })
 export class FullPageLayoutComponent implements OnInit, OnDestroy {
   private isOpen = new BehaviorSubject<OverlayMenuState>(

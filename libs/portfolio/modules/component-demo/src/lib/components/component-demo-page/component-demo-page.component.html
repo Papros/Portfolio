@@ -1,0 +1,47 @@
+<lib-navigation-bar [actions]="navigationActions"></lib-navigation-bar>
+
+<div class="page-layout">
+  <mat-drawer-container class="component-demo-drawer" autosize>
+    <mat-drawer
+      #drawer
+      class="component-demo-sidenav"
+      mode="side"
+      [opened]="true"
+    >
+      <lib-simple-menu [actions]="componentMenuList"></lib-simple-menu>
+    </mat-drawer>
+
+    <mat-drawer-content class="component-demo-content">
+      <ng-content *ngIf="componentDetails; else demoCardList"></ng-content>
+
+      <ng-template #demoCardList>
+        <div class="component-demo-card-list">
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+          <lib-demo-card></lib-demo-card>
+        </div>
+      </ng-template>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+  <footer class="component-demo-footer">Footer content here</footer>
+</div>
