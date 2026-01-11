@@ -1,10 +1,8 @@
 <ng-container *ngIf="doc$ | async as doc; else notFound">
-  <h1>{{ doc.title }}</h1>
-  <p>{{ doc.description }}</p>
-
   <mat-tab-group>
     <mat-tab label="Overview">
-      {{ doc.overview.markdown }}
+      <h1>{{ doc.title }}</h1>
+      <p>{{ doc.description }}</p>
     </mat-tab>
 
     <mat-tab label="API">

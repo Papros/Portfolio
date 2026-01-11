@@ -36,7 +36,11 @@
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ],
-      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
+      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"],
+      "@ui/*": ["libs/ui/*/src/index.ts"],
+      "@ui": ["libs/ui/index.ts"],
+      "@docs/*": ["libs/docs/*/index.ts"],
+      "@docs": ["libs/docs/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
