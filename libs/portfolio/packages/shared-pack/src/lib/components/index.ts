@@ -1,7 +1,4 @@
 export * from './components-grid/components-grid.component';
-export * from './grid-menu/grid-menu.component';
-export * from './grid-menu/grid-menu.interface';
-export * from './grid-menu/grid-slot.directive';
 export * from './grid-list/grid-list.component';
 export * from './navigation-bar/navigation-bar.component';
 export * from './navigation-bar/navigation-bat.interface';
