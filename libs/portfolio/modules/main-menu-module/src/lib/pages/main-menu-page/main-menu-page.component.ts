@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridMenuComponent, GridSlotDirective } from '@portfolio/shared-pack';
+import { GridMenuComponent, GridSlotDirective } from '@ui/grid-menu';
 
 @Component({
   selector: 'lib-main-menu-page',
@@ -148,12 +148,12 @@ export class MainMenuPageComponent {
         },
       },
       {
-        id: 'gapBottom',
-        options: { enabled: false, visible: false, background: '#000' },
+        id: 'brick',
+        options: { enabled: true, visible: true, background: '#000' },
         position: { colStart: 9, colSpan: 2, rowStart: 9, rowSpan: 2 },
         label: {
           value: '',
-          shadow: false,
+          shadow: true,
           positionHorizontal: 1,
           positionVertical: 1,
         },

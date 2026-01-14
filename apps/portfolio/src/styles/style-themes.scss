@@ -1,120 +1,116 @@
 $app-theme: (
   default: (
-    generic-gradient: (
-      color1: #251989,
-      color2: #9c007f,
-      color3: #de2d68,
-      color4: #ff7251,
-      color5: #ffb74b,
-      color6: #f9f871,
+    primary: (
+      color: #1b3a4b,
+      // Deep forest blue – main accent
+      light: #2c5d6f,
+      // Lighter hover state
+      dark: #10232e // Darker shade for depth,,,,,,
     ),
-    matching-gradient: (
-      color1: #251989,
-      color2: #004db8,
-      color3: #0076d2,
-      color4: #009cd7,
-      color5: #00c0ce,
-      color6: #00e1bf,
+    accent: (
+      color: #a3be8c,
+      // Soft moss green – highlights and buttons
+      light: #c0d9ac,
+      // Lighter hover
+      dark: #7d996a // Darker for active states,,,,,,
     ),
-    text: (
-      primary: #000000,
-      secondary: #454545,
-      reversed: #ffffff,
-      disabled: #9a9a9a,
+    neutral: (
+      bg: #1e1e1e,
+      // Dark background for sections
+      card: #2a2a2a,
+      // Card/panel background
+      text: #e0e0e0,
+      // Main text
+      muted: #95a5a6,
+      // Secondary text
+      border: #3d3d3d // Borders and dividers,,,,,,
     ),
-    spot-palette: (
-      color1: #251989,
-      color2: #655585,
-      color3: #f8ebff,
-      color4: #66baa7,
+    feedback: (
+      success: #27ae60,
+      warning: #f1c40f,
+      error: #e74c3c,
     ),
-    highlight-palette: (
-      color1: #251989,
-      color2: #9a88bc,
-      color3: #fffade,
-      color4: #e8d5b5,
-    ),
-    neighbor-palette: (
-      color1: #251989,
-      color2: #7bb4c4,
-      color3: #008399,
-      color4: #324a51,
+    gradient: (
+      primary: linear-gradient(135deg, #1b3a4b, #a3be8c),
+      secondary: linear-gradient(135deg, #2c5d6f, #c0d9ac),
     ),
   ),
-  default2: (
-    generic-gradient: (
-      color1: #251989,
-      // Deep indigo: Background base
-      color2: #8a0075,
-      // Rich magenta: Adds depth
-      color3: #d32f5e,
-      // Vibrant crimson: A warm transition
-      color4: #ff6a44,
-      // Bright orange: Bold accent
-      color5: #ffb347,
-      // Soft amber: Warm highlight
-      color6: #f9e76a
-        // Gentle yellow: Brings balance,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  cinematic: (
+    primary: (
+      color: #0f1a2b,
+      // Deep charcoal-blue – main accent
+      light: #1a2f4b,
+      // Lighter hover state
+      dark: #08111c // Darker shade for depth,,,,,
     ),
-    matching-gradient: (
-      color1: #251989,
-      // Deep indigo: Anchor color
-      color2: #0057a3,
-      // Cool blue: Brighter than original
-      color3: #0077c0,
-      // Vibrant azure: A strong mid-tone
-      color4: #00a1d5,
-      // Bright teal: Energized touch
-      color5: #00c5c9,
-      // Tropical cyan: Fresh and vibrant
-      color6: #00e8b5
-        // Aqua mint: Soft, lively highlight,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+    accent: (
+      color: #ff9f1c,
+      // Vibrant amber – call-to-action
+      light: #ffb84d,
+      // Lighter hover
+      dark: #cc7a16 // Darker for active states,,,,,
     ),
-    text: (
-      primary: #121212,
-      // Deep gray-black: Easy on the eyes
-      secondary: #555555,
-      // Balanced gray: Works well in shadows
-      reversed: #ffffff,
-      // Crisp white: For light text
-      disabled: #b0b0b0
-        // Light gray: Improved legibility,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+    neutral: (
+      bg: #121212,
+      // Very dark background
+      card: #1e1e1e,
+      // Card/panel background
+      text: #eaeaea,
+      // Main text
+      muted: #9a9a9a,
+      // Secondary text
+      border: #2c2c2c // Borders and dividers,,,,,
     ),
-    spot-palette: (
-      color1: #251989,
-      // Deep indigo: Anchor color
-      color2: #5e4d82,
-      // Muted violet: Gentle variation
-      color3: #ede1ff,
-      // Light lavender: Soft spot highlight
-      color4: #60b99f
-        // Soft teal: Contrasting spot color,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+    feedback: (
+      success: #2ecc71,
+      warning: #f1c40f,
+      error: #e74c3c,
     ),
-    highlight-palette: (
-      color1: #251989,
-      // Deep indigo: Consistent base
-      color2: #8f7db5,
-      // Soft lavender: Harmonized accent
-      color3: #fff7c2,
-      // Light cream: Gentle warmth
-      color4: #e3c8a8
-        // Muted beige: Subtle, earthy tone,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+    gradient: (
+      primary: linear-gradient(135deg, #0f1a2b, #ff9f1c),
+      secondary: linear-gradient(135deg, #1a2f4b, #ffb84d),
     ),
-    neighbor-palette: (
-      color1: #251989,
-      // Deep indigo: Unifying base
-      color2: #78b3bf,
-      // Cool aquamarine: Balances warm tones
-      color3: #007890,
-      // Deep teal: Bold contrast
-      color4: #2c3e47
-        // Slate blue-gray: Grounding neighbor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ),
+  lightTheme: (
+    primary: (
+      color: #4a5568,
+      // Slate gray – main accent
+      light: #718096,
+      // Lighter hover state
+      dark: #2d3748 // Darker shade for depth,,,,
+    ),
+    accent: (
+      color: #63b3ed,
+      // Soft sky blue – highlights and buttons
+      light: #90cdf4,
+      // Lighter hover
+      dark: #4299e1 // Darker for active states,,,,
+    ),
+    neutral: (
+      bg: #ffffff,
+      // Main background – white
+      card: #f7fafc,
+      // Card/panel background – very light gray
+      text: #2d3748,
+      // Main text – dark slate
+      muted: #718096,
+      // Secondary text
+      border: #e2e8f0 // Borders and dividers – light gray,,,,
+    ),
+    feedback: (
+      success: #38a169,
+      warning: #ecc94b,
+      error: #e53e3e,
+    ),
+    gradient: (
+      primary: linear-gradient(135deg, #4a5568, #63b3ed),
+      secondary: linear-gradient(135deg, #718096, #90cdf4),
     ),
   ),
 );
 
 // Variable to store the active theme
-$active-theme: default;
+$active-theme: lightTheme;
 
 // Mixin to set the global theme
 @function set-theme($theme-name) {
@@ -129,7 +125,6 @@ $active-theme: default;
 
     @if length($path) > 0 {
       @each $key in $path {
-        @debug $key;
         @if map-has-key($color, $key) {
           $color: map-get($color, $key);
         } @else {

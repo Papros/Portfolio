@@ -46,6 +46,13 @@ export const appRoutes: Routes = [
             (m) => m.AboutMePageComponent
           ),
       },
+      {
+        path: 'components',
+        loadChildren: () =>
+          import('@portfolio/component-demo').then(
+            (m) => m.ComponentDemoModule
+          ),
+      },
     ],
   },
   {

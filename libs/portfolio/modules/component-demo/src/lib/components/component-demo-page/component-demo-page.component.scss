@@ -1,0 +1,33 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  height: 100%;
+}
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.component-demo-drawer {
+  flex: 1;
+  background-color: get-color(neutral, bg);
+
+  .component-demo-sidenav {
+    max-width: 250px;
+  }
+
+  .component-demo-content {
+    padding: 1%;
+    border-radius: 8px;
+  }
+}
+
+.component-demo-footer {
+  width: 100%;
+  border-top: 1px solid #ddd;
+  padding: 16px;
+  text-align: center;
+  background: #fafafa;
+}

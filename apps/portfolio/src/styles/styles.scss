@@ -1,5 +1,5 @@
-@import './style-themes.scss';
-@import './styles-overlay.scss';
+@forward './style-themes.scss';
+@forward './styles-overlay.scss';
 
 @tailwind base;
 @tailwind components;
@@ -22,6 +22,7 @@ div {
 }
 
 * {
+  box-sizing: border-box;
   animation-duration: 400ms;
   animation-timing-function: ease-in-out;
 }

@@ -18,6 +18,9 @@
       "@portfolio/about-me-module": [
         "libs/portfolio/modules/about-me-module/src/index.ts"
       ],
+      "@portfolio/component-demo": [
+        "libs/portfolio/modules/component-demo/src/index.ts"
+      ],
       "@portfolio/default-layout": [
         "libs/portfolio/layouts/default-layout/src/index.ts"
       ],
@@ -33,7 +36,12 @@
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ],
-      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
+      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"],
+      "@ui/*": ["libs/ui/*/src/index.ts"],
+      "@ui": ["libs/ui/index.ts"],
+      "@docs/*": ["libs/docs/*/index.ts"],
+      "@docs": ["libs/docs/index.ts"],
+      "@docs-model": ["libs/docs-model/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

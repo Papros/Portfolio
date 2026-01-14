@@ -1,4 +1,4 @@
-@import 'style-themes';
+@use 'style-themes' as *;
 
 .cv-container {
   display: flex;

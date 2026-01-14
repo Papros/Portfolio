@@ -1,0 +1,20 @@
+<lib-navigation-bar [actions]="navigationActions"></lib-navigation-bar>
+
+<div class="page-layout">
+  <mat-drawer-container class="component-demo-drawer" autosize>
+    <mat-drawer
+      #drawer
+      class="component-demo-sidenav"
+      mode="side"
+      [opened]="true"
+    >
+      <lib-simple-menu [actions]="componentMenuList"></lib-simple-menu>
+    </mat-drawer>
+
+    <mat-drawer-content class="component-demo-content">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+  <footer class="component-demo-footer">Footer content here</footer>
+</div>

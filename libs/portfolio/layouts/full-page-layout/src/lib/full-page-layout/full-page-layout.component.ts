@@ -1,21 +1,23 @@
-import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Navigation, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
   AttachedComponentBackdrop,
-  OverlayMenuComponent,
-  OverlayMenuOption,
-  OverlayMenuState,
   OverlayService,
 } from '@portfolio/shared-pack';
 import { BehaviorSubject } from 'rxjs';
+import {
+  OverlayMenuState,
+  OverlayMenuOption,
+  OverlayMenuComponent,
+} from '@ui/overlay-menu';
 
 @Component({
   selector: 'lib-full-page-layout',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './full-page-layout.component.html',
-  styleUrl: './full-page-layout.component.css',
+  styleUrl: './full-page-layout.component.scss',
 })
 export class FullPageLayoutComponent implements OnInit, OnDestroy {
   private isOpen = new BehaviorSubject<OverlayMenuState>(

@@ -1,0 +1,9 @@
+<a class="demo-card-container" [routerLink]="routingAction">
+  <div class="demo-card-image">
+    <img [src]="imageScr || placeholder" [alt]="title" loading="lazy" />
+  </div>
+  <div class="demo-card-content">
+    <span class="demo-card-title">{{ title }}</span>
+    <span class="demo-card-desc">{{ desc }}</span>
+  </div>
+</a>

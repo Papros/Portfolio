@@ -1,0 +1,37 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+.demo-card-container {
+  padding: 2%;
+  display: block;
+  max-width: 250px;
+  max-height: 350px;
+  border-radius: 8px;
+  border: 1px solid get-color(neutral, border);
+  background-color: get-color(neutral, card);
+
+  &:hover {
+    background-color: get-color(neutral, border);
+  }
+
+  .demo-card-image {
+    background-color: #fff;
+  }
+
+  .demo-card-content {
+    padding: 4px;
+
+    .demo-card-title {
+      display: block;
+      width: 100%;
+      font-weight: bold;
+      font-size: medium;
+    }
+
+    .demo-card-desc {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

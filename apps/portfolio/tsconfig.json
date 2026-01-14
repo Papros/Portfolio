@@ -9,7 +9,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": [],
+  "include": ["../../libs/docs/**/*.d.ts", "libs/docs/typing.d.ts"],
   "references": [
     {
       "path": "./tsconfig.editor.json"
