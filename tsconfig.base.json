@@ -40,7 +40,8 @@
       "@ui/*": ["libs/ui/*/src/index.ts"],
       "@ui": ["libs/ui/index.ts"],
       "@docs/*": ["libs/docs/*/index.ts"],
-      "@docs": ["libs/docs/index.ts"]
+      "@docs": ["libs/docs/index.ts"],
+      "@docs-model": ["libs/docs-model/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

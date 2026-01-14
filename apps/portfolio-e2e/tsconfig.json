@@ -19,6 +19,7 @@
     "cypress.config.ts",
     "**/*.cy.ts",
     "**/*.cy.js",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "libs/docs/typing.d.ts"
   ]
 }

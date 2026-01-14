@@ -9,7 +9,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": [],
+  "include": ["libs/portfolio/packages/shared-pack/src/lib/types/raw.d.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

@@ -64,6 +64,7 @@ export interface DocCodeSection {
 
 export interface DocExample {
   title: string;
+  description: string;
   component: Type<unknown>;
   source?: {
     html?: string;

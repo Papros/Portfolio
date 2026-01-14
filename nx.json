@@ -19,7 +19,7 @@
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "targetDefaults": {
-    "@angular-devkit/build-angular:browser": {
+    "@angular-devkit/build-angular:browser-esbuild": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]

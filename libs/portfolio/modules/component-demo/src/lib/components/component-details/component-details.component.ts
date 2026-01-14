@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { COMPONENT_DOCS } from './component-details.const';
+import { COMPONENT_DOCS } from '@docs-model';
 
 @Component({
   selector: 'lib-component-details',

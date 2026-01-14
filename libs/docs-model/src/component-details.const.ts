@@ -1,5 +1,8 @@
 import { ComponentDoc } from './component-details.interface';
-import { DefaultOverlayMenuExampleComponent } from '@docs/overlay-menu';
+import {
+  DefaultOverlayMenuExampleComponent,
+  DEFAULT_OVERLAY_MENU_EXAMPLE_CODE,
+} from '@docs/overlay-menu';
 
 export const COMPONENT_DOCS: ComponentDoc[] = [
   {
@@ -22,6 +25,7 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
           description: 'A simple example of the overlay menu in action.',
           example: {
             title: 'Overlay Menu Example',
+            description: '',
             component: DefaultOverlayMenuExampleComponent,
           },
         },
@@ -50,6 +54,18 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
       ],
       outputs: [],
     },
-    examples: [],
+    examples: [
+      {
+        title: 'Default Overlay Menu',
+        description:
+          'An example demonstrating the default overlay menu functionality.',
+        component: DefaultOverlayMenuExampleComponent,
+        source: {
+          ts: DEFAULT_OVERLAY_MENU_EXAMPLE_CODE.ts,
+          html: DEFAULT_OVERLAY_MENU_EXAMPLE_CODE.html,
+          scss: DEFAULT_OVERLAY_MENU_EXAMPLE_CODE.scss,
+        },
+      },
+    ],
   },
 ];
