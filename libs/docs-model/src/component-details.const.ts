@@ -7,9 +7,12 @@ import {
 export const COMPONENT_DOCS: ComponentDoc[] = [
   {
     id: 'overlay-menu',
-    title: 'Overlay Menu',
-    description:
-      'Menu component that appears as an overlay. Gives quick access to necessary actions.',
+    meta: {
+      title: 'Overlay Menu',
+      description:
+        'Menu component that appears as an overlay. Gives quick access to necessary actions.',
+      thumbnail: 'assets/images/component-demo/overlay-menu-icon.png',
+    },
     overview: {
       sections: [
         {
@@ -25,8 +28,14 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
           description: 'A simple example of the overlay menu in action.',
           example: {
             title: 'Overlay Menu Example',
-            description: '',
+            description:
+              'An example showcasing the basic usage of the overlay menu component.',
             component: DefaultOverlayMenuExampleComponent,
+            source: {
+              html: '<div class="example-container">',
+              ts: `import { Component } from '@angular/core'`,
+              scss: `.example-container { display: flex; justify-content: center; padding: 20px; }`,
+            },
           },
         },
       ],

@@ -1,9 +1,9 @@
 import { Type } from '@angular/core';
+import { expand } from 'rxjs';
 
 export interface ComponentDoc {
   id: string;
-  title: string;
-  description: string;
+  meta: ComponentMeta;
   overview: DocArticle;
   api: {
     inputs: DocApiProperty[];
@@ -12,7 +12,13 @@ export interface ComponentDoc {
   examples: DocExample[];
 }
 
-export type DocSection =
+export interface ComponentMeta {
+  title: string;
+  description: string;
+  thumbnail: string;
+}
+
+export type DocArticleSection =
   | DocMarkdownSection
   | DocExampleSection
   | DocCodeSection;
@@ -36,28 +42,28 @@ export interface ExampleDef {
 }
 
 export interface DocArticle {
-  sections: DocSection[];
+  sections: DocArticleSection[];
 }
 
-export interface DocMarkdownSection {
+export interface DocSection {
+  type: string;
+  id: string;
+  title: string;
+}
+
+export interface DocMarkdownSection extends DocSection {
   type: 'markdown';
-  id: string; // anchor
-  title: string; // TOC
   content: string; // markdown
 }
 
-export interface DocExampleSection {
+export interface DocExampleSection extends DocSection {
   type: 'example';
-  id: string;
-  title: string;
   description?: string;
   example: DocExample;
 }
 
-export interface DocCodeSection {
+export interface DocCodeSection extends DocSection {
   type: 'code';
-  id: string;
-  title: string;
   language: 'html' | 'ts' | 'scss';
   code: string;
 }

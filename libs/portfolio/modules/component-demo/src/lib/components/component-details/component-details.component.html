@@ -1,26 +1,22 @@
 <ng-container *ngIf="doc$ | async as doc; else notFound">
   <mat-tab-group>
-    <mat-tab label="Overview">
-      <h1>{{ doc.title }}</h1>
-      <p>{{ doc.description }}</p>
+    <mat-tab label="Overview" *ngIf="doc.overview">
+      <lib-component-overview
+        [overview]="doc.overview"
+      ></lib-component-overview>
     </mat-tab>
 
-    <mat-tab label="API">
-      <!-- <lib-api-table
-        [inputs]="doc.api.inputs"
-        [outputs]="doc.api.outputs"
-      ></lib-api-table> -->
+    <mat-tab label="API" *ngIf="doc.api">
+      <lib-component-api [docApi]="doc.api"> </lib-component-api>
     </mat-tab>
 
-    <mat-tab label="Examples">
-      <!-- <lib-example-host
-        *ngFor="let example of doc.examples"
-        [example]="example"
-      ></lib-example-host> -->
+    <mat-tab label="Examples" *ngIf="doc.examples">
+      <lib-component-example [examples]="doc.examples"></lib-component-example>
     </mat-tab>
   </mat-tab-group>
 </ng-container>
 
+<!-- #LandingPage fallback content for missing component details -->
 <ng-template #notFound>
   <p>Component not found.</p>
 </ng-template>

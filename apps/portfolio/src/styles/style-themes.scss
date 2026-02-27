@@ -5,14 +5,14 @@ $app-theme: (
       // Deep forest blue – main accent
       light: #2c5d6f,
       // Lighter hover state
-      dark: #10232e // Darker shade for depth,,,,,,
+      dark: #10232e, // Darker shade for depth,,,,,,
     ),
     accent: (
       color: #a3be8c,
       // Soft moss green – highlights and buttons
       light: #c0d9ac,
       // Lighter hover
-      dark: #7d996a // Darker for active states,,,,,,
+      dark: #7d996a, // Darker for active states,,,,,,
     ),
     neutral: (
       bg: #1e1e1e,
@@ -23,7 +23,7 @@ $app-theme: (
       // Main text
       muted: #95a5a6,
       // Secondary text
-      border: #3d3d3d // Borders and dividers,,,,,,
+      border: #3d3d3d, // Borders and dividers,,,,,,
     ),
     feedback: (
       success: #27ae60,
@@ -41,14 +41,14 @@ $app-theme: (
       // Deep charcoal-blue – main accent
       light: #1a2f4b,
       // Lighter hover state
-      dark: #08111c // Darker shade for depth,,,,,
+      dark: #08111c, // Darker shade for depth,,,,,
     ),
     accent: (
       color: #ff9f1c,
       // Vibrant amber – call-to-action
       light: #ffb84d,
       // Lighter hover
-      dark: #cc7a16 // Darker for active states,,,,,
+      dark: #cc7a16, // Darker for active states,,,,,
     ),
     neutral: (
       bg: #121212,
@@ -59,7 +59,7 @@ $app-theme: (
       // Main text
       muted: #9a9a9a,
       // Secondary text
-      border: #2c2c2c // Borders and dividers,,,,,
+      border: #2c2c2c, // Borders and dividers,,,,,
     ),
     feedback: (
       success: #2ecc71,
@@ -77,14 +77,14 @@ $app-theme: (
       // Slate gray – main accent
       light: #718096,
       // Lighter hover state
-      dark: #2d3748 // Darker shade for depth,,,,
+      dark: #2d3748, // Darker shade for depth,,,,
     ),
     accent: (
       color: #63b3ed,
       // Soft sky blue – highlights and buttons
       light: #90cdf4,
       // Lighter hover
-      dark: #4299e1 // Darker for active states,,,,
+      dark: #4299e1, // Darker for active states,,,,
     ),
     neutral: (
       bg: #ffffff,
@@ -95,7 +95,7 @@ $app-theme: (
       // Main text – dark slate
       muted: #718096,
       // Secondary text
-      border: #e2e8f0 // Borders and dividers – light gray,,,,
+      border: #e2e8f0, // Borders and dividers – light gray,,,,
     ),
     feedback: (
       success: #38a169,
