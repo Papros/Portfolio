@@ -12,6 +12,14 @@ import {
 import { ComponentDetailsComponent } from './lib/components/component-details/component-details.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentsGalleryComponent } from './lib/components/components-gallery/components-gallery.component';
+import {
+  ArticleSectionComponent,
+  CodeBlockComponent,
+  ComponentApiComponent,
+  ComponentExampleComponent,
+  ComponentOverviewComponent,
+} from './lib/components';
+import { MatIcon } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -27,9 +35,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DemoCardComponent,
+    ComponentsGalleryComponent,
     ComponentDemoPageComponent,
     ComponentDetailsComponent,
-    ComponentsGalleryComponent,
+    ComponentOverviewComponent,
+    ComponentExampleComponent,
+    ComponentApiComponent,
+    CodeBlockComponent,
+    ArticleSectionComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +52,7 @@ const routes: Routes = [
     MatSidenavModule,
     MatButtonModule,
     MatTabsModule,
+    MatIcon,
   ],
 })
 export class ComponentDemoModule {}

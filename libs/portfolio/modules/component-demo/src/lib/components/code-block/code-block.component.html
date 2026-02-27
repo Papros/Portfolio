@@ -1,0 +1,48 @@
+<div class="example-block" *ngIf="example">
+  <div class="example-header">
+    {{ example.title }}
+
+    <button
+      matIconButton
+      class="code-visible-button"
+      (click)="toggleCodeVisibility()"
+    >
+      <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
+    </button>
+  </div>
+
+  @if (!isCodeVisible) {
+    <div class="example-component">
+      <ng-container *ngComponentOutlet="example.component" />
+    </div>
+  } @else {
+    <div class="example-code">
+      <mat-tab-group mat-stretch-tabs="false">
+        <mat-tab label=".html" *ngIf="example.source?.html">
+          <div class="example-code-html">
+            {{ example.source?.html }}
+          </div>
+        </mat-tab>
+
+        <mat-tab label=".ts" *ngIf="example.source?.ts">
+          <div class="example-code-ts">{{ example.source?.ts }}</div>
+        </mat-tab>
+
+        <mat-tab label=".scss" *ngIf="example.source?.scss">
+          <div class="example-code-ts">{{ example.source?.scss }}</div>
+        </mat-tab>
+
+        <mat-tab
+          label="Not found"
+          *ngIf="
+            !example.source?.html &&
+            !example.source?.ts &&
+            !example.source?.scss
+          "
+        >
+          No code provided for this example.
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  }
+</div>

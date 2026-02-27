@@ -1,0 +1,29 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+.doc-article-container {
+  display: flex;
+  flex-direction: row;
+
+  .doc-article-content {
+    flex: 9;
+    padding-right: 1rem;
+  }
+
+  .doc-section-shortcuts-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-left: 4px solid get-color(neutral, border);
+    padding-left: 8px;
+    margin-top: 4px;
+
+    .section-shortcut {
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        color: get-color(accent, color);
+        cursor: pointer;
+      }
+    }
+  }
+}

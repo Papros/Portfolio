@@ -1,0 +1,19 @@
+<div class="doc-article-container">
+  <div class="doc-article-content">
+    @for (section of overview?.sections; track section.id) {
+      <lib-article-section [section]="section"></lib-article-section>
+    }
+  </div>
+
+  <div class="doc-section-shortcuts-list">
+    @for (section of overview?.sections; track section.id) {
+      <a
+        [routerLink]="[]"
+        [fragment]="'section-' + section.id"
+        class="section-shortcut"
+      >
+        {{ section.title }}
+      </a>
+    }
+  </div>
+</div>

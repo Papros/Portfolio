@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
 
 @Component({
   selector: 'lib-components-gallery',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './components-gallery.component.html',
   styleUrl: './components-gallery.component.scss',
 })
-export class ComponentsGalleryComponent {}
+export class ComponentsGalleryComponent {
+  get componentList(): ComponentDoc[] {
+    return COMPONENT_DOCS || [];
+  }
+}

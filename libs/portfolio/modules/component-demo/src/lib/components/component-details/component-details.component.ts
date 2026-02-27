@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
-import { COMPONENT_DOCS } from '@docs-model';
+import { map, Observable } from 'rxjs';
+import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
 
 @Component({
   selector: 'lib-component-details',
@@ -11,7 +11,7 @@ import { COMPONENT_DOCS } from '@docs-model';
   standalone: false,
 })
 export class ComponentDetailsComponent {
-  readonly doc$;
+  readonly doc$: Observable<ComponentDoc | undefined>;
 
   constructor(private route: ActivatedRoute) {
     this.doc$ = this.route.paramMap.pipe(

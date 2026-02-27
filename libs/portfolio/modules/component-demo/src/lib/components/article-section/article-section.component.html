@@ -1,0 +1,25 @@
+<div
+  *ngIf="section"
+  id="section-{{ section.id }}"
+  class="dev-section-container"
+>
+  <a class="dev-section-title">{{ section.title }}</a>
+
+  @switch (section.type) {
+    @case ('markdown') {
+      <p [innerHTML]="section.content"></p>
+    }
+
+    @case ('example') {
+      <p>{{ section.description }}</p>
+
+      <lib-code-block [example]="section.example"></lib-code-block>
+
+      {{ section.example.description }}
+    }
+
+    @case ('code') {
+      <pre><code> {{ section.code }} </code></pre>
+    }
+  }
+</div>

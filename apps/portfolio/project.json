@@ -25,7 +25,8 @@
         ],
         "styles": [
           "apps/portfolio/src/styles/styles.scss",
-          "apps/portfolio/src/styles/style-themes.scss"
+          "apps/portfolio/src/styles/style-themes.scss",
+          "node_modules/prismjs/themes/prism-tomorrow.css"
         ],
         "scripts": [],
         "baseHref": "/portfolio/",
