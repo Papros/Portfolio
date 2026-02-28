@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IconService } from '@portfolio/shared-pack';
 
 @Component({
@@ -11,5 +11,14 @@ import { IconService } from '@portfolio/shared-pack';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(private iconService: IconService) {}
+  constructor(
+    private iconService: IconService,
+    private router: Router,
+  ) {
+    const redirect = sessionStorage.getItem('redirect');
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      router.navigateByUrl(redirect);
+    }
+  }
 }
