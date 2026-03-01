@@ -43,9 +43,17 @@ jobs:
       - name: Test
         run: npx nx test portfolio --skip-nx-cloud
 
+      # Version update for Angular app
+      - name: Inject build version
+        run: echo "export const BUILD_VERSION = '${{ github.sha }}';" > apps/portfolio/src/environments/version.ts
+
       # Build Angular app
       - name: Build Angular project
         run: npx nx build portfolio --configuration=production --base-href="/Portfolio/"
+
+      # Copy 404.html for SPA fallback and fix gh-pages deployment
+      - name: Force SPA fallback
+        run: cp apps/portfolio/public/404.html dist/apps/portfolio/404.html
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
