@@ -16,21 +16,21 @@ export const appRoutes: Routes = [
         path: 'menu',
         loadComponent: () =>
           import('@portfolio/main-menu-module').then(
-            (m) => m.MainMenuPageComponent
+            (m) => m.MainMenuPageComponent,
           ),
       },
       {
         path: 'error',
         loadComponent: () =>
           import('@portfolio/landing-pages-pack').then(
-            (m) => m.ErrorLandingPageComponent
+            (m) => m.ErrorLandingPageComponent,
           ),
       },
       {
         path: 'construction',
         loadComponent: () =>
           import('@portfolio/landing-pages-pack').then(
-            (m) => m.NotReadyLandingPageComponent
+            (m) => m.NotReadyLandingPageComponent,
           ),
       },
     ],
@@ -43,14 +43,14 @@ export const appRoutes: Routes = [
         path: 'about',
         loadComponent: () =>
           import('@portfolio/about-me-module').then(
-            (m) => m.AboutMePageComponent
+            (m) => m.AboutMePageComponent,
           ),
       },
       {
         path: 'components',
         loadChildren: () =>
           import('@portfolio/component-demo').then(
-            (m) => m.ComponentDemoModule
+            (m) => m.ComponentDemoModule,
           ),
       },
     ],
@@ -58,6 +58,5 @@ export const appRoutes: Routes = [
   {
     path: '**',
     redirectTo: 'about',
-    pathMatch: 'full',
   },
 ];

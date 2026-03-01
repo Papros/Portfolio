@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { IconService } from '@portfolio/shared-pack';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +10,12 @@ import { IconService } from '@portfolio/shared-pack';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(
-    private iconService: IconService,
-    private router: Router,
-  ) {
-    const redirect = sessionStorage.getItem('redirect');
+  constructor() {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+
     if (redirect) {
-      sessionStorage.removeItem('redirect');
-      router.navigateByUrl(redirect);
+      window.history.replaceState({}, '', redirect);
     }
   }
 }
