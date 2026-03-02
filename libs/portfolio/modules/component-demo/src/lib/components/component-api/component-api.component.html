@@ -1,1 +1,55 @@
-<p>component-api works!</p>
+<div class="doc-article-container">
+  <div class="doc-article-content">
+    <h3>Inputs</h3>
+    <div class="table-block" id="inputs">
+      <table mat-table [dataSource]="docApi.inputs" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">
+            <b>{{ element.name }}</b> : <i>{{ element.type }}</i>
+            {{ element.defaultValue ? '= ' + element.defaultValue : '' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="desc">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['name', 'desc']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'desc']"></tr>
+      </table>
+    </div>
+
+    <h3>Outputs</h3>
+    <div class="table-block" id="outputs">
+      <table mat-table [dataSource]="docApi.outputs" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.name }} : {{ element.type }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="desc">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['name', 'desc']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'desc']"></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="doc-section-shortcuts-list">
+    <a [routerLink]="[]" fragment="inputs" class="section-shortcut"> Inputs </a>
+    <a [routerLink]="[]" fragment="outputs" class="section-shortcut">
+      Outputs
+    </a>
+  </div>
+</div>

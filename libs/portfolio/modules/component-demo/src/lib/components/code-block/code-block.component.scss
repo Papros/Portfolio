@@ -10,7 +10,6 @@
   .example-header {
     width: 100%;
     height: 20px;
-    padding-bottom: 2%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,5 +24,10 @@
   }
 
   .example-code {
+    padding-top: 0.5rem;
+
+    ::ng-deep .mat-mdc-tab {
+      --mdc-secondary-navigation-tab-container-height: 24px;
+    }
   }
 }

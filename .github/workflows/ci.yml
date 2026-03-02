@@ -49,7 +49,7 @@ jobs:
 
       # Build Angular app
       - name: Build Angular project
-        run: npx nx build portfolio --configuration=production --base-href="/Portfolio/"
+        run: npx nx build portfolio --configuration=production --base-href="/portfolio/"
 
       # Copy 404.html for SPA fallback and fix gh-pages deployment
       - name: Force SPA fallback
