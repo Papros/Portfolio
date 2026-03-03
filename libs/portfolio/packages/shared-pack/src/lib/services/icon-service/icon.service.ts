@@ -6,12 +6,10 @@ import { MatIconRegistry } from '@angular/material/icon';
 export class IconService {
   constructor(
     private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
-  ) {
-    this.registerIcons();
-  }
+    private sanitizer: DomSanitizer,
+  ) {}
 
-  private registerIcons(): void {
+  public registerIcons(): void {
     this.registerIcon('compass-needle', 'assets/icons/compass-needle-icon.svg');
     this.registerIcon('compass-glowing', 'assets/icons/compass-icon.svg');
   }
@@ -19,7 +17,7 @@ export class IconService {
   private registerIcon(iconName: string, iconPath: string) {
     this.iconRegistry.addSvgIcon(
       iconName,
-      this.sanitizer.bypassSecurityTrustResourceUrl(iconPath)
+      this.sanitizer.bypassSecurityTrustResourceUrl(iconPath),
     );
   }
 }

@@ -1,0 +1,49 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+.doc-article-container {
+  display: flex;
+  flex-direction: row;
+
+  .doc-article-content {
+    flex: 9;
+    padding-right: 1rem;
+
+    .table-block {
+      width: 90%;
+      padding: 0% 5%;
+      margin: 0% 5%;
+      border-radius: 16px;
+      border: 1px solid get-color(neutral, border);
+
+      .value-cell {
+        color: get-color(neutral, muted);
+      }
+    }
+
+    .mat-column-name {
+      width: 35%;
+    }
+
+    .mat-column-desc {
+      width: 65%;
+    }
+  }
+
+  .doc-section-shortcuts-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-left: 4px solid get-color(neutral, border);
+    padding-left: 8px;
+    margin-top: 4px;
+
+    .section-shortcut {
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        color: get-color(accent, color);
+        cursor: pointer;
+      }
+    }
+  }
+}

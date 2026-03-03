@@ -20,6 +20,7 @@ import {
   ComponentOverviewComponent,
 } from './lib/components';
 import { MatIcon } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
   {
@@ -53,6 +54,7 @@ const routes: Routes = [
     MatButtonModule,
     MatTabsModule,
     MatIcon,
+    MatTableModule,
   ],
 })
 export class ComponentDemoModule {}
