@@ -1,7 +1,13 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { IconService } from '@portfolio/shared-pack';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +20,8 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
+    provideAppInitializer(() => {
+      inject(IconService).registerIcons();
+    }),
   ],
 };

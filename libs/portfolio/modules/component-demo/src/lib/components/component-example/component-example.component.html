@@ -1,1 +1,7 @@
-<p>component-example works!</p>
+<div class="doc-examples-container">
+  <div class="doc-examples-content">
+    @for (example of examples; track example.component) {
+      <lib-code-block [example]="example"></lib-code-block>
+    }
+  </div>
+</div>
