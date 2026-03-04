@@ -16,4 +16,11 @@ export class CodeBlockComponent {
   toggleCodeVisibility() {
     this.isCodeVisible = !this.isCodeVisible;
   }
+
+  isCodeUrl(source: string | null): boolean {
+    return (
+      source !== null &&
+      (source.startsWith('http://') || source.startsWith('https://'))
+    );
+  }
 }

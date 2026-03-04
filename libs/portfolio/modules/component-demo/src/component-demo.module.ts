@@ -21,6 +21,7 @@ import {
 } from './lib/components';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { componentDocResolver } from './lib/resolvers/component-doc.resolver';
 
 const routes: Routes = [
   {
@@ -28,7 +29,13 @@ const routes: Routes = [
     component: ComponentDemoPageComponent,
     children: [
       { path: '', component: ComponentsGalleryComponent },
-      { path: ':component', component: ComponentDetailsComponent },
+      {
+        path: ':component',
+        component: ComponentDetailsComponent,
+        resolve: {
+          doc: componentDocResolver,
+        },
+      },
     ],
   },
 ];

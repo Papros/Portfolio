@@ -1,4 +1,4 @@
-<ng-container *ngIf="doc$ | async as doc; else notFound">
+<ng-container *ngIf="doc; else notFound">
   <mat-tab-group>
     <mat-tab label="Overview" *ngIf="doc.overview">
       <lib-component-overview

@@ -78,3 +78,7 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
     ],
   },
 ];
+
+export const COMPONENT_DOC_MAP = new Map(
+  COMPONENT_DOCS.map((doc) => [doc.id, doc]),
+);

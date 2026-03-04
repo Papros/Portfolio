@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
+import { ComponentDoc } from '@docs-model';
 
 @Component({
   selector: 'lib-component-details',
@@ -11,12 +10,9 @@ import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
   standalone: false,
 })
 export class ComponentDetailsComponent {
-  readonly doc$: Observable<ComponentDoc | undefined>;
+  readonly doc: ComponentDoc;
 
   constructor(private route: ActivatedRoute) {
-    this.doc$ = this.route.paramMap.pipe(
-      map((params) => params.get('component')),
-      map((id) => COMPONENT_DOCS.find((doc) => doc.id === id))
-    );
+    this.doc = this.route.snapshot.data['doc'];
   }
 }
