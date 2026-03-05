@@ -18,10 +18,20 @@ import {
   ComponentApiComponent,
   ComponentExampleComponent,
   ComponentOverviewComponent,
+  CodeHighlightDirective,
 } from './lib/components';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { componentDocResolver } from './lib/resolvers/component-doc.resolver';
+import {
+  provideGithubDocsSource,
+  DocsSourceFacade,
+} from '@portfolio/component-docs-data-access';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-scss';
 
 const routes: Routes = [
   {
@@ -62,6 +72,9 @@ const routes: Routes = [
     MatTabsModule,
     MatIcon,
     MatTableModule,
+    ClipboardModule,
+    CodeHighlightDirective,
   ],
+  providers: [DocsSourceFacade, provideGithubDocsSource()],
 })
 export class ComponentDemoModule {}

@@ -9,5 +9,6 @@ import { DocExample } from '@docs-model';
   styleUrl: './component-example.component.scss',
 })
 export class ComponentExampleComponent {
+  @Input() componentId!: string;
   @Input() examples: DocExample[] = [];
 }

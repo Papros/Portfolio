@@ -1,7 +1,10 @@
 <div class="doc-article-container">
   <div class="doc-article-content">
     @for (section of overview?.sections; track section.id) {
-      <lib-article-section [section]="section"></lib-article-section>
+      <lib-article-section
+        [componentId]="componentId"
+        [section]="section"
+      ></lib-article-section>
     }
   </div>
 

@@ -2,16 +2,21 @@
   <mat-tab-group>
     <mat-tab label="Overview" *ngIf="doc.overview">
       <lib-component-overview
+        [componentId]="doc.id"
         [overview]="doc.overview"
       ></lib-component-overview>
     </mat-tab>
 
     <mat-tab label="API" *ngIf="doc.api">
-      <lib-component-api [docApi]="doc.api"> </lib-component-api>
+      <lib-component-api [componentId]="doc.id" [docApi]="doc.api">
+      </lib-component-api>
     </mat-tab>
 
     <mat-tab label="Examples" *ngIf="doc.examples">
-      <lib-component-example [examples]="doc.examples"></lib-component-example>
+      <lib-component-example
+        [componentId]="doc.id"
+        [examples]="doc.examples"
+      ></lib-component-example>
     </mat-tab>
   </mat-tab-group>
 </ng-container>

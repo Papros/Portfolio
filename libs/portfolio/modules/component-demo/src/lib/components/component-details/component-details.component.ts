@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentDoc } from '@docs-model';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'lib-component-details',

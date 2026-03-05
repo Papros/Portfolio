@@ -8,6 +8,6 @@ import { DocArticleSection } from '@docs-model';
   styleUrl: './article-section.component.scss',
 })
 export class ArticleSectionComponent {
-  @Input()
-  section: DocArticleSection | null = null;
+  @Input() componentId!: string;
+  @Input() section: DocArticleSection | null = null;
 }

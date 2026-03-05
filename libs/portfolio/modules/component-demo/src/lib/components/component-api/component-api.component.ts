@@ -9,6 +9,7 @@ import { DocApiProperty } from '@docs-model';
   styleUrl: './component-api.component.scss',
 })
 export class ComponentApiComponent {
+  @Input() componentId!: string;
   @Input() docApi: {
     inputs: DocApiProperty[];
     outputs: DocApiProperty[];

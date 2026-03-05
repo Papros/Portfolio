@@ -9,5 +9,6 @@ import { DocArticle } from '@docs-model';
   styleUrl: './component-overview.component.scss',
 })
 export class ComponentOverviewComponent {
+  @Input() componentId!: string;
   @Input() overview: DocArticle | null = null;
 }
