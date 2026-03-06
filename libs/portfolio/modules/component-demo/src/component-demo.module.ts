@@ -5,6 +5,7 @@ import { DemoCardComponent } from './lib/components/demo-card/demo-card.componen
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   NavigationBarComponent,
   SimpleMenuComponent,
@@ -72,6 +73,7 @@ const routes: Routes = [
     MatTabsModule,
     MatIcon,
     MatTableModule,
+    MatTooltipModule,
     ClipboardModule,
     CodeHighlightDirective,
   ],

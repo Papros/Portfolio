@@ -8,11 +8,17 @@
         matIconButton
         class="code-visible-button"
         (click)="toggleCodeVisibility()"
+        [matTooltip]="isCodeVisible ? 'View code' : 'hide code'"
       >
         <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
       </button>
 
-      <button matIconButton class="copy-clipboard-button">
+      <button
+        matIconButton
+        class="copy-clipboard-button"
+        (click)="copyCode()"
+        matTooltip="Copy code"
+      >
         <mat-icon>content_copy</mat-icon>
       </button>
     </div>
@@ -24,7 +30,10 @@
     </div>
   } @else {
     <div class="example-code">
-      <mat-tab-group mat-stretch-tabs="false">
+      <mat-tab-group
+        mat-stretch-tabs="false"
+        (selectedTabChange)="onTabChange($event.index)"
+      >
         <mat-tab label=".html">
           <ng-template matTabContent>
             <ng-container *ngIf="getCode('html') | async as state">

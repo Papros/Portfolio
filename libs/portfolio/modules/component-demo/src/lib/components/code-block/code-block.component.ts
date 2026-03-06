@@ -3,6 +3,7 @@ import { DocExample } from '@docs-model';
 import { DocsSourceFacade } from '@portfolio/component-docs-data-access';
 import { map, catchError, shareReplay, of, Observable, startWith } from 'rxjs';
 import { CodeState } from './code-block.interface';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'lib-code-block',
@@ -19,10 +20,14 @@ export class CodeBlockComponent {
   @Input() lazy = true;
 
   isCodeVisible = false;
+  activeFileType: 'html' | 'ts' | 'scss' = 'html';
 
   private cache = new Map<string, Observable<CodeState>>();
 
-  constructor(private docsFacade: DocsSourceFacade) {}
+  constructor(
+    private docsFacade: DocsSourceFacade,
+    private clipboard: Clipboard,
+  ) {}
 
   toggleCodeVisibility() {
     this.isCodeVisible = !this.isCodeVisible;
@@ -43,5 +48,20 @@ export class CodeBlockComponent {
     }
 
     return this.cache.get(fileType) ?? of({ loading: false, error: true });
+  }
+
+  onTabChange(index: number) {
+    const map: ('html' | 'ts' | 'scss')[] = ['html', 'ts', 'scss'];
+    this.activeFileType = map[index];
+  }
+
+  copyCode() {
+    const code$ = this.getCode(this.activeFileType);
+
+    code$.subscribe((state) => {
+      if (state.code) {
+        this.clipboard.copy(state.code);
+      }
+    });
   }
 }
