@@ -5,6 +5,7 @@ import { DemoCardComponent } from './lib/components/demo-card/demo-card.componen
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   NavigationBarComponent,
   SimpleMenuComponent,
@@ -18,9 +19,20 @@ import {
   ComponentApiComponent,
   ComponentExampleComponent,
   ComponentOverviewComponent,
+  CodeHighlightDirective,
 } from './lib/components';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { componentDocResolver } from './lib/resolvers/component-doc.resolver';
+import {
+  provideGithubDocsSource,
+  DocsSourceFacade,
+} from '@portfolio/component-docs-data-access';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-scss';
 
 const routes: Routes = [
   {
@@ -28,7 +40,13 @@ const routes: Routes = [
     component: ComponentDemoPageComponent,
     children: [
       { path: '', component: ComponentsGalleryComponent },
-      { path: ':component', component: ComponentDetailsComponent },
+      {
+        path: ':component',
+        component: ComponentDetailsComponent,
+        resolve: {
+          doc: componentDocResolver,
+        },
+      },
     ],
   },
 ];
@@ -55,6 +73,10 @@ const routes: Routes = [
     MatTabsModule,
     MatIcon,
     MatTableModule,
+    MatTooltipModule,
+    ClipboardModule,
+    CodeHighlightDirective,
   ],
+  providers: [DocsSourceFacade, provideGithubDocsSource()],
 })
 export class ComponentDemoModule {}

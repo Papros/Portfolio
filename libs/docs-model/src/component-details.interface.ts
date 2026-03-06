@@ -70,6 +70,7 @@ export interface DocCodeSection extends DocSection {
 
 export interface DocExample {
   title: string;
+  id: string;
   description: string;
   component: Type<unknown>;
   source?: {

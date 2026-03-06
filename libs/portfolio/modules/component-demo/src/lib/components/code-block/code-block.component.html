@@ -2,13 +2,26 @@
   <div class="example-header">
     {{ example.title }}
 
-    <button
-      matIconButton
-      class="code-visible-button"
-      (click)="toggleCodeVisibility()"
-    >
-      <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
-    </button>
+    <div class="example-header_buttons-section">
+      <button
+        *ngIf="componentId && example.id"
+        matIconButton
+        class="code-visible-button"
+        (click)="toggleCodeVisibility()"
+        [matTooltip]="isCodeVisible ? 'View code' : 'hide code'"
+      >
+        <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
+      </button>
+
+      <button
+        matIconButton
+        class="copy-clipboard-button"
+        (click)="copyCode()"
+        matTooltip="Copy code"
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
   </div>
 
   @if (!isCodeVisible) {
@@ -17,30 +30,55 @@
     </div>
   } @else {
     <div class="example-code">
-      <mat-tab-group mat-stretch-tabs="false">
-        <mat-tab label=".html" *ngIf="example.source?.html">
-          <div class="example-code-html">
-            {{ example.source?.html }}
-          </div>
+      <mat-tab-group
+        mat-stretch-tabs="false"
+        (selectedTabChange)="onTabChange($event.index)"
+      >
+        <mat-tab label=".html">
+          <ng-template matTabContent>
+            <ng-container *ngIf="getCode('html') | async as state">
+              <div *ngIf="state.loading">Loading...</div>
+              <pre
+                *ngIf="state.code"
+                libCodeHighlight
+                [code]="state.code"
+                language="html"
+              ></pre>
+              <div *ngIf="state.error">Failed to load code</div>
+            </ng-container>
+          </ng-template>
         </mat-tab>
 
         <mat-tab label=".ts" *ngIf="example.source?.ts">
-          <div class="example-code-ts">{{ example.source?.ts }}</div>
+          <ng-template matTabContent
+            ><ng-container *ngIf="getCode('ts') | async as state">
+              <div *ngIf="state.loading">Loading...</div>
+              <pre
+                #codeBlockTS
+                *ngIf="state.code"
+                libCodeHighlight
+                [code]="state.code"
+                language="typescript"
+              ></pre>
+              <div *ngIf="state.error">Failed to load code</div>
+            </ng-container></ng-template
+          >
         </mat-tab>
 
         <mat-tab label=".scss" *ngIf="example.source?.scss">
-          <div class="example-code-ts">{{ example.source?.scss }}</div>
-        </mat-tab>
-
-        <mat-tab
-          label="Not found"
-          *ngIf="
-            !example.source?.html &&
-            !example.source?.ts &&
-            !example.source?.scss
-          "
-        >
-          No code provided for this example.
+          <ng-template matTabContent
+            ><ng-container *ngIf="getCode('scss') | async as state">
+              <div *ngIf="state.loading">Loading...</div>
+              <pre
+                #codeBlockSCSS
+                *ngIf="state.code"
+                libCodeHighlight
+                [code]="state.code"
+                language="scss"
+              ></pre>
+              <div *ngIf="state.error">Failed to load code</div>
+            </ng-container></ng-template
+          >
         </mat-tab>
       </mat-tab-group>
     </div>

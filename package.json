@@ -50,6 +50,7 @@
     "@swc/helpers": "~0.5.11",
     "@types/jest": "29.5.14",
     "@types/node": "18.16.9",
+    "@types/prismjs": "^1.26.6",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
     "@typescript-eslint/utils": "^7.16.0",
