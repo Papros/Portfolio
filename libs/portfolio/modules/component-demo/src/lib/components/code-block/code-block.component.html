@@ -24,11 +24,7 @@
     </div>
   </div>
 
-  @if (!isCodeVisible) {
-    <div class="example-component">
-      <ng-container *ngComponentOutlet="example.component" />
-    </div>
-  } @else {
+  @if (isCodeVisible) {
     <div class="example-code">
       <mat-tab-group
         mat-stretch-tabs="false"
@@ -83,4 +79,8 @@
       </mat-tab-group>
     </div>
   }
+
+  <div class="example-component">
+    <ng-container *ngComponentOutlet="example.component" />
+  </div>
 </div>
