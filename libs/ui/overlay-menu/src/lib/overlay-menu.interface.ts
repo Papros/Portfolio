@@ -1,11 +1,10 @@
 export interface OverlayMenuOption {
   label: string;
   icon: string;
-  callback: () => void;
+  id: string;
 }
 
 export enum OverlayMenuState {
-  TOGGLE = 'toggle',
   OPEN = 'open',
   CLOSED = 'closed',
 }

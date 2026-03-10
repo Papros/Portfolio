@@ -7,6 +7,8 @@
 
 .menu-container {
   position: relative;
+  --radius: 120px;
+  --spread: 160deg;
 
   .menu-option {
     position: absolute;
@@ -24,8 +26,8 @@
     justify-content: center;
 
     transform: translate(-50%, -50%)
-      rotate(calc(160deg / var(--total) * var(--i))) translateX(0)
-      rotate(calc(-160deg / var(--total) * var(--i)));
+      rotate(calc(var(--spread) / var(--total) * var(--i))) translateX(0)
+      rotate(calc(-1 * (var(--spread)) / var(--total) * var(--i)));
     transition:
       opacity 0.1s ease,
       transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -47,8 +49,9 @@
     opacity: 1;
     pointer-events: auto;
     transform: translate(-50%, -50%)
-      rotate(calc(160deg / var(--total) * var(--i))) translateX(-120px)
-      rotate(calc(-160deg / var(--total) * var(--i)));
+      rotate(calc(var(--spread) / var(--total) * var(--i)))
+      translateX(calc(-1 * var(--radius)))
+      rotate(calc(-1 * (var(--spread) / var(--total) * var(--i))));
   }
 
   &:not(.open) .menu-option {
@@ -65,7 +68,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     cursor: pointer;
 
     background: #222;

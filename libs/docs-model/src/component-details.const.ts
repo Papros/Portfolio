@@ -41,7 +41,7 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
     api: {
       inputs: [
         {
-          name: 'menuState',
+          name: 'state',
           type: 'OverlayMenuState',
           defaultValue: 'OverlayMenuState.CLOSED',
           description: 'Controls the state of the menu (open, closed, toggle).',

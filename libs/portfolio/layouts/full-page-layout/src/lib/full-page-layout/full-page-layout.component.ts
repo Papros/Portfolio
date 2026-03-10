@@ -1,16 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import {
-  AttachedComponentBackdrop,
-  OverlayService,
-} from '@portfolio/shared-pack';
-import { BehaviorSubject } from 'rxjs';
+import { OverlayService } from '@portfolio/shared-pack';
 import {
   OverlayMenuState,
   OverlayMenuOption,
   OverlayMenuComponent,
 } from '@ui/overlay-menu';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'lib-full-page-layout',
@@ -20,72 +23,81 @@ import {
   styleUrl: './full-page-layout.component.scss',
 })
 export class FullPageLayoutComponent implements OnInit, OnDestroy {
-  private isOpen = new BehaviorSubject<OverlayMenuState>(
-    OverlayMenuState.CLOSED
-  );
+  private menuState = signal(OverlayMenuState.CLOSED);
 
   overlayMenuOptions: OverlayMenuOption[] = [
     {
+      id: 'home1',
       label: 'MENU',
       icon: 'home',
-      callback: () => {
-        console.log('menu-callback');
-        this.router.navigateByUrl('/menu');
-        console.log('last navigation: ', this.router.navigated);
-      },
     },
     {
+      id: 'home2',
       label: 'MENU',
       icon: 'home',
-      callback: () => {
-        console.log('second-callback');
-      },
     },
     {
+      id: 'home3',
       label: 'MENU',
       icon: 'home',
-      callback: () => {
-        console.log('second-callback');
-      },
     },
     {
+      id: 'home4',
       label: 'MENU',
       icon: 'home',
-      callback: () => {
-        console.log('second-callback');
-      },
     },
     {
+      id: 'home5',
       label: 'MENU2',
       icon: 'arrow',
-      callback: () => {
-        console.log('second-callback');
-      },
     },
   ];
 
-  constructor(private overlayService: OverlayService, private router: Router) {}
+  constructor(
+    private overlayService: OverlayService,
+    private destroyRef: DestroyRef,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.overlayService.closeAll();
-    this.overlayService.attachComponent(
+    const { overlayRef, componentRef } = this.overlayService.attachComponent(
       OverlayMenuComponent,
       {
-        menuState: this.isOpen,
-        label: 'test123',
         options: this.overlayMenuOptions,
+        stateSignal: this.menuState,
       },
-      { bottom: '50px', right: '100px' },
-      true,
-      [AttachedComponentBackdrop.Transparent],
-      () => {
-        this.isOpen.next(OverlayMenuState.CLOSED);
-      }
+      {
+        position: { bottom: '50px', right: '100px' },
+        backdropCallback: () => this.menuState.set(OverlayMenuState.CLOSED),
+      },
     );
+
+    componentRef.instance.optionSelected
+      .pipe(takeUntilDestroyed<OverlayMenuOption>(this.destroyRef))
+      .subscribe({
+        next: (option) => {
+          this.onMenuCallback(option);
+        },
+      });
+  }
+
+  onMenuCallback(option: OverlayMenuOption) {
+    switch (option.id) {
+      case 'home1':
+      case 'home2':
+      case 'home3':
+      case 'home4':
+      case 'home5':
+      case 'default':
+        console.log('menu-callback');
+        this.router.navigateByUrl('/menu');
+        console.log('last navigation: ', this.router.navigated);
+        return;
+    }
   }
 
   ngOnDestroy(): void {
     this.overlayService.closeAll();
-    this.isOpen.complete();
   }
 }

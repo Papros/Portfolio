@@ -1,4 +1,5 @@
 import {
+  ComponentRef,
   Injectable,
   InjectionToken,
   Injector,
@@ -9,40 +10,41 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   AttachedComponentBackdrop,
-  AttachedComponentPosition,
+  AttachOptions,
   ComponentInputs,
 } from './overlay.interface';
-import { Injector as AngularInjector } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OverlayService implements OnDestroy {
-  private overlayRefs: OverlayRef[] = [];
-  private bulkSubscription$ = new Subscription();
+  private overlayRefs = new Map<OverlayRef, Subscription>();
 
-  constructor(private overlay: Overlay, private injector: Injector) {
-    this.overlayRefs = [];
-  }
+  constructor(
+    private overlay: Overlay,
+    private injector: Injector,
+  ) {}
 
   attachComponent<T>(
     component: Type<T>,
     inputs: ComponentInputs<T> = {},
-    position: AttachedComponentPosition = {},
-    hasBackdrop = true,
-    backdropClass: AttachedComponentBackdrop[] = [
-      AttachedComponentBackdrop.Transparent,
-    ],
-    backdropCallback: () => void
-  ): OverlayRef {
+    options: AttachOptions = {},
+  ): { overlayRef: OverlayRef; componentRef: ComponentRef<T> } {
+    const {
+      position = {},
+      hasBackdrop = true,
+      backdropClass = [AttachedComponentBackdrop.Transparent],
+      backdropCallback,
+    } = options;
+
     const positionStrategy = this.overlay
       .position()
       .global()
-      .top(position.top || '0px')
-      .left(position.left || '0px')
-      .right(position.right || 'auto')
-      .bottom(position.bottom || 'auto');
+      .top(position.top ?? '0px')
+      .left(position.left ?? '0px')
+      .right(position.right ?? 'auto')
+      .bottom(position.bottom ?? 'auto');
 
     const overlayRef = this.overlay.create({
       positionStrategy,
@@ -50,73 +52,53 @@ export class OverlayService implements OnDestroy {
       backdropClass: ['noninteractive-backdrop', ...backdropClass],
     });
 
-    const injector = this.createInjector(inputs);
-
-    const portal = new ComponentPortal(component, null, injector);
+    const portal = new ComponentPortal(component, null, this.injector);
     const componentRef = overlayRef.attach(portal);
 
-    Object.keys(inputs).forEach((inputKey) => {
-      const key = inputKey as keyof T;
-      const inputValue = inputs[key];
-      if (inputValue !== undefined) {
-        componentRef.setInput(inputKey, inputValue);
+    Object.entries(inputs).forEach(([key, value]) => {
+      if (value !== undefined) {
+        componentRef.setInput(key, value);
       }
     });
 
-    if (hasBackdrop) {
-      const backdropSub$ = overlayRef.backdropClick().subscribe({
-        next: (event: MouseEvent) => {
+    const sub = new Subscription();
+
+    if (hasBackdrop && backdropCallback) {
+      sub.add(
+        overlayRef.backdropClick().subscribe((event: MouseEvent) => {
           if (
             (event.target as HTMLElement).matches(
-              'button, a, input, textarea, select, label, [data-ignore-backdrop]'
+              'button, a, input, textarea, select, label, [data-ignore-backdrop]',
             )
           ) {
             return;
           }
-
           backdropCallback();
-        },
-      });
-
-      this.bulkSubscription$.add(backdropSub$);
+        }),
+      );
     }
 
-    this.overlayRefs.push(overlayRef);
+    this.overlayRefs.set(overlayRef, sub);
 
-    return overlayRef;
+    return { overlayRef, componentRef };
   }
 
-  close(overlayRef: OverlayRef) {
-    const index = this.overlayRefs.indexOf(overlayRef);
-    if (index !== -1) {
-      this.overlayRefs[index].dispose();
-      this.overlayRefs.splice(index, 1);
-    }
+  close(overlayRef: OverlayRef): void {
+    const sub = this.overlayRefs.get(overlayRef);
+    sub?.unsubscribe();
+    overlayRef.dispose();
+    this.overlayRefs.delete(overlayRef);
   }
 
-  closeAll() {
-    this.overlayRefs.forEach((overlayRef) => overlayRef.dispose());
-    this.overlayRefs = [];
-  }
-
-  private createInjector(inputs: { [key: string]: any }) {
-    const providers = Object.keys(inputs).map((key) => {
-      const token = new InjectionToken<any>(key);
-      return {
-        provide: token,
-        useValue: inputs[key],
-      };
+  closeAll(): void {
+    this.overlayRefs.forEach((sub, overlayRef) => {
+      sub.unsubscribe();
+      overlayRef.dispose();
     });
-
-    const customInjector = Injector.create({
-      providers,
-      parent: this.injector,
-    });
-
-    return customInjector;
+    this.overlayRefs.clear();
   }
 
   ngOnDestroy(): void {
-    this.bulkSubscription$?.unsubscribe();
+    this.closeAll();
   }
 }
