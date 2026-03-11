@@ -11,19 +11,19 @@ import { OverlayMenuComponent, OverlayMenuOption } from '@ui/overlay-menu';
 export class DefaultOverlayMenuExampleComponent {
   menuOption: OverlayMenuOption[] = [
     {
+      id: 'option1',
       label: 'Option 1',
       icon: 'home',
-      callback: () => console.log('Option 1 clicked'),
     },
     {
+      id: 'option2',
       label: 'Option 2',
       icon: 'settings',
-      callback: () => console.log('Option 2 clicked'),
     },
     {
+      id: 'option3',
       label: 'Option 3',
       icon: 'info',
-      callback: () => console.log('Option 3 clicked'),
     },
   ];
 }

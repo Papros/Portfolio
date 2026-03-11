@@ -1,13 +1,15 @@
 import {
-  ChangeDetectorRef,
   Component,
+  computed,
+  DestroyRef,
+  EventEmitter,
   Input,
-  OnDestroy,
-  OnInit,
+  Output,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, Subscription } from 'rxjs';
 import { OverlayMenuOption, OverlayMenuState } from './overlay-menu.interface';
 
 @Component({
@@ -17,69 +19,69 @@ import { OverlayMenuOption, OverlayMenuState } from './overlay-menu.interface';
   templateUrl: './overlay-menu.component.html',
   styleUrl: './overlay-menu.component.scss',
 })
-export class OverlayMenuComponent implements OnInit, OnDestroy {
-  @Input() menuState = new BehaviorSubject<OverlayMenuState>(
-    OverlayMenuState.CLOSED
-  );
-  @Input() label = 'Menu';
-  @Input() icon = 'donut_small';
+export class OverlayMenuComponent {
   @Input() options: OverlayMenuOption[] = [];
+  @Input() radius = 120;
+  @Input() spread = 160;
+  @Input() stateSignal: WritableSignal<OverlayMenuState> | null = null;
 
-  isMenuOpen = false;
-  bulkSubscription$ = new Subscription();
+  @Output() optionSelected = new EventEmitter<OverlayMenuOption>();
 
-  private hideTimeout: any;
+  private readonly _isOpen = signal(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private cdr: ChangeDetectorRef) {}
+  readonly isMenuOpen = computed(() => {
+    const external = this.stateSignal;
+    return external !== null
+      ? external() === OverlayMenuState.OPEN
+      : this._isOpen();
+  });
 
-  ngOnInit(): void {
-    this.isMenuOpen = false;
-    this.cdr.markForCheck();
+  private hideTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    const stateSub$ = this.menuState.subscribe({
-      next: (state: OverlayMenuState) => {
-        switch (state) {
-          case OverlayMenuState.CLOSED:
-            this.isMenuOpen = false;
-            break;
-          case OverlayMenuState.OPEN:
-            this.isMenuOpen = true;
-            break;
-          case OverlayMenuState.TOGGLE:
-            this.isMenuOpen = !this.isMenuOpen;
-            break;
-        }
+  constructor(private destroyRef: DestroyRef) {
+    this.destroyRef.onDestroy(() => this.clearHideTimeout());
+  }
 
-        this.cdr.markForCheck();
-      },
-    });
-    this.bulkSubscription$.add(stateSub$);
+  toggle(): void {
+    if (this.stateSignal !== null) {
+      this.stateSignal.update((s) =>
+        s === OverlayMenuState.OPEN
+          ? OverlayMenuState.CLOSED
+          : OverlayMenuState.OPEN,
+      );
+    } else {
+      this._isOpen.update((v) => !v);
+    }
   }
 
   onMouseEnter(): void {
-    clearTimeout(this.hideTimeout);
-    this.isMenuOpen = true;
+    this.clearHideTimeout();
+    if (this.stateSignal !== null) {
+      this.stateSignal.set(OverlayMenuState.OPEN);
+    } else {
+      this._isOpen.set(true);
+    }
   }
 
   onMouseLeave(): void {
-    clearTimeout(this.hideTimeout);
+    this.clearHideTimeout();
     this.hideTimeout = setTimeout(() => {
-      this.isMenuOpen = false;
-      this.cdr.markForCheck();
+      if (this.stateSignal !== null) {
+        this.stateSignal.set(OverlayMenuState.CLOSED);
+      } else {
+        this._isOpen.set(false);
+      }
     }, 1500);
   }
 
-  runCallback(option: OverlayMenuOption): void {
-    option.callback?.();
+  selectOption(option: OverlayMenuOption): void {
+    this.optionSelected.emit(option);
   }
 
-  toggle() {
-    this.menuState.next(OverlayMenuState.TOGGLE);
-  }
-
-  ngOnDestroy(): void {
-    this.bulkSubscription$?.unsubscribe();
-    clearTimeout(this.hideTimeout);
+  private clearHideTimeout(): void {
+    if (this.hideTimeout !== null) {
+      clearTimeout(this.hideTimeout);
+      this.hideTimeout = null;
+    }
   }
 }

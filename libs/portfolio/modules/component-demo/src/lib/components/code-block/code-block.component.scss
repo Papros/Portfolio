@@ -30,4 +30,18 @@
       --mdc-secondary-navigation-tab-container-height: 24px;
     }
   }
+
+  pre {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    padding: 16px;
+    border-radius: 8px;
+    overflow: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+  }
+
+  code {
+    border-radius: 8px;
+  }
 }

@@ -5,6 +5,13 @@ export interface AttachedComponentPosition {
   bottom?: string;
 }
 
+export interface AttachOptions {
+  position?: AttachedComponentPosition;
+  hasBackdrop?: boolean;
+  backdropClass?: AttachedComponentBackdrop[];
+  backdropCallback?: () => void;
+}
+
 export enum AttachedComponentBackdrop {
   Transparent = 'cdk-overlay-transparent-backdrop',
   Dark = 'cdk-overlay-dark-backdrop',

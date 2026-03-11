@@ -13,7 +13,10 @@
     @case ('example') {
       <p>{{ section.description }}</p>
 
-      <lib-code-block [example]="section.example"></lib-code-block>
+      <lib-code-block
+        [componentId]="componentId"
+        [example]="section.example"
+      ></lib-code-block>
 
       {{ section.example.description }}
     }

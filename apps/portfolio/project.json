@@ -24,12 +24,14 @@
           "apps/portfolio/src/assets"
         ],
         "styles": [
+          "node_modules/prismjs/themes/prism-tomorrow.css",
+          "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
           "apps/portfolio/src/styles/styles.scss",
           "apps/portfolio/src/styles/style-themes.scss",
           "node_modules/prismjs/themes/prism-tomorrow.css"
         ],
         "scripts": [],
-        "baseHref": "/portfolio/",
+        "baseHref": "/Portfolio/",
         "stylePreprocessorOptions": {
           "includePaths": ["apps/portfolio/src/styles"]
         }

@@ -25,6 +25,9 @@
       "@portfolio/component-demo": [
         "libs/portfolio/modules/component-demo/src/index.ts"
       ],
+      "@portfolio/main-menu-module": [
+        "libs/portfolio/modules/main-menu-module/src/index.ts"
+      ],
       "@portfolio/default-layout": [
         "libs/portfolio/layouts/default-layout/src/index.ts"
       ],
@@ -34,11 +37,11 @@
       "@portfolio/landing-pages-pack": [
         "libs/portfolio/packages/landing-pages-pack/src/index.ts"
       ],
-      "@portfolio/main-menu-module": [
-        "libs/portfolio/modules/main-menu-module/src/index.ts"
-      ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
+      ],
+      "@portfolio/component-docs-data-access": [
+        "libs/portfolio/packages/component-docs-data-access/src/index.ts"
       ],
       "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"],
       "@ui": ["libs/ui/index.ts"],
