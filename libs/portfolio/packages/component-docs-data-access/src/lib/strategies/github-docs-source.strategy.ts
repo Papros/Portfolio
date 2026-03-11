@@ -12,7 +12,6 @@ export class GithubDocsSourceStrategy implements DocsSourceStrategy {
     exampleId: string,
     fileType: 'ts' | 'html' | 'scss',
   ) {
-    console.log('fetching data from git');
     const url = this.buildUrl(componentId, exampleId, fileType);
     return this.http
       .get<any>(url)

@@ -90,9 +90,7 @@ export class FullPageLayoutComponent implements OnInit, OnDestroy {
       case 'home4':
       case 'home5':
       case 'default':
-        console.log('menu-callback');
         this.router.navigateByUrl('/menu');
-        console.log('last navigation: ', this.router.navigated);
         return;
     }
   }

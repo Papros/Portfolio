@@ -26,8 +26,6 @@ export class GridMenuComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     this.slots.forEach((slot) => this.slotMap.set(slot.libGridSlot, slot));
-    console.log(this.slotMap);
-    console.log(this.slots);
   }
 
   getSlotTemplate(id: string) {

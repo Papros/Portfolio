@@ -14,15 +14,15 @@
     </ng-template>
 
     <ng-template libGridSlot="about">
-      <a href="/Portfolio/components"> Component Gallery </a>
+      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="componentGallery">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <a href="/Portfolio/components"> Design system </a>
     </ng-template>
 
     <ng-template libGridSlot="gameGallery">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <a href="/Portfolio/games"> Games </a>
     </ng-template>
 
     <ng-template libGridSlot="widgetWeather">
