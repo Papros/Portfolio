@@ -50,7 +50,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'git',
-        options: { enabled: true, visible: true, background: '#111827' },
+        options: { enabled: true, visible: true, background: '#010409' },
         position: { colStart: 8, colSpan: 3, rowStart: 1, rowSpan: 2 },
         label: {
           value: 'GitHub',

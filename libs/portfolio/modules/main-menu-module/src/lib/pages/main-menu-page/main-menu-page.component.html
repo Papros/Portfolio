@@ -1,7 +1,14 @@
 <div class="shelf-container">
   <lib-grid-menu [menuConfig]="menuConfig">
     <ng-template libGridSlot="git">
-      <a href="https://github.com/Papros" target="_blank"> GIT LINK </a>
+      <a href="https://github.com/Papros" target="_blank" class="git-link">
+        <img
+          src="assets/images/main-menu/GitHub_Invertocat_White.svg"
+          alt="GitHub repository"
+        />
+
+        <div class="label">GitHub / Papros</div>
+      </a>
     </ng-template>
 
     <ng-template libGridSlot="linkedin">
