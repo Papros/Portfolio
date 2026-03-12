@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridMenuComponent, GridSlotDirective } from '@ui/grid-menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'lib-main-menu-page',
   standalone: true,
-  imports: [CommonModule, GridMenuComponent, GridSlotDirective],
+  imports: [CommonModule, GridMenuComponent, GridSlotDirective, MatIconModule],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })
@@ -16,7 +17,7 @@ export class MainMenuPageComponent {
     items: [
       {
         id: 'about',
-        options: { enabled: true, visible: true, background: '#3b82f6' },
+        options: { enabled: false, visible: true, background: '#3b82f6' },
         position: { colStart: 1, colSpan: 7, rowStart: 1, rowSpan: 1 },
         label: {
           value: 'About Me',
@@ -50,7 +51,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'git',
-        options: { enabled: true, visible: true, background: '#111827' },
+        options: { enabled: true, visible: true, background: '#010409' },
         position: { colStart: 8, colSpan: 3, rowStart: 1, rowSpan: 2 },
         label: {
           value: 'GitHub',
@@ -61,7 +62,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'widgetWeather',
-        options: { enabled: true, visible: true, background: '#0ea5e9' },
+        options: { enabled: false, visible: true, background: '#0ea5e9' },
         position: { colStart: 8, colSpan: 3, rowStart: 4, rowSpan: 2 },
         label: {
           value: 'Weather Widget',
@@ -83,7 +84,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'widgetChart',
-        options: { enabled: true, visible: true, background: '#ef4444' },
+        options: { enabled: false, visible: true, background: '#ef4444' },
         position: { colStart: 5, colSpan: 3, rowStart: 4, rowSpan: 2 },
         label: {
           value: 'Chart Widget',
@@ -94,7 +95,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'linkedin',
-        options: { enabled: true, visible: true, background: '#2563eb' },
+        options: { enabled: true, visible: true, background: '#1a3a5c' },
         position: { colStart: 3, colSpan: 3, rowStart: 6, rowSpan: 2 },
         label: {
           value: 'LinkedIn',
@@ -105,7 +106,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'widgetTrivia',
-        options: { enabled: true, visible: true, background: '#84cc16' },
+        options: { enabled: false, visible: true, background: '#84cc16' },
         position: { colStart: 6, colSpan: 6, rowStart: 6, rowSpan: 3 },
         label: {
           value: 'Trivia Widget',
@@ -116,7 +117,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'achievements',
-        options: { enabled: true, visible: true, background: '#f97316' },
+        options: { enabled: false, visible: true, background: '#f97316' },
         position: { colStart: 1, colSpan: 2, rowStart: 6, rowSpan: 5 },
         label: {
           value: 'Achievements 🏆',
@@ -127,7 +128,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'contact',
-        options: { enabled: true, visible: true, background: '#14b8a6' },
+        options: { enabled: false, visible: true, background: '#14b8a6' },
         position: { colStart: 3, colSpan: 3, rowStart: 8, rowSpan: 3 },
         label: {
           value: 'Contact Form',
@@ -138,7 +139,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'easterEgg',
-        options: { enabled: true, visible: true, background: '#f472b6' },
+        options: { enabled: false, visible: true, background: '#f472b6' },
         position: { colStart: 6, colSpan: 3, rowStart: 9, rowSpan: 2 },
         label: {
           value: 'Easter Egg 🐞',
@@ -149,7 +150,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'brick',
-        options: { enabled: true, visible: true, background: '#000' },
+        options: { enabled: false, visible: true, background: '#000' },
         position: { colStart: 9, colSpan: 2, rowStart: 9, rowSpan: 2 },
         label: {
           value: '',

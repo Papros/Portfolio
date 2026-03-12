@@ -1,70 +1,103 @@
 <div class="shelf-container">
   <lib-grid-menu [menuConfig]="menuConfig">
     <ng-template libGridSlot="git">
-      <a href="https://github.com/Papros" target="_blank"> GIT LINK </a>
+      <a href="https://github.com/Papros" target="_blank" class="git-link">
+        <img
+          src="assets/images/main-menu/GitHub_Invertocat_White.svg"
+          alt="GitHub repository"
+        />
+
+        <div class="label">GitHub / Papros</div>
+      </a>
     </ng-template>
 
     <ng-template libGridSlot="linkedin">
       <a
         href="https://www.linkedin.com/in/piotr-papros-4a67771a1/"
         target="_blank"
+        class="linkedin-card"
       >
-        LinkedIn
+        <div class="linkedin-header">
+          <img
+            src="assets/images/cv/profile_photo.webp"
+            alt="Piotr Papros"
+            class="linkedin-avatar"
+          />
+          <div class="linkedin-badge">in</div>
+        </div>
+
+        <div class="linkedin-info">
+          <span class="linkedin-name">Piotr Papros</span>
+          <span class="linkedin-title">Frontend Developer</span>
+          <span class="linkedin-cta">View Profile →</span>
+        </div>
+      </a>
+    </ng-template>
+
+    <ng-template libGridSlot="componentGallery">
+      <a href="/Portfolio/components" class="tile-card">
+        <mat-icon class="tile-watermark">widgets</mat-icon>
+        <span class="tile-label">Design System</span>
+      </a>
+    </ng-template>
+
+    <ng-template libGridSlot="gameGallery">
+      <a href="/Portfolio/games" class="tile-card">
+        <mat-icon class="tile-watermark">sports_esports</mat-icon>
+        <span class="tile-label">Games</span>
+      </a>
+    </ng-template>
+
+    <ng-template libGridSlot="cv">
+      <a href="/Portfolio/about" class="tile-card">
+        <mat-icon class="tile-watermark">badge</mat-icon>
+        <span class="tile-label">CV</span>
       </a>
     </ng-template>
 
     <ng-template libGridSlot="about">
-      <a href="/Portfolio/components"> Component Gallery </a>
-    </ng-template>
-
-    <ng-template libGridSlot="componentGallery">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
-    </ng-template>
-
-    <ng-template libGridSlot="gameGallery">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="widgetWeather">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="widgetChart">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="widgetTrivia">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="achievements">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="contact">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="easterEgg">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="easterEgg">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="brick">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
-    </ng-template>
-
-    <ng-template libGridSlot="cv">
-      <a href="/Portfolio/about"> CV </a>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
   </lib-grid-menu>
 </div>
 
-<ng-template #underDevelopment>
-  <div class="under-development">
-    <span class="label">Under development</span>
+<ng-template #comingSoon>
+  <div class="disabled-outer">
+    <div class="disabled-inner">
+      <mat-icon class="disabled-icon">nest_clock_farsight_analog</mat-icon>
+      <span class="disabled-label">coming soon</span>
+    </div>
   </div>
 </ng-template>

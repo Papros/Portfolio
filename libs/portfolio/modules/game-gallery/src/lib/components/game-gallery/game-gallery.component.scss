@@ -1,0 +1,14 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  height: 100%;
+}
+
+.msg {
+  border-radius: 16px;
+  border: 8px solid get-color(accent, color);
+  background-color: get-color(accent, light);
+  padding: 2%;
+  font-size: larger;
+  margin: 12%;
+}

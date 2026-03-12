@@ -1,0 +1,12 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  height: 100%;
+}
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: get-color(primary, color);
+}

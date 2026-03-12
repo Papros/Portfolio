@@ -53,6 +53,11 @@ export const appRoutes: Routes = [
             (m) => m.ComponentDemoModule,
           ),
       },
+      {
+        path: 'games',
+        loadChildren: () =>
+          import('@portfolio/game-gallery').then((m) => m.GameGalleryModule),
+      },
     ],
   },
   {
