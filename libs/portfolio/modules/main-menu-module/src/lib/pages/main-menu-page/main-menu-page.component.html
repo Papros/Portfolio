@@ -39,11 +39,17 @@
     </ng-template>
 
     <ng-template libGridSlot="componentGallery">
-      <a href="/Portfolio/components"> Design system </a>
+      <a href="/Portfolio/components" class="tile-card">
+        <mat-icon class="tile-watermark">widgets</mat-icon>
+        <span class="tile-label">Design System</span>
+      </a>
     </ng-template>
 
     <ng-template libGridSlot="gameGallery">
-      <a href="/Portfolio/games"> Games </a>
+      <a href="/Portfolio/games" class="tile-card">
+        <mat-icon class="tile-watermark">sports_esports</mat-icon>
+        <span class="tile-label">Games</span>
+      </a>
     </ng-template>
 
     <ng-template libGridSlot="widgetWeather">
@@ -79,7 +85,10 @@
     </ng-template>
 
     <ng-template libGridSlot="cv">
-      <a href="/Portfolio/about"> CV </a>
+      <a href="/Portfolio/about" class="tile-card">
+        <mat-icon class="tile-watermark">badge</mat-icon>
+        <span class="tile-label">CV</span>
+      </a>
     </ng-template>
   </lib-grid-menu>
 </div>
