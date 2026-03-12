@@ -15,13 +15,27 @@
       <a
         href="https://www.linkedin.com/in/piotr-papros-4a67771a1/"
         target="_blank"
+        class="linkedin-card"
       >
-        LinkedIn
+        <div class="linkedin-header">
+          <img
+            src="assets/images/cv/profile_photo.webp"
+            alt="Piotr Papros"
+            class="linkedin-avatar"
+          />
+          <div class="linkedin-badge">in</div>
+        </div>
+
+        <div class="linkedin-info">
+          <span class="linkedin-name">Piotr Papros</span>
+          <span class="linkedin-title">Frontend Developer</span>
+          <span class="linkedin-cta">View Profile →</span>
+        </div>
       </a>
     </ng-template>
 
     <ng-template libGridSlot="about">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="componentGallery">
@@ -33,35 +47,35 @@
     </ng-template>
 
     <ng-template libGridSlot="widgetWeather">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="widgetChart">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="widgetTrivia">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="achievements">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="contact">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="easterEgg">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="easterEgg">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="brick">
-      <ng-container *ngTemplateOutlet="underDevelopment"></ng-container>
+      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
     <ng-template libGridSlot="cv">
@@ -70,8 +84,11 @@
   </lib-grid-menu>
 </div>
 
-<ng-template #underDevelopment>
-  <div class="under-development">
-    <span class="label">Under development</span>
+<ng-template #comingSoon>
+  <div class="disabled-outer">
+    <div class="disabled-inner">
+      <mat-icon class="disabled-icon">nest_clock_farsight_analog</mat-icon>
+      <span class="disabled-label">coming soon</span>
+    </div>
   </div>
 </ng-template>

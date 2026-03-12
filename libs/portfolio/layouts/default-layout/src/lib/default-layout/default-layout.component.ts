@@ -7,6 +7,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './default-layout.component.html',
-  styleUrl: './default-layout.component.css',
+  styleUrl: './default-layout.component.scss',
 })
 export class DefaultLayoutComponent {}

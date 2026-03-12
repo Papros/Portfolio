@@ -1,20 +1,17 @@
 <div
   class="custom-grid grid gap-2 p-4"
-  [style.gridTemplateColumns]="'repeat(' + menuConfig.gridWidth + ', 1fr)'"
-  [style.gridTemplateRows]="'repeat(' + menuConfig.gridHeight + ', 1fr)'"
+  [style.--grid-cols]="menuConfig.gridWidth"
+  [style.--grid-rows]="menuConfig.gridHeight"
 >
   <div
     *ngFor="let item of menuConfig.items"
-    class="flex items-center justify-center rounded-lg border text-white font-bold text-sm"
-    [ngStyle]="{
-      gridColumn: item.position.colStart + ' / span ' + item.position.colSpan,
-      gridRow: item.position.rowStart + ' / span ' + item.position.rowSpan,
-      backgroundColor: item.options.background,
-      opacity: item.options.visible ? 1 : 0.3
-    }"
+    class="grid-tile flex items-center justify-center rounded-lg border text-white font-bold text-sm"
+    [class.tile-enabled]="item.options.enabled"
+    [class.tile-disabled]="!item.options.enabled"
+    [style]="getItemStyle(item)"
   >
     <ng-container *ngIf="getSlotTemplate(item.id) as tpl; else fallback">
-      <ng-container *ngTemplateOutlet="getSlotTemplate(item.id)"></ng-container>
+      <ng-container *ngTemplateOutlet="tpl"></ng-container>
     </ng-container>
 
     <ng-template #fallback>

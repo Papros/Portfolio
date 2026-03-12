@@ -6,7 +6,11 @@ import {
   QueryList,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridLabelOptions, GridMenuConfig } from './grid-menu.interface';
+import {
+  GridItemConfig,
+  GridLabelOptions,
+  GridMenuConfig,
+} from './grid-menu.interface';
 import { GridSlotDirective } from './grid-slot.directive';
 
 @Component({
@@ -56,5 +60,20 @@ export class GridMenuComponent implements AfterContentInit {
       default:
         return 'center';
     }
+  }
+
+  getItemStyle(item: GridItemConfig): Record<string, string> {
+    return {
+      '--col-start': String(item.position.colStart),
+      '--col-span': String(item.position.colSpan),
+      '--row-start': String(item.position.rowStart),
+      '--row-span': String(item.position.rowSpan),
+      backgroundColor: item.options.enabled
+        ? item.options.background
+        : '#16181f',
+      border: item.options.enabled
+        ? '1px solid transparent'
+        : '1px solid #22252e',
+    };
   }
 }
