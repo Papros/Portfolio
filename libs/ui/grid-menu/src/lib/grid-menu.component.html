@@ -1,11 +1,11 @@
 <div
-  class="custom-grid grid gap-2 p-4"
+  class="custom-grid"
   [style.--grid-cols]="menuConfig.gridWidth"
   [style.--grid-rows]="menuConfig.gridHeight"
 >
   <div
     *ngFor="let item of menuConfig.items"
-    class="grid-tile flex items-center justify-center rounded-lg border text-white font-bold text-sm"
+    class="grid-tile"
     [class.tile-enabled]="item.options.enabled"
     [class.tile-disabled]="!item.options.enabled"
     [style]="getItemStyle(item)"
@@ -16,7 +16,6 @@
 
     <ng-template #fallback>
       <span
-        class="px-2"
         [style.textShadow]="
           item.label.shadow ? '1px 1px 2px rgba(0,0,0,0.5)' : 'none'
         "

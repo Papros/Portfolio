@@ -1,16 +1,21 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    height: auto;
+    min-height: 100%;
+  }
 }
 
 .shelf-container {
   flex: 1;
-  min-height: 0;
+  min-height: 100%;
   display: grid;
   place-items: center;
-  padding: clamp(16px, 4%, 48px);
+  padding: clamp(8px, 1%, 48px);
   background: #0e0f13;
   box-sizing: border-box;
 
@@ -23,6 +28,11 @@
   @media (min-width: 481px) and (max-width: 768px) {
     padding: 24px;
     height: auto;
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    padding: 8px 16px;
+    min-height: 100dvh;
   }
 }
 
