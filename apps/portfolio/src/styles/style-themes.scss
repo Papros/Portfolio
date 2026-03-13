@@ -1,29 +1,37 @@
 $app-theme: (
-  default: (
+  lightTheme: (
     primary: (
-      color: #1b3a4b,
+      color: #1a2332,
       // Deep forest blue – main accent
       light: #2c5d6f,
       // Lighter hover state
-      dark: #10232e, // Darker shade for depth,,,,,,
+      dark: #10232e,
+      // Darker shade for depth,,,,,,
     ),
     accent: (
       color: #a3be8c,
       // Soft moss green – highlights and buttons
       light: #c0d9ac,
       // Lighter hover
-      dark: #7d996a, // Darker for active states,,,,,,
+      dark: #7d996a,
+      // Darker for active states,,,,,,
+      vibrant: #1d9e75,
+      muted: #1d9e752e,
     ),
     neutral: (
       bg: #1e1e1e,
       // Dark background for sections
-      card: #2a2a2a,
+      card: #30302e,
       // Card/panel background
-      text: #e0e0e0,
-      // Main text
-      muted: #95a5a6,
-      // Secondary text
-      border: #3d3d3d, // Borders and dividers,,,,,,
+      border: #3d3d3d,
+      // Borders and dividers,,,,,,
+    ),
+    text: (
+      primaryDark: #000000,
+      primaryLight: #e0e0e0,
+      secondaryLight: #b0afa6,
+      subtext: #95a5a6,
+      negative: #dce8f0,
     ),
     feedback: (
       success: #27ae60,
@@ -33,78 +41,6 @@ $app-theme: (
     gradient: (
       primary: linear-gradient(135deg, #1b3a4b, #a3be8c),
       secondary: linear-gradient(135deg, #2c5d6f, #c0d9ac),
-    ),
-  ),
-  cinematic: (
-    primary: (
-      color: #0f1a2b,
-      // Deep charcoal-blue – main accent
-      light: #1a2f4b,
-      // Lighter hover state
-      dark: #08111c, // Darker shade for depth,,,,,
-    ),
-    accent: (
-      color: #ff9f1c,
-      // Vibrant amber – call-to-action
-      light: #ffb84d,
-      // Lighter hover
-      dark: #cc7a16, // Darker for active states,,,,,
-    ),
-    neutral: (
-      bg: #121212,
-      // Very dark background
-      card: #1e1e1e,
-      // Card/panel background
-      text: #eaeaea,
-      // Main text
-      muted: #9a9a9a,
-      // Secondary text
-      border: #2c2c2c, // Borders and dividers,,,,,
-    ),
-    feedback: (
-      success: #2ecc71,
-      warning: #f1c40f,
-      error: #e74c3c,
-    ),
-    gradient: (
-      primary: linear-gradient(135deg, #0f1a2b, #ff9f1c),
-      secondary: linear-gradient(135deg, #1a2f4b, #ffb84d),
-    ),
-  ),
-  lightTheme: (
-    primary: (
-      color: #4a5568,
-      // Slate gray – main accent
-      light: #718096,
-      // Lighter hover state
-      dark: #2d3748, // Darker shade for depth,,,,
-    ),
-    accent: (
-      color: #63b3ed,
-      // Soft sky blue – highlights and buttons
-      light: #90cdf4,
-      // Lighter hover
-      dark: #4299e1, // Darker for active states,,,,
-    ),
-    neutral: (
-      bg: #ffffff,
-      // Main background – white
-      card: #f7fafc,
-      // Card/panel background – very light gray
-      text: #2d3748,
-      // Main text – dark slate
-      muted: #718096,
-      // Secondary text
-      border: #e2e8f0, // Borders and dividers – light gray,,,,
-    ),
-    feedback: (
-      success: #38a169,
-      warning: #ecc94b,
-      error: #e53e3e,
-    ),
-    gradient: (
-      primary: linear-gradient(135deg, #4a5568, #63b3ed),
-      secondary: linear-gradient(135deg, #718096, #90cdf4),
     ),
   ),
 );
@@ -122,6 +58,10 @@ $active-theme: lightTheme;
   @if map-has-key($app-theme, $active-theme) {
     $theme-map: map-get($app-theme, $active-theme);
     $color: map-get($theme-map, $first);
+
+    @if ($color == null) {
+      @error "Color `#{$first}` : `#{$path}` not found.";
+    }
 
     @if length($path) > 0 {
       @each $key in $path {
