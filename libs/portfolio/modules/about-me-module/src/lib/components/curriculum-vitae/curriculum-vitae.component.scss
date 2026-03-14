@@ -84,7 +84,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: get-color(accent, color);
+  color: get-color(accent, vibrant);
   margin: 0;
   font-weight: 500;
 }
@@ -133,7 +133,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
   &:hover {
     opacity: 1;
-    color: get-color(accent, color);
+    color: get-color(accent, vibrant);
   }
 }
 
@@ -254,7 +254,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: get-color(accent, color);
+  color: get-color(accent, vibrant);
   margin: 0 0 16px;
   font-weight: 500;
 }
@@ -287,7 +287,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: get-color(accent, color);
+  color: get-color(accent, vibrant);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -337,7 +337,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
 .tl-date-start,
 .tl-date-end {
-  font-size: 11px;
+  font-size: 14px;
   color: get-color(text, subtext);
   line-height: 1.4;
 }
@@ -367,7 +367,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
   &.tl-dot--current {
     background: get-color(accent, color);
-    border-color: get-color(accent, color);
+    border-color: get-color(accent, vibrant);
     box-shadow: 0 0 0 3px get-color(accent, light);
   }
 }
@@ -393,13 +393,13 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 .tl-company {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
   color: get-color(text, primaryLight);
 }
 .tl-position {
-  font-size: 12px;
-  color: get-color(accent, color);
+  font-size: 16px;
+  color: get-color(accent, vibrant);
   font-style: italic;
 }
 
@@ -413,7 +413,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 .tl-desc-item {
-  font-size: 13px;
+  font-size: 15px;
   color: get-color(text, subtext);
   line-height: 1.6;
   padding-left: 12px;
@@ -438,12 +438,12 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 .tl-tag {
-  font-size: 10px;
+  font-size: 14px;
   padding: 2px 8px;
   border-radius: 20px;
-  background: transparent;
+  background: get-color(primary, dark);
   border: 0.5px solid get-color(neutral, border);
-  color: get-color(text, subtext);
+  color: get-color(text, secondaryLight);
   letter-spacing: 0.04em;
 }
 
@@ -474,7 +474,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 .edu-year {
   font-size: 12px;
-  color: get-color(accent, color);
+  color: get-color(accent, vibrant);
 }
 .edu-course {
   font-size: 13px;
