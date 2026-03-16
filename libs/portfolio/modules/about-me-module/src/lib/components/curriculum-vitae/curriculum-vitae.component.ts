@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CurriculumVitaeInterface,
@@ -29,6 +29,10 @@ export class CurriculumVitaeComponent implements OnInit {
   cvDate: CurriculumVitaeInterface | null = cvDefault;
 
   isDarkMode = false;
+
+  readonly hoveredSkill = signal<string | null>(null);
+  readonly printMode = signal<'color' | 'bw'>('color');
+  readonly currentYear = new Date().getFullYear();
 
   @HostBinding('class.dark-mode')
   get darkModeClass(): boolean {
@@ -64,6 +68,22 @@ export class CurriculumVitaeComponent implements OnInit {
     localStorage.setItem('cv-dark-mode', String(this.isDarkMode));
   }
 
+  togglePrintMode(): void {
+    this.printMode.set(this.printMode() === 'color' ? 'bw' : 'color');
+  }
+
+  printCV(): void {
+    const isBw = this.printMode() === 'bw';
+    if (isBw) {
+      document.body.classList.add('cv-print-bw');
+    }
+    window.print();
+
+    if (isBw) {
+      document.body.classList.remove('cv-print-bw');
+    }
+  }
+
   onImageError(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/default_avatar.png';
     //TO-DO AdBlock popup here
@@ -80,5 +100,12 @@ export class CurriculumVitaeComponent implements OnInit {
       [LanguageLevel.NATIVE]: '100%',
     };
     return map[level] ?? '50%';
+  }
+
+  isSkillActive(skillName: string): boolean {
+    const hovered = this.hoveredSkill();
+    return (
+      hovered !== null && hovered.toLowerCase() === skillName.toLowerCase()
+    );
   }
 }

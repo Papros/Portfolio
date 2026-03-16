@@ -20,6 +20,8 @@ export interface CurriculumVitaeInterface {
     endDate?: string;
     skills: string[];
     description: string[];
+    url?: string;
+    projectUrls?: string[];
   }[];
   education: { schoolName: string; curseName: string; endDate: string }[];
   hobby: { name: string; desc: string }[];

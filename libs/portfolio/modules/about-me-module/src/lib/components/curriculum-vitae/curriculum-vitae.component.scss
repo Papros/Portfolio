@@ -3,7 +3,7 @@
 $cv-font-display: 'DM Serif Display', 'Georgia', serif;
 $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
-// ─── Root Container ───────────────────────────────────────────────────────────
+// === Root Container ===========================================================
 .cv-container {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -13,7 +13,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   color: get-color(text, negative);
 }
 
-// ─── Sidebar ──────────────────────────────────────────────────────────────────
+// === Sidebar ==================================================================
 .cv-sidebar {
   background: get-color(primary, color);
   color: get-color(text, negative);
@@ -40,7 +40,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   padding: 32px 24px 40px;
 }
 
-// ─── Profile Block ────────────────────────────────────────────────────────────
+// === Profile Block ============================================================
 .profile-block {
   display: flex;
   flex-direction: column;
@@ -89,14 +89,14 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
 }
 
-// ─── Sidebar Divider ──────────────────────────────────────────────────────────
+// === Sidebar Divider ==========================================================
 .sidebar-divider {
   height: 0.5px;
   background: rgba(255, 255, 255, 0.07);
   margin: -4px 0;
 }
 
-// ─── Sidebar Sections ─────────────────────────────────────────────────────────
+// === Sidebar Sections =========================================================
 .sidebar-section {
   display: flex;
   flex-direction: column;
@@ -111,7 +111,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
 }
 
-// ─── Contact ──────────────────────────────────────────────────────────────────
+// === Contact ==================================================================
 .contact-list {
   display: flex;
   flex-direction: column;
@@ -135,6 +135,10 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
     opacity: 1;
     color: get-color(accent, vibrant);
   }
+
+  .link-raw {
+    display: none;
+  }
 }
 
 .contact-icon {
@@ -144,7 +148,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   align-items: center;
 }
 
-// ─── Skills ───────────────────────────────────────────────────────────────────
+// === Skills ===================================================================
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
@@ -160,9 +164,16 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   border-radius: 20px;
   font-weight: 400;
   letter-spacing: 0.02em;
+  cursor: pointer;
 }
 
-// ─── Languages ────────────────────────────────────────────────────────────────
+.skill-pill--active {
+  background: get-color(text, secondaryLight);
+  color: get-color(text, primaryDark);
+  border-color: get-color(text, primaryDark);
+}
+
+// === Languages ================================================================
 .lang-list {
   display: flex;
   flex-direction: column;
@@ -204,7 +215,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-// ─── Hobbies ──────────────────────────────────────────────────────────────────
+// === Hobbies ==================================================================
 .hobby-list {
   display: flex;
   flex-direction: column;
@@ -226,7 +237,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.4;
 }
 
-// ─── Main Area ────────────────────────────────────────────────────────────────
+// === Main Area ================================================================
 .cv-main {
   display: flex;
   flex-direction: column;
@@ -234,7 +245,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   color: get-color(text, secondaryLight);
 }
 
-// ─── Header ───────────────────────────────────────────────────────────────────
+// === Header ===================================================================
 .cv-header {
   position: relative;
   padding: 40px 48px 32px;
@@ -267,7 +278,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
 }
 
-// ─── Sections ─────────────────────────────────────────────────────────────────
+// === Sections =================================================================
 .cv-section {
   padding: 32px 48px;
 
@@ -298,7 +309,21 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   background: get-color(neutral, border);
 }
 
-// ─── Timeline ─────────────────────────────────────────────────────────────────
+.cv-footer {
+  .footer-option {
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .footer-option--center {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+// === Timeline =================================================================
 .timeline {
   display: flex;
   flex-direction: column;
@@ -397,6 +422,21 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
   color: get-color(text, primaryLight);
 }
+
+.tl-link {
+  display: flex;
+  align-items: baseline;
+  color: get-color(text, secondaryLight);
+
+  mat-icon {
+    font-size: 18px;
+
+    &:hover {
+      color: get-color(text, negative);
+    }
+  }
+}
+
 .tl-position {
   font-size: 16px;
   color: get-color(accent, vibrant);
@@ -445,9 +485,16 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   border: 0.5px solid get-color(neutral, border);
   color: get-color(text, secondaryLight);
   letter-spacing: 0.04em;
+  cursor: pointer;
 }
 
-// ─── Education ────────────────────────────────────────────────────────────────
+.tl-tag--active {
+  background: get-color(text, secondaryLight);
+  color: get-color(text, primaryDark);
+  border-color: get-color(text, primaryDark);
+}
+
+// === Education ================================================================
 .education-list {
   display: flex;
   flex-direction: column;
@@ -483,7 +530,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
 }
 
-// ─── RWD ──────────────────────────────────────────────────────────────────────
+// === RWD ======================================================================
 @media (max-width: 1100px) {
   .cv-container {
     grid-template-columns: 240px 1fr;
@@ -497,8 +544,40 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 @media (max-width: 768px) {
+  .print-fab {
+    position: static !important;
+    bottom: auto;
+    right: auto;
+    z-index: auto;
+    margin-top: 4px;
+    gap: 6px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .print-fab__toggle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .print-fab__print {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
   .cv-container {
     grid-template-columns: 1fr;
+  }
+
+  .print-fab.desktop-only {
+    display: none;
   }
 
   .cv-sidebar {
@@ -563,5 +642,160 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   .edu-main {
     flex-direction: column;
     gap: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+// === Floating print buttons =====================================
+
+.print-fab {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: auto;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 0.5px solid get-color(neutral, border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: $cv-font-body;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+  }
+}
+
+.print-fab__toggle {
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  background: get-color(primary, color);
+  color: get-color(text, secondaryLight);
+
+  &:hover {
+    border-color: get-color(accent, vibrant);
+    color: get-color(accent, vibrant);
+    background: get-color(accent, muted);
+  }
+}
+
+.print-fab--bw .print-fab__toggle {
+  background: get-color(primary, color);
+  border-color: get-color(text, secondaryLight);
+  color: get-color(text, secondaryLight);
+}
+
+.print-fab__print {
+  height: 36px;
+  padding: 0 14px;
+  background: get-color(primary, color);
+  border-color: get-color(text, secondaryLight);
+  color: get-color(text, primaryLight);
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    background: get-color(accent, muted);
+  }
+}
+
+.print-fab__label {
+  font-size: 13px;
+}
+
+// == B&W Print Override =================================================
+
+@media print {
+  .link-raw {
+    display: inline !important;
+  }
+
+  .hobby-section,
+  .print-fab,
+  .avatar-wrap,
+  .print-none {
+    display: none !important;
+  }
+
+  :host-context(body.cv-print-bw) {
+    .cv-sidebar {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border-right: 1px solid #cccccc;
+    }
+
+    .profile-name,
+    .sidebar-label,
+    .contact-item,
+    .lang-name,
+    .lang-level {
+      color: #000000 !important;
+    }
+
+    .profile-role,
+    .skill-pill,
+    .lang-fill,
+    .avatar-ring {
+      color: #333333 !important;
+      background: #eeeeee !important;
+      border-color: #999999 !important;
+    }
+
+    .lang-bar {
+      background: #dddddd !important;
+    }
+
+    .lang-fill {
+      background: #333333 !important;
+    }
+
+    .cv-main {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .header-name,
+    .tl-company,
+    .edu-school {
+      color: #000000 !important;
+    }
+
+    .header-role,
+    .tl-position,
+    .section-label,
+    .edu-year {
+      color: #333333 !important;
+    }
+
+    .header-about,
+    .tl-desc-item,
+    .tl-date-start,
+    .tl-date-end,
+    .edu-course {
+      color: #444444 !important;
+    }
+
+    .tl-dot--current {
+      background: #333333 !important;
+      border-color: #333333 !important;
+      box-shadow: none !important;
+    }
+
+    .tl-tag {
+      border-color: #999999 !important;
+      color: #444444 !important;
+    }
   }
 }

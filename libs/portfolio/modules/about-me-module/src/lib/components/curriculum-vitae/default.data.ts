@@ -72,6 +72,7 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Mentored junior and mid frontend developers on the team',
         'Collaborated directly with the client: presented demos and iterated on requested changes',
       ],
+      url: 'https://softwaremind.com/',
     },
     {
       company: 'Ailleron',
@@ -91,6 +92,7 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Developed and maintained a comprehensive retail banking platform for Bank Pekao customers',
         'Worked with detailed requirements documentation and strict financial security standards',
       ],
+      url: 'https://ailleron.com/pl/',
     },
     {
       company: 'Trapeze',
@@ -112,7 +114,9 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Led migration of legacy AngularJS codebase to modern Angular — improving maintainability and performance',
         'Integrated real-time data streams via WebSockets and Apache Kafka',
         'Collaborated within a multinational team using English as the primary language',
+        'Company rebranded to Ebblo in 2026',
       ],
+      url: 'https://cee.ebblo.com/',
     },
     {
       company: 'Trapeze',
@@ -125,6 +129,7 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Built Xamarin mobile app + Angular web app + Node.js backend as an integrated prototype',
         'Presented the prototype to potential clients',
       ],
+      url: 'https://cee.ebblo.com/',
     },
     {
       company: 'Mindcloud / Private Tutoring',
@@ -136,6 +141,7 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Taught programming and mathematics at Mindcloud — project-based learning in a Minecraft environment',
         'Provided private tutoring in math and introductory programming for children and teenagers',
       ],
+      url: 'https://mindcloud.pl/',
     },
   ],
   education: [
