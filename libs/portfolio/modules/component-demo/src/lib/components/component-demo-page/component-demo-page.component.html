@@ -1,12 +1,15 @@
-<lib-navigation-bar [actions]="navigationActions"></lib-navigation-bar>
+<lib-navigation-bar
+  [actions]="navigationActions"
+  (actionClick)="onNavigationAction($event)"
+></lib-navigation-bar>
 
 <div class="page-layout">
   <mat-drawer-container class="component-demo-drawer" autosize>
     <mat-drawer
       #drawer
       class="component-demo-sidenav"
-      mode="side"
-      [opened]="true"
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile"
     >
       <lib-simple-menu [actions]="componentMenuList"></lib-simple-menu>
     </mat-drawer>

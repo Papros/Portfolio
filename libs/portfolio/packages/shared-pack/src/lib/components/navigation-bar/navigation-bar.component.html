@@ -1,8 +1,12 @@
 <mat-toolbar>
-  @for (action of actions; track action.icon) {
-  <button matIconButton class="toolbar-action-icon" (click)="action.callback()">
-    <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
-    <span *ngIf="action.label"> {{ action.label }} </span>
-  </button>
+  @for (action of actions; track action.id) {
+    <button
+      matIconButton
+      [class]="'toolbar-action-icon ' + (action.cssClass || '')"
+      (click)="actionClick.emit(action.id)"
+    >
+      <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+      <span *ngIf="action.label">{{ action.label }}</span>
+    </button>
   }
 </mat-toolbar>

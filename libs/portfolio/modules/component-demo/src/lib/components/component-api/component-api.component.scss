@@ -3,47 +3,123 @@
 .doc-article-container {
   display: flex;
   flex-direction: row;
+  gap: 1.5rem;
 
   .doc-article-content {
-    flex: 9;
-    padding-right: 1rem;
+    flex: 1;
+    min-width: 0;
 
-    .table-block {
-      width: 90%;
-      padding: 0% 5%;
-      margin: 0% 5%;
-      border-radius: 16px;
+    .api-section-title {
+      color: get-color(text, primaryLight);
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1rem;
+      font-weight: bold;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .table-wrapper {
+      border-radius: 8px;
       border: 1px solid get-color(neutral, border);
+      overflow: hidden;
+      overflow-x: auto;
 
-      .value-cell {
-        color: get-color(text, subtext);
+      table {
+        width: 100%;
       }
     }
 
     .mat-column-name {
       width: 35%;
     }
-
     .mat-column-desc {
       width: 65%;
+    }
+
+    .prop-name {
+      font-weight: bold;
+      color: get-color(accent, color);
+    }
+
+    .prop-type {
+      color: get-color(text, subtext);
+      font-style: italic;
+    }
+
+    .prop-default {
+      display: block;
+      font-size: 0.8125rem;
+      color: get-color(text, subtext);
+      margin-top: 2px;
     }
   }
 
   .doc-section-shortcuts-list {
-    flex: 1;
+    width: 160px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    border-left: 4px solid get-color(neutral, border);
-    padding-left: 8px;
-    margin-top: 4px;
+    border-left: 3px solid get-color(neutral, border);
+    padding-left: 12px;
+    gap: 0.5rem;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
 
     .section-shortcut {
-      margin-bottom: 0.5rem;
+      font-size: 0.8125rem;
+      color: get-color(text, secondaryLight);
+      text-decoration: none;
+      transition: color 0.15s ease;
 
       &:hover {
         color: get-color(accent, color);
-        cursor: pointer;
       }
     }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+
+    .doc-section-shortcuts-list {
+      width: 100%;
+      flex-direction: row;
+      border-left: none;
+      border-bottom: 1px solid get-color(neutral, border);
+      padding-left: 0;
+      padding-bottom: 12px;
+      position: static;
+    }
+  }
+}
+
+::ng-deep .mat-mdc-table {
+  background-color: get-color(neutral, card) !important;
+
+  .mat-mdc-header-row {
+    background-color: get-color(neutral, bg);
+  }
+
+  .mat-mdc-header-cell {
+    color: get-color(text, secondaryLight);
+    font-size: 0.8125rem;
+    border-bottom-color: get-color(neutral, border);
+  }
+
+  .mat-mdc-cell {
+    color: get-color(text, primaryLight);
+    border-bottom-color: get-color(neutral, border);
+    font-size: 0.875rem;
+    padding: 12px 16px;
+  }
+
+  .mat-mdc-row:last-child .mat-mdc-cell {
+    border-bottom: none;
+  }
+
+  .mat-mdc-row:hover .mat-mdc-cell {
+    background-color: get-color(primary, dark);
   }
 }

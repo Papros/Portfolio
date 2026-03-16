@@ -1,5 +1,6 @@
 export interface NavigationAction {
+  id: string;
   icon?: string;
   label?: string;
-  callback: () => void;
+  cssClass?: string;
 }

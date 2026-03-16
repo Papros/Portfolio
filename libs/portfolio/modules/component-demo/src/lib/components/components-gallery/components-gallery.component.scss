@@ -1,6 +1,17 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
 .component-demo-card-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
+
+  @media (max-width: 639px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }

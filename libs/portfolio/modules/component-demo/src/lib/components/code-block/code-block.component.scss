@@ -2,46 +2,97 @@
 
 .example-block {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid get-color(neutral, border);
-  padding: 1%;
-  min-height: 50px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
 
   .example-header {
     width: 100%;
-    height: 20px;
+    min-height: 44px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 8px 16px;
+    background-color: get-color(neutral, card);
+    border-bottom: 1px solid get-color(neutral, border);
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: get-color(text, primaryLight);
 
-    .code-visible-button {
-      margin: 0.5rem;
+    .example-header_buttons-section {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+
+      button {
+        color: get-color(text, secondaryLight);
+        transition: color 0.15s ease;
+
+        &:hover {
+          color: get-color(accent, color);
+        }
+      }
+    }
+  }
+
+  .example-code {
+    background-color: get-color(neutral, bg);
+    border-bottom: 1px solid get-color(neutral, border);
+
+    ::ng-deep {
+      .mat-mdc-tab {
+        --mdc-secondary-navigation-tab-container-height: 32px;
+      }
+
+      .mat-mdc-tab-header {
+        background-color: get-color(neutral, card);
+        border-bottom: 1px solid get-color(neutral, border);
+      }
+
+      .mdc-tab__text-label {
+        color: get-color(text, secondaryLight);
+        font-size: 0.8125rem;
+        font-family: 'Fira Code', monospace;
+      }
+
+      .mdc-tab--active .mdc-tab__text-label {
+        color: get-color(accent, color);
+      }
+
+      .mdc-tab-indicator__content--underline {
+        border-color: get-color(accent, vibrant);
+      }
     }
   }
 
   .example-component {
-    padding-top: 1rem;
-  }
+    padding: 1.5rem;
+    background-color: get-color(neutral, bg);
 
-  .example-code {
-    padding-top: 0.5rem;
-
-    ::ng-deep .mat-mdc-tab {
-      --mdc-secondary-navigation-tab-container-height: 24px;
+    @media (max-width: 767px) {
+      padding: 1rem;
     }
   }
 
   pre {
-    background: #1e1e1e;
-    color: #dcdcdc;
+    margin: 0;
+    background-color: get-color(neutral, bg);
+    color: get-color(text, primaryLight);
     padding: 16px;
-    border-radius: 8px;
-    overflow: auto;
+    overflow-x: auto;
     font-family: 'Fira Code', monospace;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+
+    @media (max-width: 767px) {
+      font-size: 0.8125rem;
+      padding: 12px;
+    }
   }
 
   code {
-    border-radius: 8px;
+    border-radius: 0;
   }
 }

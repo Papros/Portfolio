@@ -1,0 +1,34 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+::ng-deep .mat-mdc-tab-group {
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid get-color(neutral, border);
+    background-color: get-color(neutral, card);
+  }
+
+  .mat-mdc-tab-body-wrapper {
+    background-color: get-color(neutral, bg);
+    padding: 1.5rem;
+
+    @media (max-width: 767px) {
+      padding: 1rem 0.75rem;
+    }
+  }
+
+  .mdc-tab__text-label {
+    color: get-color(text, secondaryLight);
+  }
+
+  .mdc-tab--active .mdc-tab__text-label {
+    color: get-color(accent, color);
+  }
+
+  .mdc-tab-indicator__content--underline {
+    border-color: get-color(accent, vibrant);
+  }
+}

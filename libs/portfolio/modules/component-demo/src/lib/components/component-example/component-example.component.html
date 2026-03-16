@@ -1,10 +1,8 @@
 <div class="doc-examples-container">
-  <div class="doc-examples-content">
-    @for (example of examples; track example.component) {
-      <lib-code-block
-        [componentId]="componentId"
-        [example]="example"
-      ></lib-code-block>
-    }
-  </div>
+  @for (example of examples; track example.component) {
+    <lib-code-block
+      [componentId]="componentId"
+      [example]="example"
+    ></lib-code-block>
+  }
 </div>
