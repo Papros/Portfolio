@@ -63,7 +63,7 @@ export class MainMenuPageComponent {
       {
         id: 'widgetWeather',
         options: { enabled: false, visible: true, background: '#0ea5e9' },
-        position: { colStart: 8, colSpan: 3, rowStart: 4, rowSpan: 2 },
+        position: { colStart: 8, colSpan: 3, rowStart: 3, rowSpan: 1 },
         label: {
           value: 'Weather Widget',
           shadow: false,
@@ -74,7 +74,7 @@ export class MainMenuPageComponent {
       {
         id: 'cv',
         options: { enabled: true, visible: true, background: '#6d28d9' },
-        position: { colStart: 8, colSpan: 3, rowStart: 3, rowSpan: 1 },
+        position: { colStart: 8, colSpan: 3, rowStart: 4, rowSpan: 2 },
         label: {
           value: 'CV',
           shadow: false,

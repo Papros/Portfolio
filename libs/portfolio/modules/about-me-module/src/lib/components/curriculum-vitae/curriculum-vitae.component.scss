@@ -1,174 +1,801 @@
 @use 'style-themes' as *;
 
+$cv-font-display: 'DM Serif Display', 'Georgia', serif;
+$cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+
+// === Root Container ===========================================================
 .cv-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  font-family: $cv-font-body;
+  background: get-color(neutral, bg);
+  color: get-color(text, negative);
+}
+
+// === Sidebar ==================================================================
+.cv-sidebar {
+  background: get-color(primary, color);
+  color: get-color(text, negative);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 2px;
+  }
+}
+
+.sidebar-inner {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px 24px 40px;
+}
 
-  width: 100%;
+// === Profile Block ============================================================
+.profile-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid get-color(accent, dark);
+  opacity: 0.6;
+}
+
+.profile-name {
+  font-family: $cv-font-display;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: get-color(text, negative);
+  margin: 0;
+}
+
+.profile-role {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: get-color(accent, vibrant);
+  margin: 0;
+  font-weight: 500;
+}
+
+// === Sidebar Divider ==========================================================
+.sidebar-divider {
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: -4px 0;
+}
+
+// === Sidebar Sections =========================================================
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: get-color(text, subtext);
+  font-weight: 500;
+}
+
+// === Contact ==================================================================
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: get-color(accent, vibrant);
+  text-decoration: none;
+  opacity: 0.85;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+  line-height: 1.4;
+
+  &:hover {
+    opacity: 1;
+    color: get-color(accent, vibrant);
+  }
+
+  .link-raw {
+    display: none;
+  }
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  color: get-color(text, subtext);
+  display: flex;
+  align-items: center;
+}
+
+// === Skills ===================================================================
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-pill {
+  font-size: 11px;
+  padding: 3px 9px;
+  background: get-color(accent, muted);
+  color: get-color(accent, vibrant);
+  border: 0.5px solid get-color(accent, vibrant);
+  border-radius: 20px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.skill-pill--active {
+  background: get-color(text, secondaryLight);
+  color: get-color(text, primaryDark);
+  border-color: get-color(text, primaryDark);
+}
+
+// === Languages ================================================================
+.lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lang-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lang-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.lang-name {
+  font-size: 13px;
+  color: get-color(text, negative);
+}
+.lang-level {
+  font-size: 11px;
+  color: get-color(text, subtext);
+}
+
+.lang-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lang-fill {
   height: 100%;
+  background: get-color(accent, color);
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  .side-section {
-    flex: 1;
-    background-color: #566973;
-    color: #f0f0f0;
+// === Hobbies ==================================================================
+.hobby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hobby-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hobby-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: get-color(text, negative);
+}
+.hobby-desc {
+  font-size: 11px;
+  color: get-color(text, subtext);
+  line-height: 1.4;
+}
 
-    .cv-photo {
-      padding: 10%;
-    }
+// === Main Area ================================================================
+.cv-main {
+  display: flex;
+  flex-direction: column;
+  background: get-color(neutral, card);
+  color: get-color(text, secondaryLight);
+}
 
-    .info-container {
+// === Header ===================================================================
+.cv-header {
+  position: relative;
+  padding: 40px 48px 32px;
+  border-bottom: 0.5px solid get-color(neutral, border);
+}
+
+.header-name {
+  font-family: $cv-font-display;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  margin: 0 0 6px;
+  color: get-color(text, primaryLight);
+  line-height: 1.1;
+}
+
+.header-role {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: get-color(accent, vibrant);
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.header-about {
+  font-size: 14px;
+  line-height: 1.7;
+  color: get-color(text, subtext);
+  max-width: 580px;
+  margin: 0;
+}
+
+// === Sections =================================================================
+.cv-section {
+  padding: 32px 48px;
+
+  & + .cv-section {
+    border-top: 0.5px solid get-color(neutral, border);
+  }
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: get-color(accent, vibrant);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.section-line {
+  flex: 1;
+  height: 0.5px;
+  background: get-color(neutral, border);
+}
+
+.cv-footer {
+  .footer-option {
+    a {
       display: flex;
-      flex-direction: column;
-      padding: 10px 10px;
-
-      .info-section {
-        &:first-of-type {
-          padding-top: 0;
-        }
-
-        padding-top: 30px;
-
-        .info-section-title {
-          display: block;
-          font-weight: bolder;
-          width: 100%;
-          font-size: 20px;
-          display: flex;
-          align-items: center;
-
-          mat-icon {
-            font-size: 20px;
-          }
-        }
-
-        .info-section-data {
-          display: block;
-          width: 100%;
-          padding-left: 8px;
-
-          .single-data-row {
-            display: block;
-            width: 100%;
-          }
-        }
-      }
+      align-items: center;
     }
   }
 
-  .main-section {
-    flex: 4;
-    padding: 20px 200px 10px 20px;
-    overflow-y: auto;
+  .footer-option--center {
+    flex: 1;
+    text-align: center;
+  }
+}
 
-    .cv-title {
-      .main-title {
-        display: block;
-        width: 100%;
-        font-size: 40px;
-        text-transform: capitalize;
-      }
+// === Timeline =================================================================
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
 
-      .subtitle {
-        display: block;
-        width: 100%;
-        font-size: 20px;
-        color: #a5abad;
-        text-transform: uppercase;
-      }
-    }
+.timeline-entry {
+  display: grid;
+  grid-template-columns: 90px 28px 1fr;
+  gap: 0 4px;
+  animation: fadeSlideUp 0.4s ease both;
 
-    .info-section-title {
-      display: block;
-      font-weight: bolder;
-      width: 100%;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
+  &:last-child .tl-line {
+    display: none;
+  }
+}
 
-      mat-icon {
-        font-size: 20px;
-      }
-    }
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .info-section {
-      padding-left: 12px;
+.tl-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 2px;
+  padding-right: 8px;
+  padding-bottom: 28px;
+}
 
-      display: flex;
-      flex-direction: row;
+.tl-date-start,
+.tl-date-end {
+  font-size: 14px;
+  color: get-color(text, subtext);
+  line-height: 1.4;
+}
+.tl-date-sep {
+  font-size: 10px;
+  color: get-color(neutral, border);
+  line-height: 1;
+}
 
-      .entry-title {
-        flex: 1;
-      }
+.tl-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3px;
+}
 
-      .entry-desc {
-        padding-left: 6px;
-        flex: 10;
-      }
+.tl-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: get-color(accent, vibrant);
+  border: 2px solid get-color(accent, vibrant);
+  flex-shrink: 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 
-      &.education-section {
-        .entry-title {
-          flex: 3;
-        }
-      }
+  &.tl-dot--current {
+    background: get-color(accent, color);
+    border-color: get-color(accent, vibrant);
+    box-shadow: 0 0 0 3px get-color(accent, light);
+  }
+}
 
-      &.work-section {
-        display: block;
+.tl-line {
+  flex: 1;
+  width: 0.5px;
+  background: get-color(neutral, border);
+  margin-top: 4px;
+}
 
-        .work-entry {
-          padding-bottom: 16px;
-          width: 100%;
+.tl-content {
+  padding-bottom: 28px;
+  padding-left: 12px;
+}
 
-          .work-entry-title {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: baseline;
+.tl-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
 
-            .company-name {
-              font-weight: 500;
-              font-size: 18px;
-            }
+.tl-company {
+  font-size: 18px;
+  font-weight: 500;
+  color: get-color(text, primaryLight);
+}
 
-            .company-position {
-              font-style: italic;
-              padding-left: 8px;
-              font-size: 15px;
-            }
+.tl-link {
+  display: flex;
+  align-items: baseline;
+  color: get-color(text, secondaryLight);
 
-            .date-range {
-              margin-left: auto;
-              font-style: italic;
-              color: #a5abad;
-            }
-          }
+  mat-icon {
+    font-size: 18px;
 
-          .used-skill {
-            padding-left: 8px;
-
-            span {
-              font-size: 13px;
-              font-weight: 300;
-              padding-right: 4px;
-            }
-          }
-
-          .work-desc {
-            padding-left: 12px;
-            span {
-              display: block;
-              width: 100%;
-            }
-          }
-        }
-      }
+    &:hover {
+      color: get-color(text, negative);
     }
   }
 }
 
-@media (max-width: 1440px) {
+.tl-position {
+  font-size: 16px;
+  color: get-color(accent, vibrant);
+  font-style: italic;
+}
+
+.tl-desc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tl-desc-item {
+  font-size: 15px;
+  color: get-color(text, subtext);
+  line-height: 1.6;
+  padding-left: 12px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: get-color(neutral, border);
+  }
+}
+
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tl-tag {
+  font-size: 14px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: get-color(primary, dark);
+  border: 0.5px solid get-color(neutral, border);
+  color: get-color(text, secondaryLight);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.tl-tag--active {
+  background: get-color(text, secondaryLight);
+  color: get-color(text, primaryDark);
+  border-color: get-color(text, primaryDark);
+}
+
+// === Education ================================================================
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.edu-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edu-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.edu-school {
+  font-size: 15px;
+  font-weight: 500;
+  color: get-color(text, primaryLight);
+}
+.edu-year {
+  font-size: 12px;
+  color: get-color(accent, vibrant);
+}
+.edu-course {
+  font-size: 13px;
+  color: get-color(text, subtext);
+  line-height: 1.5;
+  margin: 0;
+}
+
+// === RWD ======================================================================
+@media (max-width: 1100px) {
   .cv-container {
-    .main-section {
-      padding-right: 40px;
+    grid-template-columns: 240px 1fr;
+  }
+
+  .cv-header,
+  .cv-section {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .print-fab {
+    position: static !important;
+    bottom: auto;
+    right: auto;
+    z-index: auto;
+    margin-top: 4px;
+    gap: 6px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .print-fab__toggle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .print-fab__print {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cv-container {
+    grid-template-columns: 1fr;
+  }
+
+  .print-fab.desktop-only {
+    display: none;
+  }
+
+  .cv-sidebar {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidebar-inner {
+    padding: 24px 20px 28px;
+    gap: 20px;
+  }
+  .profile-block {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .avatar-wrap {
+    flex-shrink: 0;
+  }
+  .profile-name {
+    font-size: 20px;
+  }
+
+  .cv-header {
+    padding: 24px 20px 20px;
+  }
+  .header-name {
+    font-size: 28px;
+  }
+  .cv-section {
+    padding: 24px 20px;
+  }
+
+  .timeline-entry {
+    grid-template-columns: 70px 24px 1fr;
+  }
+
+  .tl-date-start,
+  .tl-date-end {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-entry {
+    grid-template-columns: 56px 20px 1fr;
+  }
+
+  .tl-left {
+    padding-right: 4px;
+  }
+  .tl-content {
+    padding-left: 8px;
+  }
+  .tl-company {
+    font-size: 14px;
+  }
+  .header-name {
+    font-size: 24px;
+  }
+  .edu-main {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+// === Floating print buttons =====================================
+
+.print-fab {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: auto;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 0.5px solid get-color(neutral, border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: $cv-font-body;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+  }
+}
+
+.print-fab__toggle {
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  background: get-color(primary, color);
+  color: get-color(text, secondaryLight);
+
+  &:hover {
+    border-color: get-color(accent, vibrant);
+    color: get-color(accent, vibrant);
+    background: get-color(accent, muted);
+  }
+}
+
+.print-fab--bw .print-fab__toggle {
+  background: get-color(primary, color);
+  border-color: get-color(text, secondaryLight);
+  color: get-color(text, secondaryLight);
+}
+
+.print-fab__print {
+  height: 36px;
+  padding: 0 14px;
+  background: get-color(primary, color);
+  border-color: get-color(text, secondaryLight);
+  color: get-color(text, primaryLight);
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    background: get-color(accent, muted);
+  }
+}
+
+.print-fab__label {
+  font-size: 13px;
+}
+
+// == B&W Print Override =================================================
+
+@media print {
+  .link-raw {
+    display: inline !important;
+  }
+
+  .hobby-section,
+  .print-fab,
+  .avatar-wrap,
+  .print-none {
+    display: none !important;
+  }
+
+  :host-context(body.cv-print-bw) {
+    .cv-sidebar {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border-right: 1px solid #cccccc;
+    }
+
+    .profile-name,
+    .sidebar-label,
+    .contact-item,
+    .lang-name,
+    .lang-level {
+      color: #000000 !important;
+    }
+
+    .profile-role,
+    .skill-pill,
+    .lang-fill,
+    .avatar-ring {
+      color: #333333 !important;
+      background: #eeeeee !important;
+      border-color: #999999 !important;
+    }
+
+    .lang-bar {
+      background: #dddddd !important;
+    }
+
+    .lang-fill {
+      background: #333333 !important;
+    }
+
+    .cv-main {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .header-name,
+    .tl-company,
+    .edu-school {
+      color: #000000 !important;
+    }
+
+    .header-role,
+    .tl-position,
+    .section-label,
+    .edu-year {
+      color: #333333 !important;
+    }
+
+    .header-about,
+    .tl-desc-item,
+    .tl-date-start,
+    .tl-date-end,
+    .edu-course {
+      color: #444444 !important;
+    }
+
+    .tl-dot--current {
+      background: #333333 !important;
+      border-color: #333333 !important;
+      box-shadow: none !important;
+    }
+
+    .tl-tag {
+      border-color: #999999 !important;
+      color: #444444 !important;
     }
   }
 }
