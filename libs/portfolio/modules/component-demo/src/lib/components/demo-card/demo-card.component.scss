@@ -1,37 +1,56 @@
 @use 'apps/portfolio/src/styles/styles.scss' as *;
 
 .demo-card-container {
-  padding: 2%;
-  display: block;
-  max-width: 250px;
-  max-height: 350px;
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   border: 1px solid get-color(neutral, border);
   background-color: get-color(neutral, card);
+  overflow: hidden;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: get-color(neutral, border);
+    background-color: get-color(primary, dark);
   }
 
   .demo-card-image {
+    aspect-ratio: 16 / 9;
     background-color: get-color(neutral, bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .demo-card-content {
-    padding: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
 
     .demo-card-title {
       display: block;
-      width: 100%;
       font-weight: bold;
-      font-size: medium;
+      font-size: 0.875rem;
+      color: get-color(text, primaryLight);
     }
 
     .demo-card-desc {
-      display: block;
-      width: 100%;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: get-color(text, secondaryLight);
     }
   }
 }

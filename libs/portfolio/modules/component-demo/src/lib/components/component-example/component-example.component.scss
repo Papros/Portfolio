@@ -2,11 +2,7 @@
 
 .doc-examples-container {
   display: flex;
-  flex-direction: row;
-
-  .doc-examples-content {
-    flex: 9;
-    padding-right: 1rem;
-    padding-top: 1rem;
-  }
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1rem;
 }

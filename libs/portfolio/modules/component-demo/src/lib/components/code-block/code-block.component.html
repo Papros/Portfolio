@@ -8,7 +8,7 @@
         matIconButton
         class="code-visible-button"
         (click)="toggleCodeVisibility()"
-        [matTooltip]="isCodeVisible ? 'View code' : 'hide code'"
+        [matTooltip]="isCodeVisible ? 'Hide code' : 'View code'"
       >
         <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
       </button>
@@ -30,7 +30,7 @@
         mat-stretch-tabs="false"
         (selectedTabChange)="onTabChange($event.index)"
       >
-        <mat-tab label=".html">
+        <mat-tab label=".html" *ngIf="example.source?.html">
           <ng-template matTabContent>
             <ng-container *ngIf="getCode('html') | async as state">
               <div *ngIf="state.loading">Loading...</div>

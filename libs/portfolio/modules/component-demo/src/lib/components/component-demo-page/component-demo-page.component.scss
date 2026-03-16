@@ -12,15 +12,26 @@
 
 .component-demo-drawer {
   flex: 1;
+  min-height: 0;
   background-color: get-color(neutral, bg);
 
   .component-demo-sidenav {
     max-width: 250px;
+    background-color: get-color(neutral, card);
+    border-right: 1px solid get-color(neutral, border);
+
+    @media (max-width: 767px) {
+      max-width: 80vw;
+    }
   }
 
   .component-demo-content {
     padding: 1%;
     border-radius: 8px;
+
+    @media (max-width: 767px) {
+      padding: 12px;
+    }
   }
 }
 
@@ -30,4 +41,28 @@
   padding: 16px;
   text-align: center;
   background: get-color(neutral, card);
+  color: get-color(text, secondaryLight);
+}
+
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: get-color(text, primaryLight);
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+}
+
+::ng-deep .mobile-only {
+  display: none;
+
+  @media (max-width: 767px) {
+    display: inline-flex;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +13,6 @@ import { NavigationAction } from './navigation-bat.interface';
   styleUrl: './navigation-bar.component.scss',
 })
 export class NavigationBarComponent {
-  @Input()
-  actions: NavigationAction[] = [];
+  @Input() actions: NavigationAction[] = [];
+  @Output() actionClick = new EventEmitter<string>();
 }

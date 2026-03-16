@@ -10,6 +10,21 @@ import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
 })
 export class ComponentsGalleryComponent {
   get componentList(): ComponentDoc[] {
+    if (COMPONENT_DOCS[0] && !COMPONENT_DOCS[1]) {
+      const component = COMPONENT_DOCS[0];
+      const arr: ComponentDoc[] = [
+        component,
+        component,
+        component,
+        component,
+        component,
+        component,
+        component,
+        component,
+      ];
+      return arr;
+    }
+
     return COMPONENT_DOCS || [];
   }
 }
