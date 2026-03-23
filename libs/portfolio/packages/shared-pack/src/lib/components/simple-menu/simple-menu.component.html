@@ -1,22 +1,22 @@
 <div class="simple-menu-container">
   <div class="simple-menu-header">
-    <content #header></content>
+    <ng-content select="[header]"></ng-content>
   </div>
   <div class="simple-menu-content">
-    @for(action of actions; track $index) {
-    <button
-      matIconButton
-      class="simple-menu-action"
-      [routerLink]="['/components', action.navigation]"
-      routerLinkActive="link-active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
-      <span *ngIf="action.label"> {{ action.label }} </span>
-    </button>
+    @for (action of actions; track $index) {
+      <button
+        matIconButton
+        class="simple-menu-action"
+        [routerLink]="['/components', action.navigation]"
+        routerLinkActive="link-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+        <span *ngIf="action.label">{{ action.label }}</span>
+      </button>
     }
   </div>
   <div class="simple-menu-footer">
-    <content #footer></content>
+    <ng-content select="[footer]"></ng-content>
   </div>
 </div>

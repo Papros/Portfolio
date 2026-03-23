@@ -1,10 +1,10 @@
 <div class="component-demo-card-list">
   @for (component of componentList; track component.id) {
-  <lib-demo-card
-    [title]="component.meta.title"
-    [imageScr]="component.meta.thumbnail"
-    [desc]="component.meta.description"
-    [routingAction]="[component.id]"
-  ></lib-demo-card>
+    <lib-demo-card
+      [title]="component.meta.title"
+      [imageSrc]="component.meta.thumbnail"
+      [desc]="component.meta.description"
+      [routingAction]="[component.id]"
+    ></lib-demo-card>
   }
 </div>

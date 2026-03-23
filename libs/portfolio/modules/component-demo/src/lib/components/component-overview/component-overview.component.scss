@@ -3,27 +3,50 @@
 .doc-article-container {
   display: flex;
   flex-direction: row;
+  gap: 1.5rem;
 
   .doc-article-content {
-    flex: 9;
-    padding-right: 1rem;
+    flex: 1;
+    min-width: 0;
   }
 
   .doc-section-shortcuts-list {
-    flex: 1;
+    width: 160px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    border-left: 4px solid get-color(neutral, border);
-    padding-left: 8px;
-    margin-top: 4px;
+    border-left: 3px solid get-color(neutral, border);
+    padding-left: 12px;
+    gap: 0.5rem;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
 
     .section-shortcut {
-      margin-bottom: 0.5rem;
+      font-size: 0.8125rem;
+      color: get-color(text, secondaryLight);
+      text-decoration: none;
+      transition: color 0.15s ease;
 
       &:hover {
         color: get-color(accent, color);
         cursor: pointer;
       }
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+
+    .doc-section-shortcuts-list {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border-left: none;
+      border-bottom: 1px solid get-color(neutral, border);
+      padding-left: 0;
+      padding-bottom: 12px;
+      position: static;
     }
   }
 }

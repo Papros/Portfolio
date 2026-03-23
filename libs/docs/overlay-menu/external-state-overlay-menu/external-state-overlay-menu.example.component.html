@@ -1,0 +1,9 @@
+<div class="example-wrapper">
+  <button mat-stroked-button (click)="toggle()">Toggle (external state)</button>
+  <div class="menu-container">
+    <lib-overlay-menu
+      [options]="options"
+      [stateSignal]="menuState"
+    ></lib-overlay-menu>
+  </div>
+</div>

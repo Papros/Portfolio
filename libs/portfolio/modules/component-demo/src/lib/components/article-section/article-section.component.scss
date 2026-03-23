@@ -1,9 +1,34 @@
 @use 'apps/portfolio/src/styles/styles.scss' as *;
 
 .dev-section-container {
-  margin-bottom: 2rem;
-}
+  margin-bottom: 2.5rem;
 
-.dev-section-title {
-  font-weight: bold;
+  .dev-section-title {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: get-color(text, primaryLight);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid get-color(neutral, border);
+  }
+
+  p {
+    color: get-color(text, secondaryLight);
+    line-height: 1.7;
+  }
+
+  pre {
+    background-color: get-color(neutral, card);
+    border: 1px solid get-color(neutral, border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+
+    code {
+      font-family: monospace;
+      font-size: 0.875rem;
+      color: get-color(text, primaryLight);
+    }
+  }
 }

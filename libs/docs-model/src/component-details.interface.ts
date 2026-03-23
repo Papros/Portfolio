@@ -1,5 +1,4 @@
 import { Type } from '@angular/core';
-import { expand } from 'rxjs';
 
 export interface ComponentDoc {
   id: string;
@@ -35,9 +34,9 @@ export interface ExampleDef {
   description: string;
   component: Type<unknown>;
   code?: {
-    ts?: string;
-    html?: string;
-    scss?: string;
+    ts?: boolean;
+    html?: boolean;
+    scss?: boolean;
   };
 }
 
@@ -74,8 +73,8 @@ export interface DocExample {
   description: string;
   component: Type<unknown>;
   source?: {
-    html?: string;
-    ts?: string;
-    scss?: string;
+    html?: boolean;
+    ts?: boolean;
+    scss?: boolean;
   };
 }

@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class DemoCardComponent {
   @Input()
-  imageScr = 'assets/images/component-demo/component-placeholder.png';
+  imageSrc = 'assets/images/component-demo/component-placeholder.png';
 
   @Input()
   title = 'Component';

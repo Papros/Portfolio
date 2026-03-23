@@ -1,5 +1,9 @@
 import { ComponentDoc } from './component-details.interface';
-import { DefaultOverlayMenuExampleComponent } from '@docs/overlay-menu';
+import {
+  CustomSpreadOverlayMenuExampleComponent,
+  DefaultOverlayMenuExampleComponent,
+  ExternalStateOverlayMenuExampleComponent,
+} from '@docs/overlay-menu';
 
 export const COMPONENT_DOCS: ComponentDoc[] = [
   {
@@ -7,7 +11,7 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
     meta: {
       title: 'Overlay Menu',
       description:
-        'Menu component that appears as an overlay. Gives quick access to necessary actions.',
+        'A radial menu that expands from a center trigger. Supports hover, click, and external signal-based state control.',
       thumbnail: 'assets/images/component-demo/overlay-menu-icon.png',
     },
     overview: {
@@ -16,24 +20,38 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
           type: 'markdown',
           id: 'overview',
           title: 'Overview',
-          content: 'This is an overlay menu component used for quick actions.',
+          content:
+            'OverlayMenu displays a set of options arranged in a circular pattern around a central trigger. ' +
+            'The menu opens on hover or click, and supports both internal and external state management via Angular signals. ' +
+            'The spread angle and radius are fully configurable.',
         },
         {
           type: 'example',
           id: 'basic-usage',
-          title: 'Basic Usage',
-          description: 'A simple example of the overlay menu in action.',
+          title: 'Basic usage',
+          description: 'Default configuration with internal state management.',
           example: {
             id: 'default-overlay-menu',
-            title: 'Overlay Menu Example',
+            title: 'Default overlay menu',
             description:
-              'An example showcasing the basic usage of the overlay menu component.',
+              'Hover over or click the center icon to reveal options.',
             component: DefaultOverlayMenuExampleComponent,
-            source: {
-              ts: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.ts',
-              html: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.html',
-              scss: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.scss',
-            },
+            source: { ts: true, html: true, scss: true },
+          },
+        },
+        {
+          type: 'example',
+          id: 'external-state',
+          title: 'External state control',
+          description:
+            'Pass a WritableSignal to control the menu state from outside the component.',
+          example: {
+            id: 'external-state-overlay-menu',
+            title: 'External state overlay menu',
+            description:
+              'Menu state is driven by a signal defined in the parent component.',
+            component: ExternalStateOverlayMenuExampleComponent,
+            source: { ts: true, html: true, scss: true },
           },
         },
       ],
@@ -41,38 +59,61 @@ export const COMPONENT_DOCS: ComponentDoc[] = [
     api: {
       inputs: [
         {
-          name: 'state',
-          type: 'OverlayMenuState',
-          defaultValue: 'OverlayMenuState.CLOSED',
-          description: 'Controls the state of the menu (open, closed, toggle).',
+          name: 'options',
+          type: 'OverlayMenuOption[]',
+          defaultValue: '[]',
+          description: 'List of options displayed around the center trigger.',
         },
         {
-          name: 'label',
-          type: 'string',
-          defaultValue: 'Menu',
-          description: 'Label for the menu.',
+          name: 'radius',
+          type: 'number',
+          defaultValue: '120',
+          description: 'Distance in pixels from the center to each option.',
         },
         {
-          name: 'icon',
-          type: 'string',
-          defaultValue: 'donut_small',
-          description: 'Icon for the menu.',
+          name: 'spread',
+          type: 'number',
+          defaultValue: '160',
+          description: 'Arc angle in degrees across which options are spread.',
+        },
+        {
+          name: 'stateSignal',
+          type: 'WritableSignal<OverlayMenuState> | null',
+          defaultValue: 'null',
+          description:
+            'Optional external signal for controlling open/closed state. When provided, internal state is ignored.',
         },
       ],
-      outputs: [],
+      outputs: [
+        {
+          name: 'optionSelected',
+          type: 'EventEmitter<OverlayMenuOption>',
+          defaultValue: '',
+          description: 'Emitted when the user clicks an option.',
+        },
+      ],
     },
     examples: [
       {
         id: 'default-overlay-menu',
-        title: 'Default Overlay Menu',
-        description:
-          'An example demonstrating the default overlay menu functionality.',
+        title: 'Default overlay menu',
+        description: 'Basic usage with internal state and three options.',
         component: DefaultOverlayMenuExampleComponent,
-        source: {
-          ts: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.ts',
-          html: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.html',
-          scss: '/libs/docs/overlay-menu/default-overlay-menu/default-overlay-menu.example.component.scss',
-        },
+        source: { ts: true, html: true, scss: true },
+      },
+      {
+        id: 'external-state-overlay-menu',
+        title: 'External state control',
+        description: 'Menu controlled via a WritableSignal from the parent.',
+        component: ExternalStateOverlayMenuExampleComponent,
+        source: { ts: true, html: true, scss: true },
+      },
+      {
+        id: 'custom-spread-overlay-menu',
+        title: 'Custom radius and spread',
+        description: 'Five options spread across 260° with radius of 160px.',
+        component: CustomSpreadOverlayMenuExampleComponent,
+        source: { ts: true, html: true, scss: true },
       },
     ],
   },
