@@ -13,12 +13,12 @@
 .component-demo-drawer {
   flex: 1;
   min-height: 0;
-  background-color: get-color(neutral, bg);
+  background-color: get-color(neutral-bg);
 
   .component-demo-sidenav {
     max-width: 250px;
-    background-color: get-color(neutral, card);
-    border-right: 1px solid get-color(neutral, border);
+    background-color: get-color(neutral-card);
+    border-right: 1px solid get-color(neutral-border);
 
     @media (max-width: 767px) {
       max-width: 80vw;
@@ -37,11 +37,11 @@
 
 .component-demo-footer {
   width: 100%;
-  border-top: 1px solid get-color(neutral, border);
+  border-top: 1px solid get-color(neutral-border);
   padding: 16px;
   text-align: center;
-  background: get-color(neutral, card);
-  color: get-color(text, secondaryLight);
+  background: get-color(neutral-card);
+  color: get-color(text-secondary);
 }
 
 .mobile-menu-btn {
@@ -52,7 +52,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: get-color(text, primaryLight);
+  color: get-color(text-inverse);
 
   @media (max-width: 767px) {
     display: flex;

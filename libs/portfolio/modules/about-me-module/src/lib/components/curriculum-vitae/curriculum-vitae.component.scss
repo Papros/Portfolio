@@ -9,26 +9,26 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   grid-template-columns: 280px 1fr;
   min-height: 100vh;
   font-family: $cv-font-body;
-  background: get-color(neutral, bg);
-  color: get-color(text, negative);
+  background: get-color(neutral-bg);
+  color: get-color(text-primary);
 }
 
 // === Sidebar ==================================================================
 .cv-sidebar {
-  background: get-color(primary, color);
-  color: get-color(text, negative);
+  background: get-color(neutral-card);
+  color: get-color(text-primary);
   position: sticky;
   top: 0;
   height: 100vh;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+  scrollbar-color: get-color(neutral-border) transparent;
 
   &::-webkit-scrollbar {
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.07);
+    background: get-color(neutral-border);
     border-radius: 2px;
   }
 }
@@ -67,7 +67,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid get-color(accent, dark);
+  border: 2px solid get-color(accent-muted);
   opacity: 0.6;
 }
 
@@ -76,7 +76,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 22px;
   font-weight: 400;
   line-height: 1.2;
-  color: get-color(text, negative);
+  color: get-color(text-primary);
   margin: 0;
 }
 
@@ -84,7 +84,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
   margin: 0;
   font-weight: 500;
 }
@@ -92,7 +92,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 // === Sidebar Divider ==========================================================
 .sidebar-divider {
   height: 0.5px;
-  background: rgba(255, 255, 255, 0.07);
+  background: get-color(neutral-border);
   margin: -4px 0;
 }
 
@@ -107,7 +107,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   font-weight: 500;
 }
 
@@ -123,7 +123,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
   text-decoration: none;
   opacity: 0.85;
   transition:
@@ -133,7 +133,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
   &:hover {
     opacity: 1;
-    color: get-color(accent, vibrant);
+    color: get-color(accent-vibrant);
   }
 
   .link-raw {
@@ -143,7 +143,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
 .contact-icon {
   flex-shrink: 0;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   display: flex;
   align-items: center;
 }
@@ -158,9 +158,9 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .skill-pill {
   font-size: 11px;
   padding: 3px 9px;
-  background: get-color(accent, muted);
-  color: get-color(accent, vibrant);
-  border: 0.5px solid get-color(accent, vibrant);
+  background: get-color(accent-muted);
+  color: get-color(accent-vibrant);
+  border: 0.5px solid get-color(accent-vibrant);
   border-radius: 20px;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -168,9 +168,9 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 .skill-pill--active {
-  background: get-color(text, secondaryLight);
-  color: get-color(text, primaryDark);
-  border-color: get-color(text, primaryDark);
+  background: get-color(text-secondary);
+  color: get-color(text-inverse);
+  border-color: get-color(text-inverse);
 }
 
 // === Languages ================================================================
@@ -194,23 +194,23 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
 .lang-name {
   font-size: 13px;
-  color: get-color(text, negative);
+  color: get-color(text-primary);
 }
 .lang-level {
   font-size: 11px;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
 }
 
 .lang-bar {
   height: 3px;
-  background: rgba(255, 255, 255, 0.08);
+  background: get-color(neutral-border);
   border-radius: 2px;
   overflow: hidden;
 }
 
 .lang-fill {
   height: 100%;
-  background: get-color(accent, color);
+  background: get-color(accent-soft);
   border-radius: 2px;
   transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -229,11 +229,11 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .hobby-name {
   font-size: 12px;
   font-weight: 500;
-  color: get-color(text, negative);
+  color: get-color(text-primary);
 }
 .hobby-desc {
   font-size: 11px;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   line-height: 1.4;
 }
 
@@ -241,15 +241,15 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .cv-main {
   display: flex;
   flex-direction: column;
-  background: get-color(neutral, card);
-  color: get-color(text, secondaryLight);
+  background: get-color(neutral-bg);
+  color: get-color(text-primary);
 }
 
 // === Header ===================================================================
 .cv-header {
   position: relative;
   padding: 40px 48px 32px;
-  border-bottom: 0.5px solid get-color(neutral, border);
+  border-bottom: 0.5px solid get-color(neutral-border);
 }
 
 .header-name {
@@ -257,7 +257,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 400;
   margin: 0 0 6px;
-  color: get-color(text, primaryLight);
+  color: get-color(text-primary);
   line-height: 1.1;
 }
 
@@ -265,7 +265,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
   margin: 0 0 16px;
   font-weight: 500;
 }
@@ -273,7 +273,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .header-about {
   font-size: 14px;
   line-height: 1.7;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   max-width: 580px;
   margin: 0;
 }
@@ -283,7 +283,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   padding: 32px 48px;
 
   & + .cv-section {
-    border-top: 0.5px solid get-color(neutral, border);
+    border-top: 0.5px solid get-color(neutral-border);
   }
 }
 
@@ -298,7 +298,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -306,7 +306,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .section-line {
   flex: 1;
   height: 0.5px;
-  background: get-color(neutral, border);
+  background: get-color(neutral-border);
 }
 
 .cv-footer {
@@ -333,10 +333,33 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   display: grid;
   grid-template-columns: 90px 28px 1fr;
   gap: 0 4px;
+  border-radius: 8px;
   animation: fadeSlideUp 0.4s ease both;
 
   &:last-child .tl-line {
     display: none;
+  }
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      get-color(neutral-card) 30%,
+      transparent
+    );
+
+    .tl-date-start,
+    .tl-date-end,
+    .tl-connector {
+      color: get-color(text-primary);
+    }
+
+    .tl-dot {
+      width: 12px;
+      height: 12px;
+      background: get-color(accent-vibrant);
+      border-color: get-color(accent-vibrant);
+      box-shadow: 0 0 0 3px get-color(accent-muted);
+    }
   }
 }
 
@@ -363,12 +386,12 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .tl-date-start,
 .tl-date-end {
   font-size: 14px;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   line-height: 1.4;
 }
 .tl-date-sep {
   font-size: 10px;
-  color: get-color(neutral, border);
+  color: get-color(text-secondary);
   line-height: 1;
 }
 
@@ -383,24 +406,24 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: get-color(accent, vibrant);
-  border: 2px solid get-color(accent, vibrant);
+  background: get-color(accent-vibrant);
+  border: 2px solid get-color(accent-vibrant);
   flex-shrink: 0;
   transition:
     background 0.2s,
     border-color 0.2s;
 
   &.tl-dot--current {
-    background: get-color(accent, color);
-    border-color: get-color(accent, vibrant);
-    box-shadow: 0 0 0 3px get-color(accent, light);
+    background: get-color(accent-soft);
+    border-color: get-color(accent-vibrant);
+    box-shadow: 0 0 0 3px get-color(accent-muted);
   }
 }
 
 .tl-line {
   flex: 1;
   width: 0.5px;
-  background: get-color(neutral, border);
+  background: get-color(neutral-border);
   margin-top: 4px;
 }
 
@@ -420,26 +443,26 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .tl-company {
   font-size: 18px;
   font-weight: 500;
-  color: get-color(text, primaryLight);
+  color: get-color(text-primary);
 }
 
 .tl-link {
   display: flex;
   align-items: baseline;
-  color: get-color(text, secondaryLight);
+  color: get-color(text-secondary);
 
   mat-icon {
     font-size: 18px;
 
     &:hover {
-      color: get-color(text, negative);
+      color: get-color(text-primary);
     }
   }
 }
 
 .tl-position {
   font-size: 16px;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
   font-style: italic;
 }
 
@@ -454,7 +477,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
 .tl-desc-item {
   font-size: 15px;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   line-height: 1.6;
   padding-left: 12px;
   position: relative;
@@ -467,7 +490,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: get-color(neutral, border);
+    background: get-color(neutral-border);
   }
 }
 
@@ -481,17 +504,17 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   padding: 2px 8px;
   border-radius: 20px;
-  background: get-color(primary, dark);
-  border: 0.5px solid get-color(neutral, border);
-  color: get-color(text, secondaryLight);
+  background: get-color(primary-dark);
+  border: 0.5px solid get-color(neutral-border);
+  color: get-color(text-secondary);
   letter-spacing: 0.04em;
   cursor: pointer;
 }
 
 .tl-tag--active {
-  background: get-color(text, secondaryLight);
-  color: get-color(text, primaryDark);
-  border-color: get-color(text, primaryDark);
+  background: get-color(text-secondary);
+  color: get-color(neutral-bg);
+  border-color: get-color(neutral-bg);
 }
 
 // === Education ================================================================
@@ -517,15 +540,15 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .edu-school {
   font-size: 15px;
   font-weight: 500;
-  color: get-color(text, primaryLight);
+  color: get-color(text-primary);
 }
 .edu-year {
   font-size: 12px;
-  color: get-color(accent, vibrant);
+  color: get-color(accent-vibrant);
 }
 .edu-course {
   font-size: 13px;
-  color: get-color(text, subtext);
+  color: get-color(text-secondary);
   line-height: 1.5;
   margin: 0;
 }
@@ -651,8 +674,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   }
 }
 
-// === Floating print buttons =====================================
-
+// === Floating print buttons ===================================================
 .print-fab {
   position: fixed;
   top: 32px;
@@ -666,7 +688,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     align-items: center;
     gap: 6px;
-    border: 0.5px solid get-color(neutral, border);
+    border: 0.5px solid get-color(neutral-border);
     border-radius: 10px;
     cursor: pointer;
     font-family: $cv-font-body;
@@ -681,33 +703,33 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   width: 36px;
   height: 36px;
   justify-content: center;
-  background: get-color(primary, color);
-  color: get-color(text, secondaryLight);
+  background: get-color(primary-base);
+  color: get-color(text-secondary);
 
   &:hover {
-    border-color: get-color(accent, vibrant);
-    color: get-color(accent, vibrant);
-    background: get-color(accent, muted);
+    border-color: get-color(accent-vibrant);
+    color: get-color(accent-vibrant);
+    background: get-color(accent-muted);
   }
 }
 
 .print-fab--bw .print-fab__toggle {
-  background: get-color(primary, color);
-  border-color: get-color(text, secondaryLight);
-  color: get-color(text, secondaryLight);
+  background: get-color(primary-base);
+  border-color: get-color(text-secondary);
+  color: get-color(text-secondary);
 }
 
 .print-fab__print {
   height: 36px;
   padding: 0 14px;
-  background: get-color(primary, color);
-  border-color: get-color(text, secondaryLight);
-  color: get-color(text, primaryLight);
+  background: get-color(primary-base);
+  border-color: get-color(text-secondary);
+  color: get-color(text-primary);
   font-size: 13px;
   font-weight: 500;
 
   &:hover {
-    background: get-color(accent, muted);
+    background: get-color(accent-muted);
   }
 }
 
@@ -715,8 +737,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 13px;
 }
 
-// == B&W Print Override =================================================
-
+// === B&W Print Override =======================================================
 @media print {
   .link-raw {
     display: inline !important;

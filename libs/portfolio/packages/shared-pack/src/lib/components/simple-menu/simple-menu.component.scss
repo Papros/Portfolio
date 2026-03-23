@@ -3,7 +3,7 @@
 .simple-menu-container {
   width: 100%;
   height: 100%;
-  background-color: get-color(neutral, card);
+  background-color: get-color(neutral-card);
   display: flex;
   flex-direction: column;
 
@@ -24,25 +24,25 @@
       width: 100%;
       text-align: left;
       font-size: 0.875rem;
-      color: get-color(text, secondaryLight);
+      color: get-color(text-secondary);
       transition:
         background-color 0.15s ease,
         color 0.15s ease;
 
       &:hover {
-        background-color: get-color(accent, muted);
-        color: get-color(accent, color);
+        background-color: get-color(accent-muted);
+        color: get-color(accent-soft);
       }
 
       &.link-active {
         background: linear-gradient(
           to right,
-          get-color(accent, muted),
+          get-color(accent-muted),
           transparent
         );
-        color: get-color(accent, vibrant);
+        color: get-color(accent-vibrant);
         font-weight: bold;
-        border-left: 3px solid get-color(accent, vibrant);
+        border-left: 3px solid get-color(accent-vibrant);
         padding-left: 9px;
       }
     }

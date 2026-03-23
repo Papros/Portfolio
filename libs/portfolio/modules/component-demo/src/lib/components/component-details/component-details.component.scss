@@ -7,12 +7,12 @@
 
 ::ng-deep .mat-mdc-tab-group {
   .mat-mdc-tab-header {
-    border-bottom: 1px solid get-color(neutral, border);
-    background-color: get-color(neutral, card);
+    border-bottom: 1px solid get-color(neutral-border);
+    background-color: get-color(neutral-card);
   }
 
   .mat-mdc-tab-body-wrapper {
-    background-color: get-color(neutral, bg);
+    background-color: get-color(neutral-bg);
     padding: 1.5rem;
 
     @media (max-width: 767px) {
@@ -21,14 +21,14 @@
   }
 
   .mdc-tab__text-label {
-    color: get-color(text, secondaryLight);
+    color: get-color(text-secondary);
   }
 
   .mdc-tab--active .mdc-tab__text-label {
-    color: get-color(accent, color);
+    color: get-color(accent-soft);
   }
 
   .mdc-tab-indicator__content--underline {
-    border-color: get-color(accent, vibrant);
+    border-color: get-color(accent-vibrant);
   }
 }

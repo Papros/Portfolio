@@ -10,7 +10,7 @@
     min-width: 0;
 
     .api-section-title {
-      color: get-color(text, primaryLight);
+      color: get-color(text-inverse);
       margin: 1.5rem 0 0.75rem;
       font-size: 1rem;
       font-weight: bold;
@@ -22,7 +22,7 @@
 
     .table-wrapper {
       border-radius: 8px;
-      border: 1px solid get-color(neutral, border);
+      border: 1px solid get-color(neutral-border);
       overflow: hidden;
       overflow-x: auto;
 
@@ -40,18 +40,18 @@
 
     .prop-name {
       font-weight: bold;
-      color: get-color(accent, color);
+      color: get-color(accent-soft);
     }
 
     .prop-type {
-      color: get-color(text, subtext);
+      color: get-color(text-secondary);
       font-style: italic;
     }
 
     .prop-default {
       display: block;
       font-size: 0.8125rem;
-      color: get-color(text, subtext);
+      color: get-color(text-secondary);
       margin-top: 2px;
     }
   }
@@ -61,7 +61,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    border-left: 3px solid get-color(neutral, border);
+    border-left: 3px solid get-color(neutral-border);
     padding-left: 12px;
     gap: 0.5rem;
     position: sticky;
@@ -70,12 +70,12 @@
 
     .section-shortcut {
       font-size: 0.8125rem;
-      color: get-color(text, secondaryLight);
+      color: get-color(text-secondary);
       text-decoration: none;
       transition: color 0.15s ease;
 
       &:hover {
-        color: get-color(accent, color);
+        color: get-color(accent-soft);
       }
     }
   }
@@ -87,7 +87,7 @@
       width: 100%;
       flex-direction: row;
       border-left: none;
-      border-bottom: 1px solid get-color(neutral, border);
+      border-bottom: 1px solid get-color(neutral-border);
       padding-left: 0;
       padding-bottom: 12px;
       position: static;
@@ -96,21 +96,21 @@
 }
 
 ::ng-deep .mat-mdc-table {
-  background-color: get-color(neutral, card) !important;
+  background-color: get-color(neutral-card) !important;
 
   .mat-mdc-header-row {
-    background-color: get-color(neutral, bg);
+    background-color: get-color(neutral-bg);
   }
 
   .mat-mdc-header-cell {
-    color: get-color(text, secondaryLight);
+    color: get-color(text-secondary);
     font-size: 0.8125rem;
-    border-bottom-color: get-color(neutral, border);
+    border-bottom-color: get-color(neutral-border);
   }
 
   .mat-mdc-cell {
-    color: get-color(text, primaryLight);
-    border-bottom-color: get-color(neutral, border);
+    color: get-color(text-inverse);
+    border-bottom-color: get-color(neutral-border);
     font-size: 0.875rem;
     padding: 12px 16px;
   }
@@ -120,6 +120,6 @@
   }
 
   .mat-mdc-row:hover .mat-mdc-cell {
-    background-color: get-color(primary, dark);
+    background-color: get-color(neutral-bg-deep);
   }
 }

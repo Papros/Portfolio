@@ -3,11 +3,11 @@
 mat-toolbar {
   width: 100%;
   height: 50px;
-  background-color: get-color(primary, color);
+  background-color: get-color(primary-base);
   gap: 32px;
 
   .toolbar-action-icon {
-    color: get-color(accent, color);
+    color: get-color(accent-soft);
 
     span {
       padding-bottom: 10px;
