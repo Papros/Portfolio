@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar [class.sticky-toolbar]="isSticky">
   @for (action of actions; track action.id) {
     <button
       matIconButton

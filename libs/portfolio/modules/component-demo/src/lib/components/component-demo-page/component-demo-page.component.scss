@@ -5,19 +5,27 @@
 }
 
 .page-layout {
+  min-height: 100%;
+
   display: flex;
   flex-direction: column;
+}
+
+::ng-deep .mat-drawer-container {
   height: 100%;
 }
 
 .component-demo-drawer {
   flex: 1;
-  min-height: 0;
-  background-color: get-color(neutral-bg);
+  background-color: get-color(neutral-bg-deep);
+
+  ::ng-deep .mat-drawer-container {
+    height: 100%;
+  }
 
   .component-demo-sidenav {
     max-width: 250px;
-    background-color: get-color(neutral-card);
+    background-color: get-color(neutral-bg);
     border-right: 1px solid get-color(neutral-border);
 
     @media (max-width: 767px) {
@@ -25,9 +33,16 @@
     }
   }
 
+  ::ng-deep .mat-drawer-content {
+    overflow: visible !important;
+    display: flex;
+    flex-direction: column;
+  }
+
   .component-demo-content {
     padding: 1%;
     border-radius: 8px;
+    min-height: 100%;
 
     @media (max-width: 767px) {
       padding: 12px;
@@ -37,11 +52,24 @@
 
 .component-demo-footer {
   width: 100%;
-  border-top: 1px solid get-color(neutral-border);
   padding: 16px;
   text-align: center;
+
+  border-top: 2px solid get-color(neutral-border);
   background: get-color(neutral-card);
-  color: get-color(text-secondary);
+  color: get-color(text-primary);
+
+  .footer-option {
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .footer-option--center {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 .mobile-menu-btn {
@@ -52,7 +80,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: get-color(text-inverse);
+  color: get-color(text-primary);
 
   @media (max-width: 767px) {
     display: flex;

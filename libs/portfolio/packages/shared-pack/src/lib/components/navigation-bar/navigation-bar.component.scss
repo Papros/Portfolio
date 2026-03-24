@@ -6,6 +6,12 @@ mat-toolbar {
   background-color: get-color(primary-base);
   gap: 32px;
 
+  &.sticky-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
   .toolbar-action-icon {
     color: get-color(accent-soft);
 

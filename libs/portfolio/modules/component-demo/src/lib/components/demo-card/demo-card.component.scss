@@ -11,7 +11,7 @@
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: get-color(neutral-bg-deep);
+    background-color: get-color(neutral-card-hover);
   }
 
   .demo-card-image {
@@ -40,7 +40,7 @@
       display: block;
       font-weight: bold;
       font-size: 0.875rem;
-      color: get-color(text-inverse);
+      color: get-color(text-primary);
     }
 
     .demo-card-desc {

@@ -14,5 +14,6 @@ import { NavigationAction } from './navigation-bat.interface';
 })
 export class NavigationBarComponent {
   @Input() actions: NavigationAction[] = [];
+  @Input() isSticky = true;
   @Output() actionClick = new EventEmitter<string>();
 }
