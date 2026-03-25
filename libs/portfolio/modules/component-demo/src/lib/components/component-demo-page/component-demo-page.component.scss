@@ -94,3 +94,44 @@
     display: inline-flex;
   }
 }
+
+[data-section='design-system'] {
+  ::ng-deep lib-simple-menu {
+    .simple-menu-container {
+      background-color: get-color(neutral-card);
+    }
+
+    .simple-menu-action {
+      color: get-color(accent-surface) !important;
+
+      &:hover {
+        color: get-color(text-primary) !important;
+        background-color: get-color(neutral-card-hover) !important;
+      }
+
+      &.link-active {
+        background: linear-gradient(
+          to right,
+          get-color(accent-muted),
+          transparent
+        );
+        color: get-color(accent-vibrant-dark);
+        border-left: 3px solid get-color(accent-vibrant-dark);
+      }
+    }
+  }
+}
+
+lib-navigation-bar {
+  ::ng-deep mat-toolbar {
+    background-color: get-color(neutral-border) !important;
+  }
+
+  ::ng-deep .toolbar-action-icon {
+    color: get-color(accent-surface) !important;
+
+    &:hover {
+      color: get-color(accent-vibrant) !important;
+    }
+  }
+}

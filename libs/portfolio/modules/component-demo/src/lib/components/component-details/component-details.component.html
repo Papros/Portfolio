@@ -1,18 +1,18 @@
 <ng-container *ngIf="doc; else notFound">
   <mat-tab-group>
-    <mat-tab label="Overview" *ngIf="doc.overview">
+    <mat-tab label="Overview">
       <lib-component-overview
         [componentId]="doc.id"
         [overview]="doc.overview"
       ></lib-component-overview>
     </mat-tab>
 
-    <mat-tab label="API" *ngIf="doc.api">
+    <mat-tab label="API">
       <lib-component-api [componentId]="doc.id" [docApi]="doc.api">
       </lib-component-api>
     </mat-tab>
 
-    <mat-tab label="Examples" *ngIf="doc.examples">
+    <mat-tab label="Examples">
       <lib-component-example
         [componentId]="doc.id"
         [examples]="doc.examples"

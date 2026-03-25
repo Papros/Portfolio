@@ -24,14 +24,13 @@
       width: 100%;
       text-align: left;
       font-size: 0.875rem;
-      color: get-color(text-secondary);
+      color: get-color(text-primary);
       transition:
         background-color 0.15s ease,
         color 0.15s ease;
 
       &:hover {
-        background-color: get-color(accent-muted);
-        color: get-color(accent-soft);
+        background-color: get-color(neutral-card-hover);
       }
 
       &.link-active {
