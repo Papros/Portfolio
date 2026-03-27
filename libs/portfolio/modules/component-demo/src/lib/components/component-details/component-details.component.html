@@ -1,5 +1,5 @@
 <ng-container *ngIf="doc; else notFound">
-  <mat-tab-group>
+  <mat-tab-group mat-stretch-tabs="false">
     <mat-tab label="Overview">
       <lib-component-overview
         [componentId]="doc.id"

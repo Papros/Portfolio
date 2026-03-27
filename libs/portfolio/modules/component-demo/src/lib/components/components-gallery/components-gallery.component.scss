@@ -1,6 +1,13 @@
 @use 'apps/portfolio/src/styles/styles.scss' as *;
 
+:host {
+  display: block;
+  height: 100%;
+  flex: 1;
+}
+
 .component-demo-card-list {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;

@@ -7,15 +7,16 @@
     display: block;
     font-size: 1.125rem;
     font-weight: bold;
-    color: get-color(text-inverse);
+    color: get-color(text-primary);
     margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid get-color(neutral-border);
   }
 
   p {
-    color: get-color(text-secondary);
+    color: get-color(text-primary);
     line-height: 1.7;
+    padding-bottom: 0.75rem;
   }
 
   pre {
@@ -28,7 +29,7 @@
     code {
       font-family: monospace;
       font-size: 0.875rem;
-      color: get-color(text-inverse);
+      color: get-color(text-primary);
     }
   }
 }
