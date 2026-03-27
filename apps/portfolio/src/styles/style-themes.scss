@@ -1,80 +1,12 @@
-$app-theme: (
-  lightTheme: (
-    primary: (
-      color: #1a2332,
-      // Deep forest blue – main accent
-      light: #2c5d6f,
-      // Lighter hover state
-      dark: #10232e,
-      // Darker shade for depth,,,,,,
-    ),
-    accent: (
-      color: #a3be8c,
-      // Soft moss green – highlights and buttons
-      light: #c0d9ac,
-      // Lighter hover
-      dark: #7d996a,
-      // Darker for active states,,,,,,
-      vibrant: #1d9e75,
-      muted: #1d9e752e,
-    ),
-    neutral: (
-      bg: #1e1e1e,
-      // Dark background for sections
-      card: #30302e,
-      // Card/panel background
-      border: #3d3d3d,
-      // Borders and dividers,,,,,,
-    ),
-    text: (
-      primaryDark: #000000,
-      primaryLight: #e0e0e0,
-      secondaryLight: #b0afa6,
-      subtext: #95a5a6,
-      negative: #dce8f0,
-    ),
-    feedback: (
-      success: #27ae60,
-      warning: #f1c40f,
-      error: #e74c3c,
-    ),
-    gradient: (
-      primary: linear-gradient(135deg, #1b3a4b, #a3be8c),
-      secondary: linear-gradient(135deg, #2c5d6f, #c0d9ac),
-    ),
-  ),
-);
-
-// Variable to store the active theme
-$active-theme: lightTheme;
-
 // Mixin to set the global theme
-@function set-theme($theme-name) {
-  $active-theme: $theme-name !global;
+@mixin emit-theme($theme-name) {
+  $map: map-get($themes, $theme-name);
+  @each $key, $value in $map {
+    --#{$key}: #{$value};
+  }
 }
 
 // Mixin to retrieve a color
-@function get-color($first, $path...) {
-  @if map-has-key($app-theme, $active-theme) {
-    $theme-map: map-get($app-theme, $active-theme);
-    $color: map-get($theme-map, $first);
-
-    @if ($color == null) {
-      @error "Color `#{$first}` : `#{$path}` not found.";
-    }
-
-    @if length($path) > 0 {
-      @each $key in $path {
-        @if map-has-key($color, $key) {
-          $color: map-get($color, $key);
-        } @else {
-          @error "Key `#{$key}` not found in the theme `#{$active-theme}`.";
-        }
-      }
-    }
-
-    @return $color;
-  } @else {
-    @error "Theme `#{$active-theme}` not found.";
-  }
+@function get-color($token) {
+  @return var(--#{$token});
 }

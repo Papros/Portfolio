@@ -4,19 +4,19 @@
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  border: 1px solid get-color(neutral, border);
-  background-color: get-color(neutral, card);
+  border: 1px solid get-color(neutral-border);
+  background-color: get-color(neutral-card);
   overflow: hidden;
   text-decoration: none;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: get-color(primary, dark);
+    background-color: get-color(neutral-card-hover);
   }
 
   .demo-card-image {
     aspect-ratio: 16 / 9;
-    background-color: get-color(neutral, bg);
+    background-color: get-color(neutral-bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +40,7 @@
       display: block;
       font-weight: bold;
       font-size: 0.875rem;
-      color: get-color(text, primaryLight);
+      color: get-color(text-primary);
     }
 
     .demo-card-desc {
@@ -50,7 +50,7 @@
       overflow: hidden;
       font-size: 0.8125rem;
       line-height: 1.5;
-      color: get-color(text, secondaryLight);
+      color: get-color(text-secondary);
     }
   }
 }

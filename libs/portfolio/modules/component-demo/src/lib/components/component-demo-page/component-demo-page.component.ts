@@ -15,6 +15,8 @@ export class ComponentDemoPageComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer!: MatDrawer;
 
   isMobile = false;
+  readonly currentYear = new Date().getFullYear();
+
   private bpSub!: Subscription;
 
   componentMenuList: SimpleMenuAction[] = [

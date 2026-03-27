@@ -1,32 +1,67 @@
 @use 'apps/portfolio/src/styles/styles.scss' as *;
 
 :host {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+}
+
+lib-navigation-bar {
+  ::ng-deep mat-toolbar {
+    background-color: get-color(neutral-border) !important;
+  }
+
+  ::ng-deep .toolbar-action-icon {
+    color: get-color(accent-surface) !important;
+
+    &:hover {
+      color: get-color(accent-vibrant) !important;
+    }
+  }
 }
 
 .page-layout {
   display: flex;
   flex-direction: column;
+  flex: 1;
+
+  overflow: auto;
+}
+
+::ng-deep .mat-drawer-container {
   height: 100%;
 }
 
 .component-demo-drawer {
   flex: 1;
-  min-height: 0;
-  background-color: get-color(neutral, bg);
+  background-color: get-color(neutral-bg-deep);
+
+  ::ng-deep .mat-drawer-container {
+    height: 100%;
+  }
 
   .component-demo-sidenav {
     max-width: 250px;
-    background-color: get-color(neutral, card);
-    border-right: 1px solid get-color(neutral, border);
+    height: 100%;
+    background-color: get-color(neutral-bg);
+    border-right: 1px solid get-color(neutral-border);
 
     @media (max-width: 767px) {
       max-width: 80vw;
     }
   }
 
+  ::ng-deep .mat-drawer-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .component-demo-content {
-    padding: 1%;
+    padding: 16px;
     border-radius: 8px;
 
     @media (max-width: 767px) {
@@ -37,11 +72,24 @@
 
 .component-demo-footer {
   width: 100%;
-  border-top: 1px solid get-color(neutral, border);
   padding: 16px;
   text-align: center;
-  background: get-color(neutral, card);
-  color: get-color(text, secondaryLight);
+
+  border-top: 2px solid get-color(neutral-border);
+  background: get-color(neutral-card);
+  color: get-color(text-primary);
+
+  .footer-option {
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .footer-option--center {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 .mobile-menu-btn {
@@ -52,7 +100,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: get-color(text, primaryLight);
+  color: get-color(text-primary);
 
   @media (max-width: 767px) {
     display: flex;
@@ -64,5 +112,32 @@
 
   @media (max-width: 767px) {
     display: inline-flex;
+  }
+}
+
+[data-section='design-system'] {
+  ::ng-deep lib-simple-menu {
+    .simple-menu-container {
+      background-color: get-color(neutral-card);
+    }
+
+    .simple-menu-action {
+      color: get-color(accent-surface) !important;
+
+      &:hover {
+        color: get-color(text-primary) !important;
+        background-color: get-color(neutral-card-hover) !important;
+      }
+
+      &.link-active {
+        background: linear-gradient(
+          to right,
+          get-color(accent-muted),
+          transparent
+        );
+        color: get-color(accent-vibrant-dark);
+        border-left: 3px solid get-color(accent-vibrant-dark);
+      }
+    }
   }
 }

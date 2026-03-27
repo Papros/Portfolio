@@ -43,6 +43,9 @@
       "@portfolio/main-menu-module": [
         "libs/portfolio/modules/main-menu-module/src/index.ts"
       ],
+      "@portfolio/notification": [
+        "libs/portfolio/packages/notification/src/index.ts"
+      ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ],

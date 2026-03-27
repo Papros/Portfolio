@@ -1,4 +1,9 @@
-<div *ngIf="cvDate" class="cv-container" [class.dark-mode]="isDarkMode">
+<div
+  *ngIf="cvDate"
+  class="cv-container"
+  data-section="cv"
+  [class.dark-mode]="isDarkMode"
+>
   <aside class="cv-sidebar">
     <div class="sidebar-inner">
       <div class="profile-block">
@@ -221,7 +226,7 @@
       </div>
     </section>
 
-    <section class="cv-section cv-footer">
+    <footer class="cv-section cv-footer">
       <div class="footer-option print-none">
         <a href="/Portfolio/menu">
           <mat-icon>arrow_left</mat-icon> Back to menu</a
@@ -233,7 +238,7 @@
           cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
         }}. All rights reserved.
       </div>
-    </section>
+    </footer>
   </main>
 
   <div

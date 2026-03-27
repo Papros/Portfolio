@@ -2,33 +2,57 @@
 
 :host {
   display: block;
-  height: 100%;
+  padding-bottom: 16px;
+  flex: 1;
 }
 
 ::ng-deep .mat-mdc-tab-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .mat-mdc-tab {
+    &:hover {
+      background-color: get-color(neutral-card-hover);
+    }
+  }
+  .mat-mdc-tab-label-container {
+    border-color: get-color(neutral-border);
+    margin: 0 1.5rem;
+  }
+
   .mat-mdc-tab-header {
-    border-bottom: 1px solid get-color(neutral, border);
-    background-color: get-color(neutral, card);
+    background-color: get-color(neutral-bg);
+
+    position: sticky !important;
+    top: -16px !important;
+    z-index: 10;
   }
 
   .mat-mdc-tab-body-wrapper {
-    background-color: get-color(neutral, bg);
+    background-color: get-color(neutral-bg);
     padding: 1.5rem;
+    flex: 1;
 
     @media (max-width: 767px) {
       padding: 1rem 0.75rem;
     }
   }
 
+  .mat-mdc-tab {
+    padding: 0 5%;
+  }
+
   .mdc-tab__text-label {
-    color: get-color(text, secondaryLight);
+    color: get-color(text-secondary);
   }
 
   .mdc-tab--active .mdc-tab__text-label {
-    color: get-color(accent, color);
+    color: get-color(accent-vibrant);
   }
 
   .mdc-tab-indicator__content--underline {
-    border-color: get-color(accent, vibrant);
+    color: get-color(accent-vibrant);
+    border-top-width: 3px !important;
   }
 }

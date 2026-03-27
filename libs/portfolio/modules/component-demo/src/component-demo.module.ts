@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
+  CamelCaseFormatPipe,
   NavigationBarComponent,
   SimpleMenuComponent,
 } from '@portfolio/shared-pack';
@@ -76,6 +77,7 @@ const routes: Routes = [
     MatTooltipModule,
     ClipboardModule,
     CodeHighlightDirective,
+    CamelCaseFormatPipe,
   ],
   providers: [DocsSourceFacade, provideGithubDocsSource()],
 })

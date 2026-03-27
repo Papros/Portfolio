@@ -1,9 +1,11 @@
 <lib-navigation-bar
+  data-section="design-system"
   [actions]="navigationActions"
+  [isSticky]="false"
   (actionClick)="onNavigationAction($event)"
 ></lib-navigation-bar>
 
-<div class="page-layout">
+<div class="page-layout" data-section="design-system">
   <mat-drawer-container class="component-demo-drawer" autosize>
     <mat-drawer
       #drawer
@@ -16,8 +18,18 @@
 
     <mat-drawer-content class="component-demo-content">
       <router-outlet></router-outlet>
+
+      <footer class="component-demo-footer">
+        <div class="footer-option">
+          <a href="/Portfolio/menu">
+            <mat-icon>arrow_left</mat-icon> Back to menu</a
+          >
+        </div>
+        <div class="footer-option--center">
+          &copy; {{ currentYear }}
+          Piotr Papros. All rights reserved.
+        </div>
+      </footer>
     </mat-drawer-content>
   </mat-drawer-container>
-
-  <footer class="component-demo-footer">Footer content here</footer>
 </div>
