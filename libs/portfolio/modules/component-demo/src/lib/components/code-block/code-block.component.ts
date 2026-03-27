@@ -9,9 +9,14 @@ import {
   Observable,
   startWith,
   take,
+  takeUntil,
+  filter,
+  timeout,
+  EMPTY,
 } from 'rxjs';
 import { CodeState } from './code-block.interface';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { NotificationService } from '@portfolio/notification';
 
 @Component({
   selector: 'lib-code-block',
@@ -32,6 +37,7 @@ export class CodeBlockComponent implements OnChanges {
   constructor(
     private docsFacade: DocsSourceFacade,
     private clipboard: Clipboard,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnChanges() {
@@ -61,6 +67,7 @@ export class CodeBlockComponent implements OnChanges {
           map((code): CodeState => ({ loading: false, code })),
           startWith<CodeState>({ loading: true }),
           catchError(() => of<CodeState>({ loading: false, error: true })),
+          shareReplay(1),
         );
 
       this.stateCache.set(fileType, state$);
@@ -81,10 +88,21 @@ export class CodeBlockComponent implements OnChanges {
 
   copyCode() {
     this.getCode(this.activeFileType)
-      .pipe(take(1))
+      .pipe(
+        filter((state) => !state.loading),
+        take(1),
+        timeout(10000),
+        catchError(() => {
+          this.notificationService.error(
+            'Failed to copy — code not available.',
+          );
+          return EMPTY;
+        }),
+      )
       .subscribe((state) => {
         if (state.code) {
           this.clipboard.copy(state.code);
+          this.notificationService.info('Code copied into clipboard!');
         }
       });
   }

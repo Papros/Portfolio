@@ -1,0 +1,99 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+.snackbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+  line-height: 1.4;
+
+  &--success {
+    background: get-color(feedback-success-dark);
+    border-left-color: get-color(feedback-success-light);
+    color: get-color(feedback-success);
+  }
+
+  &--error {
+    background: get-color(feedback-error-dark);
+    border-left-color: get-color(feedback-error-light);
+    color: get-color(feedback-error);
+  }
+
+  &--warning {
+    background: get-color(feedback-warning-dark);
+    border-left-color: get-color(feedback-warning-light);
+    color: get-color(feedback-warning);
+  }
+
+  &--info {
+    background: get-color(feedback-info-dark);
+    border-left-color: get-color(feedback-info-light);
+    color: get-color(feedback-info);
+  }
+}
+
+.snackbar__icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.snackbar__message {
+  flex: 1;
+}
+
+.snackbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.snackbar__action-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: inherit;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+
+  &:hover {
+    opacity: 1;
+    background: get-color(scrollbar-primary);
+  }
+}
+
+.snackbar__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  opacity: 0.5;
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

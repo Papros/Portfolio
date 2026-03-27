@@ -10,7 +10,7 @@
     min-width: 0;
 
     .api-section-title {
-      color: get-color(text-inverse);
+      color: get-color(text-primary);
       margin: 1.5rem 0 0.75rem;
       font-size: 1rem;
       font-weight: bold;
@@ -40,18 +40,18 @@
 
     .prop-name {
       font-weight: bold;
-      color: get-color(accent-soft);
+      color: get-color(accent-surface);
     }
 
     .prop-type {
-      color: get-color(text-secondary);
+      color: get-color(text-primary);
       font-style: italic;
     }
 
     .prop-default {
       display: block;
       font-size: 0.8125rem;
-      color: get-color(text-secondary);
+      color: get-color(text-primary);
       margin-top: 2px;
     }
   }
@@ -75,7 +75,7 @@
       transition: color 0.15s ease;
 
       &:hover {
-        color: get-color(accent-soft);
+        color: get-color(accent-vibrant);
       }
     }
   }
@@ -103,13 +103,13 @@
   }
 
   .mat-mdc-header-cell {
-    color: get-color(text-secondary);
+    color: get-color(text-primary);
     font-size: 0.8125rem;
     border-bottom-color: get-color(neutral-border);
   }
 
   .mat-mdc-cell {
-    color: get-color(text-inverse);
+    color: get-color(text-primary);
     border-bottom-color: get-color(neutral-border);
     font-size: 0.875rem;
     padding: 12px 16px;
