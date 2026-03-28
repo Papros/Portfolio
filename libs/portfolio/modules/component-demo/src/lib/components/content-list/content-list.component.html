@@ -1,0 +1,13 @@
+<div class="doc-section-shortcuts-list">
+  @for (section of sections; track section.id) {
+    <a
+      [class.section-shortcut--active]="
+        activeSection() === 'section-' + section.id
+      "
+      (click)="scrollToSection(section.id, $event)"
+      class="section-shortcut"
+    >
+      {{ section.title }}
+    </a>
+  }
+</div>

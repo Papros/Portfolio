@@ -29,10 +29,19 @@
     z-index: 10;
   }
 
+  .mat-mdc-tab-body {
+    overflow: visible !important;
+  }
+
+  .mat-mdc-tab-body-content {
+    overflow: visible !important;
+  }
+
   .mat-mdc-tab-body-wrapper {
     background-color: get-color(neutral-bg);
     padding: 1.5rem;
     flex: 1;
+    overflow: visible !important;
 
     @media (max-width: 767px) {
       padding: 1rem 0.75rem;

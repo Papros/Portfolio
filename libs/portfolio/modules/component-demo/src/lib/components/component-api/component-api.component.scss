@@ -5,6 +5,12 @@
   flex-direction: row;
   gap: 1.5rem;
 
+  lib-content-list {
+    position: sticky;
+    top: 50px;
+    z-index: 10;
+  }
+
   .doc-article-content {
     flex: 1;
     min-width: 0;
@@ -53,44 +59,6 @@
       font-size: 0.8125rem;
       color: get-color(text-primary);
       margin-top: 2px;
-    }
-  }
-
-  .doc-section-shortcuts-list {
-    width: 160px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    border-left: 3px solid get-color(neutral-border);
-    padding-left: 12px;
-    gap: 0.5rem;
-    position: sticky;
-    top: 1rem;
-    align-self: flex-start;
-
-    .section-shortcut {
-      font-size: 0.8125rem;
-      color: get-color(text-secondary);
-      text-decoration: none;
-      transition: color 0.15s ease;
-
-      &:hover {
-        color: get-color(accent-vibrant);
-      }
-    }
-  }
-
-  @media (max-width: 767px) {
-    flex-direction: column-reverse;
-
-    .doc-section-shortcuts-list {
-      width: 100%;
-      flex-direction: row;
-      border-left: none;
-      border-bottom: 1px solid get-color(neutral-border);
-      padding-left: 0;
-      padding-bottom: 12px;
-      position: static;
     }
   }
 }
