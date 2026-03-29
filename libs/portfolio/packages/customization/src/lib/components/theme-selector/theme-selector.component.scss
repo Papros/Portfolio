@@ -1,0 +1,40 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: get-color(text-secondary);
+
+  &__track {
+    width: 36px;
+    height: 20px;
+    border-radius: 10px;
+    background: get-color(neutral-border);
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: get-color(text-secondary);
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  &--dark &__track {
+    background: get-color(accent-muted);
+  }
+
+  &--dark &__thumb {
+    transform: translateX(16px);
+    background: get-color(accent-vibrant);
+  }
+}

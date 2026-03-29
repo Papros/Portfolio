@@ -2,11 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridMenuComponent, GridSlotDirective } from '@ui/grid-menu';
 import { MatIconModule } from '@angular/material/icon';
+import { ThemeSelectorComponent } from '@portfolio/customization';
 
 @Component({
   selector: 'lib-main-menu-page',
   standalone: true,
-  imports: [CommonModule, GridMenuComponent, GridSlotDirective, MatIconModule],
+  imports: [
+    CommonModule,
+    GridMenuComponent,
+    GridSlotDirective,
+    MatIconModule,
+    ThemeSelectorComponent,
+  ],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })
@@ -150,7 +157,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'brick',
-        options: { enabled: false, visible: true, background: '#000' },
+        options: { enabled: true, visible: true, background: '#777' },
         position: { colStart: 9, colSpan: 2, rowStart: 9, rowSpan: 2 },
         label: {
           value: '',

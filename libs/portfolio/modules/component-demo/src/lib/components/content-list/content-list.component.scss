@@ -35,20 +35,3 @@
     }
   }
 }
-
-:host {
-  @media (max-width: 767px) {
-    flex-direction: column-reverse;
-
-    .doc-section-shortcuts-list {
-      width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      border-left: none;
-      border-bottom: 1px solid get-color(neutral-border);
-      padding-left: 0;
-      padding-bottom: 12px;
-      position: static;
-    }
-  }
-}

@@ -28,6 +28,9 @@
       "@portfolio/component-docs-data-access": [
         "libs/portfolio/packages/component-docs-data-access/src/index.ts"
       ],
+      "@portfolio/customization": [
+        "libs/portfolio/packages/customization/src/index.ts"
+      ],
       "@portfolio/default-layout": [
         "libs/portfolio/layouts/default-layout/src/index.ts"
       ],
@@ -45,6 +48,9 @@
       ],
       "@portfolio/notification": [
         "libs/portfolio/packages/notification/src/index.ts"
+      ],
+      "@portfolio/persistence": [
+        "libs/portfolio/packages/persistence/src/index.ts"
       ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"

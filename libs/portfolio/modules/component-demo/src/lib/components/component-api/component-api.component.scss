@@ -11,6 +11,12 @@
     z-index: 10;
   }
 
+  @media (max-width: 767px) {
+    lib-content-list {
+      display: none;
+    }
+  }
+
   .doc-article-content {
     flex: 1;
     min-width: 0;

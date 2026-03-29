@@ -8,6 +8,8 @@ import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { IconService } from '@portfolio/shared-pack';
+import { persistenceProviders } from '@portfolio/persistence';
+import { ThemeService } from 'libs/portfolio/packages/customization/src/lib/services/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +24,8 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAppInitializer(() => {
       inject(IconService).registerIcons();
+      inject(ThemeService);
     }),
+    ...persistenceProviders,
   ],
 };
