@@ -1,5 +1,6 @@
 @use './theme' as *;
 @use './_snackbar' as *;
+@use './_tooltip' as *;
 
 @forward './style-themes.scss';
 @forward './styles-overlay.scss';

@@ -7,10 +7,10 @@ export class ThemeService {
   private storage = inject(STORAGE_SERVICE);
 
   private readonly STORAGE_KEY = 'app-theme';
-  private readonly DEFAULT: ThemeMode = 'dark';
+  private readonly DEFAULT: ThemeMode = ThemeMode.Dark;
 
   readonly mode = signal<ThemeMode>(this.loadFromStorage());
-  readonly isDark = computed(() => this.mode() === 'dark');
+  readonly isDark = computed(() => this.mode() === ThemeMode.Dark);
 
   constructor() {
     effect(() => {
@@ -20,7 +20,9 @@ export class ThemeService {
   }
 
   toggle(): void {
-    this.mode.update((m) => (m === 'dark' ? 'light' : 'dark'));
+    this.mode.update((m) =>
+      m === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark,
+    );
   }
 
   setMode(mode: ThemeMode): void {

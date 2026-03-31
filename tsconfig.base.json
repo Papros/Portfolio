@@ -19,6 +19,9 @@
       "@docs-model": ["libs/docs-model/index.ts"],
       "@docs/*": ["libs/docs/*/index.ts"],
       "@environments": ["apps/portfolio/src/environments/index.ts"],
+      "@papros-it/multistate-slider": [
+        "libs/ui/multistate-slider/src/index.ts"
+      ],
       "@portfolio/about-me-module": [
         "libs/portfolio/modules/about-me-module/src/index.ts"
       ],

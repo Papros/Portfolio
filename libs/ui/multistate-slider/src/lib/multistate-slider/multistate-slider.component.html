@@ -1,0 +1,35 @@
+<div
+  class="ms-track"
+  [style.--option-count]="resolvedOptions().length"
+  role="radiogroup"
+>
+  <div
+    class="ms-thumb"
+    [style.width]="trackWidth()"
+    [style.transform]="'translateX(' + selectedIndex() * 100 + '%)'"
+  ></div>
+
+  @for (option of resolvedOptions(); track option.value; let i = $index) {
+    <button
+      #optionBtn
+      class="ms-option"
+      [class.ms-option--selected]="selectedIndex() === i"
+      [class.ms-option--disabled]="option.disabled"
+      [attr.aria-label]="option.label || option.icon"
+      [attr.aria-checked]="selectedIndex() === i"
+      [attr.tabindex]="selectedIndex() === i ? 0 : -1"
+      role="radio"
+      [title]="option.icon ? option.label : null"
+      (click)="select(i)"
+      (keydown)="onKeydown($event, i)"
+    >
+      @if (projectedOptionsSig().length) {
+        <ng-container [ngTemplateOutlet]="getTemplateAt(i)" />
+      } @else if (option.icon) {
+        <span class="ms-icon" [innerHTML]="option.icon"></span>
+      } @else if (option.label) {
+        <span class="ms-label">{{ option.label }}</span>
+      }
+    </button>
+  }
+</div>

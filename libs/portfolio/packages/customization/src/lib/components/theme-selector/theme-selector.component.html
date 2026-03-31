@@ -1,15 +1,22 @@
-<button
-  class="theme-toggle"
-  [class.theme-toggle--dark]="themeService.isDark()"
-  (click)="themeService.toggle()"
-  [attr.aria-label]="
-    themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'
-  "
+<pipr-multistate-slider
+  [value]="themeService.mode()"
+  (valueChange)="onThemeChange($event)"
 >
-  <mat-icon fontSet="material-icons-outlined" class="theme-toggle__icon">
-    {{ themeService.isDark() ? 'dark_mode' : 'light_mode' }}
-  </mat-icon>
-  <div class="theme-toggle__track">
-    <div class="theme-toggle__thumb"></div>
-  </div>
-</button>
+  <pipr-slider-option [value]="ThemeMode.Light">
+    <mat-icon [matTooltip]="'Light theme'" matTooltipClass="lib-tooltip"
+      >light_mode</mat-icon
+    >
+  </pipr-slider-option>
+
+  <pipr-slider-option [value]="ThemeMode.Dark">
+    <mat-icon [matTooltip]="'Dark theme'" matTooltipClass="lib-tooltip"
+      >dark_mode</mat-icon
+    >
+  </pipr-slider-option>
+
+  <pipr-slider-option [value]="ThemeMode.Retro">
+    <mat-icon [matTooltip]="'Retro theme'" matTooltipClass="lib-tooltip"
+      >save</mat-icon
+    >
+  </pipr-slider-option>
+</pipr-multistate-slider>
