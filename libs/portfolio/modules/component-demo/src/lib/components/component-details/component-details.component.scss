@@ -54,15 +54,15 @@
   }
 
   .mdc-tab__text-label {
-    color: get-color(text-secondary);
+    color: get-color(text-secondary) !important;
   }
 
   .mdc-tab--active .mdc-tab__text-label {
-    color: get-color(accent-vibrant);
+    color: get-color(accent-vibrant) !important;
   }
 
   .mdc-tab-indicator__content--underline {
-    color: get-color(accent-vibrant);
+    color: get-color(accent-vibrant) !important;
     border-top-width: 3px !important;
   }
 }

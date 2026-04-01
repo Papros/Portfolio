@@ -67,7 +67,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid get-color(accent-muted);
+  border: 4px solid get-color(accent-muted);
   opacity: 0.6;
 }
 
@@ -158,9 +158,10 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 .skill-pill {
   font-size: 11px;
   padding: 3px 9px;
-  background: get-color(accent-muted);
-  color: get-color(accent-vibrant);
-  border: 0.5px solid get-color(accent-vibrant);
+  background: get-color(accent-vibrant);
+  color: get-color(accent-surface);
+  border: 0.5px solid get-color(accent-vibrant-dark);
+
   border-radius: 20px;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -168,9 +169,10 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 .skill-pill--active {
-  background: get-color(text-secondary);
-  color: get-color(text-inverse);
-  border-color: get-color(text-inverse);
+  background: get-color(accent-surface);
+  color: get-color(accent-vibrant-dark);
+  border-color: get-color(accent-vibrant);
+  transition: 600ms ease-in-out;
 }
 
 // === Languages ================================================================
@@ -506,17 +508,17 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   padding: 2px 8px;
   border-radius: 20px;
-  background: get-color(primary-dark);
-  border: 0.5px solid get-color(neutral-border);
-  color: get-color(text-secondary);
+  background: get-color(accent-surface);
+  border: 0.5px solid get-color(accent-muted);
+  color: get-color(accent-vibrant-dark);
   letter-spacing: 0.04em;
   cursor: pointer;
 }
 
 .tl-tag--active {
-  background: get-color(text-secondary);
-  color: get-color(neutral-bg);
-  border-color: get-color(neutral-bg);
+  background: get-color(accent-vibrant);
+  color: get-color(accent-text);
+  border-color: get-color(accent-vibrant-dark);
   transition: 600ms ease-in-out;
 }
 
@@ -671,9 +673,11 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   }
 }
 
-@media (min-width: 768px) {
-  .mobile-only {
-    display: none;
+.mobile-only {
+  display: flex;
+
+  @media (min-width: 768px) {
+    display: none !important;
   }
 }
 
@@ -706,33 +710,26 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   width: 36px;
   height: 36px;
   justify-content: center;
-  background: get-color(primary-base);
-  color: get-color(text-secondary);
+  background: get-color(neutral-card);
+  border-color: get-color(neutral-border-hover);
+  color: get-color(neutral-border);
 
   &:hover {
-    border-color: get-color(accent-vibrant);
-    color: get-color(accent-vibrant);
-    background: get-color(accent-muted);
+    background: get-color(accent-vibrant-dark);
   }
-}
-
-.print-fab--bw .print-fab__toggle {
-  background: get-color(primary-base);
-  border-color: get-color(text-secondary);
-  color: get-color(text-secondary);
 }
 
 .print-fab__print {
   height: 36px;
   padding: 0 14px;
-  background: get-color(primary-base);
-  border-color: get-color(text-secondary);
-  color: get-color(text-primary);
+  background: get-color(neutral-card);
+  border-color: get-color(neutral-border-hover);
+  color: get-color(neutral-border);
   font-size: 13px;
   font-weight: 500;
 
   &:hover {
-    background: get-color(accent-muted);
+    background: get-color(accent-vibrant-dark);
   }
 }
 
