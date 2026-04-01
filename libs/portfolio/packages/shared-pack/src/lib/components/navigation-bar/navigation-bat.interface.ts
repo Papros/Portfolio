@@ -3,4 +3,5 @@ export interface NavigationAction {
   icon?: string;
   label?: string;
   cssClass?: string;
+  routerLink?: string;
 }

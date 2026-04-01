@@ -34,7 +34,6 @@ export class ThemeService {
   }
 
   private applyToDOM(mode: ThemeMode): void {
-    console.log(`Applying theme: ${mode}`);
     document.documentElement.setAttribute('data-theme', mode);
   }
 }

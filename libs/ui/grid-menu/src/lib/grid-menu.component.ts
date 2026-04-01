@@ -70,10 +70,10 @@ export class GridMenuComponent implements AfterContentInit {
       '--row-span': String(item.position.rowSpan),
       backgroundColor: item.options.enabled
         ? item.options.background
-        : '#16181f',
+        : 'var(--neutral-card)',
       border: item.options.enabled
         ? '1px solid transparent'
-        : '1px solid #22252e',
+        : '1px solid var(--neutral-border)',
     };
   }
 }

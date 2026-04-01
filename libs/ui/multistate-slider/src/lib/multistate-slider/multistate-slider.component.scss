@@ -1,12 +1,16 @@
 :host {
   display: inline-block;
+  --ms-track-bg: #eee;
+  --ms-thumb-bg: #1976d2;
+  --ms-option-color: #666;
+  --ms-option-selected-color: #fff;
 }
 
 .ms-track {
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--ms-track-bg, #e0e0e0);
+  background: var(--ms-track-bg);
   border-radius: 999px;
   padding: 3px;
   gap: 0;
@@ -18,7 +22,7 @@
   bottom: 3px;
   left: 3px;
   border-radius: 999px;
-  background: var(--ms-thumb-bg, #1976d2);
+  background: var(--ms-thumb-bg);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 0;
@@ -36,11 +40,11 @@
   background: none;
   cursor: pointer;
   border-radius: 999px;
-  color: var(--ms-option-color, #757575);
+  color: var(--ms-option-color);
   transition: color 0.2s ease;
 
   &--selected {
-    color: var(--ms-option-selected-color, #fff);
+    color: var(--ms-option-selected-color);
   }
 
   &--disabled {

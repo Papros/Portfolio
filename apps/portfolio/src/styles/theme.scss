@@ -70,6 +70,12 @@
 
   /* Scrollbar */
   --scrollbar-primary: rgba(255, 255, 255, 0.07);
+
+  --accent-vibrant: #9e8fff; /* fiolet — docs/tech          */
+  --accent-vibrant-dark: #5e4ed4;
+  --accent-muted: rgba(124, 106, 247, 0.13);
+  --accent-surface: #f0eeff;
+  --accent-text: #fff;
 }
 
 /* ------------------------------------------------------------
@@ -80,7 +86,7 @@
 
   /* Backgrounds */
   --neutral-bg-deep: #e8e4dc; /* <html> / outermost page bg  */
-  --neutral-bg: #f0ede8; /* sekcje, layout bg           */
+  --neutral-bg: #f8f5f1; /* sekcje, layout bg           */
   --neutral-card: #ffffff; /* karty, panele               */
   --neutral-card-hover: #f7f5f1; /* hover state na kartach      */
   --neutral-border: #dbd8d0; /* bordery, dividers           */
@@ -99,6 +105,12 @@
   /* Surface overlays */
   --overlay-soft: rgba(240, 237, 232, 0.75);
   --overlay-strong: rgba(232, 228, 220, 0.92);
+
+  --accent-vibrant: #9e8fff; /* fiolet — docs/tech          */
+  --accent-vibrant-dark: #5e4ed4;
+  --accent-muted: rgba(124, 106, 247, 0.13);
+  --accent-surface: #f0eeff;
+  --accent-text: #fff;
 }
 
 /* ------------------------------------------------------------
@@ -111,10 +123,10 @@
 }
 
 [data-section='design-system'] {
-  --accent-vibrant: #9e8fff; /* fiolet — docs/tech          */
-  --accent-vibrant-dark: #5e4ed4;
-  --accent-muted: rgba(124, 106, 247, 0.13);
-  --accent-surface: #f0eeff;
+  // --accent-vibrant: #9e8fff; /* fiolet — docs/tech          */
+  // --accent-vibrant-dark: #5e4ed4;
+  // --accent-muted: rgba(124, 106, 247, 0.13);
+  // --accent-surface: #f0eeff;
 }
 
 [data-section='games'] {

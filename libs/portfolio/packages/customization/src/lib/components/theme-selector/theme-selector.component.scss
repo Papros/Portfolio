@@ -1,7 +1,10 @@
 @use 'style-themes' as *;
 
-lib-multistate-slider {
-  --ms-track-bg: get-color(neutral-bg);
-  --ms-thumb-bg: get-color(primary);
-  --ms-option-selected-color: get-color(text-primary);
+:host {
+  pipr-multistate-slider {
+    --ms-track-bg: #{get-color(neutral-card)};
+    --ms-thumb-bg: #{get-color(neutral-bg-deep)};
+    --ms-option-color: #{get-color(text-secondary)};
+    --ms-option-selected-color: #{get-color(text-primary)};
+  }
 }

@@ -28,7 +28,7 @@ export class ComponentDemoPageComponent implements OnInit, OnDestroy {
 
   navigationActions: NavigationAction[] = [
     { id: 'home', icon: 'home' },
-    { id: 'components', label: 'Components' },
+    { id: 'components', label: 'Components', routerLink: '/components' },
     { id: 'menu', icon: 'menu', cssClass: 'mobile-only' },
   ];
 

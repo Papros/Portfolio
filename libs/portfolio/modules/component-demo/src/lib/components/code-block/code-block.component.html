@@ -8,6 +8,7 @@
         matIconButton
         class="code-visible-button"
         (click)="toggleCodeVisibility()"
+        matTooltipClass="lib-tooltip"
         [matTooltip]="isCodeVisible ? 'Hide code' : 'View code'"
       >
         <mat-icon>{{ isCodeVisible ? 'code_off' : 'code' }}</mat-icon>
@@ -17,6 +18,7 @@
         matIconButton
         class="copy-clipboard-button"
         (click)="copyCode()"
+        matTooltipClass="lib-tooltip"
         matTooltip="Copy code"
       >
         <mat-icon>content_copy</mat-icon>
@@ -25,7 +27,7 @@
   </div>
 
   @if (isCodeVisible) {
-    <div class="example-code">
+    <div class="example-code" data-theme="dark">
       <mat-tab-group
         mat-stretch-tabs="false"
         (selectedTabChange)="onTabChange($event.index)"

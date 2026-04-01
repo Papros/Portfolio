@@ -11,14 +11,14 @@
 
 lib-navigation-bar {
   ::ng-deep mat-toolbar {
-    background-color: get-color(neutral-border) !important;
+    background-color: get-color(accent-vibrant) !important;
   }
 
   ::ng-deep .toolbar-action-icon {
     color: get-color(accent-surface) !important;
 
     &:hover {
-      color: get-color(accent-vibrant) !important;
+      color: get-color(accent-text) !important;
     }
   }
 }
@@ -122,10 +122,10 @@ lib-navigation-bar {
     }
 
     .simple-menu-action {
-      color: get-color(accent-surface) !important;
+      color: get-color(text-primary) !important;
 
       &:hover {
-        color: get-color(text-primary) !important;
+        color: get-color(text-secondary) !important;
         background-color: get-color(neutral-card-hover) !important;
       }
 
