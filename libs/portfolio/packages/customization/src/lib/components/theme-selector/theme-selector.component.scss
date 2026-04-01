@@ -2,9 +2,9 @@
 
 :host {
   pipr-multistate-slider {
-    --ms-track-bg: #{get-color(neutral-card)};
-    --ms-thumb-bg: #{get-color(neutral-bg-deep)};
-    --ms-option-color: #{get-color(text-secondary)};
-    --ms-option-selected-color: #{get-color(text-primary)};
+    --pipr-ms-track-bg: #{get-color(neutral-card)};
+    --pipr-ms-thumb-bg: #{get-color(neutral-bg-deep)};
+    --pipr-ms-option-color: #{get-color(text-secondary)};
+    --pipr-ms-option-selected-color: #{get-color(text-primary)};
   }
 }

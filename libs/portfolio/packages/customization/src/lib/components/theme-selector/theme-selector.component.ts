@@ -4,6 +4,7 @@ import { ThemeService } from '../../services/theme.service';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MultistateSliderComponent,
+  SliderConfig,
   SliderOptionComponent,
 } from '@ui/multistate-slider';
 import { ThemeMode } from '../../interfaces/theme.interface';
@@ -29,4 +30,9 @@ export class ThemeSelectorComponent {
   onThemeChange(selectedTheme: ThemeMode): void {
     this.themeService.setMode(selectedTheme);
   }
+
+  sliderConfig: SliderConfig = {
+    expandMode: 'click',
+    expandDirection: 'ltr',
+  };
 }

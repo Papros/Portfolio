@@ -146,10 +146,6 @@ RETRO THEME
   --text-muted: #5c4830;
   --text-inverse: #1a1209;
 
-  /* CV-specific */
-  --cv-accent: #c8832a;
-  --cv-bg-dark: #1a1209;
-
   /* Surface overlays */
   --overlay-soft: rgba(32, 24, 16, 0.78);
   --overlay-strong: rgba(26, 18, 9, 0.93);
@@ -163,6 +159,42 @@ RETRO THEME
   --accent-muted: rgba(200, 131, 42, 0.14);
   --accent-surface: #faeeda;
   --accent-text: #1a1209;
+}
+
+/* ------------------------------------------------------------
+Dusk THEME
+------------------------------------------------------------ */
+
+[data-theme='dusk'] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --neutral-bg-deep: #16111e;
+  --neutral-bg: #1d1628;
+  --neutral-card: #261d35;
+  --neutral-card-hover: #352845;
+  --neutral-border: #352845;
+  --neutral-border-hover: #4a3860;
+
+  /* Text */
+  --text-primary: #ede0f8;
+  --text-secondary: #8070a0;
+  --text-muted: #4a3860;
+  --text-inverse: #16111e;
+
+  /* Surface overlays */
+  --overlay-soft: rgba(29, 22, 40, 0.78);
+  --overlay-strong: rgba(22, 17, 30, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-primary: rgba(255, 255, 255, 0.06);
+
+  /* Accent */
+  --accent-vibrant: #f0a060;
+  --accent-vibrant-dark: #c87830;
+  --accent-muted: rgba(240, 160, 96, 0.13);
+  --accent-surface: #faeeda;
+  --accent-text: #16111e;
 }
 
 /* ------------------------------------------------------------

@@ -88,7 +88,25 @@
     </ng-template>
 
     <ng-template libGridSlot="brick">
-      <lib-theme-selector></lib-theme-selector>
+      <div class="customization-tile">
+        <div class="customization-row">
+          <div class="customization-row-icon">
+            <span>Motyw</span><mat-icon>format_color_fill</mat-icon>
+          </div>
+          <div class="customization-row-content">
+            <lib-theme-selector></lib-theme-selector>
+          </div>
+        </div>
+
+        <div class="customization-row">
+          <div class="customization-row-icon">
+            <span>Język</span><mat-icon>flag</mat-icon>
+          </div>
+          <div class="customization-row-content">
+            <lib-theme-selector></lib-theme-selector>
+          </div>
+        </div>
+      </div>
     </ng-template>
   </lib-grid-menu>
 </div>
