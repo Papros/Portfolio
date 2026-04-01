@@ -9,7 +9,7 @@ import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { IconService } from '@portfolio/shared-pack';
 import { persistenceProviders } from '@portfolio/persistence';
-import { ThemeService } from 'libs/portfolio/packages/customization/src/lib/services/theme.service';
+import { ThemeService } from '@portfolio/customization';
 
 export const appConfig: ApplicationConfig = {
   providers: [
