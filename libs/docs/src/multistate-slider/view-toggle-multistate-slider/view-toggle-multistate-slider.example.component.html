@@ -1,0 +1,30 @@
+<div class="toolbar">
+  <span class="toolbar-label">Products</span>
+  <pipr-multistate-slider
+    [value]="view()"
+    [config]="{ expandMode: 'always' }"
+    (valueChange)="view.set($event)"
+  >
+    <pipr-slider-option value="grid">
+      <mat-icon>grid_view</mat-icon>
+    </pipr-slider-option>
+    <pipr-slider-option value="list">
+      <mat-icon>view_list</mat-icon>
+    </pipr-slider-option>
+    <pipr-slider-option value="compact">
+      <mat-icon>view_headline</mat-icon>
+    </pipr-slider-option>
+  </pipr-multistate-slider>
+</div>
+
+<div class="items" [class]="'items--' + view()">
+  @for (item of items; track item.id) {
+    <div class="item">
+      <div class="item-thumb" [style.background]="item.color"></div>
+      <div class="item-body">
+        <span class="item-name">{{ item.name }}</span>
+        <span class="item-price">{{ item.price }}</span>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,14 @@
+<pipr-multistate-slider
+  [value]="selected()"
+  (valueChange)="selected.set($event)"
+>
+  <pipr-slider-option value="light">
+    <mat-icon>light_mode</mat-icon>
+  </pipr-slider-option>
+  <pipr-slider-option value="dark">
+    <mat-icon>dark_mode</mat-icon>
+  </pipr-slider-option>
+  <pipr-slider-option value="save">
+    <mat-icon>save</mat-icon>
+  </pipr-slider-option>
+</pipr-multistate-slider>

@@ -24,6 +24,10 @@ export class ComponentDemoPageComponent implements OnInit, OnDestroy {
       label: 'Overlay menu',
       navigation: 'overlay-menu',
     },
+    {
+      label: 'Multistate slider',
+      navigation: 'multistate-slider',
+    },
   ];
 
   navigationActions: NavigationAction[] = [

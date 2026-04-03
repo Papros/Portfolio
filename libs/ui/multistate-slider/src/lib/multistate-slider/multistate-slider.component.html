@@ -26,7 +26,7 @@
       [attr.aria-checked]="selectedIndex() === i"
       [attr.tabindex]="selectedIndex() === i ? 0 : -1"
       role="radio"
-      [title]="option.icon ? option.label : null"
+      [title]="option.icon ? option.label : 'Click to select'"
       (click)="select(i, $event)"
       (keydown)="onKeydown($event, i)"
     >

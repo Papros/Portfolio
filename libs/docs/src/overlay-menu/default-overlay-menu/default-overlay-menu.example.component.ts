@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { OverlayMenuComponent, OverlayMenuOption } from '@ui/overlay-menu';
+import {
+  OverlayMenuComponent,
+  OverlayMenuOption,
+} from '@papros-it/overlay-menu';
 
 @Component({
   selector: 'docs-default-overlay-menu',

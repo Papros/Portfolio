@@ -16,12 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@docs": ["libs/docs/index.ts"],
+      "@docs/*": ["libs/docs/src/*/index.ts"],
       "@docs-model": ["libs/docs-model/index.ts"],
-      "@docs/*": ["libs/docs/*/index.ts"],
       "@environments": ["apps/portfolio/src/environments/index.ts"],
-      "@papros-it/multistate-slider": [
-        "libs/ui/multistate-slider/src/index.ts"
-      ],
+      "@papros-it": ["libs/ui/index.ts"],
+      "@papros-it/*": ["libs/ui/*/src/index.ts"],
       "@portfolio/about-me-module": [
         "libs/portfolio/modules/about-me-module/src/index.ts"
       ],
@@ -37,6 +36,8 @@
       "@portfolio/default-layout": [
         "libs/portfolio/layouts/default-layout/src/index.ts"
       ],
+      "@portfolio/docs": ["libs/docs/src/index.ts"],
+      "@portfolio/docs-model": ["libs/docs-model/src/index.ts"],
       "@portfolio/full-page-layout": [
         "libs/portfolio/layouts/full-page-layout/src/index.ts"
       ],
@@ -58,9 +59,7 @@
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ],
-      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"],
-      "@ui": ["libs/ui/index.ts"],
-      "@ui/*": ["libs/ui/*/src/index.ts"]
+      "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
     }
   },
   "exclude": ["node_modules", "tmp"]

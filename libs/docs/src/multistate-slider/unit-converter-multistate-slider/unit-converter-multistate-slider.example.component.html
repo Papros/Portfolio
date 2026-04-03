@@ -1,0 +1,64 @@
+<div class="converter">
+  <div class="converter-row">
+    <span class="converter-label">Distance</span>
+    <div class="converter-value">
+      <span class="value">{{ displayDistance() }}</span>
+      <pipr-multistate-slider
+        [value]="distanceUnit()"
+        [config]="{ expandMode: 'hover' }"
+        (valueChange)="distanceUnit.set($event)"
+      >
+        <pipr-slider-option value="km">
+          <span class="unit">km</span>
+        </pipr-slider-option>
+        <pipr-slider-option value="mi">
+          <span class="unit">mi</span>
+        </pipr-slider-option>
+      </pipr-multistate-slider>
+    </div>
+  </div>
+
+  <div class="converter-row">
+    <span class="converter-label">Temperature</span>
+    <div class="converter-value">
+      <span class="value">{{ displayTemp() }}</span>
+      <pipr-multistate-slider
+        [value]="tempUnit()"
+        [config]="{ expandMode: 'hover' }"
+        (valueChange)="tempUnit.set($event)"
+      >
+        <pipr-slider-option value="C">
+          <span class="unit">°C</span>
+        </pipr-slider-option>
+        <pipr-slider-option value="F">
+          <span class="unit">°F</span>
+        </pipr-slider-option>
+        <pipr-slider-option value="K">
+          <span class="unit">K</span>
+        </pipr-slider-option>
+      </pipr-multistate-slider>
+    </div>
+  </div>
+
+  <div class="converter-row">
+    <span class="converter-label">Currency</span>
+    <div class="converter-value">
+      <span class="value">{{ displayCurrency() }}</span>
+      <pipr-multistate-slider
+        [value]="currency()"
+        [config]="{ expandMode: 'hover' }"
+        (valueChange)="currency.set($event)"
+      >
+        <pipr-slider-option value="PLN">
+          <span class="unit">PLN</span>
+        </pipr-slider-option>
+        <pipr-slider-option value="EUR">
+          <span class="unit">EUR</span>
+        </pipr-slider-option>
+        <pipr-slider-option value="USD">
+          <span class="unit">USD</span>
+        </pipr-slider-option>
+      </pipr-multistate-slider>
+    </div>
+  </div>
+</div>

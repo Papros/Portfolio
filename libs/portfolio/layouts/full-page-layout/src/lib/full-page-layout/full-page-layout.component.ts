@@ -12,7 +12,7 @@ import {
   OverlayMenuState,
   OverlayMenuOption,
   OverlayMenuComponent,
-} from '@ui/overlay-menu';
+} from '@papros-it/overlay-menu';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

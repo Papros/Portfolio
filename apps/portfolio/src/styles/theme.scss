@@ -1,11 +1,11 @@
 /* ============================================================
 theme.scss
-Portfolio design tokens — dark (default) + light override
+Portfolio design tokens - dark (default) + light override
 Usage: document.documentElement.setAttribute('data-theme', 'light')
 ============================================================ */
 
 /* ------------------------------------------------------------
-SHARED — akcenty i branding niezależne od trybu
+SHARED - akcenty i branding niezależne od trybu
 ------------------------------------------------------------ */
 :root {
   /* Primary (branding / teal-navy) */
@@ -198,23 +198,23 @@ Dusk THEME
 }
 
 /* ------------------------------------------------------------
-SECTION ACCENTS — per-podstrona override (opcjonalne)
+SECTION ACCENTS - per-podstrona override (opcjonalne)
 Użycie: <main data-section="games"> lub ThemeService.setSection()
 ------------------------------------------------------------ */
 
 [data-section='cv'] {
-  //--accent-vibrant: #1d9e75; /* domyślny emerald — bez zmian */
+  //--accent-vibrant: #1d9e75; /* domyślny emerald - bez zmian */
 }
 
 [data-section='games'] {
-  --accent-vibrant: #e85d4a; /* coral/czerwień — energia */
+  --accent-vibrant: #e85d4a; /* coral/czerwień - energia */
   --accent-vibrant-dark: #c43d2a;
   --accent-muted: rgba(232, 93, 74, 0.13);
   --accent-surface: #fff0ee;
 }
 
 [data-section='projects'] {
-  --accent-vibrant: #2c8fd6; /* niebieski — tech/code */
+  --accent-vibrant: #2c8fd6; /* niebieski - tech/code */
   --accent-vibrant-dark: #1a6fad;
   --accent-muted: rgba(44, 143, 214, 0.13);
   --accent-surface: #eef6ff;

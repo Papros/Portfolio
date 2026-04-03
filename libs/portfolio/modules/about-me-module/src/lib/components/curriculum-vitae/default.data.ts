@@ -23,7 +23,7 @@ export const cvDefault: CurriculumVitaeInterface = {
       },
     ],
     aboutMe:
-      'Frontend-focused full-stack developer with 5+ years of commercial experience, including a Lead Frontend Developer role. Specialized in Angular ecosystems (RxJS, NgRx, Nx) across Telco, Banking, and Public Transport sectors. Comfortable owning features end-to-end — from architecture decisions and client demos to mentoring junior developers.',
+      'Frontend-focused full-stack developer with 5+ years of commercial experience, including a Lead Frontend Developer role. Specialized in Angular ecosystems (RxJS, NgRx, Nx) across Telco, Banking, and Public Transport sectors. Comfortable owning features end-to-end - from architecture decisions and client demos to mentoring junior developers.',
     photoLink:
       'https://media.licdn.com/dms/image/v2/C4D03AQG5NkRfETBVCw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1610712563946?e=1749686400&v=beta&t=ivLMFsheTFv-31jBxttnhBPyQnt5KaXJQTLXXOLk3rI',
   },
@@ -68,7 +68,7 @@ export const cvDefault: CurriculumVitaeInterface = {
         'Figma',
       ],
       description: [
-        'Led frontend development of an administrative platform for a Telco sector client — managed priorities, architecture decisions, and code reviews',
+        'Led frontend development of an administrative platform for a Telco sector client - managed priorities, architecture decisions, and code reviews',
         'Mentored junior and mid frontend developers on the team',
         'Collaborated directly with the client: presented demos and iterated on requested changes',
       ],
@@ -111,7 +111,7 @@ export const cvDefault: CurriculumVitaeInterface = {
       ],
       description: [
         'Enhanced a PWA installed on Windows Embedded onboard computers in public transport vehicles',
-        'Led migration of legacy AngularJS codebase to modern Angular — improving maintainability and performance',
+        'Led migration of legacy AngularJS codebase to modern Angular - improving maintainability and performance',
         'Integrated real-time data streams via WebSockets and Apache Kafka',
         'Collaborated within a multinational team using English as the primary language',
         'Company rebranded to Ebblo in 2026',
@@ -138,7 +138,7 @@ export const cvDefault: CurriculumVitaeInterface = {
       endDate: '06.2020',
       skills: ['Scratch', 'Minecraft'],
       description: [
-        'Taught programming and mathematics at Mindcloud — project-based learning in a Minecraft environment',
+        'Taught programming and mathematics at Mindcloud - project-based learning in a Minecraft environment',
         'Provided private tutoring in math and introductory programming for children and teenagers',
       ],
       url: 'https://mindcloud.pl/',

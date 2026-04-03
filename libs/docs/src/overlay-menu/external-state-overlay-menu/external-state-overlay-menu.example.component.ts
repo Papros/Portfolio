@@ -4,7 +4,7 @@ import {
   OverlayMenuComponent,
   OverlayMenuOption,
   OverlayMenuState,
-} from '@ui/overlay-menu';
+} from '@papros-it/overlay-menu';
 
 @Component({
   selector: 'docs-external-state-overlay-menu',

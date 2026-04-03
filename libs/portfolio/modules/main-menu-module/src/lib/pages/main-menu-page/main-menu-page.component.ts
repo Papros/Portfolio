@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridMenuComponent, GridSlotDirective } from '@ui/grid-menu';
+import { GridMenuComponent, GridSlotDirective } from '@papros-it/grid-menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ThemeSelectorComponent } from '@portfolio/customization';
 

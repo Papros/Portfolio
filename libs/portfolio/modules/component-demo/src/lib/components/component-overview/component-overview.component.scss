@@ -11,10 +11,12 @@
     min-width: 0;
   }
 
-  lib-content-list {
+  .sticky-container {
     position: sticky;
     top: 50px;
     z-index: 10;
+
+    align-self: flex-start;
   }
 
   @media (max-width: 767px) {

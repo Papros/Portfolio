@@ -6,7 +6,7 @@ import {
   MultistateSliderComponent,
   SliderConfig,
   SliderOptionComponent,
-} from '@ui/multistate-slider';
+} from '@papros-it/multistate-slider';
 import { ThemeMode } from '../../interfaces/theme.interface';
 import { MatTooltipModule } from '@angular/material/tooltip';
 

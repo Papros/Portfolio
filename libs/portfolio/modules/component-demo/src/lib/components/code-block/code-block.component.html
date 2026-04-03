@@ -42,7 +42,9 @@
                 [code]="state.code"
                 language="html"
               ></pre>
-              <div *ngIf="state.error">Failed to load code</div>
+              <div *ngIf="state.error" class="code-error">
+                <mat-icon>error</mat-icon> Failed to load code
+              </div>
             </ng-container>
           </ng-template>
         </mat-tab>
@@ -58,7 +60,9 @@
                 [code]="state.code"
                 language="typescript"
               ></pre>
-              <div *ngIf="state.error">Failed to load code</div>
+              <div *ngIf="state.error" class="code-error">
+                <mat-icon>error</mat-icon> Failed to load code
+              </div>
             </ng-container></ng-template
           >
         </mat-tab>
@@ -74,7 +78,9 @@
                 [code]="state.code"
                 language="scss"
               ></pre>
-              <div *ngIf="state.error">Failed to load code</div>
+              <div *ngIf="state.error" class="code-error">
+                <mat-icon>error</mat-icon> Failed to load code
+              </div>
             </ng-container></ng-template
           >
         </mat-tab>

@@ -39,6 +39,7 @@
 
   .example-code {
     background-color: get-color(code-block-card);
+    color: get-color(text-primary);
     border-bottom: 1px solid get-color(neutral-border);
 
     ::ng-deep {
@@ -63,6 +64,13 @@
 
       .mdc-tab-indicator__content--underline {
         border-color: get-color(accent-surface);
+      }
+
+      .code-error {
+        display: flex;
+        align-items: center;
+
+        color: get-color(feedback-error);
       }
     }
   }
