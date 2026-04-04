@@ -1,4 +1,4 @@
-<div class="shelf-container">
+<div class="shelf-container" *transloco="let t; prefix: 'main-menu'">
   <lib-grid-menu [menuConfig]="menuConfig">
     <ng-template libGridSlot="git">
       <a href="https://github.com/Papros" target="_blank" class="git-link">
@@ -29,7 +29,7 @@
         <div class="linkedin-info">
           <span class="linkedin-name">Piotr Papros</span>
           <span class="linkedin-title">Frontend Developer</span>
-          <span class="linkedin-cta">View Profile →</span>
+          <span class="linkedin-cta">{{ t('linkedin.view_profile') }} →</span>
         </div>
       </a>
     </ng-template>
@@ -37,21 +37,21 @@
     <ng-template libGridSlot="componentGallery">
       <a href="/Portfolio/components" class="tile-card">
         <mat-icon class="tile-watermark">widgets</mat-icon>
-        <span class="tile-label">Design System</span>
+        <span class="tile-label">{{ t('design_system.title') }}</span>
       </a>
     </ng-template>
 
     <ng-template libGridSlot="gameGallery">
       <a href="/Portfolio/games" class="tile-card">
         <mat-icon class="tile-watermark">sports_esports</mat-icon>
-        <span class="tile-label">Games</span>
+        <span class="tile-label">{{ t('games.title') }}</span>
       </a>
     </ng-template>
 
     <ng-template libGridSlot="cv">
       <a href="/Portfolio/about" class="tile-card">
         <mat-icon class="tile-watermark">badge</mat-icon>
-        <span class="tile-label">CV</span>
+        <span class="tile-label">{{ t('cv.title') }}</span>
       </a>
     </ng-template>
 
@@ -91,7 +91,8 @@
       <div class="customization-tile">
         <div class="customization-row">
           <div class="customization-row-icon">
-            <span>Motyw</span><mat-icon>format_color_fill</mat-icon>
+            <span>{{ t('customization.motive') }}</span
+            ><mat-icon>format_color_fill</mat-icon>
           </div>
           <div class="customization-row-content">
             <lib-theme-selector></lib-theme-selector>
@@ -100,7 +101,8 @@
 
         <div class="customization-row">
           <div class="customization-row-icon">
-            <span>Język</span><mat-icon>flag</mat-icon>
+            <span>{{ t('customization.language') }}</span
+            ><mat-icon>flag</mat-icon>
           </div>
           <div class="customization-row-content">
             <lib-theme-selector></lib-theme-selector>
@@ -112,10 +114,10 @@
 </div>
 
 <ng-template #comingSoon>
-  <div class="disabled-outer">
+  <div class="disabled-outer" *transloco="let t; prefix: 'main-menu'">
     <div class="disabled-inner">
       <mat-icon class="disabled-icon">nest_clock_farsight_analog</mat-icon>
-      <span class="disabled-label">coming soon</span>
+      <span class="disabled-label">{{ t('disabled.info') }}</span>
     </div>
   </div>
 </ng-template>

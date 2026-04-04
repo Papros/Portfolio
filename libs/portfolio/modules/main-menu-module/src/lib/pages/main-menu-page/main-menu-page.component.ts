@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GridMenuComponent, GridSlotDirective } from '@papros-it/grid-menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ThemeSelectorComponent } from '@portfolio/customization';
+import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'lib-main-menu-page',
@@ -13,7 +14,9 @@ import { ThemeSelectorComponent } from '@portfolio/customization';
     GridSlotDirective,
     MatIconModule,
     ThemeSelectorComponent,
+    TranslocoModule,
   ],
+  providers: [provideTranslocoScope('main-menu')],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })

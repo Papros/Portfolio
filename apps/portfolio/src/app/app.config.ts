@@ -3,6 +3,7 @@ import {
   inject,
   provideAppInitializer,
   provideZoneChangeDetection,
+  isDevMode,
 } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -10,6 +11,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { IconService } from '@portfolio/shared-pack';
 import { persistenceProviders } from '@portfolio/persistence';
 import { ThemeService } from '@portfolio/customization';
+import { TranslocoHttpLoader } from './transloco-loader';
+import { provideTransloco } from '@jsverse/transloco';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,5 +30,15 @@ export const appConfig: ApplicationConfig = {
       inject(ThemeService);
     }),
     ...persistenceProviders,
+    provideHttpClient(),
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'pl'],
+        defaultLang: 'en',
+        reRenderOnLangChange: true,
+        prodMode: !isDevMode(),
+      },
+      loader: TranslocoHttpLoader,
+    }),
   ],
 };
