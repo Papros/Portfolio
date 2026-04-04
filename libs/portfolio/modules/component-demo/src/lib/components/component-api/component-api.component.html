@@ -54,20 +54,10 @@
     </ng-container>
   </div>
 
-  <div class="doc-section-shortcuts-list">
-    <a
-      [routerLink]="[]"
-      fragment="inputs"
-      class="section-shortcut"
-      *ngIf="docApi.inputs.length > 0"
-      >Inputs</a
-    >
-    <a
-      [routerLink]="[]"
-      fragment="outputs"
-      class="section-shortcut"
-      *ngIf="docApi.outputs.length > 0"
-      >Outputs</a
-    >
-  </div>
+  <lib-content-list
+    [sections]="[
+      { id: 'inputs', title: 'Inputs' },
+      { id: 'outputs', title: 'Outputs' },
+    ]"
+  ></lib-content-list>
 </div>

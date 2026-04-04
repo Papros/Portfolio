@@ -12,7 +12,7 @@ import {
   OverlayMenuState,
   OverlayMenuOption,
   OverlayMenuComponent,
-} from '@ui/overlay-menu';
+} from '@papros-it/overlay-menu';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -60,6 +60,11 @@ export class FullPageLayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    //this.attachMenu();
+    console.log();
+  }
+
+  attachMenu() {
     this.overlayService.closeAll();
     const { overlayRef, componentRef } = this.overlayService.attachComponent(
       OverlayMenuComponent,

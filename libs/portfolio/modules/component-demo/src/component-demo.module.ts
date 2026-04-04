@@ -21,6 +21,7 @@ import {
   ComponentExampleComponent,
   ComponentOverviewComponent,
   CodeHighlightDirective,
+  ContentListComponent,
 } from './lib/components';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -44,6 +45,7 @@ const routes: Routes = [
       {
         path: ':component',
         component: ComponentDetailsComponent,
+        runGuardsAndResolvers: 'paramsChange',
         resolve: {
           doc: componentDocResolver,
         },
@@ -63,6 +65,7 @@ const routes: Routes = [
     ComponentApiComponent,
     CodeBlockComponent,
     ArticleSectionComponent,
+    ContentListComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,158 @@
+:host {
+  display: inline-block;
+  position: relative;
+
+  --pipr-ms-track-bg: #eee;
+  --pipr-ms-thumb-bg: #1976d2;
+  --pipr-ms-option-color: #666;
+  --pipr-ms-option-selected-color: #fff;
+  --pipr-ms-option-size: 36px;
+  --pipr-ms-padding: 3px;
+  --pipr-ms-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ms-track {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: var(--pipr-ms-track-bg);
+  border-radius: 999px;
+  padding: var(--pipr-ms-padding);
+  gap: 0;
+  overflow: hidden;
+}
+
+// Overlay mode – track wychodzi poza layout hosta
+:host(.ms-host--ltr) .ms-track--overlay,
+:host(.ms-host--rtl) .ms-track--overlay,
+:host(.ms-host--center) .ms-track--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+:host(.ms-host--rtl) .ms-track--overlay {
+  left: auto;
+  right: 0;
+}
+
+:host(.ms-host--ttb) .ms-track--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+:host(.ms-host--btt) .ms-track--overlay {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+  left: 0;
+}
+
+// Vertical layout
+.ms-track--vertical {
+  flex-direction: column;
+}
+
+:host(.ms-host--btt) .ms-track--vertical {
+  flex-direction: column-reverse;
+}
+
+.ms-thumb {
+  position: absolute;
+  border-radius: 999px;
+  background: var(--pipr-ms-thumb-bg);
+  pointer-events: none;
+  z-index: 0;
+  transition: transform var(--pipr-ms-transition);
+
+  // Horizontal (domyślny)
+  top: var(--pipr-ms-padding);
+  bottom: var(--pipr-ms-padding);
+  left: var(--pipr-ms-padding);
+  width: var(--pipr-ms-option-size);
+  height: auto;
+}
+
+// Vertical thumb
+.ms-track--vertical .ms-thumb {
+  top: var(--pipr-ms-padding);
+  left: var(--pipr-ms-padding);
+  right: var(--pipr-ms-padding);
+  bottom: auto;
+  width: auto;
+  height: var(--pipr-ms-option-size);
+}
+
+// RTL – thumb zakotwiczony do prawej, przesuwa się w lewo
+:host(.ms-host--rtl) .ms-thumb {
+  left: auto;
+  right: var(--pipr-ms-padding);
+}
+
+// BTT – thumb zakotwiczony do dołu
+:host(.ms-host--btt) .ms-track--vertical .ms-thumb {
+  top: auto;
+  bottom: var(--pipr-ms-padding);
+}
+
+.ms-option {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: var(--pipr-ms-option-size);
+  height: var(--pipr-ms-option-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 999px;
+  color: var(--pipr-ms-option-color);
+  transition:
+    color 0.2s ease,
+    width var(--pipr-ms-transition),
+    height var(--pipr-ms-transition),
+    opacity var(--pipr-ms-transition),
+    padding var(--pipr-ms-transition);
+  overflow: hidden;
+
+  &--selected {
+    color: var(--pipr-ms-option-selected-color);
+  }
+
+  &--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &--hidden {
+    width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// Vertical hidden – zerujemy height zamiast width
+.ms-track--vertical .ms-option--hidden {
+  width: var(--pipr-ms-option-size) !important;
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ms-expand-trigger {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 999px;
+}

@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}

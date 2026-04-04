@@ -1,8 +1,10 @@
 @media (max-width: 1100px) {
   ::ng-deep .overlay-menu-container {
     display: none;
+  }
 
-    .example-component & {
+  ::ng-deep .example-component {
+    .overlay-menu-container {
       display: block;
     }
   }

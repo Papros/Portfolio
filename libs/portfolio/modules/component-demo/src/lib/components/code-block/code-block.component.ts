@@ -94,7 +94,7 @@ export class CodeBlockComponent implements OnChanges {
         timeout(10000),
         catchError(() => {
           this.notificationService.error(
-            'Failed to copy — code not available.',
+            'Failed to copy - code not available.',
           );
           return EMPTY;
         }),

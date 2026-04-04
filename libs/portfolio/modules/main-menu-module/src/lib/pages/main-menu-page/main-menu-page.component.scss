@@ -1,3 +1,5 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -16,7 +18,7 @@
   display: grid;
   place-items: center;
   padding: clamp(8px, 1%, 48px);
-  background: #0e0f13;
+  background: get-color(neutral-card);
   box-sizing: border-box;
 
   @media (max-width: 480px) {
@@ -148,6 +150,55 @@
   opacity: 0.9;
 }
 
+// ========= CUSTOMIZATION =======================
+
+.customization-tile {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: get-color(neutral-card-hover);
+
+  .customization-row {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 0;
+    width: 100%;
+    flex: 1;
+
+    &:first-of-type {
+      border-bottom: 1px dashed get-color(overlay-soft);
+    }
+
+    .customization-row-icon {
+      padding: 0.5rem 1.5rem;
+      border-right: 2px solid get-color(overlay-soft);
+      color: get-color(accent-vibrant);
+
+      display: flex;
+      flex-direction: column;
+
+      width: 30%;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        color: get-color(text-primary);
+      }
+    }
+
+    .customization-row-content {
+      padding: 0.5rem 1.5rem;
+    }
+
+    lib-theme-selector {
+      flex: 1;
+    }
+  }
+}
+
 // ========= DISABLED TEMPLATE ===================
 .disabled-outer {
   width: 100%;
@@ -168,8 +219,8 @@
       -45deg,
       transparent,
       transparent 10px,
-      rgba(255, 255, 255, 0.018) 10px,
-      rgba(255, 255, 255, 0.018) 11px
+      get-color(overlay-soft) 10px,
+      get-color(overlay-soft) 11px
     );
     pointer-events: none;
   }
@@ -187,7 +238,7 @@
     font-size: 28px;
     width: 28px;
     height: 28px;
-    color: #4a4e5c;
+    color: get-color(text-muted);
   }
 
   .disabled-label {
@@ -196,7 +247,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #4a4e5c;
+    color: get-color(text-muted);
   }
 }
 
@@ -210,7 +261,7 @@
   height: 100%;
   padding: 14px 16px;
   text-decoration: none;
-  color: white;
+  color: #fff;
   box-sizing: border-box;
   overflow: hidden;
 
@@ -229,7 +280,7 @@
     transition:
       opacity 0.3s ease,
       transform 0.3s ease;
-    color: white;
+    color: #fff;
   }
 
   .tile-label {

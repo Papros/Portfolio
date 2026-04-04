@@ -1,12 +1,12 @@
 /* ============================================================
-   theme.scss
-   Portfolio design tokens — dark (default) + light override
-   Usage: document.documentElement.setAttribute('data-theme', 'light')
-   ============================================================ */
+theme.scss
+Portfolio design tokens - dark (default) + light override
+Usage: document.documentElement.setAttribute('data-theme', 'light')
+============================================================ */
 
 /* ------------------------------------------------------------
-   SHARED — akcenty i branding niezależne od trybu
-   ------------------------------------------------------------ */
+SHARED - akcenty i branding niezależne od trybu
+------------------------------------------------------------ */
 :root {
   /* Primary (branding / teal-navy) */
   --primary-light: #2c5d6f;
@@ -37,32 +37,35 @@
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #1b3a4b, #a3be8c);
   --gradient-secondary: linear-gradient(135deg, #2c5d6f, #c0d9ac);
+
+  /* Code block */
+  --code-block-border: #2a3545;
+  --code-block-card: #151c26;
+  --code-block-text: #e8e4dc;
+  --code-block-component-text: #e8e4dc;
+  --code-block-component-card: #f1f1f1;
 }
 
 /* ------------------------------------------------------------
-   DARK THEME (default)
-   ------------------------------------------------------------ */
+DARK THEME (default)
+------------------------------------------------------------ */
 :root,
 [data-theme='dark'] {
   color-scheme: dark;
 
   /* Backgrounds */
-  --neutral-bg-deep: #0d1420; /* <html> / outermost page bg  */
-  --neutral-bg: #151c26; /* sekcje, layout bg           */
-  --neutral-card: #1e2736; /* karty, panele               */
-  --neutral-card-hover: #273040; /* hover state na kartach      */
-  --neutral-border: #2a3545; /* bordery, dividers           */
-  --neutral-border-hover: #3d4f62; /* hover state na borderach    */
+  --neutral-bg-deep: #0d1420;
+  --neutral-bg: #151c26;
+  --neutral-card: #1e2736;
+  --neutral-card-hover: #273040;
+  --neutral-border: #2a3545;
+  --neutral-border-hover: #3d4f62;
 
   /* Text */
-  --text-primary: #e8e4dc; /* główny tekst                */
-  --text-secondary: #8a9bb0; /* opisy, subtitles            */
-  --text-muted: #4a5a70; /* placeholdery, labels        */
-  --text-inverse: #1a2332; /* tekst na jasnych tłach      */
-
-  /* CV-specific */
-  --cv-accent: #1d9e75;
-  --cv-bg-dark: #0d1420;
+  --text-primary: #e8e4dc;
+  --text-secondary: #8a9bb0;
+  --text-muted: #4a5a70;
+  --text-inverse: #1a2332;
 
   /* Surface overlays */
   --overlay-soft: rgba(21, 28, 38, 0.75);
@@ -70,62 +73,148 @@
 
   /* Scrollbar */
   --scrollbar-primary: rgba(255, 255, 255, 0.07);
+
+  --accent-vibrant: #9e8fff;
+  --accent-vibrant-dark: #5e4ed4;
+  --accent-muted: rgba(124, 106, 247, 0.13);
+  --accent-surface: #f0eeff;
+  --accent-text: #fff;
 }
 
 /* ------------------------------------------------------------
-   LIGHT THEME
-   ------------------------------------------------------------ */
+LIGHT THEME
+------------------------------------------------------------ */
 [data-theme='light'] {
   color-scheme: light;
 
   /* Backgrounds */
-  --neutral-bg-deep: #e8e4dc; /* <html> / outermost page bg  */
-  --neutral-bg: #f0ede8; /* sekcje, layout bg           */
-  --neutral-card: #ffffff; /* karty, panele               */
-  --neutral-card-hover: #f7f5f1; /* hover state na kartach      */
-  --neutral-border: #dbd8d0; /* bordery, dividers           */
-  --neutral-border-hover: #c4c0b8; /* hover state na borderach    */
+  /* <html> / outermost page bg  */
+  --neutral-bg-deep: #eeecea;
+  /* sekcje, layout bg  */
+  --neutral-bg: #f5f3ef;
+  /* karty, panele*/
+  --neutral-card: #ffffff;
+  /* hover state na kartach*/
+  --neutral-card-hover: #f0ede8;
+  /* bordery, dividers  */
+  --neutral-border: #dddbd5;
+  /* hover state na borderach */
+  --neutral-border-hover: #c8c5be;
 
   /* Text */
-  --text-primary: #1a2332; /* główny tekst                */
-  --text-secondary: #5a6878; /* opisy, subtitles            */
-  --text-muted: #9aa8b8; /* placeholdery, labels        */
-  --text-inverse: #e8e4dc; /* tekst na ciemnych tłach     */
-
-  /* CV-specific */
-  --cv-accent: #17805e;
-  --cv-bg-dark: #1a2332;
+  /* główny tekst */
+  --text-primary: #1a2332;
+  /* opisy, subtitles*/
+  --text-secondary: #5a6e85;
+  /* placeholdery, labels  */
+  --text-muted: #96a3b0;
+  /* tekst na jasnych tłach*/
+  --text-inverse: #ffffff;
 
   /* Surface overlays */
-  --overlay-soft: rgba(240, 237, 232, 0.75);
-  --overlay-strong: rgba(232, 228, 220, 0.92);
+  --overlay-soft: rgba(245, 243, 239, 0.8);
+  --overlay-strong: rgba(238, 236, 234, 0.95);
+
+  /* Scrollbar */
+  --scrollbar-primary: rgba(0, 0, 0, 0.1);
+
+  --accent-vibrant: #534ab7;
+  --accent-vibrant-dark: #3c3489;
+  --accent-muted: rgba(83, 74, 183, 0.1);
+  --accent-surface: #eeedfe;
+  --accent-text: #fff;
 }
 
 /* ------------------------------------------------------------
-   SECTION ACCENTS — per-podstrona override (opcjonalne)
-   Użycie: <main data-section="games"> lub ThemeService.setSection()
-   ------------------------------------------------------------ */
+RETRO THEME
+------------------------------------------------------------ */
 
-[data-section='cv'] {
-  --accent-vibrant: #1d9e75; /* domyślny emerald — bez zmian */
+[data-theme='retro'] {
+  color-scheme: retro;
+
+  /* Backgrounds */
+  --neutral-bg-deep: #1a1209;
+  --neutral-bg: #201810;
+  --neutral-card: #2c1f10;
+  --neutral-card-hover: #352515;
+  --neutral-border: #4a3420;
+  --neutral-border-hover: #5a4030;
+
+  /* Text */
+  --text-primary: #e8d5a0;
+  --text-secondary: #9e845c;
+  --text-muted: #5c4830;
+  --text-inverse: #1a1209;
+
+  /* Surface overlays */
+  --overlay-soft: rgba(32, 24, 16, 0.78);
+  --overlay-strong: rgba(26, 18, 9, 0.93);
+
+  /* Scrollbar */
+  --scrollbar-primary: rgba(255, 255, 255, 0.06);
+
+  /* Accent */
+  --accent-vibrant: #c8832a;
+  --accent-vibrant-dark: #a05e18;
+  --accent-muted: rgba(200, 131, 42, 0.14);
+  --accent-surface: #faeeda;
+  --accent-text: #1a1209;
 }
 
-[data-section='design-system'] {
-  --accent-vibrant: #9e8fff; /* fiolet — docs/tech          */
-  --accent-vibrant-dark: #5e4ed4;
-  --accent-muted: rgba(124, 106, 247, 0.13);
-  --accent-surface: #f0eeff;
+/* ------------------------------------------------------------
+Dusk THEME
+------------------------------------------------------------ */
+
+[data-theme='dusk'] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --neutral-bg-deep: #16111e;
+  --neutral-bg: #1d1628;
+  --neutral-card: #261d35;
+  --neutral-card-hover: #352845;
+  --neutral-border: #352845;
+  --neutral-border-hover: #4a3860;
+
+  /* Text */
+  --text-primary: #ede0f8;
+  --text-secondary: #8070a0;
+  --text-muted: #4a3860;
+  --text-inverse: #16111e;
+
+  /* Surface overlays */
+  --overlay-soft: rgba(29, 22, 40, 0.78);
+  --overlay-strong: rgba(22, 17, 30, 0.94);
+
+  /* Scrollbar */
+  --scrollbar-primary: rgba(255, 255, 255, 0.06);
+
+  /* Accent */
+  --accent-vibrant: #f0a060;
+  --accent-vibrant-dark: #c87830;
+  --accent-muted: rgba(240, 160, 96, 0.13);
+  --accent-surface: #faeeda;
+  --accent-text: #16111e;
+}
+
+/* ------------------------------------------------------------
+SECTION ACCENTS - per-podstrona override (opcjonalne)
+Użycie: <main data-section="games"> lub ThemeService.setSection()
+------------------------------------------------------------ */
+
+[data-section='cv'] {
+  //--accent-vibrant: #1d9e75; /* domyślny emerald - bez zmian */
 }
 
 [data-section='games'] {
-  --accent-vibrant: #e85d4a; /* coral/czerwień — energia    */
+  --accent-vibrant: #e85d4a; /* coral/czerwień - energia */
   --accent-vibrant-dark: #c43d2a;
   --accent-muted: rgba(232, 93, 74, 0.13);
   --accent-surface: #fff0ee;
 }
 
 [data-section='projects'] {
-  --accent-vibrant: #2c8fd6; /* niebieski — tech/code       */
+  --accent-vibrant: #2c8fd6; /* niebieski - tech/code */
   --accent-vibrant-dark: #1a6fad;
   --accent-muted: rgba(44, 143, 214, 0.13);
   --accent-surface: #eef6ff;

@@ -5,6 +5,7 @@ mat-toolbar {
   height: 50px;
   background-color: get-color(primary-base);
   gap: 32px;
+  font-weight: 700;
 
   &.sticky-toolbar {
     position: sticky;
@@ -13,10 +14,22 @@ mat-toolbar {
   }
 
   .toolbar-action-icon {
-    color: get-color(accent-soft);
+    color: get-color(accent-surface);
+    padding: 6px 8px;
+    border-radius: 25px;
 
     span {
       padding-bottom: 10px;
+    }
+
+    &:hover {
+      background-color: get-color(accent-vibrant-dark);
+      color: get-color(accent-surface) !important;
+    }
+
+    &--active {
+      background-color: get-color(accent-surface);
+      color: get-color(accent-vibrant-dark) !important;
     }
   }
 }

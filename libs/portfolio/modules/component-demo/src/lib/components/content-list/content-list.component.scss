@@ -1,0 +1,36 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+:host {
+  overflow: visible;
+}
+
+.doc-section-shortcuts-list {
+  width: 160px;
+  align-self: flex-start;
+  overflow-y: auto;
+
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  border-left: 3px solid get-color(accent-vibrant);
+  padding-left: 12px;
+  gap: 0.5rem;
+
+  .section-shortcut {
+    font-size: 0.8125rem;
+    color: get-color(text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &--active {
+      color: get-color(accent-vibrant);
+      font-weight: 500;
+    }
+
+    &:hover {
+      color: get-color(accent-vibrant);
+      cursor: pointer;
+    }
+  }
+}

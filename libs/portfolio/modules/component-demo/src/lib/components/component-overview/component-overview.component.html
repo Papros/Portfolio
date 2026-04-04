@@ -8,15 +8,7 @@
     }
   </div>
 
-  <div class="doc-section-shortcuts-list">
-    @for (section of overview?.sections; track section.id) {
-      <a
-        [routerLink]="[]"
-        [fragment]="'section-' + section.id"
-        class="section-shortcut"
-      >
-        {{ section.title }}
-      </a>
-    }
+  <div class="sticky-container">
+    <lib-content-list [sections]="overview?.sections"></lib-content-list>
   </div>
 </div>

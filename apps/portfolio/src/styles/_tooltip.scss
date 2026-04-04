@@ -1,0 +1,9 @@
+@use 'style-themes' as *;
+
+.lib-tooltip {
+  color: get-color(text-primary);
+  background-color: get-color(neutral-bg);
+  border: 1px solid get-color(neutral-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+}

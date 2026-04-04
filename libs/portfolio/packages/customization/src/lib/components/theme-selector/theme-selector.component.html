@@ -1,0 +1,29 @@
+<pipr-multistate-slider
+  [value]="themeService.mode()"
+  [config]="sliderConfig"
+  (valueChange)="onThemeChange($event)"
+>
+  <pipr-slider-option [value]="ThemeMode.Light">
+    <mat-icon [matTooltip]="'Light theme'" matTooltipClass="lib-tooltip"
+      >light_mode</mat-icon
+    >
+  </pipr-slider-option>
+
+  <pipr-slider-option [value]="ThemeMode.Dark">
+    <mat-icon [matTooltip]="'Dark theme'" matTooltipClass="lib-tooltip"
+      >dark_mode</mat-icon
+    >
+  </pipr-slider-option>
+
+  <pipr-slider-option [value]="ThemeMode.Retro">
+    <mat-icon [matTooltip]="'Retro theme'" matTooltipClass="lib-tooltip"
+      >save</mat-icon
+    >
+  </pipr-slider-option>
+
+  <pipr-slider-option [value]="ThemeMode.Dusk">
+    <mat-icon [matTooltip]="'Dusk theme'" matTooltipClass="lib-tooltip"
+      >wb_twilight</mat-icon
+    >
+  </pipr-slider-option>
+</pipr-multistate-slider>

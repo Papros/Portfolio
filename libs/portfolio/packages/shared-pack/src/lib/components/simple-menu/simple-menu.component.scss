@@ -39,9 +39,9 @@
           get-color(accent-muted),
           transparent
         );
-        color: get-color(accent-vibrant);
+        color: get-color(accent-vibrant-dark);
         font-weight: bold;
-        border-left: 3px solid get-color(accent-vibrant);
+        border-left: 3px solid get-color(accent-vibrant-dark);
         padding-left: 9px;
       }
     }

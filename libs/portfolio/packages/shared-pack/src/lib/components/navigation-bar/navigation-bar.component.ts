@@ -4,11 +4,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationAction } from './navigation-bat.interface';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'lib-navigation-bar',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatIconModule,
+  ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.scss',
 })

@@ -18,7 +18,7 @@
     border-bottom: 1px solid get-color(neutral-border);
     font-size: 0.875rem;
     font-weight: bold;
-    color: get-color(text-secondary);
+    color: get-color(text-primary);
 
     .example-header_buttons-section {
       display: flex;
@@ -38,7 +38,8 @@
   }
 
   .example-code {
-    background-color: get-color(neutral-bg);
+    background-color: get-color(code-block-card);
+    color: get-color(text-primary);
     border-bottom: 1px solid get-color(neutral-border);
 
     ::ng-deep {
@@ -64,12 +65,19 @@
       .mdc-tab-indicator__content--underline {
         border-color: get-color(accent-surface);
       }
+
+      .code-error {
+        display: flex;
+        align-items: center;
+
+        color: get-color(feedback-error);
+      }
     }
   }
 
   .example-component {
     padding: 1.5rem;
-    background-color: get-color(neutral-bg);
+    background-color: get-color(code-block-component-card) !important;
 
     @media (max-width: 767px) {
       padding: 1rem;
@@ -78,8 +86,8 @@
 
   pre {
     margin: 0;
-    background-color: get-color(neutral-bg);
-    color: get-color(text-primary);
+    background-color: get-color(code-block-card);
+    color: get-color(code-block-component-text);
     overflow-x: auto;
     padding: 0;
     font-family: 'Fira Code', monospace;

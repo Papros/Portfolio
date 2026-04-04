@@ -1,0 +1,42 @@
+<div
+  class="ms-track"
+  [class.ms-track--collapsible]="isCollapsible()"
+  [class.ms-track--expanded]="isExpanded()"
+  [class.ms-track--overlay]="isOverlay() && isCollapsible()"
+  [class.ms-track--vertical]="isVertical()"
+  [style.--option-count]="resolvedOptions().length"
+  role="radiogroup"
+>
+  <div class="ms-thumb" [style.transform]="thumbTransform()"></div>
+
+  @if (isCollapsible() && !isExpanded()) {
+    <div class="ms-expand-trigger" (click)="expand()"></div>
+  }
+
+  @for (option of resolvedOptions(); track option.value; let i = $index) {
+    <button
+      #optionBtn
+      class="ms-option"
+      [class.ms-option--selected]="selectedIndex() === i"
+      [class.ms-option--disabled]="option.disabled"
+      [class.ms-option--hidden]="
+        isCollapsible() && !isExpanded() && selectedIndex() !== i
+      "
+      [attr.aria-label]="option.label || option.icon"
+      [attr.aria-checked]="selectedIndex() === i"
+      [attr.tabindex]="selectedIndex() === i ? 0 : -1"
+      role="radio"
+      [title]="option.icon ? option.label : 'Click to select'"
+      (click)="select(i, $event)"
+      (keydown)="onKeydown($event, i)"
+    >
+      @if (projectedOptionsSig().length) {
+        <ng-container [ngTemplateOutlet]="getTemplateAt(i)" />
+      } @else if (option.icon) {
+        <span class="ms-icon" [innerHTML]="option.icon"></span>
+      } @else if (option.label) {
+        <span class="ms-label">{{ option.label }}</span>
+      }
+    </button>
+  }
+</div>

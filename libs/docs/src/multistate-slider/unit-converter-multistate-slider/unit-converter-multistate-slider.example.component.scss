@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.converter {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.converter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.converter-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.converter-value {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: right;
+}
+
+.unit {
+  font-size: 12px;
+  font-weight: 500;
+  font-family: monospace;
+}

@@ -171,7 +171,7 @@
         >
           <div class="tl-left">
             <span class="tl-date-start">{{ job.startDate }}</span>
-            <span class="tl-date-sep">—</span>
+            <span class="tl-date-sep">-</span>
             <span class="tl-date-end">{{ job.endDate || 'now' }}</span>
           </div>
           <div class="tl-connector">
@@ -241,10 +241,7 @@
     </footer>
   </main>
 
-  <div
-    class="print-fab desktop-only"
-    [class.print-fab--bw]="printMode() === 'bw'"
-  >
+  <div class="print-fab desktop-only print-fab--bw">
     <button
       class="print-fab__toggle"
       (click)="togglePrintMode()"
@@ -254,9 +251,10 @@
       [attr.title]="printMode() === 'color' ? 'B&W print' : 'Color print'"
     >
       <mat-icon fontSet="material-icons-outlined">
-        {{ printMode() === 'color' ? 'light_mode' : 'dark_mode' }}
+        {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
       </mat-icon>
     </button>
+
     <button
       class="print-fab__print"
       (click)="printCV()"
@@ -265,7 +263,7 @@
     >
       <mat-icon fontSet="material-icons-outlined">print</mat-icon>
       <span class="print-fab__label">
-        {{ printMode() === 'bw' ? 'Print B&W' : 'Print' }}
+        {{ printMode() === 'bw' ? 'Print B&W' : 'Print color' }}
       </span>
     </button>
   </div>

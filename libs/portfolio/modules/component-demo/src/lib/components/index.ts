@@ -8,3 +8,4 @@ export * from './component-api/component-api.component';
 export * from './article-section/article-section.component';
 export * from './code-block/code-block.component';
 export * from './code-block/code-block-highlight.directive';
+export * from './content-list/content-list.component';
