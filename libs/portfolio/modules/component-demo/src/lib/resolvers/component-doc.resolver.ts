@@ -4,7 +4,6 @@ import { COMPONENT_DOC_MAP, ComponentDoc } from '@docs-model';
 
 export const componentDocResolver: ResolveFn<ComponentDoc> = (route) => {
   const router = inject(Router);
-
   const id = route.paramMap.get('component');
   const doc = COMPONENT_DOC_MAP.get(id ?? '');
 

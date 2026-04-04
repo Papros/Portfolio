@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { SliderConfig, SliderOption } from './multistate-slider.interface';
 import { SliderOptionComponent } from '../slider-option/slider-option.component';
 import { filter, fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'pipr-multistate-slider',
@@ -35,6 +36,8 @@ import { filter, fromEvent } from 'rxjs';
 export class MultistateSliderComponent<T = unknown>
   implements OnInit, AfterContentInit
 {
+  private destroyRef = inject(DestroyRef);
+
   options = input<SliderOption<T>[]>([]);
   value = input<T>();
   config = input<SliderConfig>({});
@@ -161,9 +164,9 @@ export class MultistateSliderComponent<T = unknown>
 
   ngAfterContentInit() {
     this.updateProjectedOptions();
-    this.projectedOptions.changes.subscribe(() =>
-      this.updateProjectedOptions(),
-    );
+    this.projectedOptions.changes
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.updateProjectedOptions());
   }
 
   protected expand(): void {

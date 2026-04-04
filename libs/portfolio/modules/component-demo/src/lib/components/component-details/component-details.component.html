@@ -1,21 +1,21 @@
-<ng-container *ngIf="doc; else notFound">
+<ng-container *ngIf="doc() as component; else notFound">
   <mat-tab-group mat-stretch-tabs="false">
     <mat-tab label="Overview">
       <lib-component-overview
-        [componentId]="doc.id"
-        [overview]="doc.overview"
+        [componentId]="component.id"
+        [overview]="component.overview"
       ></lib-component-overview>
     </mat-tab>
 
     <mat-tab label="API">
-      <lib-component-api [componentId]="doc.id" [docApi]="doc.api">
+      <lib-component-api [componentId]="component.id" [docApi]="component.api">
       </lib-component-api>
     </mat-tab>
 
     <mat-tab label="Examples">
       <lib-component-example
-        [componentId]="doc.id"
-        [examples]="doc.examples"
+        [componentId]="component.id"
+        [examples]="component.examples"
       ></lib-component-example>
     </mat-tab>
   </mat-tab-group>

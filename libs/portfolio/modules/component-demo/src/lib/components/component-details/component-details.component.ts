@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentDoc } from '@docs-model';
-import { Input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'lib-component-details',
@@ -11,9 +17,14 @@ import { Input } from '@angular/core';
   standalone: false,
 })
 export class ComponentDetailsComponent {
-  readonly doc: ComponentDoc;
+  doc = signal<ComponentDoc | null>(null);
+  private destroyRef = inject(DestroyRef);
 
   constructor(private route: ActivatedRoute) {
-    this.doc = this.route.snapshot.data['doc'];
+    this.route.data
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.doc.set(data['doc']);
+      });
   }
 }

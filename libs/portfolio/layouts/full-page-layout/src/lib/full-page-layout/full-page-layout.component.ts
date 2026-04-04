@@ -60,6 +60,11 @@ export class FullPageLayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    //this.attachMenu();
+    console.log();
+  }
+
+  attachMenu() {
     this.overlayService.closeAll();
     const { overlayRef, componentRef } = this.overlayService.attachComponent(
       OverlayMenuComponent,

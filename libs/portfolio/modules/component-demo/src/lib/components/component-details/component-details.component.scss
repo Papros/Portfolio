@@ -29,11 +29,13 @@
   }
 
   .mat-mdc-tab-body {
-    overflow: visible !important;
+    overflow-y: visible !important;
+    overflow-x: clip !important;
   }
 
   .mat-mdc-tab-body-content {
-    overflow: visible !important;
+    overflow-y: visible !important;
+    overflow-x: clip !important;
   }
 
   .mat-mdc-tab-body-wrapper {
@@ -41,6 +43,7 @@
     padding: 1.5rem;
     flex: 1;
     overflow-y: visible !important;
+    overflow-x: clip !important;
 
     @media (max-width: 767px) {
       padding: 1rem 0.75rem;

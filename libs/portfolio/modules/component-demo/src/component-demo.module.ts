@@ -45,6 +45,7 @@ const routes: Routes = [
       {
         path: ':component',
         component: ComponentDetailsComponent,
+        runGuardsAndResolvers: 'paramsChange',
         resolve: {
           doc: componentDocResolver,
         },
