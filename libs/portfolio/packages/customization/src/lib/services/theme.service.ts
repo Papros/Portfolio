@@ -7,7 +7,7 @@ export class ThemeService {
   private storage = inject(STORAGE_SERVICE);
 
   private readonly STORAGE_KEY = 'app-theme';
-  private readonly DEFAULT: ThemeMode = ThemeMode.Dark;
+  private readonly DEFAULT: ThemeMode = ThemeMode.Dusk;
 
   readonly mode = signal<ThemeMode>(this.loadFromStorage());
   readonly isDark = computed(() => this.mode() === ThemeMode.Dark);

@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@docs": ["libs/docs/index.ts"],
-      "@docs/*": ["libs/docs/src/*/index.ts"],
       "@docs-model": ["libs/docs-model/index.ts"],
+      "@docs/*": ["libs/docs/src/*/index.ts"],
       "@environments": ["apps/portfolio/src/environments/index.ts"],
       "@papros-it": ["libs/ui/index.ts"],
       "@papros-it/*": ["libs/ui/*/src/index.ts"],

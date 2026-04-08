@@ -2,8 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridMenuComponent, GridSlotDirective } from '@papros-it/grid-menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ThemeSelectorComponent } from '@portfolio/customization';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import {
+  LanguageSelectorComponent,
+  ThemeSelectorComponent,
+} from '@portfolio/customization';
+import {
+  provideTranslocoScope,
+  TranslocoModule,
+  TranslocoService,
+} from '@jsverse/transloco';
 
 @Component({
   selector: 'lib-main-menu-page',
@@ -14,9 +21,10 @@ import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
     GridSlotDirective,
     MatIconModule,
     ThemeSelectorComponent,
+    LanguageSelectorComponent,
     TranslocoModule,
   ],
-  providers: [provideTranslocoScope('main-menu')],
+  providers: [provideTranslocoScope({ scope: 'main-menu', alias: 'mainMenu' })],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })
@@ -149,7 +157,7 @@ export class MainMenuPageComponent {
       },
       {
         id: 'easterEgg',
-        options: { enabled: false, visible: true, background: '#f472b6' },
+        options: { enabled: true, visible: true, background: '#f472b6' },
         position: { colStart: 6, colSpan: 3, rowStart: 9, rowSpan: 2 },
         label: {
           value: 'Easter Egg 🐞',
