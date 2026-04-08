@@ -1,0 +1,21 @@
+{
+  "linkedin": {
+    "view_profile": "View profile"
+  },
+  "design_system": {
+    "title": "Design system"
+  },
+  "games": {
+    "title": "Games"
+  },
+  "cv": {
+    "title": "CV"
+  },
+  "disabled": {
+    "info": "coming soon"
+  },
+  "customization": {
+    "language": "Language",
+    "motive": "Motive"
+  }
+}
