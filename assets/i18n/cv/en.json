@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "contact": "Contact",
+    "skills": "Skills",
+    "languages": "Languages",
+    "interests": "Interests",
+    "experience": "Experience",
+    "education": "Education"
+  },
+  "actions": {
+    "print": "Print",
+    "print_bw": "Print B&W",
+    "print_color": "Print color",
+    "switch_bw": "Switch to black & white",
+    "switch_color": "Switch to color",
+    "back_to_menu": "Back to menu"
+  },
+  "labels": {
+    "now": "now",
+    "all_rights": "All rights reserved"
+  }
+}
