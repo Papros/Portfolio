@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -7,8 +7,8 @@ import {
   SliderOptionComponent,
   SliderConfig,
 } from '@papros-it/multistate-slider';
-import { ThemeMode } from '../../interfaces/theme.interface';
-import { TranslocoService } from '@jsverse/transloco';
+import { SliderExpandDirection } from '@papros-it/multistate-slider';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'lib-language-selector',
@@ -23,20 +23,20 @@ import { TranslocoService } from '@jsverse/transloco';
   styleUrl: './language-selector.component.scss',
 })
 export class LanguageSelectorComponent {
-  translationService = inject(TranslocoService);
+  translationService = inject(TranslationService);
 
-  ThemeMode = ThemeMode;
+  direction = input<SliderExpandDirection>('ltr');
 
   get activeLang() {
-    return this.translationService.getActiveLang();
+    return this.translationService.activeLang();
   }
 
   onLanguageChange(lang: string): void {
-    this.translationService.setActiveLang(lang);
+    this.translationService.setLang(lang);
   }
 
   sliderConfig: SliderConfig = {
     expandMode: 'click',
-    expandDirection: 'ltr',
+    expandDirection: this.direction(),
   };
 }

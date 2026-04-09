@@ -1,4 +1,11 @@
-import { Component, HostBinding, Input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  HostBinding,
+  Input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CurriculumVitaeInterface,
@@ -6,11 +13,21 @@ import {
   LanguageLevel,
 } from './curriculum-vitae.interface';
 import { MatIconModule } from '@angular/material/icon';
-import { cvDefault } from './default.data';
+import { cvDefault, cvDefault_pl } from './default.data';
 import {
   CamelCaseFormatPipe,
   PhoneNumberFormatPipe,
 } from '@portfolio/shared-pack';
+import {
+  provideTranslocoScope,
+  TranslocoModule,
+  TranslocoService,
+} from '@jsverse/transloco';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  LanguageSelectorComponent,
+  ThemeSelectorComponent,
+} from '@portfolio/customization';
 
 @Component({
   selector: 'lib-curriculum-vitae',
@@ -20,7 +37,11 @@ import {
     MatIconModule,
     PhoneNumberFormatPipe,
     CamelCaseFormatPipe,
+    TranslocoModule,
+    ThemeSelectorComponent,
+    LanguageSelectorComponent,
   ],
+  providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',
   styleUrl: './curriculum-vitae.component.scss',
 })
@@ -49,6 +70,21 @@ export class CurriculumVitaeComponent implements OnInit {
 
   get subtitle(): string {
     return this.cvDate?.basicInfo.position.toUpperCase() || '';
+  }
+
+  constructor(
+    private translocoService: TranslocoService,
+    private destroyRef: DestroyRef,
+  ) {
+    this.translocoService.langChanges$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((lang) => {
+        this.cvDate = (
+          lang === 'pl' ? cvDefault_pl : cvDefault
+        ) as CurriculumVitaeInterface;
+        console.log('Change language: ', lang);
+        console.log(this.cvDate);
+      });
   }
 
   ngOnInit(): void {
