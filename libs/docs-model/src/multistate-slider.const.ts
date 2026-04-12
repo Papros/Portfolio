@@ -11,6 +11,7 @@ import { ComponentDoc } from './component-details.interface';
 export const multistateSliderDoc: ComponentDoc = {
   id: 'multistate-slider',
   meta: {
+    id: 'overlay-menu',
     title: 'Multistate Slider',
     description:
       'A segmented control for selecting one value from a fixed set. Supports icons, projected content, and collapsible expand modes.',

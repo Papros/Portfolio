@@ -8,6 +8,7 @@ import {
 export const overlayMenuDoc: ComponentDoc = {
   id: 'overlay-menu',
   meta: {
+    id: 'overlay-menu',
     title: 'Overlay Menu',
     description:
       'A radial menu that expands from a center trigger. Supports hover, click, and external signal-based state control.',

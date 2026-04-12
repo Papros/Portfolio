@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
+import { COMPONENT_META, ComponentMeta } from '@docs-model';
 
 @Component({
   selector: 'lib-components-gallery',
@@ -9,7 +9,7 @@ import { COMPONENT_DOCS, ComponentDoc } from '@docs-model';
   styleUrl: './components-gallery.component.scss',
 })
 export class ComponentsGalleryComponent {
-  get componentList(): ComponentDoc[] {
-    return COMPONENT_DOCS || [];
+  get componentList(): ComponentMeta[] {
+    return COMPONENT_META || [];
   }
 }
