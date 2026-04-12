@@ -17,7 +17,7 @@ import { cvDefault, cvDefault_pl } from './default.data';
 import {
   CamelCaseFormatPipe,
   PhoneNumberFormatPipe,
-} from '@portfolio/shared-pack';
+} from '@portfolio/shared-pack/pipes';
 import {
   provideTranslocoScope,
   TranslocoModule,

@@ -19,6 +19,6 @@ export class GithubDocsSourceStrategy implements DocsSourceStrategy {
   }
 
   private buildUrl(id: string, exampleId: string, type: string) {
-    return `https://api.github.com/repos/Papros/Portfolio/contents/libs/docs/${id}/${exampleId}/${exampleId}.example.component.${type}`;
+    return `https://api.github.com/repos/Papros/Portfolio/contents/libs/docs/src/${id}/${exampleId}/${exampleId}.example.component.${type}`;
   }
 }

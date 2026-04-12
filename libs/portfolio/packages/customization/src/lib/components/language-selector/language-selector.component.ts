@@ -9,6 +9,7 @@ import {
 } from '@papros-it/multistate-slider';
 import { SliderExpandDirection } from '@papros-it/multistate-slider';
 import { TranslationService } from '../../services/translation.service';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'lib-language-selector',
@@ -18,6 +19,7 @@ import { TranslationService } from '../../services/translation.service';
     MultistateSliderComponent,
     SliderOptionComponent,
     MatTooltipModule,
+    TranslocoModule,
   ],
   templateUrl: './language-selector.component.html',
   styleUrl: './language-selector.component.scss',

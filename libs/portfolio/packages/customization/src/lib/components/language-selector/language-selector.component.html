@@ -1,4 +1,7 @@
 <pipr-multistate-slider
+  *transloco="let t"
+  matTooltipClass="lib-tooltip"
+  [matTooltip]="t('shared.ui.select-language-tooltip')"
   [value]="activeLang"
   [config]="sliderConfig"
   (valueChange)="onLanguageChange($event)"

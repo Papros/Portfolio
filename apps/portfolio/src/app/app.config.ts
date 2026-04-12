@@ -8,7 +8,7 @@ import {
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-import { IconService } from '@portfolio/shared-pack';
+import { IconService } from '@portfolio/shared-pack/services';
 import { persistenceProviders } from '@portfolio/persistence';
 import { ThemeService } from '@portfolio/customization';
 import { TranslocoHttpLoader } from './transloco-loader';

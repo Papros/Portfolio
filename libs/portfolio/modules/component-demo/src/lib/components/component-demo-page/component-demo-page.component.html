@@ -3,7 +3,12 @@
   [actions]="navigationActions"
   [isSticky]="false"
   (actionClick)="onNavigationAction($event)"
-></lib-navigation-bar>
+>
+  <div class="selector-container">
+    <lib-language-selector></lib-language-selector>
+    <lib-theme-selector></lib-theme-selector>
+  </div>
+</lib-navigation-bar>
 
 <div class="page-layout" data-section="design-system">
   <mat-drawer-container class="component-demo-drawer" autosize>

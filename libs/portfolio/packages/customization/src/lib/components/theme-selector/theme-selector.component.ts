@@ -9,6 +9,7 @@ import {
 } from '@papros-it/multistate-slider';
 import { ThemeMode } from '../../interfaces/theme.interface';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'lib-theme-selector',
@@ -18,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MultistateSliderComponent,
     SliderOptionComponent,
     MatTooltipModule,
+    TranslocoModule,
   ],
   templateUrl: './theme-selector.component.html',
   styleUrl: './theme-selector.component.scss',

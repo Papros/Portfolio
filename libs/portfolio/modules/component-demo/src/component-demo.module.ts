@@ -7,10 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
-  CamelCaseFormatPipe,
   NavigationBarComponent,
   SimpleMenuComponent,
-} from '@portfolio/shared-pack';
+} from '@portfolio/shared-pack/components';
+import { CamelCaseFormatPipe } from '@portfolio/shared-pack/pipes';
 import { ComponentDetailsComponent } from './lib/components/component-details/component-details.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentsGalleryComponent } from './lib/components/components-gallery/components-gallery.component';
@@ -35,6 +35,10 @@ import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-scss';
+import {
+  LanguageSelectorComponent,
+  ThemeSelectorComponent,
+} from '@portfolio/customization';
 
 const routes: Routes = [
   {
@@ -81,6 +85,8 @@ const routes: Routes = [
     ClipboardModule,
     CodeHighlightDirective,
     CamelCaseFormatPipe,
+    ThemeSelectorComponent,
+    LanguageSelectorComponent,
   ],
   providers: [DocsSourceFacade, provideGithubDocsSource()],
 })
