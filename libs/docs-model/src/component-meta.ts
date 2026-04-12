@@ -9,7 +9,7 @@ export const COMPONENT_META: ComponentMeta[] = [
     thumbnail: 'assets/images/component-demo/overlay-menu-icon.png',
   },
   {
-    id: 'overlay-menu',
+    id: 'multistate-slider',
     title: 'Multistate Slider',
     description:
       'A segmented control for selecting one value from a fixed set. Supports icons, projected content, and collapsible expand modes.',
