@@ -1,6 +1,9 @@
 <pipr-multistate-slider
+  *transloco="let t"
   [value]="themeService.mode()"
   [config]="sliderConfig"
+  matTooltipClass="lib-tooltip"
+  [matTooltip]="t('shared.ui.select-theme-tooltip')"
   (valueChange)="onThemeChange($event)"
 >
   <pipr-slider-option [value]="ThemeMode.Light">

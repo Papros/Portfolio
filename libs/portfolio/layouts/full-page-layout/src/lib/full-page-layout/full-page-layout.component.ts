@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { OverlayService } from '@portfolio/shared-pack';
+import { OverlayService } from '@portfolio/shared-pack/services';
 import {
   OverlayMenuState,
   OverlayMenuOption,

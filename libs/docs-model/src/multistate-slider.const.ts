@@ -11,6 +11,7 @@ import { ComponentDoc } from './component-details.interface';
 export const multistateSliderDoc: ComponentDoc = {
   id: 'multistate-slider',
   meta: {
+    id: 'multistate-slider',
     title: 'Multistate Slider',
     description:
       'A segmented control for selecting one value from a fixed set. Supports icons, projected content, and collapsible expand modes.',
@@ -47,18 +48,7 @@ export const multistateSliderDoc: ComponentDoc = {
         id: 'projected-content',
         title: 'Projected content',
         content:
-          'Instead of the `options` input you can project `pipr-slider-option` elements as children. ' +
-          'Each child becomes a fully custom template - useful for icons from icon fonts, images, or any inline HTML.\n\n' +
-          '```html\n' +
-          '<pipr-multistate-slider>\n' +
-          '  <pipr-slider-option [value]="\'light\'">\n' +
-          '    <mat-icon>light_mode</mat-icon>\n' +
-          '  </pipr-slider-option>\n' +
-          '  <pipr-slider-option [value]="\'dark\'">\n' +
-          '    <mat-icon>dark_mode</mat-icon>\n' +
-          '  </pipr-slider-option>\n' +
-          '</pipr-multistate-slider>\n' +
-          '```',
+          'Instead of the `options` input you can project `pipr-slider-option` elements as children. Each child becomes a fully custom template - useful for icons from icon fonts, images, or any inline HTML.',
       },
       {
         type: 'example',

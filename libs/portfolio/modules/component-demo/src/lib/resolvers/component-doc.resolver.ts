@@ -1,16 +1,18 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Router } from '@angular/router';
-import { COMPONENT_DOC_MAP, ComponentDoc } from '@docs-model';
+import { COMPONENT_REGISTRY, ComponentDoc } from '@docs-model';
+import { from } from 'rxjs';
 
 export const componentDocResolver: ResolveFn<ComponentDoc> = (route) => {
   const router = inject(Router);
-  const id = route.paramMap.get('component');
-  const doc = COMPONENT_DOC_MAP.get(id ?? '');
+  const id = route.paramMap.get('component') ?? '';
 
-  if (!doc) {
+  const loader = COMPONENT_REGISTRY[id];
+
+  if (!loader) {
     router.navigate(['/components']);
     throw new Error('Component not found');
   }
 
-  return doc;
+  return from(loader());
 };

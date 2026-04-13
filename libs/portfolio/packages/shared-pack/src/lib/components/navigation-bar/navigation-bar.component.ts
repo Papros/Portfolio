@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NavigationAction } from './navigation-bat.interface';
+import { NavigationAction } from './navigation-bar.interface';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -25,3 +25,5 @@ export class NavigationBarComponent {
   @Input() isSticky = true;
   @Output() actionClick = new EventEmitter<string>();
 }
+
+export { NavigationAction };

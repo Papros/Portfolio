@@ -4,8 +4,10 @@ mat-toolbar {
   width: 100%;
   height: 50px;
   background-color: get-color(primary-base);
-  gap: 32px;
   font-weight: 700;
+
+  display: flex;
+  flex-direction: row;
 
   &.sticky-toolbar {
     position: sticky;
@@ -13,23 +15,37 @@ mat-toolbar {
     z-index: 100;
   }
 
-  .toolbar-action-icon {
-    color: get-color(accent-surface);
-    padding: 6px 8px;
-    border-radius: 25px;
+  .action-container {
+    gap: 24px;
+    display: flex;
+    flex-direction: row;
 
-    span {
-      padding-bottom: 10px;
+    .toolbar-action-icon {
+      color: get-color(accent-surface);
+      padding: 6px 8px;
+      border-radius: 25px;
+
+      span {
+        padding-bottom: 10px;
+      }
+
+      &:hover {
+        background-color: get-color(accent-vibrant-dark);
+        color: get-color(accent-surface) !important;
+      }
+
+      &--active {
+        background-color: get-color(accent-surface);
+        color: get-color(accent-vibrant-dark) !important;
+      }
     }
 
-    &:hover {
-      background-color: get-color(accent-vibrant-dark);
-      color: get-color(accent-surface) !important;
+    @media (max-width: 767px) {
+      gap: 8px;
     }
+  }
 
-    &--active {
-      background-color: get-color(accent-surface);
-      color: get-color(accent-vibrant-dark) !important;
-    }
+  .navigation-container {
+    flex: 1;
   }
 }

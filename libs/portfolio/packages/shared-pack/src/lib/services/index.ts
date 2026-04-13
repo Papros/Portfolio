@@ -1,2 +1,2 @@
-export * from './overlay-service';
-export * from './icon-service';
+export { OverlayService } from './overlay-service';
+export { IconService } from './icon-service';

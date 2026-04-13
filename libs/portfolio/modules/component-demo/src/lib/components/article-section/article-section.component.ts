@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DocArticleSection } from '@docs-model';
 
 @Component({
@@ -6,6 +6,7 @@ import { DocArticleSection } from '@docs-model';
   standalone: false,
   templateUrl: './article-section.component.html',
   styleUrl: './article-section.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleSectionComponent {
   @Input() componentId!: string;

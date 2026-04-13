@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "contact": "Kontakt",
+    "skills": "Umiejętności",
+    "languages": "Języki",
+    "interests": "Zainteresowania",
+    "experience": "Doświadczenie",
+    "education": "Wykształcenie"
+  },
+  "actions": {
+    "print": "Drukuj",
+    "print_bw": "Drukuj czarno-białe",
+    "print_color": "Drukuj kolorowe",
+    "switch_bw": "Przełącz na czarno-białe",
+    "switch_color": "Przełącz na kolorowe",
+    "back_to_menu": "Wróć do menu"
+  },
+  "labels": {
+    "now": "obecnie",
+    "all_rights": "Wszelkie prawa zastrzeżone"
+  }
+}

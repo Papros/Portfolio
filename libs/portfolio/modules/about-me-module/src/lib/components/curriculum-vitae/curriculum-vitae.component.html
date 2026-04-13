@@ -1,270 +1,294 @@
-<div
-  *ngIf="cvDate"
-  class="cv-container"
-  data-section="cv"
-  [class.dark-mode]="isDarkMode"
->
-  <aside class="cv-sidebar">
-    <div class="sidebar-inner">
-      <div class="profile-block">
-        <div class="avatar-wrap">
-          <img
-            src="assets/images/cv/profile_photo.webp"
-            (error)="onImageError($event)"
-            class="avatar-img"
-            alt="Profile photo"
-          />
-          <div class="avatar-ring"></div>
+<ng-container *transloco="let t; scope: 'cv'; prefix: 'cv'">
+  <div
+    *ngIf="cvDate"
+    class="cv-container"
+    data-section="cv"
+    [class.dark-mode]="isDarkMode"
+  >
+    <aside class="cv-sidebar">
+      <div class="sidebar-inner">
+        <div class="profile-block">
+          <div class="avatar-wrap">
+            <img
+              src="assets/images/cv/profile_photo.webp"
+              (error)="onImageError($event)"
+              class="avatar-img"
+              alt="Profile photo"
+            />
+            <div class="avatar-ring"></div>
+          </div>
+          <h1 class="profile-name">
+            {{
+              cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
+            }}
+          </h1>
+          <p class="profile-role">{{ subtitle }}</p>
+
+          <div
+            class="print-fab mobile-only"
+            [class.print-fab--bw]="printMode() === 'bw'"
+          >
+            <lib-language-selector></lib-language-selector>
+            <lib-theme-selector></lib-theme-selector>
+            <button
+              class="print-fab__toggle"
+              (click)="togglePrintMode()"
+              [attr.aria-label]="
+                printMode() === 'color'
+                  ? t('actions.switch_bw')
+                  : t('actions.switch_color')
+              "
+              [attr.title]="
+                printMode() === 'color'
+                  ? t('actions.print_bw')
+                  : t('actions.print_color')
+              "
+            >
+              <mat-icon fontSet="material-icons-outlined">
+                {{ printMode() === 'color' ? 'light_mode' : 'dark_mode' }}
+              </mat-icon>
+            </button>
+            <button
+              class="print-fab__print"
+              (click)="printCV()"
+              [attr.aria-label]="t('actions.print')"
+              [attr.title]="t('actions.print')"
+            >
+              <mat-icon fontSet="material-icons-outlined">print</mat-icon>
+              <span class="print-fab__label">
+                {{
+                  printMode() === 'bw'
+                    ? t('actions.print_bw')
+                    : t('actions.print')
+                }}
+              </span>
+            </button>
+          </div>
         </div>
-        <h1 class="profile-name">
-          {{
-            cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
-          }}
-        </h1>
-        <p class="profile-role">{{ subtitle }}</p>
+
+        <div class="sidebar-divider"></div>
 
         <div
-          class="print-fab mobile-only"
-          [class.print-fab--bw]="printMode() === 'bw'"
+          class="sidebar-section"
+          *ngIf="cvDate.basicInfo.phone || cvDate.basicInfo.email"
         >
-          <button
-            class="print-fab__toggle"
-            (click)="togglePrintMode()"
-            [attr.aria-label]="
-              printMode() === 'color'
-                ? 'Switch to black & white'
-                : 'Switch to color'
-            "
-            [attr.title]="printMode() === 'color' ? 'B&W print' : 'Color print'"
-          >
-            <mat-icon fontSet="material-icons-outlined">
-              {{ printMode() === 'color' ? 'light_mode' : 'dark_mode' }}
-            </mat-icon>
-          </button>
-          <button
-            class="print-fab__print"
-            (click)="printCV()"
-            aria-label="Print CV"
-            title="Print / Save as PDF"
-          >
-            <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-            <span class="print-fab__label">
-              {{ printMode() === 'bw' ? 'Print B&W' : 'Print' }}
+          <span class="sidebar-label">{{ t('sections.contact') }}</span>
+          <div class="contact-list">
+            <a
+              *ngIf="cvDate.basicInfo.email"
+              [href]="'mailto:' + cvDate.basicInfo.email"
+              class="contact-item"
+            >
+              <span class="contact-icon">
+                <mat-icon>email</mat-icon>
+              </span>
+              <span>{{ cvDate.basicInfo.email }}</span>
+            </a>
+            <a
+              *ngIf="cvDate.basicInfo.phone"
+              [href]="'tel:' + cvDate.basicInfo.phone"
+              class="contact-item"
+            >
+              <span class="contact-icon">
+                <mat-icon>phone</mat-icon>
+              </span>
+              <span>{{ cvDate.basicInfo.phone | phoneNumberFormat }}</span>
+            </a>
+
+            <a
+              *ngFor="let link of cvDate.basicInfo.links"
+              [href]="'https://' + link.href"
+              target="_blank"
+              class="contact-item"
+            >
+              <span class="contact-icon">
+                <mat-icon>link</mat-icon>
+              </span>
+              <span>{{ link.alias }}</span>
+              <span class="link-raw">: {{ link.href }}</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-section" *ngIf="sortedSkills.length > 0">
+          <span class="sidebar-label">{{ t('sections.skills') }}</span>
+          <div class="skills-grid">
+            <span
+              *ngFor="let skill of sortedSkills"
+              class="skill-pill"
+              [class.skill-pill--active]="isSkillActive(skill.name)"
+              (mouseenter)="hoveredSkill.set(skill.name)"
+              (mouseleave)="hoveredSkill.set(null)"
+            >
+              {{ skill.name }}
             </span>
-          </button>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <span class="sidebar-label">{{ t('sections.languages') }}</span>
+          <div class="lang-list">
+            <div *ngFor="let language of cvDate.languages" class="lang-item">
+              <div class="lang-header">
+                <span class="lang-name">{{ language.name }}</span>
+                <span class="lang-level">{{ language.level }}</span>
+              </div>
+              <div class="lang-bar">
+                <div
+                  class="lang-fill"
+                  [style.width]="getLangWidth(language.level)"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby?.length">
+          <span class="sidebar-label">{{ t('sections.interests') }}</span>
+          <div class="hobby-list">
+            <div *ngFor="let h of cvDate.hobby" class="hobby-item">
+              <span class="hobby-name">{{ h.name }}</span>
+              <span class="hobby-desc">{{ h.desc }}</span>
+            </div>
+          </div>
         </div>
       </div>
+    </aside>
 
-      <div class="sidebar-divider"></div>
+    <main class="cv-main">
+      <header class="cv-header">
+        <div class="header-text">
+          <h2 class="header-name">
+            {{
+              cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
+            }}
+          </h2>
+          <p class="header-about">{{ cvDate.basicInfo.aboutMe }}</p>
+        </div>
+      </header>
 
-      <div
-        class="sidebar-section"
-        *ngIf="cvDate.basicInfo.phone || cvDate.basicInfo.email"
+      <section class="cv-section">
+        <div class="section-heading">
+          <span class="section-label">{{ t('sections.experience') }}</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="timeline">
+          <div
+            *ngFor="let job of cvDate.jobHistory; let i = index"
+            class="timeline-entry"
+            [style.animation-delay]="i * 80 + 'ms'"
+          >
+            <div class="tl-left">
+              <span class="tl-date-start">{{ job.startDate }}</span>
+              <span class="tl-date-sep">-</span>
+              <span class="tl-date-end">{{
+                job.endDate || t('labels.now')
+              }}</span>
+            </div>
+            <div class="tl-connector">
+              <div class="tl-dot" [class.tl-dot--current]="!job.endDate"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <span class="tl-company">{{ job.company }}</span>
+                <a
+                  class="tl-link"
+                  *ngIf="job.url"
+                  target="_blank"
+                  [href]="job.url"
+                  ><mat-icon>open_in_new</mat-icon></a
+                >
+                <span class="tl-position">{{ job.position }}</span>
+              </div>
+              <ul class="tl-desc-list">
+                <li *ngFor="let desc of job.description" class="tl-desc-item">
+                  {{ desc }}
+                </li>
+              </ul>
+              <div class="tl-tags">
+                <span
+                  *ngFor="let skill of job.skills"
+                  class="tl-tag"
+                  [class.tl-tag--active]="isSkillActive(skill)"
+                  (mouseenter)="hoveredSkill.set(skill)"
+                  (mouseleave)="hoveredSkill.set(null)"
+                  >{{ skill }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <div class="section-heading">
+          <span class="section-label">{{ t('sections.education') }}</span>
+          <div class="section-line"></div>
+        </div>
+        <div class="education-list">
+          <div *ngFor="let edu of cvDate.education" class="edu-entry">
+            <div class="edu-main">
+              <span class="edu-school">{{ edu.schoolName }}</span>
+              <span class="edu-year">{{ edu.endDate }}</span>
+            </div>
+            <p class="edu-course">{{ edu.curseName }}</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="cv-section cv-footer">
+        <div class="footer-option print-none">
+          <a href="/Portfolio/menu">
+            <mat-icon>arrow_left</mat-icon> {{ t('actions.back_to_menu') }}
+          </a>
+        </div>
+        <div class="footer-option--center">
+          &copy; {{ currentYear }}
+          {{
+            cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
+          }}. {{ t('labels.all_rights') }}.
+        </div>
+      </footer>
+    </main>
+
+    <div class="print-fab desktop-only print-fab--bw">
+      <lib-language-selector></lib-language-selector>
+      <lib-theme-selector></lib-theme-selector>
+      <button
+        class="print-fab__toggle"
+        (click)="togglePrintMode()"
+        [attr.aria-label]="
+          printMode() === 'color'
+            ? t('actions.switch_bw')
+            : t('actions.switch_color')
+        "
+        [attr.title]="
+          printMode() === 'color'
+            ? t('actions.print_bw')
+            : t('actions.print_color')
+        "
       >
-        <span class="sidebar-label">Contact</span>
-        <div class="contact-list">
-          <a
-            *ngIf="cvDate.basicInfo.email"
-            [href]="'mailto:' + cvDate.basicInfo.email"
-            class="contact-item"
-          >
-            <span class="contact-icon">
-              <mat-icon>email</mat-icon>
-            </span>
-            <span>{{ cvDate.basicInfo.email }}</span>
-          </a>
-
-          <a
-            *ngIf="cvDate.basicInfo.phone"
-            [href]="'tel:' + cvDate.basicInfo.phone"
-            class="contact-item"
-          >
-            <span class="contact-icon">
-              <mat-icon>phone</mat-icon>
-            </span>
-            <span>{{ cvDate.basicInfo.phone | phoneNumberFormat }}</span>
-          </a>
-
-          <a
-            *ngFor="let link of cvDate.basicInfo.links"
-            [href]="'https://' + link.href"
-            target="_blank"
-            class="contact-item"
-          >
-            <span class="contact-icon">
-              <mat-icon>link</mat-icon>
-            </span>
-            <span>{{ link.alias }}</span>
-            <span class="link-raw">: {{ link.href }}</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="sidebar-section" *ngIf="sortedSkills.length > 0">
-        <span class="sidebar-label">Skills</span>
-        <div class="skills-grid">
-          <span
-            *ngFor="let skill of sortedSkills"
-            class="skill-pill"
-            [class.skill-pill--active]="isSkillActive(skill.name)"
-            (mouseenter)="hoveredSkill.set(skill.name)"
-            (mouseleave)="hoveredSkill.set(null)"
-          >
-            {{ skill.name }}
-          </span>
-        </div>
-      </div>
-
-      <div class="sidebar-section">
-        <span class="sidebar-label">Languages</span>
-        <div class="lang-list">
-          <div *ngFor="let language of cvDate.languages" class="lang-item">
-            <div class="lang-header">
-              <span class="lang-name">{{ language.name }}</span>
-              <span class="lang-level">{{ language.level }}</span>
-            </div>
-            <div class="lang-bar">
-              <div
-                class="lang-fill"
-                [style.width]="getLangWidth(language.level)"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby?.length">
-        <span class="sidebar-label">Interests</span>
-        <div class="hobby-list">
-          <div *ngFor="let h of cvDate.hobby" class="hobby-item">
-            <span class="hobby-name">{{ h.name }}</span>
-            <span class="hobby-desc">{{ h.desc }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <main class="cv-main">
-    <header class="cv-header">
-      <div class="header-text">
-        <h2 class="header-name">
+        <mat-icon fontSet="material-icons-outlined">
+          {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
+        </mat-icon>
+      </button>
+      <button
+        class="print-fab__print"
+        (click)="printCV()"
+        [attr.aria-label]="t('actions.print')"
+        [attr.title]="t('actions.print')"
+      >
+        <mat-icon fontSet="material-icons-outlined">print</mat-icon>
+        <span class="print-fab__label">
           {{
-            cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
+            printMode() === 'bw'
+              ? t('actions.print_bw')
+              : t('actions.print_color')
           }}
-        </h2>
-        <p class="header-about">{{ cvDate.basicInfo.aboutMe }}</p>
-      </div>
-    </header>
-
-    <section class="cv-section">
-      <div class="section-heading">
-        <span class="section-label">Experience</span>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="timeline">
-        <div
-          *ngFor="let job of cvDate.jobHistory; let i = index"
-          class="timeline-entry"
-          [style.animation-delay]="i * 80 + 'ms'"
-        >
-          <div class="tl-left">
-            <span class="tl-date-start">{{ job.startDate }}</span>
-            <span class="tl-date-sep">-</span>
-            <span class="tl-date-end">{{ job.endDate || 'now' }}</span>
-          </div>
-          <div class="tl-connector">
-            <div class="tl-dot" [class.tl-dot--current]="!job.endDate"></div>
-            <div class="tl-line"></div>
-          </div>
-          <div class="tl-content">
-            <div class="tl-header">
-              <span class="tl-company">{{ job.company }}</span>
-              <a
-                class="tl-link"
-                *ngIf="job.url"
-                target="_blank"
-                [href]="job.url"
-                ><mat-icon>open_in_new</mat-icon></a
-              >
-              <span class="tl-position">{{ job.position }}</span>
-            </div>
-            <ul class="tl-desc-list">
-              <li *ngFor="let desc of job.description" class="tl-desc-item">
-                {{ desc }}
-              </li>
-            </ul>
-            <div class="tl-tags">
-              <span
-                *ngFor="let skill of job.skills"
-                class="tl-tag"
-                [class.tl-tag--active]="isSkillActive(skill)"
-                (mouseenter)="hoveredSkill.set(skill)"
-                (mouseleave)="hoveredSkill.set(null)"
-                >{{ skill }}</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cv-section">
-      <div class="section-heading">
-        <span class="section-label">Education</span>
-        <div class="section-line"></div>
-      </div>
-      <div class="education-list">
-        <div *ngFor="let edu of cvDate.education" class="edu-entry">
-          <div class="edu-main">
-            <span class="edu-school">{{ edu.schoolName }}</span>
-            <span class="edu-year">{{ edu.endDate }}</span>
-          </div>
-          <p class="edu-course">{{ edu.curseName }}</p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="cv-section cv-footer">
-      <div class="footer-option print-none">
-        <a href="/Portfolio/menu">
-          <mat-icon>arrow_left</mat-icon> Back to menu</a
-        >
-      </div>
-      <div class="footer-option--center">
-        &copy; {{ currentYear }}
-        {{
-          cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
-        }}. All rights reserved.
-      </div>
-    </footer>
-  </main>
-
-  <div class="print-fab desktop-only print-fab--bw">
-    <button
-      class="print-fab__toggle"
-      (click)="togglePrintMode()"
-      [attr.aria-label]="
-        printMode() === 'color' ? 'Switch to black & white' : 'Switch to color'
-      "
-      [attr.title]="printMode() === 'color' ? 'B&W print' : 'Color print'"
-    >
-      <mat-icon fontSet="material-icons-outlined">
-        {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
-      </mat-icon>
-    </button>
-
-    <button
-      class="print-fab__print"
-      (click)="printCV()"
-      aria-label="Print CV"
-      title="Print / Save as PDF"
-    >
-      <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-      <span class="print-fab__label">
-        {{ printMode() === 'bw' ? 'Print B&W' : 'Print color' }}
-      </span>
-    </button>
+        </span>
+      </button>
+    </div>
   </div>
-</div>
+</ng-container>

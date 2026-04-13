@@ -1,0 +1,8 @@
+{
+  "shared": {
+    "ui": {
+      "select-theme-tooltip": "Zmień motyw",
+      "select-language-tooltip": "Zmień język"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { ITSkill } from '@portfolio/shared-pack';
+import { ITSkill } from '@portfolio/shared-pack/interfaces';
 
 export interface CurriculumVitaeInterface {
   basicInfo: {

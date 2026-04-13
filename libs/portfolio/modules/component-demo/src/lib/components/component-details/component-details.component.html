@@ -2,19 +2,19 @@
   <mat-tab-group mat-stretch-tabs="false">
     <mat-tab label="Overview">
       <lib-component-overview
-        [componentId]="component.id"
+        [componentId]="component.meta.id"
         [overview]="component.overview"
       ></lib-component-overview>
     </mat-tab>
 
     <mat-tab label="API">
-      <lib-component-api [componentId]="component.id" [docApi]="component.api">
+      <lib-component-api [componentId]="component.meta.id" [docApi]="component.api">
       </lib-component-api>
     </mat-tab>
 
     <mat-tab label="Examples">
       <lib-component-example
-        [componentId]="component.id"
+        [componentId]="component.meta.id"
         [examples]="component.examples"
       ></lib-component-example>
     </mat-tab>

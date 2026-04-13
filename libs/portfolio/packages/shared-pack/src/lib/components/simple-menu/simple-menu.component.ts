@@ -23,3 +23,5 @@ export class SimpleMenuComponent {
   @Input()
   actions: SimpleMenuAction[] = [];
 }
+
+export { SimpleMenuAction };

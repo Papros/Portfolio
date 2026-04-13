@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NavigationAction, SimpleMenuAction } from '@portfolio/shared-pack';
+import {
+  NavigationAction,
+  SimpleMenuAction,
+} from '@portfolio/shared-pack/components';
 import { Router } from '@angular/router';
 import { MatDrawer } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';

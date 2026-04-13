@@ -1,9 +1,9 @@
 <div class="component-demo-card-list">
   @for (component of componentList; track component.id) {
     <lib-demo-card
-      [title]="component.meta.title"
-      [imageSrc]="component.meta.thumbnail"
-      [desc]="component.meta.description"
+      [title]="component.title"
+      [imageSrc]="component.thumbnail"
+      [desc]="component.description"
       [routingAction]="[component.id]"
     ></lib-demo-card>
   }

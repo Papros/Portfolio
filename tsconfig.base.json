@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@docs": ["libs/docs/index.ts"],
-      "@docs/*": ["libs/docs/src/*/index.ts"],
       "@docs-model": ["libs/docs-model/index.ts"],
+      "@docs/*": ["libs/docs/src/*/index.ts"],
       "@environments": ["apps/portfolio/src/environments/index.ts"],
       "@papros-it": ["libs/ui/index.ts"],
       "@papros-it/*": ["libs/ui/*/src/index.ts"],
@@ -32,6 +32,9 @@
       ],
       "@portfolio/customization": [
         "libs/portfolio/packages/customization/src/index.ts"
+      ],
+      "@portfolio/customization/*": [
+        "libs/portfolio/packages/customization/src/lib/*"
       ],
       "@portfolio/default-layout": [
         "libs/portfolio/layouts/default-layout/src/index.ts"
@@ -58,6 +61,9 @@
       ],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
+      ],
+      "@portfolio/shared-pack/*": [
+        "libs/portfolio/packages/shared-pack/src/lib/*"
       ],
       "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
     }

@@ -1,12 +1,6 @@
 import { ComponentDoc } from './component-details.interface';
-import { overlayMenuDoc } from './overlay-menu.const';
-import { multistateSliderDoc } from './multistate-slider.const';
 
-export const COMPONENT_DOCS: ComponentDoc[] = [
-  overlayMenuDoc,
-  multistateSliderDoc,
-];
-
-export const COMPONENT_DOC_MAP = new Map(
-  COMPONENT_DOCS.map((doc) => [doc.id, doc]),
-);
+export const COMPONENT_REGISTRY: Record<string, () => Promise<ComponentDoc>> = {
+  'overlay-menu': () => import('./overlay-menu.const').then(m => m.overlayMenuDoc),
+  'multistate-slider': () => import('./multistate-slider.const').then(m => m.multistateSliderDoc),
+};

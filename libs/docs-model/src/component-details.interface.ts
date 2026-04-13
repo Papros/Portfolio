@@ -12,6 +12,7 @@ export interface ComponentDoc {
 }
 
 export interface ComponentMeta {
+  id: string;
   title: string;
   description: string;
   thumbnail: string;
@@ -32,7 +33,7 @@ export interface DocApiProperty {
 export interface ExampleDef {
   title: string;
   description: string;
-  component: Type<unknown>;
+  component: Type<unknown> | (() => Promise<Type<unknown>>);
   code?: {
     ts?: boolean;
     html?: boolean;

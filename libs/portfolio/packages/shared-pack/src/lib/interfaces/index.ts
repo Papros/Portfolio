@@ -1,3 +1,3 @@
-export * from './skills.enum';
-export * from './app-routing.enum';
-export * from './menu-option.interface';
+export { ITSkill } from './skills.enum';
+export { AppRouting } from './app-routing.enum';
+export { MenuOption } from './menu-option.interface';
