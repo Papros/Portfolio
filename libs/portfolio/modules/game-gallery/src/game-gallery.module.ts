@@ -5,6 +5,7 @@ import {
   GameGalleryComponent,
   GameGalleryPageComponent,
 } from './lib/components';
+import { DateTimePickerComponent } from '@papros-it/date-time-picker';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [GameGalleryPageComponent, GameGalleryComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), DateTimePickerComponent],
   providers: [],
 })
 export class GameGalleryModule {}

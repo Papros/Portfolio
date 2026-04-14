@@ -1,0 +1,32 @@
+@switch (variant) {
+      @case ('clock') {
+        <pipr-time-clock
+          [value]="timeValue()"
+          [disabled]="isDisabled()"
+          [use12h]="use12h"
+          (timeChange)="onTimeChange($event)"
+          (touched)="onTouched()"
+        />
+      }
+      @case ('scroll') {
+        <pipr-time-scroll
+          [value]="timeValue()"
+          [disabled]="isDisabled()"
+          [minuteStep]="minuteStep"
+          (timeChange)="onTimeChange($event)"
+          (touched)="onTouched()"
+        />
+      }
+      @default {
+        <pipr-time-input
+          [value]="timeValue()"
+          [disabled]="isDisabled()"
+          [label]="label"
+          [appearance]="appearance"
+          [min]="minTime"
+          [max]="maxTime"
+          (timeChange)="onTimeChange($event)"
+          (touched)="onTouched()"
+        />
+      }
+    }

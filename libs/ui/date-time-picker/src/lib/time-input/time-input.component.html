@@ -1,0 +1,23 @@
+<mat-form-field [appearance]="appearance" class="pipr-time-input">
+      <mat-label>{{ label }}</mat-label>
+
+      <input
+        #inputEl
+        matInput
+        type="text"
+        inputmode="numeric"
+        maxlength="5"
+        placeholder="HH:MM"
+        [value]="displayValue"
+        [disabled]="disabled"
+        (input)="onRawInput($event)"
+        (blur)="onBlur()"
+        (keydown)="onKeydown($event)"
+      />
+
+      <mat-icon matSuffix fontSet="material-icons-outlined">schedule</mat-icon>
+
+      @if (error) {
+        <mat-error>{{ error }}</mat-error>
+      }
+</mat-form-field>

@@ -1,0 +1,139 @@
+@import '../styles/tokens';
+
+.pipr-clock {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    user-select: none;
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--pipr-surface);
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--pipr-on-surface) 8%, transparent);
+}
+ 
+/* Header */
+.pipr-clock__header {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 20px 20px 16px;
+    background: var(--pipr-primary-container);
+}
+
+.pipr-clock__segment {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    min-width: 80px;
+    height: 68px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: var(--pipr-on-primary-container);
+    background: transparent;
+    opacity: 0.55;
+    transition: background 0.15s, opacity 0.15s;
+
+    &--active {
+    background: var(--pipr-primary);
+    color: var(--pipr-on-primary);
+    opacity: 1;
+    }
+
+    &:hover:not(.pipr-clock__segment--active) {
+    opacity: 0.8;
+    background: color-mix(in srgb, var(--pipr-on-primary-container) 10%, transparent);
+    }
+}
+
+.pipr-clock__colon {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--pipr-on-primary-container);
+    opacity: 0.55;
+    padding: 0 2px;
+    line-height: 1;
+}
+
+.pipr-clock__ampm {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 10px;
+}
+
+.pipr-clock__ampm-btn {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1.5px solid color-mix(in srgb, var(--pipr-on-primary-container) 40%, transparent);
+    cursor: pointer;
+    background: transparent;
+    color: var(--pipr-on-primary-container);
+    opacity: 0.6;
+    transition: all 0.15s;
+
+    &--active {
+    background: var(--pipr-primary);
+    color: var(--pipr-on-primary);
+    border-color: var(--pipr-primary);
+    opacity: 1;
+    }
+}
+
+/* Face */
+.pipr-clock__face-wrapper {
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    align-self: center;
+}
+
+.pipr-clock__face {
+    width: 100%;
+    height: 100%;
+}
+
+.pipr-clock__bg {
+    fill: var(--pipr-surface-variant);
+}
+
+.pipr-clock__hand {
+    stroke: var(--pipr-primary);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.pipr-clock__center {
+    fill: var(--pipr-primary);
+}
+
+.pipr-clock__thumb {
+    fill: var(--pipr-primary);
+}
+
+.pipr-clock__hover {
+    fill: var(--pipr-on-surface);
+    opacity: 0.1;
+}
+
+.pipr-clock__number {
+    font-size: 13.5px;
+    font-family: inherit;
+    fill: var(--pipr-on-surface);
+    pointer-events: none;
+
+    &--inner {
+    font-size: 11.5px;
+    fill: var(--pipr-on-surface-variant);
+    }
+
+    &--selected {
+    fill: var(--pipr-on-primary);
+    font-weight: 500;
+    }
+}

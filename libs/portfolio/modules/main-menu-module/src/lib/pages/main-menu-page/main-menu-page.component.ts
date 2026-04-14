@@ -9,7 +9,6 @@ import {
 import {
   provideTranslocoScope,
   TranslocoModule,
-  TranslocoService,
 } from '@jsverse/transloco';
 
 @Component({

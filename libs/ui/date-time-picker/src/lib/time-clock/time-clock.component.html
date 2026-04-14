@@ -1,0 +1,83 @@
+ <div class="pipr-clock">
+ 
+      <!---- Header ---->
+      <div class="pipr-clock__header">
+        <button
+          class="pipr-clock__segment"
+          [class.pipr-clock__segment--active]="mode() === 'hours'"
+          (click)="mode.set('hours')"
+        >{{ hoursDisplay() }}</button>
+ 
+        <span class="pipr-clock__colon">:</span>
+ 
+        <button
+          class="pipr-clock__segment"
+          [class.pipr-clock__segment--active]="mode() === 'minutes'"
+          (click)="mode.set('minutes')"
+        >{{ minutesDisplay() }}</button>
+ 
+        @if (use12h) {
+          <div class="pipr-clock__ampm">
+            <button
+              class="pipr-clock__ampm-btn"
+              [class.pipr-clock__ampm-btn--active]="ampm() === 'AM'"
+              (click)="setAmPm('AM')"
+            >AM</button>
+            <button
+              class="pipr-clock__ampm-btn"
+              [class.pipr-clock__ampm-btn--active]="ampm() === 'PM'"
+              (click)="setAmPm('PM')"
+            >PM</button>
+          </div>
+        }
+      </div>
+ 
+      <!---- Clock face ---->
+      <div class="pipr-clock__face-wrapper">
+        <svg
+          [attr.viewBox]="'0 0 ' + size + ' ' + size"
+          class="pipr-clock__face"
+          (click)="onFaceClick($event)"
+          (mousemove)="onFaceHover($event)"
+          (mouseleave)="hoverPos.set(null)"
+        >
+          <circle [attr.cx]="cx" [attr.cy]="cy" [attr.r]="cy - 8" class="pipr-clock__bg" />
+ 
+          <line
+            [attr.x1]="cx" [attr.y1]="cy"
+            [attr.x2]="handX()" [attr.y2]="handY()"
+            class="pipr-clock__hand"
+          />
+ 
+          <circle [attr.cx]="cx" [attr.cy]="cy" r="4" class="pipr-clock__center" />
+ 
+          <circle
+            [attr.cx]="handX()" [attr.cy]="handY()"
+            [attr.r]="thumbR"
+            class="pipr-clock__thumb"
+          />
+ 
+          @if (hoverPos() !== null) {
+            <circle
+              [attr.cx]="hoverPos()!.x"
+              [attr.cy]="hoverPos()!.y"
+              r="14"
+              class="pipr-clock__hover"
+            />
+          }
+ 
+          @for (item of faceItems(); track item.label) {
+            <text
+              [attr.x]="item.x"
+              [attr.y]="item.y"
+              text-anchor="middle"
+              dominant-baseline="central"
+              class="pipr-clock__number"
+              [class.pipr-clock__number--inner]="item.inner"
+              [class.pipr-clock__number--selected]="item.selected"
+            >{{ item.label }}</text>
+          }
+        </svg>
+      </div>
+ 
+    </div>

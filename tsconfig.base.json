@@ -21,6 +21,7 @@
       "@environments": ["apps/portfolio/src/environments/index.ts"],
       "@papros-it": ["libs/ui/index.ts"],
       "@papros-it/*": ["libs/ui/*/src/index.ts"],
+      "@papros-it/date-time-picker": ["libs/ui/date-time-picker/src/index.ts"],
       "@portfolio/about-me-module": [
         "libs/portfolio/modules/about-me-module/src/index.ts"
       ],

@@ -1,0 +1,10 @@
+:host {
+    --pipr-primary:              var(--mat-sys-primary,              #6750A4);
+    --pipr-on-primary:           var(--mat-sys-on-primary,           #FFFFFF);
+    --pipr-primary-container:    var(--mat-sys-primary-container,    #EADDFF);
+    --pipr-on-primary-container: var(--mat-sys-on-primary-container, #21005D);
+    --pipr-surface:              var(--mat-sys-surface,              #FFFBFE);
+    --pipr-surface-variant:      var(--mat-sys-surface-variant,      #E7E0EC);
+    --pipr-on-surface:           var(--mat-sys-on-surface,           #1C1B1F);
+    --pipr-on-surface-variant:   var(--mat-sys-on-surface-variant,   #49454F);
+}

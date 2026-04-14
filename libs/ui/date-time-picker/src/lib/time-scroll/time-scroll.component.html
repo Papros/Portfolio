@@ -1,0 +1,47 @@
+<div class="pipr-scroll">
+      <!-- Hours drum -->
+      <div class="pipr-scroll__drum-wrapper">
+        <div
+          #hoursDrum
+          class="pipr-scroll__drum"
+          (scroll)="onHoursScroll($event)"
+        >
+          <div class="pipr-scroll__padding"></div>
+          @for (h of hours; track h) {
+            <div
+              class="pipr-scroll__item"
+              [class.pipr-scroll__item--selected]="h === selectedHours()"
+              (click)="scrollToHour(h)"
+            >
+              {{ h | number: '2.0-0' }}
+            </div>
+          }
+          <div class="pipr-scroll__padding"></div>
+        </div>
+        <div class="pipr-scroll__selection-bar"></div>
+      </div>
+
+      <span class="pipr-scroll__colon">:</span>
+
+      <!-- Minutes drum -->
+      <div class="pipr-scroll__drum-wrapper">
+        <div
+          #minutesDrum
+          class="pipr-scroll__drum"
+          (scroll)="onMinutesScroll($event)"
+        >
+          <div class="pipr-scroll__padding"></div>
+          @for (m of minutes; track m) {
+            <div
+              class="pipr-scroll__item"
+              [class.pipr-scroll__item--selected]="m === selectedMinutes()"
+              (click)="scrollToMinute(m)"
+            >
+              {{ m | number: '2.0-0' }}
+            </div>
+          }
+          <div class="pipr-scroll__padding"></div>
+        </div>
+        <div class="pipr-scroll__selection-bar"></div>
+      </div>
+    </div>

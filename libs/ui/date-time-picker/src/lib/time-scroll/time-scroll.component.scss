@@ -1,0 +1,73 @@
+@use "sass:math";
+
+$ITEM_HEIGHT: 44px;
+$VISIBLE_ITEMS: 5; // musi być nieparzyste
+
+.pipr-scroll {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: $ITEM_HEIGHT * $VISIBLE_ITEMS;
+}
+
+.pipr-scroll__drum-wrapper {
+  position: relative;
+  height: 100%;
+  width: 72px;
+}
+
+.pipr-scroll__drum {
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.pipr-scroll__padding {
+  height: $ITEM_HEIGHT * math.floor($VISIBLE_ITEMS / 2);
+  flex-shrink: 0;
+}
+
+.pipr-scroll__item {
+  height: $ITEM_HEIGHT;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--mat-sys-on-surface);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.15s, font-weight 0.15s;
+
+  &--selected {
+    opacity: 1;
+    font-weight: 600;
+    color: var(--mat-sys-primary);
+  }
+}
+
+.pipr-scroll__selection-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: $ITEM_HEIGHT;
+  transform: translateY(-50%);
+  border-top: 2px solid var(--mat-sys-outline-variant);
+  border-bottom: 2px solid var(--mat-sys-outline-variant);
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+.pipr-scroll__colon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--mat-sys-on-surface);
+  padding: 0 4px;
+}
