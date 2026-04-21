@@ -1,0 +1,2 @@
+import{Fb as i,Gb as r,Kc as a,Wb as o,ib as n}from"./chunk-6IAWNNMP.js";var m=(()=>{class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=n({type:e,selectors:[["lib-tutorial-menu-page"]],decls:3,vars:0,template:function(t,l){t&1&&(i(0,"p"),o(1,"tutorial-menu-page works!"),r(),o(2,`
+TUTORIAL!`))},dependencies:[a],encapsulation:2})}return e})();var M=[{path:"",component:m}];export{M as TUTORIAL_ROUTES};
