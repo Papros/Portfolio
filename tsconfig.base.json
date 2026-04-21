@@ -65,6 +65,10 @@
       "@portfolio/shared-pack/*": [
         "libs/portfolio/packages/shared-pack/src/lib/*"
       ],
+      "@portfolio/tutorial-module": [
+        "libs/portfolio/modules/tutorial-module/src/tutorial.routing.ts"
+      ],
+      "@portfolio/rxjs-tutorial": ["libs/tutorials/rxjs-tutorial/src/index.ts"],
       "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
     }
   },
