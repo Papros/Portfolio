@@ -1,0 +1,16 @@
+<div class="track-container">
+  {{ simulatedTime() }}
+  <div class="marble-track">
+    @for (marble of trackData()?.stream; track marble.timeInterval) {
+      <div
+        class="marble"
+        [class.--active]="marble.timeInterval < simulatedTime()"
+        [style.left]="calcPosition(marble.timeInterval) + '%'"
+      >
+        {{ marble.label }}
+      </div>
+    } @empty {
+      <span> Add some event </span>
+    }
+  </div>
+</div>

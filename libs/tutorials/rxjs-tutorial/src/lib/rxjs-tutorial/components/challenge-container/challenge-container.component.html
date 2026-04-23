@@ -1,0 +1,29 @@
+<div class="challenge-container">
+  @for (source of challengeData.data.sourceStream; track source.label) {
+    <lib-marble-track
+      [maxTime]="100"
+      [simulatedTime]="timeValue()"
+      [trackData]="source"
+    ></lib-marble-track>
+  } @empty {
+    <span> No source defined </span>
+  }
+
+  <lib-pipe-container
+    [operators]="challengeData.data.pipe"
+  ></lib-pipe-container>
+
+  <lib-marble-track
+    [maxTime]="100"
+    [simulatedTime]="timeValue()"
+    [trackData]="challengeData.data.outputStream"
+  ></lib-marble-track>
+
+  <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+    <input
+      matSliderThumb
+      [value]="timeValue()"
+      (valueChange)="onSliderChange($event)"
+    />
+  </mat-slider>
+</div>

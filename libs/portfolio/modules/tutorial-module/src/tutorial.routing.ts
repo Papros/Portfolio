@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { TutorialMenuPageComponent } from './lib/pages/tutorial-menu-page/tutorial-menu-page.component';
+import { ChallengeContainerComponent } from '@portfolio/rxjs-tutorial';
 
 export const TUTORIAL_ROUTES: Routes = [
   {
     path: '',
-    component: TutorialMenuPageComponent,
+    component: ChallengeContainerComponent,
   },
   // {
   //   path: 'rxjs',

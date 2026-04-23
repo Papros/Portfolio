@@ -59,6 +59,7 @@
       "@portfolio/persistence": [
         "libs/portfolio/packages/persistence/src/index.ts"
       ],
+      "@portfolio/rxjs-tutorial": ["libs/tutorials/rxjs-tutorial/src/index.ts"],
       "@portfolio/shared-pack": [
         "libs/portfolio/packages/shared-pack/src/index.ts"
       ],
@@ -68,7 +69,6 @@
       "@portfolio/tutorial-module": [
         "libs/portfolio/modules/tutorial-module/src/tutorial.routing.ts"
       ],
-      "@portfolio/rxjs-tutorial": ["libs/tutorials/rxjs-tutorial/src/index.ts"],
       "@styles/themes": ["apps/portfolio/src/styles/style-themes.scss"]
     }
   },

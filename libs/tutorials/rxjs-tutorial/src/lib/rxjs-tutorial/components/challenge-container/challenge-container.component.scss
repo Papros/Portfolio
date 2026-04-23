@@ -1,0 +1,13 @@
+.challenge-container {
+  width: 100%;
+  padding: 16px;
+  background-color: rgb(255, 248, 217);
+
+  --mdc-slider-inactive-track-color: #acacac;
+  --mdc-slider-with-tick-marks-active-container-color: #ff0000;
+
+  mat-slider {
+    width: 100%;
+    color: #000;
+  }
+}

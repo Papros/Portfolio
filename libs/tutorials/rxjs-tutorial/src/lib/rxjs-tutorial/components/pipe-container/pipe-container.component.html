@@ -1,0 +1,12 @@
+<div class="operators-container">
+  @for (operator of operators(); track operator.operator) {
+    <div class="single-operator">
+      <label>{{ operator.operator }}</label>
+      <span class="operator-code">
+        (data) => <span>{{ operator.code }}</span>
+      </span>
+    </div>
+  } @empty {
+    <span>No operator found</span>
+  }
+</div>

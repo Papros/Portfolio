@@ -1,1 +1,1 @@
-export * from './lib/rxjs-tutorial/components/tutorial-container/tutorial-container.component';
+export * from './lib/rxjs-tutorial/components/challenge-container/challenge-container.component';
