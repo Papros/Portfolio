@@ -1,2 +1,41 @@
-<p>tutorial-menu-page works!</p>
-TUTORIAL!
+<div class="menu-page">
+  <header class="page-header">
+    <h1 class="page-title">Tutorials</h1>
+    <p class="page-subtitle">Interaktywne narzędzia do nauki Angulara i RxJS</p>
+  </header>
+
+  <ul class="tutorial-list">
+    @for (tutorial of tutorials; track tutorial.route) {
+      <li class="tutorial-card" [class.is-unavailable]="!tutorial.available">
+        @if (tutorial.available) {
+          <a class="card-link" [routerLink]="tutorial.route">
+            <ng-container
+              *ngTemplateOutlet="cardContent; context: { $implicit: tutorial }"
+            />
+          </a>
+        } @else {
+          <div class="card-link">
+            <ng-container
+              *ngTemplateOutlet="cardContent; context: { $implicit: tutorial }"
+            />
+          </div>
+        }
+      </li>
+    }
+  </ul>
+</div>
+
+<ng-template #cardContent let-tutorial>
+  <div class="card-body">
+    <span class="card-title">{{ tutorial.title }}</span>
+    @if (!tutorial.available) {
+      <span class="card-soon">wkrótce</span>
+    }
+  </div>
+  <p class="card-desc">{{ tutorial.description }}</p>
+  <ul class="card-tags">
+    @for (tag of tutorial.tags; track tag) {
+      <li class="tag">{{ tag }}</li>
+    }
+  </ul>
+</ng-template>

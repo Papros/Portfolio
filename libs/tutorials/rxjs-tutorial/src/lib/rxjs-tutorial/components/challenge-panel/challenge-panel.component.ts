@@ -5,6 +5,6 @@ import { CommonModule } from '@angular/common';
   selector: 'lib-challenge-panel',
   imports: [CommonModule],
   templateUrl: './challenge-panel.component.html',
-  styleUrl: './challenge-panel..component.scss',
+  styleUrl: './challenge-panel.component.scss',
 })
 export class ChallengePanelComponent {}

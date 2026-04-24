@@ -1,26 +1,175 @@
-.track-container {
+@use '../../styles/rxjs-tokens.scss' as tokens;
+@include tokens.apply();
+
+:host {
+  display: block;
   width: 100%;
+}
 
-  .marble-track {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: #2a7c27;
+.track-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s;
 
-    .marble {
-      position: relative;
-      border: 4px dashed #2f662d;
-      background-color: #bce6bb;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      text-justify: center;
+  &:hover:not(.--locked) {
+    background: rgba(var(--rxjs-accent-rgb), 0.04);
+  }
 
-      &.--active {
-        background-color: #8ab489;
-        border: 4px solid #2f662d;
-      }
+  &.--focused {
+    background: rgba(var(--rxjs-accent-rgb), 0.08);
+  }
+
+  &.--locked {
+    cursor: default;
+    opacity: 0.75;
+  }
+}
+
+.track-label {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--rxjs-text-secondary);
+  width: 56px;
+  text-align: right;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.track-line-area {
+  position: relative;
+  flex: 1;
+  height: 48px;
+}
+
+.track-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 16px;
+  height: 1.5px;
+  background: var(--rxjs-track-line);
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.track-arrow {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--rxjs-track-line);
+  border-right: 1.5px solid var(--rxjs-track-line);
+}
+
+.tick {
+  position: absolute;
+  top: calc(50% - 5px);
+  width: 1px;
+  height: 10px;
+  background: var(--rxjs-tick-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+//------------ Marbles --------------------------
+
+.marble {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  transition:
+    box-shadow 0.15s,
+    opacity 0.2s,
+    transform 0.15s;
+
+  border: 2px solid transparent;
+  opacity: 0.35;
+
+  &.--active {
+    opacity: 1;
+  }
+
+  &.--focused {
+    box-shadow: 0 0 0 3px rgba(var(--rxjs-accent-rgb), 0.35);
+    transform: translate(-50%, -50%) scale(1.12);
+    z-index: 2;
+  }
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    z-index: 2;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.--next {
+    background: var(--rxjs-marble-next-bg);
+    border-color: var(--rxjs-marble-next-border);
+    color: var(--rxjs-marble-next-text);
+  }
+
+  &.--error {
+    background: var(--rxjs-marble-error-bg);
+    border-color: var(--rxjs-marble-error-border);
+    color: var(--rxjs-marble-error-text);
+
+    &::after {
+      content: '✕';
+      font-size: 13px;
     }
+  }
+
+  &.--complete {
+    border-radius: 3px;
+    width: 4px;
+    height: 28px;
+    background: var(--rxjs-track-line);
+    border: none;
+    opacity: 0.4;
+
+    &.--active {
+      opacity: 1;
+      background: var(--rxjs-accent);
+    }
+  }
+}
+
+.complete-marker {
+  position: absolute;
+  top: calc(50% - 14px);
+  width: 3px;
+  height: 28px;
+  background: var(--rxjs-track-line);
+  transform: translateX(-50%);
+  border-radius: 2px;
+  opacity: 0.5;
+  transition:
+    opacity 0.2s,
+    background 0.2s;
+
+  &.--active {
+    opacity: 1;
+    background: var(--rxjs-accent);
   }
 }

@@ -1,29 +1,101 @@
-<div class="challenge-container">
-  @for (source of challengeData.data.sourceStream; track source.label) {
-    <lib-marble-track
-      [maxTime]="100"
-      [simulatedTime]="timeValue()"
-      [trackData]="source"
-    ></lib-marble-track>
-  } @empty {
-    <span> No source defined </span>
-  }
+<div class="challenge-layout">
+  <div class="canvas-panel">
+    <div class="canvas-header">
+      <div class="challenge-meta">
+        <span class="challenge-index">Challenge {{ challenge().id }}</span>
+        <h2 class="challenge-title">{{ challenge().title }}</h2>
+        @if (challenge().subtitle) {
+          <p class="challenge-subtitle">{{ challenge().subtitle }}</p>
+        }
+      </div>
+      <div class="progress-dots">
+        @for (i of progressRange; track i) {
+          <div class="dot" [class.--active]="i === challenge().id"></div>
+        }
+      </div>
+    </div>
 
-  <lib-pipe-container
-    [operators]="challengeData.data.pipe"
-  ></lib-pipe-container>
+    <div class="streams-area">
+      @for (
+        src of challenge().data.sourceStreams;
+        track src.stream.label;
+        let i = $index
+      ) {
+        <lib-marble-track
+          [trackData]="src.stream"
+          [locked]="src.locked"
+          [maxTime]="maxTime"
+          [simulatedTime]="simulatedTime()"
+          [isFocused]="isPanelFocused('source', i)"
+          (trackClick)="onSourceTrackClick(i)"
+          (marbleClick)="onSourceMarbleClick(i, $event)"
+          (trackAreaClick)="onTrackAreaClick(i, $event)"
+          (marbleMoved)="onMarbleMoved(i, $event)"
+        />
+      }
 
-  <lib-marble-track
-    [maxTime]="100"
-    [simulatedTime]="timeValue()"
-    [trackData]="challengeData.data.outputStream"
-  ></lib-marble-track>
+      @if (!challenge().sourcesLocked) {
+        <button class="add-track-btn" (click)="onAddSourceStream()">
+          + dodaj źródło
+        </button>
+      }
+    </div>
 
-  <mat-slider min="0" max="100" step="1" showTickMarks discrete>
-    <input
-      matSliderThumb
-      [value]="timeValue()"
-      (valueChange)="onSliderChange($event)"
+    <lib-pipe-container
+      [operators]="challenge().data.pipe"
+      [isFocused]="panelFocus()?.kind === 'pipe'"
+      (pipeClick)="onPipeClick()"
+      (operatorClick)="onOperatorClick($event)"
+      (addOperator)="onAddOperator()"
+      (removeOperator)="onRemoveOperator($event)"
     />
-  </mat-slider>
+
+    <div class="scrubber-area">
+      <button
+        class="play-btn"
+        [class.--playing]="isPlaying()"
+        (click)="togglePlay()"
+        [attr.aria-label]="isPlaying() ? 'Pauza' : 'Play'"
+      >
+        {{ isPlaying() ? '⏸' : '▶' }}
+      </button>
+
+      <mat-slider
+        class="time-slider"
+        min="0"
+        [max]="maxTime"
+        step="1"
+        showTickMarks
+        discrete
+      >
+        <input
+          matSliderThumb
+          [value]="simulatedTime()"
+          (valueChange)="onSliderChange($event)"
+        />
+      </mat-slider>
+
+      <span class="time-label">{{ simulatedTime() }}ms</span>
+    </div>
+
+    @if (feedback()) {
+      <div class="feedback-bar" [class]="'--' + feedback()!.type">
+        {{ feedback()!.message }}
+      </div>
+    }
+
+    <button class="check-btn" (click)="checkAnswer()">Sprawdź →</button>
+  </div>
+
+  <div class="form-panel">
+    <lib-data-form
+      [panelFocus]="panelFocus()"
+      [sourceStreams]="sourceStreamData()"
+      [outputLocked]="challenge().data.outputStream.locked"
+      [maxTime]="maxTime"
+      (marbleAdded)="onMarbleAdded($event)"
+      (marbleRemoved)="onMarbleRemoved($event)"
+      (operatorConfirmed)="onOperatorConfirmed($event)"
+    />
+  </div>
 </div>

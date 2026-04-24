@@ -1,0 +1,335 @@
+@use '../../styles/rxjs-tokens.scss' as tokens;
+@include tokens.apply();
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.data-form {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &.--empty {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--rxjs-text-tertiary);
+
+  .empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.form-badge {
+  font-family: var(--rxjs-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+
+  &.source {
+    background: rgba(var(--rxjs-source-rgb), 0.15);
+    color: var(--rxjs-source-color);
+  }
+  &.pipe {
+    background: rgba(var(--rxjs-accent-rgb), 0.15);
+    color: var(--rxjs-accent);
+  }
+  &.output {
+    background: rgba(var(--rxjs-output-rgb), 0.15);
+    color: var(--rxjs-output-color);
+  }
+}
+
+.form-title {
+  font-family: var(--rxjs-font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rxjs-text-primary);
+}
+
+.marbles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.marble-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--rxjs-border);
+  cursor: pointer;
+  transition: background 0.12s;
+
+  &:hover,
+  &.--focused {
+    background: rgba(var(--rxjs-accent-rgb), 0.06);
+    border-color: var(--rxjs-accent);
+  }
+}
+
+.marble-type-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &.--next {
+    background: var(--rxjs-marble-next-bg);
+    color: var(--rxjs-marble-next-text);
+  }
+  &.--error {
+    background: var(--rxjs-marble-error-bg);
+    color: var(--rxjs-marble-error-text);
+  }
+  &.--complete {
+    background: var(--rxjs-border);
+    color: var(--rxjs-text-secondary);
+    border-radius: 2px;
+  }
+}
+
+.marble-time {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  color: var(--rxjs-text-tertiary);
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.marble-label {
+  font-family: var(--rxjs-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rxjs-text-primary);
+  flex: 1;
+}
+
+.row-remove {
+  background: none;
+  border: none;
+  color: var(--rxjs-text-tertiary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.12s;
+
+  &:hover {
+    color: var(--rxjs-error);
+  }
+}
+
+.empty-list {
+  font-size: 12px;
+  color: var(--rxjs-text-tertiary);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.add-marble-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px dashed var(--rxjs-border);
+  background: rgba(var(--rxjs-accent-rgb), 0.02);
+}
+
+.add-marble-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rxjs-text-tertiary);
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &.--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 11px;
+    color: var(--rxjs-text-secondary);
+    width: 70px;
+    flex-shrink: 0;
+  }
+}
+
+.form-input {
+  flex: 1;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--rxjs-border);
+  background: var(--rxjs-input-bg);
+  color: var(--rxjs-text-primary);
+  font-size: 13px;
+  transition: border-color 0.12s;
+
+  &.--mono {
+    font-family: var(--rxjs-font-mono);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--rxjs-accent);
+    box-shadow: 0 0 0 2px rgba(var(--rxjs-accent-rgb), 0.15);
+  }
+}
+
+.type-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.type-btn {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--rxjs-border);
+  background: none;
+  cursor: pointer;
+  color: var(--rxjs-text-secondary);
+  transition: all 0.12s;
+
+  &.--active {
+    background: var(--rxjs-accent);
+    border-color: var(--rxjs-accent);
+    color: #fff;
+  }
+}
+
+.btn-add {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: var(--rxjs-accent);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.op-picker-label {
+  font-size: 11px;
+  color: var(--rxjs-text-secondary);
+  margin-bottom: 8px;
+}
+
+.op-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.op-chip {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1.5px solid var(--rxjs-border);
+  background: none;
+  cursor: pointer;
+  color: var(--rxjs-text-secondary);
+  transition: all 0.12s;
+
+  &:hover {
+    border-color: var(--rxjs-accent);
+    color: var(--rxjs-accent);
+  }
+
+  &.--selected {
+    border-color: var(--rxjs-accent);
+    background: var(--rxjs-accent);
+    color: #fff;
+  }
+}
+
+.hint {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 12px;
+}
+
+.preview-label {
+  font-size: 11px;
+  color: var(--rxjs-text-tertiary);
+}
+
+.preview-code {
+  font-family: var(--rxjs-font-mono);
+  font-size: 12px;
+  color: var(--rxjs-accent);
+  background: rgba(var(--rxjs-accent-rgb), 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.hint-text {
+  font-size: 13px;
+  color: var(--rxjs-text-secondary);
+  line-height: 1.6;
+}
+
+.coming-soon {
+  font-size: 12px;
+  color: var(--rxjs-text-tertiary);
+  font-style: italic;
+}

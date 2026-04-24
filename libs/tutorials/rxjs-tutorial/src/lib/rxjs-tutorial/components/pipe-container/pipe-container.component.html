@@ -1,12 +1,46 @@
-<div class="operators-container">
-  @for (operator of operators(); track operator.operator) {
-    <div class="single-operator">
-      <label>{{ operator.operator }}</label>
-      <span class="operator-code">
-        (data) => <span>{{ operator.code }}</span>
-      </span>
-    </div>
-  } @empty {
-    <span>No operator found</span>
-  }
+<div class="pipe-wrapper" [class.--focused]="isFocused()">
+  <span class="pipe-label">pipe(</span>
+
+  <div class="operators-row">
+    @for (op of operators(); track op.operator; let i = $index) {
+      <div
+        class="operator-chip"
+        [class.--locked]="op.locked"
+        [class.--focused]="focusedOperatorIndex() === i"
+        [class.--has-code]="!!op.code"
+        (click)="onOperatorClick($event, i)"
+        [title]="op.locked ? op.operator : 'Kliknij aby edytować'"
+      >
+        <span class="op-name">{{ op.operator }}</span>
+        @if (op.code) {
+          <span class="op-code">({{ op.code }})</span>
+        }
+        @if (!op.locked) {
+          <button
+            class="op-remove"
+            (click)="onRemoveOperator($event, i)"
+            aria-label="Usuń operator"
+          >
+            ×
+          </button>
+        }
+      </div>
+
+      @if (i < operators().length - 1) {
+        <span class="op-separator">,</span>
+      }
+    } @empty {
+      <span class="no-operators">— brak operatorów —</span>
+    }
+
+    <button
+      class="add-operator-btn"
+      (click)="onAddOperatorClick($event)"
+      aria-label="Dodaj operator"
+    >
+      <span>+</span>
+    </button>
+  </div>
+
+  <span class="pipe-label">)</span>
 </div>
