@@ -211,10 +211,49 @@ export const CHALLENGE_CATCH_ERROR: RxJSChallenge = {
   operatorOptions: ['catchError', 'retry', 'tap'],
 };
 
+export const CHALLENGE_PLAYGROUND: RxJSChallenge = {
+  id: 6,
+  title: 'Playgtound',
+  subtitle: 'Testuj strumienie".',
+  mode: 'playground',
+  sourcesLocked: false,
+  data: {
+    sourceStreams: [
+      {
+        locked: false,
+        stream: {
+          label: 'source$',
+          completeTime: null,
+          stream: [
+            { type: 'next', timeInterval: 15, label: 'A' },
+            { type: 'next', timeInterval: 35, label: 'B' },
+            { type: 'error', timeInterval: 60, label: '✕' },
+          ],
+        },
+      },
+    ],
+    pipe: [{ operator: 'catchError', code: "() => of('fb')", locked: false }],
+    outputStream: {
+      locked: false,
+      stream: {
+        label: 'result$',
+        completeTime: 60,
+        stream: [
+          { type: 'next', timeInterval: 15, label: 'A' },
+          { type: 'next', timeInterval: 35, label: 'B' },
+          { type: 'next', timeInterval: 60, label: 'fb' },
+        ],
+      },
+    },
+  },
+  operatorOptions: ['catchError', 'retry', 'tap'],
+};
+
 export const ALL_CHALLENGES: RxJSChallenge[] = [
   CHALLENGE_MAP,
   CHALLENGE_FILTER,
   CHALLENGE_COMBINE_LATEST,
   CHALLENGE_FILL_SOURCE,
   CHALLENGE_CATCH_ERROR,
+  CHALLENGE_PLAYGROUND,
 ];

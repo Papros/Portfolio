@@ -5,19 +5,25 @@
   (click)="onTrackClick()"
 >
   <span class="track-label">{{ trackData().label }}</span>
-  <div class="track-line-area" #trackArea (click)="onTrackAreaClick($event)">
+
+  <div
+    class="track-line-area"
+    #trackArea
+    [style.--rxjs-elapsed]="elapsedPercent()"
+    (click)="onTrackAreaClick($event)"
+  >
     <div class="track-line"></div>
     <div class="track-arrow"></div>
 
-    @for (tick of ticks; track tick) {
-      <div class="tick" [style.left.%]="tick"></div>
+    @for (tick of ticks(); track tick.pct) {
+      <div
+        class="tick"
+        [style.left.%]="tick.pct"
+        [attr.data-time]="tick.label"
+      ></div>
     }
 
-    @for (
-      event of trackData().stream;
-      track event.timeInterval;
-      let i = $index
-    ) {
+    @for (event of trackData().stream; track $index; let i = $index) {
       <div
         class="marble"
         [class.--next]="event.type === 'next'"
@@ -26,7 +32,7 @@
         [class.--active]="event.timeInterval <= simulatedTime()"
         [class.--focused]="focusedMarbleIndex() === i"
         [style.left.%]="calcPosition(event.timeInterval)"
-        [title]="event.label"
+        [title]="event.label + ' @ ' + event.timeInterval + 'ms'"
         (click)="onMarbleClick($event, i)"
         (mousedown)="onMarbleDragStart($event, i)"
       >

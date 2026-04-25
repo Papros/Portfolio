@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ElementRef,
   HostListener,
   input,
@@ -9,6 +10,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamData } from '../../interfaces/challenge.interface';
+
+interface Tick {
+  pct: number; // pozycja w % szerokości toru
+  label: string; // label czasu np. "50"
+}
 
 @Component({
   selector: 'lib-marble-track',
@@ -28,28 +34,36 @@ export class MarbleTrackComponent {
   marbleClick = output<number>();
   trackAreaClick = output<number>();
   marbleMoved = output<{ index: number; newTime: number }>();
+  marbleDragEnd = output<number>();
 
   //Local state
   focusedMarbleIndex = signal<number | null>(null);
-  readonly ticks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+  readonly ticks = computed<Tick[]>(() => {
+    const max = this.maxTime();
+    return [10, 20, 30, 40, 50, 60, 70, 80, 90].map((pct) => ({
+      pct,
+      label: String(Math.round((pct / 100) * max)),
+    }));
+  });
+
+  readonly elapsedPercent = computed(() => {
+    const pct = Math.min(100, (this.simulatedTime() / this.maxTime()) * 100);
+    return `${pct.toFixed(1)}%`;
+  });
 
   //Drag&Drop
   @ViewChild('trackArea') trackAreaRef!: ElementRef<HTMLDivElement>;
   private draggingIndex: number | null = null;
-  private dragStartX = 0;
   private dragStartTime = 0;
 
   calcPosition(timeInterval: number): number {
     const max = this.maxTime();
     if (max === 0) return 0;
-
     return Math.min(100, Math.max(0, (timeInterval / max) * 100));
   }
 
   onTrackClick(): void {
-    if (!this.locked()) {
-      this.trackClick.emit();
-    }
+    if (!this.locked()) this.trackClick.emit();
   }
 
   onMarbleClick(event: MouseEvent, index: number): void {
@@ -60,16 +74,14 @@ export class MarbleTrackComponent {
 
   onTrackAreaClick(event: MouseEvent): void {
     if (this.locked() || this.draggingIndex !== null) return;
-
-    const target = event.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    const ratio = (event.clientX - rect.left) / rect.width;
-    const time = Math.round(ratio * this.maxTime());
-
     const clickedMarble = (event.target as HTMLElement).closest('.marble');
-    if (!clickedMarble) {
-      this.trackAreaClick.emit(time);
-    }
+    if (clickedMarble) return;
+
+    const el = event.currentTarget as HTMLElement;
+    const rect = el.getBoundingClientRect();
+    const ratio = (event.clientX - rect.left) / rect.width;
+    const time = Math.round(Math.min(1, Math.max(0, ratio)) * this.maxTime());
+    this.trackAreaClick.emit(time);
   }
 
   //Drag&Drop
@@ -77,16 +89,12 @@ export class MarbleTrackComponent {
     if (this.locked()) return;
     event.preventDefault();
     event.stopPropagation();
-
     this.draggingIndex = index;
-    this.dragStartX = event.clientX;
-    this.dragStartTime = this.trackData().stream[index].timeInterval;
   }
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
     if (this.draggingIndex === null) return;
-
     const area = this.trackAreaRef?.nativeElement;
     if (!area) return;
 
@@ -101,6 +109,9 @@ export class MarbleTrackComponent {
 
   @HostListener('document:mouseup')
   onMouseUp(): void {
+    if (this.draggingIndex !== null) {
+      this.marbleDragEnd.emit(this.draggingIndex);
+    }
     this.draggingIndex = null;
   }
 }

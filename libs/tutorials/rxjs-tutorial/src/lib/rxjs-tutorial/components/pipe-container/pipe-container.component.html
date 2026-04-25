@@ -1,46 +1,54 @@
-<div class="pipe-wrapper" [class.--focused]="isFocused()">
-  <span class="pipe-label">pipe(</span>
+<div
+  class="pipe-wrapper"
+  [class.--focused]="isFocused()"
+  (click)="pipeClick.emit()"
+>
+  <div class="pipe-header">
+    <span class="pipe-label">pipe(</span>
+  </div>
 
-  <div class="operators-row">
-    @for (op of operators(); track op.operator; let i = $index) {
-      <div
-        class="operator-chip"
-        [class.--locked]="op.locked"
-        [class.--focused]="focusedOperatorIndex() === i"
-        [class.--has-code]="!!op.code"
-        (click)="onOperatorClick($event, i)"
-        [title]="op.locked ? op.operator : 'Kliknij aby edytować'"
-      >
-        <span class="op-name">{{ op.operator }}</span>
-        @if (op.code) {
-          <span class="op-code">({{ op.code }})</span>
-        }
-        @if (!op.locked) {
-          <button
-            class="op-remove"
-            (click)="onRemoveOperator($event, i)"
-            aria-label="Usuń operator"
+  @if (operators().length > 0) {
+    <div class="operators-ladder">
+      @for (op of operators(); track op.operator; let i = $index) {
+        <div class="ladder-row">
+          <span class="ladder-connector">{{ i === 0 ? '┌' : '├' }}</span>
+          <div
+            class="operator-chip"
+            [class.--locked]="op.locked"
+            [class.--focused]="focusedOperatorIndex() === i"
+            (click)="onOperatorClick($event, i)"
+            [title]="op.locked ? op.operator : 'Kliknij aby edytować'"
           >
-            ×
-          </button>
-        }
-      </div>
-
-      @if (i < operators().length - 1) {
-        <span class="op-separator">,</span>
+            <span class="op-name">{{ op.operator }}</span>
+            @if (op.code) {
+              <span class="op-code">({{ op.code }})</span>
+            }
+            @if (!op.locked) {
+              <button
+                class="op-remove"
+                (click)="onRemoveOperator($event, i)"
+                aria-label="Usuń operator"
+              >
+                ×
+              </button>
+            }
+          </div>
+        </div>
       }
-    } @empty {
-      <span class="no-operators">— brak operatorów —</span>
-    }
+    </div>
+  } @else {
+    <span class="no-operators">— brak operatorów —</span>
+  }
 
+  <div class="add-row">
     <button
       class="add-operator-btn"
       (click)="onAddOperatorClick($event)"
       aria-label="Dodaj operator"
     >
-      <span>+</span>
+      + dodaj operator
     </button>
   </div>
 
-  <span class="pipe-label">)</span>
+  <span class="pipe-footer">)</span>
 </div>

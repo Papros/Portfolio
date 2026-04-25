@@ -50,6 +50,18 @@
       (removeOperator)="onRemoveOperator($event)"
     />
 
+    <lib-marble-track
+      [trackData]="challenge().data.outputStream.stream"
+      [locked]="challenge().data.outputStream.locked"
+      [maxTime]="maxTime"
+      [simulatedTime]="simulatedTime()"
+      [isFocused]="isPanelFocused('output')"
+      (trackClick)="onOutputTrackClick()"
+      (marbleClick)="onOutputMarbleClick($event)"
+      (trackAreaClick)="onOutputAreaClick($event)"
+      (marbleMoved)="onMarbleMoved(0, $event, true)"
+    />
+
     <div class="scrubber-area">
       <button
         class="play-btn"
@@ -85,6 +97,18 @@
     }
 
     <button class="check-btn" (click)="checkAnswer()">Sprawdź →</button>
+
+    <ng-container *ngIf="challenge().resoult && challenge().resoult?.stream">
+      <lib-marble-track
+        [trackData]="{
+          label: 'Resoults:',
+          stream: challenge().resoult?.stream || [],
+          completeTime: challenge().resoult?.completeTime ?? 0,
+        }"
+        [locked]="true"
+        [maxTime]="maxTime"
+      />
+    </ng-container>
   </div>
 
   <div class="form-panel">
@@ -95,7 +119,9 @@
       [maxTime]="maxTime"
       (marbleAdded)="onMarbleAdded($event)"
       (marbleRemoved)="onMarbleRemoved($event)"
-      (operatorConfirmed)="onOperatorConfirmed($event)"
+      (marbleUpdated)="onMarbleUpdated($event)"
+      (operatorAdded)="onOperatorConfirmed($event)"
+      (operatorUpdated)="onOperatorUpdate($event)"
     />
   </div>
 </div>

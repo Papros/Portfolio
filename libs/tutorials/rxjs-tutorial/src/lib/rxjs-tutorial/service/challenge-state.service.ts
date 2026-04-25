@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import {
+  InterpreterResult,
   PipeOperator,
   RxJSChallenge,
   StreamEvent,
@@ -26,26 +27,72 @@ export class ChallengeStateService {
       },
     },
     operatorOptions: [],
+    resoult: undefined,
   });
 
-  public challange = this._challenge.asReadonly();
+  public challenge = this._challenge.asReadonly();
 
   public initChallenge(data: RxJSChallenge) {
     this._challenge.set(data);
   }
 
-  //Operators
-  removeOperator(index: number) {
-    this._challenge.update((challenge) => ({
+  private updateSourceStream(
+    challenge: RxJSChallenge,
+    streamIndex: number,
+    updater: (events: StreamEvent[]) => StreamEvent[],
+  ): RxJSChallenge {
+    return {
       ...challenge,
       data: {
         ...challenge.data,
-        pipe: challenge.data.pipe.filter((_, i) => i !== index),
+        sourceStreams: challenge.data.sourceStreams.map((src, i) =>
+          i !== streamIndex
+            ? src
+            : {
+                ...src,
+                stream: {
+                  ...src.stream,
+                  stream: updater(src.stream.stream),
+                },
+              },
+        ),
       },
+    };
+  }
+
+  private updateOutputStream(
+    challenge: RxJSChallenge,
+    updater: (events: StreamEvent[]) => StreamEvent[],
+  ): RxJSChallenge {
+    return {
+      ...challenge,
+      data: {
+        ...challenge.data,
+        outputStream: {
+          ...challenge.data.outputStream,
+          stream: {
+            ...challenge.data.outputStream.stream,
+            stream: updater(challenge.data.outputStream.stream.stream),
+          },
+        },
+      },
+    };
+  }
+
+  setOutputStreamResult(resoult: InterpreterResult) {
+    this._challenge.update((challenge) => ({
+      ...challenge,
+      resoult: resoult,
     }));
   }
 
-  addOperator(operator: PipeOperator) {
+  private sorted(events: StreamEvent[]): StreamEvent[] {
+    return [...events].sort((a, b) => a.timeInterval - b.timeInterval);
+  }
+
+  // Operators
+
+  addOperator(operator: PipeOperator): void {
     this._challenge.update((challenge) => ({
       ...challenge,
       data: {
@@ -55,27 +102,30 @@ export class ChallengeStateService {
     }));
   }
 
-  updateOperator(operatorIndex: number, operator: PipeOperator) {
-    console.log('UPDATE Operator');
-
+  updateOperator(operatorIndex: number, operator: PipeOperator): void {
     this._challenge.update((challenge) => {
       const pipe = [...challenge.data.pipe];
       pipe[operatorIndex] = operator;
-
       return {
         ...challenge,
-        data: {
-          ...challenge.data,
-          pipe: [...challenge.data.pipe],
-        },
+        data: { ...challenge.data, pipe },
       };
     });
   }
 
-  //Stream
-  addSourceStream() {
-    console.log('ADD SOURCE');
+  removeOperator(index: number): void {
+    this._challenge.update((challenge) => ({
+      ...challenge,
+      data: {
+        ...challenge.data,
+        pipe: challenge.data.pipe.filter((_, i) => i !== index),
+      },
+    }));
+  }
 
+  // Stream
+
+  addSourceStream(): void {
     this._challenge.update((challenge) => ({
       ...challenge,
       data: {
@@ -83,17 +133,19 @@ export class ChallengeStateService {
         sourceStreams: [
           ...challenge.data.sourceStreams,
           {
-            stream: { label: 'result$', completeTime: 0, stream: [] },
             locked: false,
+            stream: {
+              label: `source${challenge.data.sourceStreams.length + 1}$`,
+              completeTime: null,
+              stream: [],
+            },
           },
         ],
       },
     }));
   }
 
-  removeSourceStream(index: number) {
-    console.log('REMOVE SOURCE');
-
+  removeSourceStream(index: number): void {
     this._challenge.update((challenge) => ({
       ...challenge,
       data: {
@@ -105,56 +157,84 @@ export class ChallengeStateService {
     }));
   }
 
-  //Marble
-  removeMarble(streamIndex: number, marbleIndex: number, output = false) {
-    console.log('Marble removed');
+  // Marble
 
-    this._challenge.update((challenge) => {
-      if (output) {
-        const stream = challenge.data.outputStream;
-
-        stream.stream.stream = stream.stream.stream.filter(
-          (_, i) => i !== marbleIndex,
-        );
-
-        return {
-          ...challenge,
-          data: {
-            ...challenge.data,
-            outputStream: stream,
-          },
-        };
-      } else {
-        const sourceStreams = { ...challenge.data.sourceStreams };
-
-        sourceStreams[streamIndex].stream.stream = sourceStreams[
-          streamIndex
-        ].stream.stream.filter((_, i) => i !== marbleIndex);
-
-        return {
-          ...challenge,
-          data: {
-            ...challenge.data,
-            sourceStreams: sourceStreams,
-          },
-        };
-      }
-    });
+  addMarble(streamIndex: number, event: StreamEvent, output = false): void {
+    this._challenge.update((challenge) =>
+      output
+        ? this.updateOutputStream(challenge, (events) =>
+            this.sorted([...events, event]),
+          )
+        : this.updateSourceStream(challenge, streamIndex, (events) =>
+            this.sorted([...events, event]),
+          ),
+    );
   }
 
-  addMarble(streamIndex: number, event: StreamEvent, output = false) {
-    console.log('Marble added');
+  removeMarble(streamIndex: number, marbleIndex: number, output = false): void {
+    this._challenge.update((challenge) =>
+      output
+        ? this.updateOutputStream(challenge, (events) =>
+            events.filter((_, i) => i !== marbleIndex),
+          )
+        : this.updateSourceStream(challenge, streamIndex, (events) =>
+            events.filter((_, i) => i !== marbleIndex),
+          ),
+    );
   }
 
-  updateMarble(streamIndex: number, event: StreamEvent, output = false) {
-    console.log('Marble update');
+  updateMarble(
+    streamIndex: number,
+    marbleIndex: number,
+    updated: StreamEvent,
+    output = false,
+  ): void {
+    this._challenge.update((challenge) =>
+      output
+        ? this.updateOutputStream(challenge, (events) =>
+            this.sorted(
+              events.map((e, i) => (i !== marbleIndex ? e : updated)),
+            ),
+          )
+        : this.updateSourceStream(challenge, streamIndex, (events) =>
+            this.sorted(
+              events.map((e, i) => (i !== marbleIndex ? e : updated)),
+            ),
+          ),
+    );
   }
 
   moveMarble(
     streamIndex: number,
-    event: { index: number; newTime: number },
+    ev: { index: number; newTime: number },
     output = false,
-  ) {
-    console.log('Marble update 2');
+  ): void {
+    this._challenge.update((challenge) =>
+      output
+        ? this.updateOutputStream(challenge, (events) =>
+            events.map((e, i) =>
+              i !== ev.index ? e : { ...e, timeInterval: ev.newTime },
+            ),
+          )
+        : this.updateSourceStream(challenge, streamIndex, (events) =>
+            events.map((e, i) =>
+              i !== ev.index ? e : { ...e, timeInterval: ev.newTime },
+            ),
+          ),
+    );
+  }
+
+  commitMarbleMove(
+    streamIndex: number,
+    marbleIndex: number,
+    output = false,
+  ): void {
+    this._challenge.update((challenge) =>
+      output
+        ? this.updateOutputStream(challenge, (events) => this.sorted(events))
+        : this.updateSourceStream(challenge, streamIndex, (events) =>
+            this.sorted(events),
+          ),
+    );
   }
 }

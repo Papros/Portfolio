@@ -26,11 +26,22 @@ export interface PipeOperator {
   operator: RxJSOperatorName;
   code?: string;
   locked: boolean;
+  inputParams?: OperatorParam[];
+}
+
+export interface OperatorParam {
+  name: string;
+  type: string;
+  description?: string;
 }
 
 //-------- Challenge ----------
 
-export type ChallengeMode = 'pick-operator' | 'fill-source' | 'guess-output';
+export type ChallengeMode =
+  | 'pick-operator'
+  | 'fill-source'
+  | 'guess-output'
+  | 'playground';
 
 export interface RxJSChallenge {
   id: number;
@@ -44,6 +55,14 @@ export interface RxJSChallenge {
     outputStream: { stream: StreamData; locked: boolean };
   };
   operatorOptions?: RxJSOperatorName[];
+  resoult?: InterpreterResult;
+}
+
+export interface InterpreterResult {
+  stream: StreamEvent[];
+  completeTime: number | null;
+  error?: string;
+  time: number;
 }
 
 //-------- Events ---------
@@ -89,7 +108,7 @@ export interface StreamData {
 //---------- UI State -------------
 
 export type PanelFocus =
-  | { kind: 'source'; index: number; marbleIndex?: number }
+  | { kind: 'source'; index: number; marbleIndex?: number; initTime?: number }
   | { kind: 'pipe'; operatorIndex?: number }
-  | { kind: 'output'; marbleIndex?: number }
+  | { kind: 'output'; marbleIndex?: number; initTime?: number }
   | null;

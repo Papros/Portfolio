@@ -20,6 +20,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { PipeContainerComponent } from '../pipe-container/pipe-container.component';
 import { DataFormComponent } from '../data-form/data-form.component';
 import { ChallengeStateService } from '../../service/challenge-state.service';
+import { OPERATOR_METADATA } from '../../interfaces/operator-meta.const';
+import { ChallengeInterpreterService } from '../../service/challenge-interpreter.service';
 
 @Component({
   selector: 'lib-challenge-container',
@@ -30,7 +32,7 @@ import { ChallengeStateService } from '../../service/challenge-state.service';
     PipeContainerComponent,
     DataFormComponent,
   ],
-  providers: [ChallengeStateService],
+  providers: [ChallengeStateService, ChallengeInterpreterService],
   templateUrl: './challenge-container.component.html',
   styleUrl: './challenge-container.component.scss',
 })
@@ -38,8 +40,9 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
   initChallenge = input.required<RxJSChallenge>();
 
   private challangeStateService = inject(ChallengeStateService);
+  private interpreter = inject(ChallengeInterpreterService);
 
-  challenge = this.challangeStateService.challange;
+  challenge = this.challangeStateService.challenge;
 
   // Local state
   readonly maxTime = 100;
@@ -104,18 +107,49 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Focus handlers
+  // Marble track handlers
   onSourceTrackClick(index: number): void {
     this.panelFocus.set({ kind: 'source', index });
+  }
+
+  onOutputTrackClick(): void {
+    this.panelFocus.set({ kind: 'output' });
   }
 
   onSourceMarbleClick(streamIndex: number, marbleIndex: number): void {
     this.panelFocus.set({ kind: 'source', index: streamIndex, marbleIndex });
   }
 
+  onOutputMarbleClick(marbleIndex: number): void {
+    this.panelFocus.set({ kind: 'output', marbleIndex });
+  }
+
   onTrackAreaClick(streamIndex: number, time: number): void {
-    this.panelFocus.set({ kind: 'source', index: streamIndex });
-    //this.dataFormRef?.newMarbleTime.set(time); — przez ViewChild lub serwis
+    this.panelFocus.set({ kind: 'source', index: streamIndex, initTime: time });
+  }
+
+  onOutputAreaClick(time: number): void {
+    this.panelFocus.set({ kind: 'output', initTime: time });
+  }
+
+  onMarbleMoved(
+    streamIndex: number,
+    event: { index: number; newTime: number },
+    output = false,
+  ): void {
+    this.challangeStateService.moveMarble(streamIndex, event, output);
+  }
+
+  onMarbleDragEnd(
+    streamIndex: number,
+    marbleIndex: number,
+    output = false,
+  ): void {
+    this.challangeStateService.commitMarbleMove(
+      streamIndex,
+      marbleIndex,
+      output,
+    );
   }
 
   onAddOperator(): void {
@@ -124,10 +158,6 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
 
   onOperatorClick(operatorIndex: number): void {
     this.panelFocus.set({ kind: 'pipe', operatorIndex });
-  }
-
-  onOutputTrackClick(): void {
-    this.panelFocus.set({ kind: 'output' });
   }
 
   onPipeClick(): void {
@@ -142,10 +172,16 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
     this.challangeStateService.removeOperator(index);
   }
 
-  onOperatorConfirmed(operator: PipeOperator): void {
-    console.log('operator confirmed', operator);
+  onOperatorConfirmed(event: { operator: PipeOperator }): void {
+    console.log('operator confirmed', event.operator);
     this.panelFocus.set(null);
-    this.challangeStateService.addOperator(operator);
+    this.challangeStateService.addOperator(event.operator);
+  }
+
+  onOperatorUpdate(event: { index: number; operator: PipeOperator }): void {
+    console.log('operator update', event.operator);
+    this.panelFocus.set(null);
+    this.challangeStateService.updateOperator(event.index, event.operator);
   }
 
   onAddSourceStream(): void {
@@ -175,23 +211,62 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  onMarbleMoved(
-    streamIndex: number,
-    event: { index: number; newTime: number },
-  ): void {
-    console.log('marble moved', streamIndex, event);
-    this.challangeStateService.moveMarble(streamIndex, event);
+  onMarbleUpdated(event: {
+    streamIndex: number;
+    marbleIndex: number;
+    event: StreamEvent;
+  }): void {
+    console.log('marble update', event);
+    this.challangeStateService.updateMarble(
+      event.streamIndex,
+      event.marbleIndex,
+      event.event,
+      this.panelFocus()?.kind === 'output',
+    );
   }
 
   //------- Checking answer -----------
 
-  checkAnswer(): void {
-    // Placeholder — tu trafi interpreter porównujący output z oczekiwanym
-    this.feedback.set({
-      type: 'hint',
-      message: 'Interpreter w budowie. Sprawdź konsolę.',
+  async checkAnswer(): Promise<void> {
+    this.feedback.set({ type: 'hint', message: 'Interpretuję...' });
+
+    const challenge = this.challangeStateService.challenge();
+
+    // walidacja: operatory combination wymagają >1 źródła
+    const combinationOp = challenge.data.pipe.find((op) => {
+      const meta = OPERATOR_METADATA[op.operator];
+      return meta?.kind === 'combination' && meta.requiresMultipleSources;
     });
-    setTimeout(() => this.feedback.set(null), 3000);
+
+    if (combinationOp && challenge.data.sourceStreams.length < 2) {
+      this.feedback.set({
+        type: 'error',
+        message: `${combinationOp.operator} wymaga co najmniej 2 źródeł. Dodaj kolejny source stream.`,
+      });
+      return;
+    }
+
+    try {
+      const result = await this.interpreter.run(challenge, this.maxTime);
+
+      if (result.error) {
+        this.feedback.set({ type: 'error', message: `Błąd: ${result.error}` });
+        return;
+      }
+
+      // zaktualizuj output stream w serwisie
+      this.challangeStateService.setOutputStreamResult(result);
+
+      this.feedback.set({
+        type: 'success',
+        message: 'Gotowe! Scrubuj slider aby zobaczyć wynik.',
+      });
+    } catch (err) {
+      this.feedback.set({
+        type: 'error',
+        message: 'Nieoczekiwany błąd interpretera.',
+      });
+    }
   }
 
   // cleanup
