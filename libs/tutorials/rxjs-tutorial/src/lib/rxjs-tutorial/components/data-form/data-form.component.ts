@@ -1,10 +1,12 @@
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   input,
   output,
   signal,
+  untracked,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -100,23 +102,54 @@ export class DataFormComponent {
     return this.sourceStreams()[focus.index] ?? null;
   });
 
+  constructor() {
+    effect(() => {
+      const focus = this.panelFocus();
+
+      if (focus?.kind === 'source' && focus.initTime !== undefined) {
+        this.newMarbleTime.set(focus.initTime);
+      }
+    });
+
+    effect(() => {
+      const focus = this.panelFocus();
+
+      if (focus?.kind === 'source' && focus.marbleIndex !== undefined) {
+        untracked(() => this.loadMarble(focus.marbleIndex ?? 0));
+      }
+    });
+
+    effect(() => {
+      const focus = this.panelFocus();
+
+      if (focus?.kind === 'pipe' && focus.operatorIndex !== undefined) {
+        untracked(() => this.focusOperator(focus.operatorIndex ?? 0));
+      }
+    });
+  }
+
   // Marble
 
-  onMarbleRowClick(index: number): void {
+  private loadMarble(index: number) {
     const stream = this.currentStream();
     if (!stream) return;
+
     const event = stream.stream[index];
     if (!event) return;
-
-    if (this.focusedMarbleIndex() === index) {
-      this.clearMarbleForm();
-      return;
-    }
 
     this.focusedMarbleIndex.set(index);
     this.newMarbleTime.set(event.timeInterval);
     this.newMarbleLabel.set(event.type !== 'complete' ? event.label : '');
     this.newMarbleType.set(event.type);
+  }
+
+  onMarbleRowClick(index: number): void {
+    if (this.focusedMarbleIndex() === index) {
+      this.clearMarbleForm();
+      return;
+    }
+
+    this.loadMarble(index);
   }
 
   onSaveMarble(): void {

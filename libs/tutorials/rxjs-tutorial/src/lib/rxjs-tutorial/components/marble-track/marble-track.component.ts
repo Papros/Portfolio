@@ -77,6 +77,8 @@ export class MarbleTrackComponent {
     const clickedMarble = (event.target as HTMLElement).closest('.marble');
     if (clickedMarble) return;
 
+    event.stopPropagation();
+
     const el = event.currentTarget as HTMLElement;
     const rect = el.getBoundingClientRect();
     const ratio = (event.clientX - rect.left) / rect.width;

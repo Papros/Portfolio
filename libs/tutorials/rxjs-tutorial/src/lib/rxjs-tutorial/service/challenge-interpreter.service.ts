@@ -51,7 +51,7 @@ const USER_CODE_CONTEXT = {
 export class ChallengeInterpreterService {
   /**
    * Uruchamia interpreter na danych challenge i zwraca wynik jako Promise.
-   * Czas w wyniku to rzeczywiste ms od uruchomienia — skalowane do maxTime.
+   * Czas w wyniku to rzeczywiste ms od uruchomienia - skalowane do maxTime.
    */
   run(challenge: RxJSChallenge, maxTime: number): Promise<InterpreterResult> {
     return new Promise((resolve) => {
@@ -109,7 +109,7 @@ export class ChallengeInterpreterService {
     });
   }
 
-  // ─── Source Observable ─────────────────────────────────────────────────────
+  // - Source Observable ---
 
   private buildSourceObservable(streamData: StreamData): Observable<unknown> {
     return new Observable((subscriber) => {
@@ -150,7 +150,7 @@ export class ChallengeInterpreterService {
     });
   }
 
-  // ─── Output Observable ─────────────────────────────────────────────────────
+  // - Output Observable ---
 
   private buildOutputObservable(
     sources$: Observable<unknown>[],
@@ -173,12 +173,12 @@ export class ChallengeInterpreterService {
       return rest.length > 0 ? this.applyPipeableOperators(base$, rest) : base$;
     }
 
-    // brak combination — source to pierwszy strumień, reszta przez pipe()
+    // brak combination - source to pierwszy strumień, reszta przez pipe()
     const source$ = sources$.length === 1 ? sources$[0] : merge(...sources$);
     return this.applyPipeableOperators(source$, operators);
   }
 
-  // ─── Combination operators ─────────────────────────────────────────────────
+  // - Combination operators ---
 
   private buildCombinationOperator(
     op: PipeOperator,
@@ -198,7 +198,7 @@ export class ChallengeInterpreterService {
     }
   }
 
-  // ─── Pipeable operators ────────────────────────────────────────────────────
+  // - Pipeable operators --
 
   private applyPipeableOperators(
     source$: Observable<unknown>,
@@ -285,7 +285,7 @@ export class ChallengeInterpreterService {
     }
   }
 
-  // ─── Helpers ───────────────────────────────────────────────────────────────
+  // - Helpers ---
 
   /**
    * Buduje funkcję z kodu użytkownika.

@@ -82,8 +82,6 @@ export class CurriculumVitaeComponent implements OnInit {
         this.cvDate = (
           lang === 'pl' ? cvDefault_pl : cvDefault
         ) as CurriculumVitaeInterface;
-        console.log('Change language: ', lang);
-        console.log(this.cvDate);
       });
   }
 

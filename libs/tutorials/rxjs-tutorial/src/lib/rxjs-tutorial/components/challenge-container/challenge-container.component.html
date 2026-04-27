@@ -115,6 +115,7 @@
     <lib-data-form
       [panelFocus]="panelFocus()"
       [sourceStreams]="sourceStreamData()"
+      [operators]="pipeOperators()"
       [outputLocked]="challenge().data.outputStream.locked"
       [maxTime]="maxTime"
       (marbleAdded)="onMarbleAdded($event)"

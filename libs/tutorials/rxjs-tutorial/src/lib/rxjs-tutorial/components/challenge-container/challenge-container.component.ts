@@ -68,6 +68,8 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
     this.challenge().data.sourceStreams.map((s) => s.stream),
   );
 
+  pipeOperators = computed<PipeOperator[]>(() => this.challenge().data.pipe);
+
   isPanelFocused(kind: 'source' | 'pipe' | 'output', index?: number): boolean {
     const f = this.panelFocus();
     if (!f) return false;
@@ -167,44 +169,33 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
   // CRUD
 
   onRemoveOperator(index: number): void {
-    // Docelowo: mutacja przez serwis/store
-    console.log('remove operator', index);
     this.challangeStateService.removeOperator(index);
   }
 
   onOperatorConfirmed(event: { operator: PipeOperator }): void {
-    console.log('operator confirmed', event.operator);
     this.panelFocus.set(null);
     this.challangeStateService.addOperator(event.operator);
   }
 
   onOperatorUpdate(event: { index: number; operator: PipeOperator }): void {
-    console.log('operator update', event.operator);
     this.panelFocus.set(null);
     this.challangeStateService.updateOperator(event.index, event.operator);
   }
 
   onAddSourceStream(): void {
-    // Docelowo: dodaj nowy pustry StreamData do listy źródeł
-    console.log('add source stream');
     this.challangeStateService.addSourceStream();
   }
 
   onRemoveSourceStream(index: number): void {
-    // Docelowo: dodaj nowy pustry StreamData do listy źródeł
-    console.log('add source stream');
     this.challangeStateService.removeSourceStream(index);
   }
 
   //------ DataForm controlers -----------------
   onMarbleAdded(event: { streamIndex: number; event: StreamEvent }): void {
-    // Docelowo: mutacja przez serwis/store
-    console.log('marble added', event);
     this.challangeStateService.addMarble(event.streamIndex, event.event);
   }
 
   onMarbleRemoved(event: { streamIndex: number; marbleIndex: number }): void {
-    console.log('marble removed', event);
     this.challangeStateService.removeMarble(
       event.streamIndex,
       event.marbleIndex,
@@ -216,7 +207,6 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
     marbleIndex: number;
     event: StreamEvent;
   }): void {
-    console.log('marble update', event);
     this.challangeStateService.updateMarble(
       event.streamIndex,
       event.marbleIndex,
