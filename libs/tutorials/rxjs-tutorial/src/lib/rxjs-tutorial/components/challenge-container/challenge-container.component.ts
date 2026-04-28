@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
   OnDestroy,
@@ -32,11 +33,11 @@ import { ChallengeInterpreterService } from '../../service/challenge-interpreter
     PipeContainerComponent,
     DataFormComponent,
   ],
-  providers: [ChallengeStateService, ChallengeInterpreterService],
+  providers: [ChallengeInterpreterService],
   templateUrl: './challenge-container.component.html',
   styleUrl: './challenge-container.component.scss',
 })
-export class ChallengeContainerComponent implements OnInit, OnDestroy {
+export class ChallengeContainerComponent implements OnDestroy {
   initChallenge = input.required<RxJSChallenge>();
 
   private challangeStateService = inject(ChallengeStateService);
@@ -54,8 +55,10 @@ export class ChallengeContainerComponent implements OnInit, OnDestroy {
 
   panelFocus = signal<PanelFocus>(null);
 
-  ngOnInit(): void {
-    this.challangeStateService.initChallenge(this.initChallenge());
+  constructor() {
+    effect(() => {
+      this.challangeStateService.initChallenge(this.initChallenge());
+    });
   }
 
   // Feedback

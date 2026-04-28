@@ -63,14 +63,18 @@
     />
 
     <div class="scrubber-area">
-      <button
-        class="play-btn"
-        [class.--playing]="isPlaying()"
-        (click)="togglePlay()"
-        [attr.aria-label]="isPlaying() ? 'Pauza' : 'Play'"
-      >
-        {{ isPlaying() ? '⏸' : '▶' }}
-      </button>
+      <div class="scrubber-control">
+        <button
+          class="play-btn"
+          [class.--playing]="isPlaying()"
+          (click)="togglePlay()"
+          [attr.aria-label]="isPlaying() ? 'Pauza' : 'Play'"
+        >
+          {{ isPlaying() ? '⏸' : '▶' }}
+        </button>
+
+        <span class="time-label">{{ simulatedTime() }}ms</span>
+      </div>
 
       <mat-slider
         class="time-slider"
@@ -86,8 +90,6 @@
           (valueChange)="onSliderChange($event)"
         />
       </mat-slider>
-
-      <span class="time-label">{{ simulatedTime() }}ms</span>
     </div>
 
     @if (feedback()) {

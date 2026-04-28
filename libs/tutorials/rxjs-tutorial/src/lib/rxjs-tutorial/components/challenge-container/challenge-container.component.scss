@@ -120,11 +120,11 @@
 .scrubber-area {
   display: flex;
   align-items: center;
-  gap: 10px;
   margin-top: 10px;
-  // label-w po lewej + 8px margin toru = wyrównanie prawej krawędzi toru
-  padding-left: var(--rxjs-label-w);
-  padding-right: 8px;
+
+  .scrubber-control {
+    width: calc(var(--rxjs-label-w) - 8px);
+  }
 }
 
 .play-btn {

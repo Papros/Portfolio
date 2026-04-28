@@ -10,6 +10,7 @@ import {
   throwError,
   timer,
   EMPTY,
+  OperatorFunction,
 } from 'rxjs';
 import {
   map,
@@ -39,6 +40,10 @@ import {
 } from '../interfaces/challenge.interface';
 import { OPERATOR_METADATA } from '../interfaces/operator-meta.const';
 
+// ----------------------------------------------------------------
+// TYPY POMOCNICZE
+// ----------------------------------------------------------------
+
 // Kontekst dostępny w kodzie użytkownika przez Function constructor
 const USER_CODE_CONTEXT = {
   of,
@@ -47,18 +52,47 @@ const USER_CODE_CONTEXT = {
   EMPTY,
 };
 
+// Wartość przepływająca przez strumień.
+type StreamValue = unknown;
+
+// Callback budowany z kodu użytkownika (np. "data => data * 2").
+type UserCallback = (...args: StreamValue[]) => StreamValue;
+
+//Operator RxJS gotowy do wrzucenia w .pipe().
+type AnyOperator = OperatorFunction<StreamValue, StreamValue>;
+
+export interface ChallengeWeights {
+  values: number;
+  timing: number;
+  sequence: number;
+  count: number;
+  completion: number;
+}
+
+export interface ChallengeResoults {
+  stars: number;
+  score: number;
+  feedback: string[];
+}
+
+// ----------------------------------------------------------------
+// SERWIS
+// ----------------------------------------------------------------
+
 @Injectable()
 export class ChallengeInterpreterService {
   /**
-   * Uruchamia interpreter na danych challenge i zwraca wynik jako Promise.
-   * Czas w wyniku to rzeczywiste ms od uruchomienia - skalowane do maxTime.
+   * Uruchamia interpreter na danych challenge i zwraca wynik jako Promise,
    */
   run(challenge: RxJSChallenge, maxTime: number): Promise<InterpreterResult> {
     return new Promise((resolve) => {
       try {
+        // source sream zamieniany na observable, emisja wartości po odpowiednich timeoutach (symulacja czasu).
         const sources$ = challenge.data.sourceStreams.map((s) =>
           this.buildSourceObservable(s.stream),
         );
+
+        console.log('Sources: ', sources$);
 
         const output$ = this.buildOutputObservable(
           sources$,
@@ -71,6 +105,7 @@ export class ChallengeInterpreterService {
 
         output$.subscribe({
           next: (value) => {
+            console.log('Interpreter value (next): ', value);
             const elapsed = Date.now() - startTime;
             const timeInterval = Math.round((elapsed / maxTime) * maxTime);
             result.push({
@@ -80,12 +115,14 @@ export class ChallengeInterpreterService {
             });
           },
           error: (err) => {
+            console.log('Interpreter value (error): ', err);
             const elapsed = Date.now() - startTime;
             result.push({
               type: 'error',
               timeInterval: Math.min(Math.round(elapsed), maxTime),
               label: String(err?.message ?? err),
             });
+            // Błąd kończy strumień — resolve'ujemy z error polem ustawionym.
             resolve({
               stream: result,
               completeTime: null,
@@ -94,11 +131,13 @@ export class ChallengeInterpreterService {
             });
           },
           complete: () => {
+            console.log('Interpreter value (complete): ');
             completeTime = Math.min(Date.now() - startTime, maxTime);
             resolve({ stream: result, completeTime, time: Date.now() });
           },
         });
       } catch (err: unknown) {
+        // synchroniczny catch (np. błąd parsowania kodu)
         resolve({
           stream: [],
           completeTime: null,
@@ -111,7 +150,14 @@ export class ChallengeInterpreterService {
 
   // - Source Observable ---
 
-  private buildSourceObservable(streamData: StreamData): Observable<unknown> {
+  /**
+   * Zamienia statyczne dane na Observable który emituje je po odpowiednich opóźnieniach (setTimeout).
+   * @param streamData lista eventów z timeInterval
+   * @returns Observable<unknown> który będzie emitować dane z source
+   */
+  private buildSourceObservable(
+    streamData: StreamData,
+  ): Observable<StreamValue> {
     return new Observable((subscriber) => {
       const timers: ReturnType<typeof setTimeout>[] = [];
 
@@ -145,18 +191,25 @@ export class ChallengeInterpreterService {
         timers.push(t);
       }
 
-      // cleanup przy unsubscribe
+      // cleanup przy unsubscribe na potrzeby switchMap/takeUntil
       return () => timers.forEach(clearTimeout);
     });
   }
 
   // - Output Observable ---
 
+  /**
+   * Łączy sources$ i operators w jeden Observable wyjściowy.
+   * @param sources$
+   * @param operators
+   * @returns
+   */
   private buildOutputObservable(
     sources$: Observable<unknown>[],
     operators: PipeOperator[],
   ): Observable<unknown> {
     if (operators.length === 0) {
+      // Brak operatorów — zwróć źródła bezpośrednio.
       return sources$.length === 1 ? sources$[0] : merge(...sources$);
     }
 
@@ -164,13 +217,15 @@ export class ChallengeInterpreterService {
     const firstOp = operators[0];
     const firstMeta = OPERATOR_METADATA[firstOp.operator];
 
-    let base$: Observable<unknown>;
-
     if (firstMeta?.kind === 'combination') {
-      base$ = this.buildCombinationOperator(firstOp, sources$);
+      // Combination operator opakowuje WSZYSTKIE sources$ naraz.
+      const combined$ = this.buildCombinationOperator(firstOp, sources$);
+
       // reszta operatorów po combination idzie do pipe()
       const rest = operators.slice(1);
-      return rest.length > 0 ? this.applyPipeableOperators(base$, rest) : base$;
+      return rest.length > 0
+        ? this.applyPipeableOperators(combined$, rest)
+        : combined$;
     }
 
     // brak combination - source to pierwszy strumień, reszta przez pipe()
@@ -330,5 +385,111 @@ export class ChallengeInterpreterService {
     const num = Number(label);
     if (!isNaN(num) && label.trim() !== '') return num;
     return label;
+  }
+
+  estimateResoult(
+    testedResoult: StreamEvent[],
+    correctResoult: StreamEvent[],
+    weights: ChallengeWeights = {
+      values: 40,
+      timing: 25,
+      sequence: 20,
+      count: 10,
+      completion: 5,
+    },
+  ): ChallengeResoults {
+    const tested = [...testedResoult].sort(
+      (a, b) => a.timeInterval - b.timeInterval,
+    );
+
+    const correct = [...correctResoult].sort(
+      (a, b) => a.timeInterval - b.timeInterval,
+    );
+
+    if (!correct.length)
+      return {
+        stars: 0,
+        score: 0,
+        feedback: [],
+      };
+
+    /**
+     * Kryteria:
+     * Tablice takie same:
+     * Kolejność taka sama:
+     * Wartości poprawne
+     * Odchylenie czasowe w normie (później wymagany identyczny czas):
+     * Typy zgodne
+     */
+
+    const feedback = {
+      stars: 0,
+      score: 0,
+      feedback: [],
+    };
+
+    // Count score
+
+    const countDiff = Math.abs(tested.length - correct.length);
+    const countScore = Math.max(0, 1 - countDiff / correct.length);
+
+    feedback.score += countScore;
+
+    // Sequence score
+
+    let typeMatches = 0;
+
+    for (let i = 0; i < Math.min(tested.length, correct.length); i++) {
+      if (tested[i].type === correct[i].type) {
+        typeMatches++;
+      }
+    }
+
+    feedback.score += typeMatches / correct.length;
+
+    // Value score
+
+    let valueMatches = 0;
+
+    for (let i = 0; i < Math.min(tested.length, correct.length); i++) {
+      if (tested[i].label === correct[i].label) {
+        valueMatches++;
+      }
+    }
+
+    feedback.score += valueMatches / correct.length;
+
+    // Timing score
+
+    const tolerance = 100;
+
+    let timingTotal = 0;
+
+    for (let i = 0; i < Math.min(tested.length, correct.length); i++) {
+      const diff = Math.abs(tested[i].timeInterval - correct[i].timeInterval);
+
+      // płynny spadek jakości
+      const eventTimingScore = Math.max(0, 1 - diff / tolerance);
+
+      timingTotal += eventTimingScore;
+    }
+
+    feedback.score += timingTotal / correct.length;
+
+    // Termination bonus
+
+    const testedLast = tested[tested.length - 1];
+
+    const correctLast = correct[correct.length - 1];
+
+    if (testedLast?.type === correctLast?.type) {
+      feedback.score += 1;
+    }
+
+    //convert to stars 0-5
+
+    feedback.stars = Math.round(feedback.score);
+
+    return feedback;
   }
 }
