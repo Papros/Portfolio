@@ -22,7 +22,11 @@ import { PipeContainerComponent } from '../pipe-container/pipe-container.compone
 import { DataFormComponent } from '../data-form/data-form.component';
 import { ChallengeStateService } from '../../service/challenge-state.service';
 import { OPERATOR_METADATA } from '../../interfaces/operator-meta.const';
-import { ChallengeInterpreterService } from '../../service/challenge-interpreter.service';
+import {
+  ChallengeInterpreterService,
+  ChallengeResoults,
+} from '../../service/challenge-interpreter.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'lib-challenge-container',
@@ -32,6 +36,7 @@ import { ChallengeInterpreterService } from '../../service/challenge-interpreter
     MatSliderModule,
     PipeContainerComponent,
     DataFormComponent,
+    MatIconModule,
   ],
   providers: [ChallengeInterpreterService],
   templateUrl: './challenge-container.component.html',
@@ -66,6 +71,8 @@ export class ChallengeContainerComponent implements OnDestroy {
     type: 'success' | 'error' | 'hint';
     message: string;
   } | null>(null);
+
+  resoultFeedback = signal<ChallengeResoults | null>(null);
 
   sourceStreamData = computed<StreamData[]>(() =>
     this.challenge().data.sourceStreams.map((s) => s.stream),
@@ -221,9 +228,18 @@ export class ChallengeContainerComponent implements OnDestroy {
   //------- Checking answer -----------
 
   async checkAnswer(): Promise<void> {
+    this.resoultFeedback.set(null);
     this.feedback.set({ type: 'hint', message: 'Interpretuję...' });
 
     const challenge = this.challangeStateService.challenge();
+
+    if (challenge.data.pipe.length == 0) {
+      this.feedback.set({
+        type: 'error',
+        message: `Wymagany przynajmniej jeden operator.`,
+      });
+      return;
+    }
 
     // walidacja: operatory combination wymagają >1 źródła
     const combinationOp = challenge.data.pipe.find((op) => {
@@ -247,12 +263,19 @@ export class ChallengeContainerComponent implements OnDestroy {
         return;
       }
 
+      this.resoultFeedback.set(
+        this.interpreter.estimateResoult(
+          result.stream,
+          challenge.resoult?.stream || [],
+        ),
+      );
+
       // zaktualizuj output stream w serwisie
       this.challangeStateService.setOutputStreamResult(result);
 
       this.feedback.set({
         type: 'success',
-        message: 'Gotowe! Scrubuj slider aby zobaczyć wynik.',
+        message: 'Gotowe!',
       });
     } catch (err) {
       this.feedback.set({

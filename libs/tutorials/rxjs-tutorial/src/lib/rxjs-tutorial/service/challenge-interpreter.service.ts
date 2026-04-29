@@ -72,7 +72,7 @@ export interface ChallengeWeights {
 export interface ChallengeResoults {
   stars: number;
   score: number;
-  feedback: string[];
+  feedback: { msg: string; type: 'success' | 'warn' | 'error' }[];
 }
 
 // ----------------------------------------------------------------
@@ -92,8 +92,6 @@ export class ChallengeInterpreterService {
           this.buildSourceObservable(s.stream),
         );
 
-        console.log('Sources: ', sources$);
-
         const output$ = this.buildOutputObservable(
           sources$,
           challenge.data.pipe,
@@ -105,7 +103,6 @@ export class ChallengeInterpreterService {
 
         output$.subscribe({
           next: (value) => {
-            console.log('Interpreter value (next): ', value);
             const elapsed = Date.now() - startTime;
             const timeInterval = Math.round((elapsed / maxTime) * maxTime);
             result.push({
@@ -115,7 +112,6 @@ export class ChallengeInterpreterService {
             });
           },
           error: (err) => {
-            console.log('Interpreter value (error): ', err);
             const elapsed = Date.now() - startTime;
             result.push({
               type: 'error',
@@ -131,7 +127,6 @@ export class ChallengeInterpreterService {
             });
           },
           complete: () => {
-            console.log('Interpreter value (complete): ');
             completeTime = Math.min(Date.now() - startTime, maxTime);
             resolve({ stream: result, completeTime, time: Date.now() });
           },
@@ -263,6 +258,7 @@ export class ChallengeInterpreterService {
     const rxjsPipes: any[] = operators.map((op) =>
       this.buildPipeableOperator(op),
     );
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (source$ as any).pipe(...rxjsPipes);
   }
@@ -422,7 +418,7 @@ export class ChallengeInterpreterService {
      * Typy zgodne
      */
 
-    const feedback = {
+    const feedback: ChallengeResoults = {
       stars: 0,
       score: 0,
       feedback: [],
@@ -433,7 +429,24 @@ export class ChallengeInterpreterService {
     const countDiff = Math.abs(tested.length - correct.length);
     const countScore = Math.max(0, 1 - countDiff / correct.length);
 
-    feedback.score += countScore;
+    feedback.score += countScore * weights.count;
+
+    if (countScore === 1) {
+      feedback.feedback.push({
+        msg: 'Correct number of emissions',
+        type: 'success',
+      });
+    } else if (countScore > 0.7) {
+      feedback.feedback.push({
+        msg: 'Emission count slightly off',
+        type: 'warn',
+      });
+    } else {
+      feedback.feedback.push({
+        msg: 'Wrong number of emissions',
+        type: 'error',
+      });
+    }
 
     // Sequence score
 
@@ -445,7 +458,17 @@ export class ChallengeInterpreterService {
       }
     }
 
-    feedback.score += typeMatches / correct.length;
+    const sequenceRatio = typeMatches / correct.length;
+
+    feedback.score += sequenceRatio * weights.sequence;
+
+    if (sequenceRatio === 1) {
+      feedback.feedback.push({ msg: 'Sequence correct', type: 'success' });
+    } else if (sequenceRatio > 0.7) {
+      feedback.feedback.push({ msg: 'Sequence mostly correct', type: 'warn' });
+    } else {
+      feedback.feedback.push({ msg: 'Event order incorrect', type: 'error' });
+    }
 
     // Value score
 
@@ -457,7 +480,20 @@ export class ChallengeInterpreterService {
       }
     }
 
-    feedback.score += valueMatches / correct.length;
+    const valueRatio = valueMatches / correct.length;
+
+    feedback.score += valueRatio * weights.values;
+
+    if (valueRatio === 1) {
+      feedback.feedback.push({ msg: 'Values correct', type: 'success' });
+    } else if (valueRatio > 0.7) {
+      feedback.feedback.push({
+        msg: 'Some emitted values incorrect',
+        type: 'warn',
+      });
+    } else {
+      feedback.feedback.push({ msg: 'Values mostly incorrect', type: 'error' });
+    }
 
     // Timing score
 
@@ -474,21 +510,52 @@ export class ChallengeInterpreterService {
       timingTotal += eventTimingScore;
     }
 
-    feedback.score += timingTotal / correct.length;
+    const timingRatio = timingTotal / correct.length;
+    feedback.score += timingRatio * weights.timing;
+
+    if (timingRatio === 1) {
+      feedback.feedback.push({ msg: 'Timing perfect', type: 'success' });
+    } else if (timingRatio > 0.7) {
+      feedback.feedback.push({ msg: 'Timing slightly off', type: 'warn' });
+    } else {
+      feedback.feedback.push({ msg: 'Timing incorrect', type: 'error' });
+    }
 
     // Termination bonus
+
+    let completionRatio = 0;
 
     const testedLast = tested[tested.length - 1];
 
     const correctLast = correct[correct.length - 1];
 
     if (testedLast?.type === correctLast?.type) {
-      feedback.score += 1;
+      completionRatio = 1;
+      feedback.feedback.push({
+        msg: 'Stream termination correct',
+        type: 'success',
+      });
+    } else {
+      feedback.feedback.push({
+        msg: 'Completion/error mismatch',
+        type: 'error',
+      });
     }
+
+    feedback.score += completionRatio * weights.completion;
+
+    feedback.score =
+      feedback.score /
+      (weights.completion +
+        weights.count +
+        weights.sequence +
+        weights.timing +
+        weights.values);
 
     //convert to stars 0-5
 
-    feedback.stars = Math.round(feedback.score);
+    feedback.stars = 3.5;
+    //Math.round(feedback.score);
 
     return feedback;
   }

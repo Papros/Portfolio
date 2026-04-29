@@ -28,7 +28,7 @@ export const CHALLENGE_MAP: RxJSChallenge = {
     outputStream: {
       locked: true,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 90,
         stream: [
           { type: 'next', timeInterval: 10, label: '2' },
@@ -70,7 +70,7 @@ export const CHALLENGE_FILTER: RxJSChallenge = {
     outputStream: {
       locked: true,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 95,
         stream: [
           { type: 'next', timeInterval: 20, label: '2' },
@@ -121,7 +121,7 @@ export const CHALLENGE_COMBINE_LATEST: RxJSChallenge = {
     outputStream: {
       locked: true,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 95,
         stream: [
           { type: 'next', timeInterval: 25, label: 'A1B1' },
@@ -160,7 +160,7 @@ export const CHALLENGE_FILL_SOURCE: RxJSChallenge = {
     outputStream: {
       locked: true,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 80,
         stream: [
           { type: 'next', timeInterval: 30, label: '3' },
@@ -198,7 +198,7 @@ export const CHALLENGE_CATCH_ERROR: RxJSChallenge = {
     outputStream: {
       locked: true,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 60,
         stream: [
           { type: 'next', timeInterval: 15, label: 'A' },
@@ -236,7 +236,7 @@ export const CHALLENGE_PLAYGROUND: RxJSChallenge = {
     outputStream: {
       locked: false,
       stream: {
-        label: 'result$',
+        label: 'Expected',
         completeTime: 60,
         stream: [
           { type: 'next', timeInterval: 15, label: 'A' },

@@ -31,6 +31,7 @@
           (marbleClick)="onSourceMarbleClick(i, $event)"
           (trackAreaClick)="onTrackAreaClick(i, $event)"
           (marbleMoved)="onMarbleMoved(i, $event)"
+          (trackRemoved)="onRemoveSourceStream(i)"
         />
       }
 
@@ -92,12 +93,6 @@
       </mat-slider>
     </div>
 
-    @if (feedback()) {
-      <div class="feedback-bar" [class]="'--' + feedback()!.type">
-        {{ feedback()!.message }}
-      </div>
-    }
-
     <button class="check-btn" (click)="checkAnswer()">Sprawdź →</button>
 
     <ng-container *ngIf="challenge().resoult && challenge().resoult?.stream">
@@ -107,9 +102,44 @@
           stream: challenge().resoult?.stream || [],
           completeTime: challenge().resoult?.completeTime ?? 0,
         }"
+        [simulatedTime]="simulatedTime()"
         [locked]="true"
         [maxTime]="maxTime"
       />
+
+      @if (feedback()) {
+        <div class="feedback-bar" [class]="'--' + feedback()!.type">
+          {{ feedback()!.message }}
+        </div>
+      }
+
+      <div *ngIf="resoultFeedback() as result" class="feedback-container">
+        <div class="feedback">
+          @for (log of result?.feedback; track log) {
+            <span class="feedback__log" [class]="'type--' + log.type">
+              {{ log.msg }}
+            </span>
+          }
+        </div>
+        <div class="stars">
+          {{ result.stars }}
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <span class="star filled">
+              <mat-icon>
+                {{
+                  result.stars >= star
+                    ? 'star'
+                    : result.stars + 0.5 >= star
+                      ? 'star_half'
+                      : 'star_border'
+                }}
+              </mat-icon>
+            </span>
+          }
+        </div>
+
+        <span class="score"> {{ result.score }}% </span>
+      </div>
     </ng-container>
   </div>
 

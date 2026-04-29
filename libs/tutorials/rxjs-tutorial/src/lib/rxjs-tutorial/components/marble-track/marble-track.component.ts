@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreamData } from '../../interfaces/challenge.interface';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Tick {
   pct: number; // pozycja w % szerokości toru
@@ -18,7 +19,7 @@ interface Tick {
 
 @Component({
   selector: 'lib-marble-track',
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './marble-track.component.html',
   styleUrl: './marble-track.component.scss',
 })
@@ -35,6 +36,7 @@ export class MarbleTrackComponent {
   trackAreaClick = output<number>();
   marbleMoved = output<{ index: number; newTime: number }>();
   marbleDragEnd = output<number>();
+  trackRemoved = output<void>();
 
   //Local state
   focusedMarbleIndex = signal<number | null>(null);
@@ -70,6 +72,11 @@ export class MarbleTrackComponent {
     event.stopPropagation();
     this.focusedMarbleIndex.set(index);
     this.marbleClick.emit(index);
+  }
+
+  onRemoveTrack(event: MouseEvent) {
+    event.stopPropagation();
+    this.trackRemoved.emit();
   }
 
   onTrackAreaClick(event: MouseEvent): void {

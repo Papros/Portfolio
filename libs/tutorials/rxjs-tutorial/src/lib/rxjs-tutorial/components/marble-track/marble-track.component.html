@@ -6,6 +6,18 @@
 >
   <span class="track-label">{{ trackData().label }}</span>
 
+  @if (!locked()) {
+    <button
+      class="track-remove"
+      (click)="onRemoveTrack($event)"
+      aria-label="Usuń źródło"
+    >
+      ×
+    </button>
+  } @else {
+    <mat-icon>lock</mat-icon>
+  }
+
   <div
     class="track-line-area"
     #trackArea

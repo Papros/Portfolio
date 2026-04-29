@@ -34,7 +34,6 @@ export class ChallengeStateService {
 
   public initChallenge(data: RxJSChallenge) {
     this._challenge.set(data);
-    console.log('Init challenge: ', data.id);
   }
 
   private updateSourceStream(
