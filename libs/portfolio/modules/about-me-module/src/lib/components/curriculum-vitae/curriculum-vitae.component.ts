@@ -28,6 +28,7 @@ import {
   LanguageSelectorComponent,
   ThemeSelectorComponent,
 } from '@portfolio/customization';
+import { FooterComponent } from '@portfolio/shared-pack/components';
 
 @Component({
   selector: 'lib-curriculum-vitae',
@@ -40,6 +41,7 @@ import {
     TranslocoModule,
     ThemeSelectorComponent,
     LanguageSelectorComponent,
+    FooterComponent,
   ],
   providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',

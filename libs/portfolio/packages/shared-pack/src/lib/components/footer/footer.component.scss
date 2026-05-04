@@ -1,0 +1,23 @@
+@use 'apps/portfolio/src/styles/styles.scss' as *;
+
+.lib-component-footer {
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+
+  border-top: 2px solid get-color(neutral-border);
+  background: get-color(neutral-card);
+  color: get-color(text-primary);
+
+  .footer-option {
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .footer-option--center {
+    flex: 1;
+    text-align: center;
+  }
+}

@@ -238,19 +238,7 @@
         </div>
       </section>
 
-      <footer class="cv-section cv-footer">
-        <div class="footer-option print-none">
-          <a href="/Portfolio/menu">
-            <mat-icon>arrow_left</mat-icon> {{ t('actions.back_to_menu') }}
-          </a>
-        </div>
-        <div class="footer-option--center">
-          &copy; {{ currentYear }}
-          {{
-            cvDate.basicInfo.name + ' ' + cvDate.basicInfo.surname | camelCase
-          }}. {{ t('labels.all_rights') }}.
-        </div>
-      </footer>
+      <lib-footer></lib-footer>
     </main>
 
     <div class="print-fab desktop-only print-fab--bw">

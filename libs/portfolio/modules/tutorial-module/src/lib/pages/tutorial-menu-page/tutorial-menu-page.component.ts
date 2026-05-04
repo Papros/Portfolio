@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { FooterComponent } from '@portfolio/shared-pack/components';
 
 interface TutorialCard {
   title: string;
@@ -14,7 +15,7 @@ interface TutorialCard {
 
 @Component({
   selector: 'lib-tutorial-menu-page',
-  imports: [CommonModule, RouterLink, MatIconModule],
+  imports: [CommonModule, RouterLink, MatIconModule, FooterComponent],
   templateUrl: './tutorial-menu-page.component.html',
   styleUrl: './tutorial-menu-page.component.scss',
 })
@@ -23,7 +24,7 @@ export class TutorialMenuPageComponent {
 
   readonly tutorials: TutorialCard[] = [
     {
-      title: 'RxJS Playground',
+      title: 'RxJS: Playground',
       description:
         'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
       image: 'assets/images/tutorials/rxjs-icon.png',
@@ -32,49 +33,22 @@ export class TutorialMenuPageComponent {
       available: true,
     },
     {
-      title: 'RxJS Playground',
+      title: 'Angular: Change detection',
       description:
-        'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
+        'Detection tree, zone vs. zoneless. Nauka przez interaktywne wyzwania.',
       image: '',
-      route: 'rxjs',
-      tags: ['rxjs', 'observables', 'operators'],
-      available: true,
+      route: 'change-detection',
+      tags: ['change detection', 'observables', 'javascript'],
+      available: false,
     },
     {
-      title: 'RxJS Playground',
+      title: 'JavaScript: Event Loop',
       description:
-        'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
+        'Tasks queue, edge cases. Nauka przez interaktywne wyzwania.',
       image: '',
-      route: 'rxjs',
-      tags: ['rxjs', 'observables', 'operators'],
-      available: true,
-    },
-    {
-      title: 'RxJS Playground',
-      description:
-        'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
-      image: 'assets/images/tutorials/rxjs-icon.png',
-      route: 'rxjs',
-      tags: ['rxjs', 'observables', 'operators'],
-      available: true,
-    },
-    {
-      title: 'RxJS Playground',
-      description:
-        'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
-      image: 'assets/images/tutorials/rxjs-icon.png',
-      route: 'rxjs',
-      tags: ['rxjs', 'observables', 'operators'],
-      available: true,
-    },
-    {
-      title: 'RxJS Playground',
-      description:
-        'Marble diagrams, operatory pipe, kombinowanie streamów. Nauka przez interaktywne wyzwania.',
-      image: 'assets/images/tutorials/rxjs-icon.png',
-      route: 'rxjs',
-      tags: ['rxjs', 'observables', 'operators'],
-      available: true,
+      route: 'event-loop',
+      tags: ['Event-loop', 'javascript'],
+      available: false,
     },
   ];
 }
