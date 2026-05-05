@@ -29,6 +29,11 @@
   background: var(--rxjs-bg);
 }
 
+.navigation-footer {
+  width: 100%;
+  padding: 0 8px;
+}
+
 // --- Header -------
 
 .canvas-header {
@@ -64,24 +69,6 @@
   color: var(--rxjs-text-secondary);
   margin: 0;
   line-height: 1.6;
-}
-
-.progress-dots {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--rxjs-border);
-  transition: background 0.25s;
-
-  &.--active {
-    background: var(--rxjs-accent);
-  }
 }
 
 // --- Streams area ----
@@ -287,7 +274,21 @@
     }
   }
 
-  .stars {
+  .passed {
+    mat-icon {
+      font-size: 50px !important;
+      width: 50px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+    }
+
+    &--success {
+      color: var(--rxjs-success);
+    }
+
+    &--error {
+      color: var(--rxjs-error);
+    }
   }
 }
 

@@ -8,11 +8,6 @@
           <p class="challenge-subtitle">{{ challenge().subtitle }}</p>
         }
       </div>
-      <div class="progress-dots">
-        @for (i of progressRange; track i) {
-          <div class="dot" [class.--active]="i === challenge().id"></div>
-        }
-      </div>
     </div>
 
     <div class="streams-area">
@@ -121,26 +116,31 @@
             </span>
           }
         </div>
-        <div class="stars">
-          {{ result.stars }}
-          @for (star of [1, 2, 3, 4, 5]; track star) {
-            <span class="star filled">
-              <mat-icon>
-                {{
-                  result.stars >= star
-                    ? 'star'
-                    : result.stars + 0.5 >= star
-                      ? 'star_half'
-                      : 'star_border'
-                }}
-              </mat-icon>
-            </span>
+        <div class="passed">
+          @if (result.passed) {
+            <mat-icon class="passed--success">check_circle</mat-icon>
+          } @else {
+            <mat-icon class="passed--error">error</mat-icon>
           }
         </div>
-
-        <span class="score"> {{ result.score }}% </span>
       </div>
     </ng-container>
+
+    <div class="navigation-footer">
+      <button
+        *ngIf="prevChallenge() as prev"
+        (click)="navigateChallenge.emit(prev.id)"
+      >
+        {{ prev.label }}
+      </button>
+      <button
+        *ngIf="nextChallenge() as next"
+        [class.highlight]="highlightNext()"
+        (click)="navigateChallenge.emit(next.id)"
+      >
+        {{ next.label }}
+      </button>
+    </div>
   </div>
 
   <div class="form-panel">

@@ -33,6 +33,11 @@
   </nav>
 
   <div class="challenge-area">
-    <lib-challenge-container [initChallenge]="challenge()!" />
+    <lib-challenge-container
+      [initChallenge]="challenge()!"
+      [nextChallenge]="meta().next"
+      [prevChallenge]="meta().prev"
+      (navigateChallenge)="goTo($event)"
+    />
   </div>
 </div>

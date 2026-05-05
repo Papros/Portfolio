@@ -65,6 +65,11 @@ export interface InterpreterResult {
   time: number;
 }
 
+export interface ChallengeMeta {
+  id: number;
+  label: string;
+}
+
 //-------- Events ---------
 
 export interface StreamBasicEvent {

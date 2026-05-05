@@ -213,7 +213,7 @@ export const CHALLENGE_CATCH_ERROR: RxJSChallenge = {
 
 export const CHALLENGE_PLAYGROUND: RxJSChallenge = {
   id: 6,
-  title: 'Playgtound',
+  title: 'Playground',
   subtitle: 'Testuj strumienie".',
   mode: 'playground',
   sourcesLocked: false,

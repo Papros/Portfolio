@@ -26,6 +26,19 @@ export class RxjsTutorialPageComponent {
     { initialValue: ALL_CHALLENGES[0] },
   );
 
+  readonly meta = toSignal(
+    this.route.data.pipe(
+      map(
+        (d) =>
+          (d['meta'] as {
+            next: { id: number; label: string } | null;
+            prev: { id: number; label: string } | null;
+          }) ?? { next: null, prev: null },
+      ),
+    ),
+    { initialValue: { next: null, prev: null } },
+  );
+
   readonly currentIndex = toSignal(
     this.route.data.pipe(
       map((d) => {
@@ -37,8 +50,19 @@ export class RxjsTutorialPageComponent {
   );
 
   goTo(index: number): void {
+    console.log('meta: ', this.meta());
     const ch = ALL_CHALLENGES[index];
-    if (ch) this.router.navigate(['..', ch.id], { relativeTo: this.route });
+    if (ch) {
+      console.log('Navigation: ', index);
+      this.router.navigate(['..', ch.id], { relativeTo: this.route }).then(
+        () => {
+          console.log('Done');
+        },
+        (err) => {
+          console.log(err);
+        },
+      );
+    }
   }
 
   get hasPrev(): boolean {

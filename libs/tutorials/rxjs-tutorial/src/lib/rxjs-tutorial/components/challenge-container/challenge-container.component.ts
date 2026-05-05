@@ -6,6 +6,8 @@ import {
   input,
   OnDestroy,
   OnInit,
+  output,
+  Signal,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -45,6 +47,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class ChallengeContainerComponent implements OnDestroy {
   initChallenge = input.required<RxJSChallenge>();
 
+  nextChallenge = input<{ id: number; label: string } | null>(null);
+  prevChallenge = input<{ id: number; label: string } | null>(null);
+
+  navigateChallenge = output<number>();
+
   private challangeStateService = inject(ChallengeStateService);
   private interpreter = inject(ChallengeInterpreterService);
 
@@ -65,6 +72,11 @@ export class ChallengeContainerComponent implements OnDestroy {
       this.challangeStateService.initChallenge(this.initChallenge());
     });
   }
+
+  highlightNext = computed(() => {
+    const resoult = this.resoultFeedback();
+    return resoult?.passed ?? false;
+  });
 
   // Feedback
   feedback = signal<{
