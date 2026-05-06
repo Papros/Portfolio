@@ -10,7 +10,6 @@ export const ChallengeControlResolver: ResolveFn<{
 
   const prev = ALL_CHALLENGES.find((c) => c.id === id - 1);
   const next = ALL_CHALLENGES.find((c) => c.id === id + 1);
-
   return {
     next: next ? { id: next.id, label: next.title } : undefined,
     prev: prev ? { id: prev.id, label: prev.title } : undefined,

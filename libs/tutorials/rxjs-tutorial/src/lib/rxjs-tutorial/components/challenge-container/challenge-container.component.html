@@ -128,17 +128,21 @@
 
     <div class="navigation-footer">
       <button
+        class="navigation-footer-action --prev"
         *ngIf="prevChallenge() as prev"
         (click)="navigateChallenge.emit(prev.id)"
       >
-        {{ prev.label }}
+        <mat-icon>arrow_back</mat-icon>
+        [{{ prev.id }}] {{ prev.label }}
       </button>
       <button
+        class="navigation-footer-action --next"
         *ngIf="nextChallenge() as next"
-        [class.highlight]="highlightNext()"
+        [class.--highlight]="highlightNext()"
         (click)="navigateChallenge.emit(next.id)"
       >
-        {{ next.label }}
+        [{{ next.id }}] {{ next.label }}
+        <mat-icon>arrow_forward</mat-icon>
       </button>
     </div>
   </div>

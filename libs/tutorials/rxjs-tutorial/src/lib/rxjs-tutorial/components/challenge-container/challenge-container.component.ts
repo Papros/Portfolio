@@ -69,7 +69,7 @@ export class ChallengeContainerComponent implements OnDestroy {
 
   constructor() {
     effect(() => {
-      this.challangeStateService.initChallenge(this.initChallenge());
+      this.resetChallenge();
     });
   }
 
@@ -239,6 +239,14 @@ export class ChallengeContainerComponent implements OnDestroy {
 
   //------- Checking answer -----------
 
+  resetChallenge() {
+    this.challangeStateService.initChallenge(this.initChallenge());
+    this.stopPlay();
+    this.simulatedTime.set(0);
+    this.feedback.set(null);
+    this.resoultFeedback.set(null);
+  }
+
   async checkAnswer(): Promise<void> {
     this.resoultFeedback.set(null);
     this.feedback.set({ type: 'hint', message: 'Interpretuję...' });
@@ -278,7 +286,7 @@ export class ChallengeContainerComponent implements OnDestroy {
       this.resoultFeedback.set(
         this.interpreter.estimateResoult(
           result.stream,
-          challenge.resoult?.stream || [],
+          challenge.data.outputStream.stream.stream || [],
         ),
       );
 

@@ -49,26 +49,14 @@ export class RxjsTutorialPageComponent {
     { initialValue: 0 },
   );
 
-  goTo(index: number): void {
-    console.log('meta: ', this.meta());
-    const ch = ALL_CHALLENGES[index];
-    if (ch) {
-      console.log('Navigation: ', index);
-      this.router.navigate(['..', ch.id], { relativeTo: this.route }).then(
-        () => {
-          console.log('Done');
-        },
-        (err) => {
-          console.log(err);
-        },
-      );
-    }
+  goTo(id: number): void {
+    this.router.navigate(['..', id], { relativeTo: this.route });
   }
 
   get hasPrev(): boolean {
-    return (this.currentIndex() ?? 0) > 0;
+    return !!this.meta().prev;
   }
   get hasNext(): boolean {
-    return (this.currentIndex() ?? 0) < ALL_CHALLENGES.length - 1;
+    return !!this.meta().next;
   }
 }
