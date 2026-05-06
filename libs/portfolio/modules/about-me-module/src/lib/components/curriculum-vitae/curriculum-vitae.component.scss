@@ -245,6 +245,10 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   flex-direction: column;
   background: get-color(neutral-bg);
   color: get-color(text-primary);
+
+  lib-footer {
+    margin: 6px;
+  }
 }
 
 // === Header ===================================================================

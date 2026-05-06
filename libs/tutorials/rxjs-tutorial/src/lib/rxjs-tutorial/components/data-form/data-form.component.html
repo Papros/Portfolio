@@ -1,0 +1,236 @@
+<div class="data-form" [class.--empty]="!panelFocus()">
+  @if (!panelFocus()) {
+    <div class="empty-state">
+      <div class="empty-icon">⟵</div>
+      <p>Kliknij tor lub operator<br />aby edytować dane</p>
+    </div>
+  }
+
+  <!-- - SOURCE ----- -->
+  @if (panelFocus()?.kind === 'source') {
+    <div class="form-section">
+      <div class="form-header">
+        <span class="form-badge source">źródło</span>
+        <span class="form-title">{{ currentStream()?.label }}</span>
+      </div>
+
+      <div class="marbles-list">
+        @for (event of currentStream()?.stream; track $index; let i = $index) {
+          <div
+            class="marble-row"
+            [class.--focused]="focusedMarbleIndex() === i"
+            (click)="onMarbleRowClick(i)"
+          >
+            <span class="marble-type-badge" [class]="'--' + event.type">
+              {{
+                event.type === 'next' ? 'N' : event.type === 'error' ? 'E' : '|'
+              }}
+            </span>
+            <span class="marble-time">{{ event.timeInterval }}ms</span>
+            <span class="marble-label">{{ event.label }}</span>
+            <button
+              class="row-remove"
+              (click)="$event.stopPropagation(); onRemoveMarble(i)"
+              aria-label="Usuń"
+            >
+              ×
+            </button>
+          </div>
+        } @empty {
+          <p class="empty-list">
+            Brak eventów. Kliknij oś czasu lub dodaj poniżej.
+          </p>
+        }
+      </div>
+
+      <div class="add-marble-form" [class.--editing]="isEditingMarble()">
+        <div class="add-marble-header">
+          <span class="add-marble-title">{{
+            isEditingMarble() ? 'Edytuj event' : 'Dodaj event'
+          }}</span>
+          @if (isEditingMarble()) {
+            <button class="btn-cancel" (click)="clearMarbleForm()">
+              anuluj
+            </button>
+          }
+        </div>
+
+        <div class="form-row">
+          <label>Czas (ms)</label>
+          <input
+            type="number"
+            class="form-input"
+            [value]="newMarbleTime()"
+            (input)="newMarbleTime.set(+$any($event.target).value)"
+            min="0"
+            [max]="maxTime()"
+          />
+        </div>
+
+        <div class="form-row">
+          <label>Label</label>
+          <input
+            type="text"
+            class="form-input"
+            [value]="newMarbleLabel()"
+            (input)="newMarbleLabel.set($any($event.target).value)"
+            maxlength="4"
+            placeholder="np. A"
+            [disabled]="newMarbleType() === 'complete'"
+          />
+        </div>
+
+        <div class="form-row">
+          <label>Typ</label>
+          <div class="type-toggle">
+            @for (t of eventTypes; track t) {
+              <button
+                class="type-btn"
+                [class.--active]="newMarbleType() === t"
+                (click)="newMarbleType.set(t)"
+              >
+                {{ t }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <button
+          class="btn-add"
+          [class.--save]="isEditingMarble()"
+          (click)="onSaveMarble()"
+        >
+          {{ isEditingMarble() ? '✓ Zapisz' : '+ Dodaj event' }}
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- - PIPE ---- -->
+  @if (panelFocus()?.kind === 'pipe') {
+    <div class="form-section">
+      <div class="form-header">
+        <span class="form-badge pipe">pipe</span>
+        <span class="form-title">
+          {{ isEditingOperator() ? 'Edytuj operator' : 'Dodaj operator' }}
+        </span>
+        @if (isEditingOperator()) {
+          <button
+            class="btn-cancel"
+            style="margin-left: auto"
+            (click)="clearOperatorForm()"
+          >
+            anuluj
+          </button>
+        }
+      </div>
+
+      <!-- picker -->
+      <div class="op-picker-label">Operator:</div>
+      <div class="op-chips">
+        @for (op of operatorOptions(); track op) {
+          <button
+            class="op-chip"
+            [class.--selected]="selectedOperator() === op"
+            (click)="onOperatorSelect(op)"
+          >
+            {{ op }}
+          </button>
+        }
+      </div>
+
+      @if (selectedOperator()) {
+        <!-- parametry / kontekst -->
+        @if (hasParams()) {
+          <div class="params-section">
+            <span class="params-label">Dostępne parametry:</span>
+            <div class="params-list">
+              @for (param of currentOperatorParams(); track param.name) {
+                <button
+                  class="param-chip"
+                  (click)="insertSnippet(param.name)"
+                  [title]="'Wstaw \'' + param.name + '\' do kodu'"
+                >
+                  <span class="param-name">{{ param.name }}</span>
+                  <span class="param-type">{{ param.type }}</span>
+                </button>
+              }
+            </div>
+            <p class="params-hint">Kliknij parametr aby wstawić do pola kodu</p>
+          </div>
+        } @else {
+          <p class="params-hint --no-params">
+            Ten operator przyjmuje wartość bezpośrednio, nie callback.<br />
+            Wpisz wartość np. <code>3</code> dla <code>take(3)</code>.
+          </p>
+        }
+
+        <!-- pole kodu -->
+        <div class="form-row --vertical">
+          <label>
+            Kod
+            @if (hasParams()) {
+              <span class="hint">
+                ({{ selectedOperator() }}(<span class="hint-params">{{
+                  paramsToString()
+                }}</span
+                >) => ...)
+              </span>
+            }
+          </label>
+          <input
+            #codeInput
+            type="text"
+            class="form-input --mono"
+            [value]="operatorCode()"
+            (input)="operatorCode.set($any($event.target).value)"
+            [placeholder]="
+              hasParams()
+                ? currentOperatorParams()[0]?.name + ' => ...'
+                : 'np. 3'
+            "
+          />
+        </div>
+
+        <!-- podgląd -->
+        <div class="preview-row">
+          <span class="preview-label">Podgląd:</span>
+          <code class="preview-code">
+            {{ selectedOperator() }}({{ operatorCode() || '...' }})
+          </code>
+        </div>
+
+        <button
+          class="btn-add"
+          [class.--save]="isEditingOperator()"
+          (click)="onConfirmOperator()"
+        >
+          {{ isEditingOperator() ? '✓ Zapisz operator' : '+ Dodaj operator' }}
+        </button>
+      }
+    </div>
+  }
+
+  <!-- - OUTPUT ----- -->
+  @if (panelFocus()?.kind === 'output') {
+    <div class="form-section">
+      <div class="form-header">
+        <span class="form-badge output">output</span>
+        <span class="form-title">Strumień wyjściowy</span>
+      </div>
+
+      @if (outputLocked()) {
+        <p class="hint-text">
+          Wyjście jest obliczane automatycznie przez interpreter.<br />
+          Scrubuj slider aby zobaczyć jak dane przepływają.
+        </p>
+      } @else {
+        <p class="hint-text">
+          Tryb <strong>guess-output</strong>: zadeklaruj co pojawi się na
+          wyjściu.
+        </p>
+        <p class="coming-soon">[ formularz wyjścia — analogiczny do źródła ]</p>
+      }
+    </div>
+  }
+</div>

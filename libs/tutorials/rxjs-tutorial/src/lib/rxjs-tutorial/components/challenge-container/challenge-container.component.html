@@ -1,0 +1,164 @@
+<div class="challenge-layout">
+  <div class="canvas-panel">
+    <div class="canvas-header">
+      <div class="challenge-meta">
+        <span class="challenge-index">Challenge {{ challenge().id }}</span>
+        <h2 class="challenge-title">{{ challenge().title }}</h2>
+        @if (challenge().subtitle) {
+          <p class="challenge-subtitle">{{ challenge().subtitle }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="streams-area">
+      @for (
+        src of challenge().data.sourceStreams;
+        track src.stream.label;
+        let i = $index
+      ) {
+        <lib-marble-track
+          [trackData]="src.stream"
+          [locked]="src.locked"
+          [maxTime]="maxTime"
+          [simulatedTime]="simulatedTime()"
+          [isFocused]="isPanelFocused('source', i)"
+          (trackClick)="onSourceTrackClick(i)"
+          (marbleClick)="onSourceMarbleClick(i, $event)"
+          (trackAreaClick)="onTrackAreaClick(i, $event)"
+          (marbleMoved)="onMarbleMoved(i, $event)"
+          (trackRemoved)="onRemoveSourceStream(i)"
+        />
+      }
+
+      @if (!challenge().sourcesLocked) {
+        <button class="add-track-btn" (click)="onAddSourceStream()">
+          + dodaj źródło
+        </button>
+      }
+    </div>
+
+    <lib-pipe-container
+      [operators]="challenge().data.pipe"
+      [isFocused]="panelFocus()?.kind === 'pipe'"
+      (pipeClick)="onPipeClick()"
+      (operatorClick)="onOperatorClick($event)"
+      (addOperator)="onAddOperator()"
+      (removeOperator)="onRemoveOperator($event)"
+    />
+
+    <lib-marble-track
+      [trackData]="challenge().data.outputStream.stream"
+      [locked]="challenge().data.outputStream.locked"
+      [maxTime]="maxTime"
+      [simulatedTime]="simulatedTime()"
+      [isFocused]="isPanelFocused('output')"
+      (trackClick)="onOutputTrackClick()"
+      (marbleClick)="onOutputMarbleClick($event)"
+      (trackAreaClick)="onOutputAreaClick($event)"
+      (marbleMoved)="onMarbleMoved(0, $event, true)"
+    />
+
+    <div class="scrubber-area">
+      <div class="scrubber-control">
+        <button
+          class="play-btn"
+          [class.--playing]="isPlaying()"
+          (click)="togglePlay()"
+          [attr.aria-label]="isPlaying() ? 'Pauza' : 'Play'"
+        >
+          {{ isPlaying() ? '⏸' : '▶' }}
+        </button>
+
+        <span class="time-label">{{ simulatedTime() }}ms</span>
+      </div>
+
+      <mat-slider
+        class="time-slider"
+        min="0"
+        [max]="maxTime"
+        step="1"
+        showTickMarks
+        discrete
+      >
+        <input
+          matSliderThumb
+          [value]="simulatedTime()"
+          (valueChange)="onSliderChange($event)"
+        />
+      </mat-slider>
+    </div>
+
+    <button class="check-btn" (click)="checkAnswer()">Sprawdź →</button>
+
+    <ng-container *ngIf="challenge().resoult && challenge().resoult?.stream">
+      <lib-marble-track
+        [trackData]="{
+          label: 'Resoults:',
+          stream: challenge().resoult?.stream || [],
+          completeTime: challenge().resoult?.completeTime ?? 0,
+        }"
+        [simulatedTime]="simulatedTime()"
+        [locked]="true"
+        [maxTime]="maxTime"
+      />
+
+      @if (feedback()) {
+        <div class="feedback-bar" [class]="'--' + feedback()!.type">
+          {{ feedback()!.message }}
+        </div>
+      }
+
+      <div *ngIf="resoultFeedback() as result" class="feedback-container">
+        <div class="feedback">
+          @for (log of result?.feedback; track log) {
+            <span class="feedback__log" [class]="'type--' + log.type">
+              {{ log.msg }}
+            </span>
+          }
+        </div>
+        <div class="passed">
+          @if (result.passed) {
+            <mat-icon class="passed--success">check_circle</mat-icon>
+          } @else {
+            <mat-icon class="passed--error">error</mat-icon>
+          }
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="navigation-footer">
+      <button
+        class="navigation-footer-action --prev"
+        *ngIf="prevChallenge() as prev"
+        (click)="navigateChallenge.emit(prev.id)"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        [{{ prev.id }}] {{ prev.label }}
+      </button>
+      <button
+        class="navigation-footer-action --next"
+        *ngIf="nextChallenge() as next"
+        [class.--highlight]="highlightNext()"
+        (click)="navigateChallenge.emit(next.id)"
+      >
+        [{{ next.id }}] {{ next.label }}
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <lib-data-form
+      [panelFocus]="panelFocus()"
+      [sourceStreams]="sourceStreamData()"
+      [operators]="pipeOperators()"
+      [outputLocked]="challenge().data.outputStream.locked"
+      [maxTime]="maxTime"
+      (marbleAdded)="onMarbleAdded($event)"
+      (marbleRemoved)="onMarbleRemoved($event)"
+      (marbleUpdated)="onMarbleUpdated($event)"
+      (operatorAdded)="onOperatorConfirmed($event)"
+      (operatorUpdated)="onOperatorUpdate($event)"
+    />
+  </div>
+</div>

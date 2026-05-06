@@ -1,0 +1,69 @@
+// _rxjs-tokens.scss
+// Importuj przez @use w każdym komponencie który potrzebuje tokenów:
+//   @use '../_rxjs-tokens' as tokens;
+//
+// Mixin aplikuje tokeny na wskazany selektor (domyślnie :host).
+// Użycie:
+//   @include tokens.apply();          → tokeny na :host
+//   @include tokens.apply('.wrapper') → tokeny na dowolny selektor
+
+@mixin apply($selector: ':host') {
+  #{$selector} {
+    // -- Tło i powierzchnie ---
+    --rxjs-bg: #f5f6fa;
+    --rxjs-surface: #ffffff;
+    --rxjs-surface-2: #eef0f6;
+    --rxjs-border: rgba(0, 0, 0, 0.09);
+
+    // -- Akcent ----
+    --rxjs-accent: #3b6fd4;
+    --rxjs-accent-rgb: 59, 111, 212;
+
+    // -- Statusy ---
+    --rxjs-error: #d44b3b;
+    --rxjs-error-rgb: 212, 75, 59;
+    --rxjs-success: #2e9e6b;
+    --rxjs-success-rgb: 46, 158, 107;
+    --rxjs-warn: #e4c61d;
+    --rxjs-warn-rgb: 46, 158, 107;
+
+    // -- Kolory źródła i wyjścia --
+    --rxjs-source-color: #3b6fd4;
+    --rxjs-source-rgb: 59, 111, 212;
+    --rxjs-output-color: #2e9e6b;
+    --rxjs-output-rgb: 46, 158, 107;
+
+    // -- Tekst ---
+    --rxjs-text-primary: #1a1d2e;
+    --rxjs-text-secondary: #4b5068;
+    --rxjs-text-tertiary: #9196ad;
+    --rxjs-text-negative: #ffffff;
+
+    // -- Tory ----
+    --rxjs-track-line: rgba(0, 0, 0, 0.18);
+    --rxjs-tick-color: rgba(0, 0, 0, 0.08);
+    --rxjs-track-bg: #ffffff;
+
+    // -- Marbls ----
+    --rxjs-marble-next-bg: #dce8ff;
+    --rxjs-marble-next-border: #3b6fd4;
+    --rxjs-marble-next-text: #1a3a7a;
+
+    --rxjs-marble-error-bg: #fde0dd;
+    --rxjs-marble-error-border: #d44b3b;
+    --rxjs-marble-error-text: #7a1a1a;
+
+    // -- Pipe chips ----
+    --rxjs-op-bg: #eef3ff;
+    --rxjs-op-border: #b8caff;
+
+    // -- Formularz ---
+    --rxjs-input-bg: #f8f9fc;
+
+    // -- Typografia ----
+    --rxjs-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+    // -- Wymiary ---
+    --rxjs-label-w: 64px;
+  }
+}
