@@ -82,8 +82,11 @@
       <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
     </ng-template>
 
-    <ng-template libGridSlot="easterEgg">
-      <ng-container *ngTemplateOutlet="comingSoon"></ng-container>
+    <ng-template libGridSlot="tutorial">
+       <a href="/Portfolio/tutorials" class="tile-card">
+        <mat-icon class="tile-watermark">cognition</mat-icon>
+        <span class="tile-label">{{ t('tutorial.title') }}</span>
+      </a>
     </ng-template>
 
     <ng-template libGridSlot="brick">

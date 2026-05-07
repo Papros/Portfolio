@@ -1,0 +1,67 @@
+<div
+  class="track-wrapper"
+  [class.--locked]="locked()"
+  [class.--focused]="isFocused()"
+  (click)="onTrackClick()"
+>
+  <span class="track-label">{{ trackData().label }}</span>
+
+  @if (!locked()) {
+    <button
+      class="track-remove"
+      (click)="onRemoveTrack($event)"
+      aria-label="Usuń źródło"
+    >
+      ×
+    </button>
+  } @else {
+    <mat-icon>lock</mat-icon>
+  }
+
+  <div
+    class="track-line-area"
+    #trackArea
+    [style.--rxjs-elapsed]="elapsedPercent()"
+    (click)="onTrackAreaClick($event)"
+  >
+    <div class="track-line"></div>
+    <div class="track-arrow"></div>
+
+    @for (tick of ticks(); track tick.pct) {
+      <div
+        class="tick"
+        [style.left.%]="tick.pct"
+        [attr.data-time]="tick.label"
+      ></div>
+    }
+
+    @for (event of trackData().stream; track $index; let i = $index) {
+      <div
+        class="marble"
+        [class.--next]="event.type === 'next'"
+        [class.--error]="event.type === 'error'"
+        [class.--complete]="event.type === 'complete'"
+        [class.--active]="event.timeInterval <= simulatedTime()"
+        [class.--focused]="focusedMarbleIndex() === i"
+        [style.left.%]="calcPosition(event.timeInterval)"
+        [title]="event.label + ' @ ' + event.timeInterval + 'ms'"
+        (click)="onMarbleClick($event, i)"
+        (mousedown)="onMarbleDragStart($event, i)"
+      >
+        @if (event.type === 'complete') {
+          <span class="complete-bar"></span>
+        } @else {
+          {{ event.label }}
+        }
+      </div>
+    }
+
+    @if (trackData().completeTime !== null) {
+      <div
+        class="complete-marker"
+        [class.--active]="trackData().completeTime! <= simulatedTime()"
+        [style.left.%]="calcPosition(trackData().completeTime!)"
+      ></div>
+    }
+  </div>
+</div>

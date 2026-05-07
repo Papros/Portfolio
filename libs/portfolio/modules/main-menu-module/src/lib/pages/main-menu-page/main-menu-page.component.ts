@@ -6,11 +6,7 @@ import {
   LanguageSelectorComponent,
   ThemeSelectorComponent,
 } from '@portfolio/customization';
-import {
-  provideTranslocoScope,
-  TranslocoModule,
-  TranslocoService,
-} from '@jsverse/transloco';
+import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'lib-main-menu-page',
@@ -156,11 +152,11 @@ export class MainMenuPageComponent {
         },
       },
       {
-        id: 'easterEgg',
+        id: 'tutorial',
         options: { enabled: true, visible: true, background: '#f472b6' },
         position: { colStart: 6, colSpan: 3, rowStart: 9, rowSpan: 2 },
         label: {
-          value: 'Easter Egg 🐞',
+          value: 'Tutorials',
           shadow: true,
           positionHorizontal: 1,
           positionVertical: 1,

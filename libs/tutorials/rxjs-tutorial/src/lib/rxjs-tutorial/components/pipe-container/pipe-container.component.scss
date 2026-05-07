@@ -1,0 +1,185 @@
+@use '../../styles/rxjs-tokens.scss' as tokens;
+@include tokens.apply();
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.pipe-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px 6px var(--rxjs-label-w);
+  border-radius: 8px;
+  transition: background 0.15s;
+  cursor: pointer;
+  gap: 0;
+
+  &:hover {
+    background: rgba(var(--rxjs-accent-rgb), 0.04);
+  }
+
+  &.--focused {
+    background: rgba(var(--rxjs-accent-rgb), 0.08);
+  }
+}
+
+// --- Nagłówek pipe( -----
+
+.pipe-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.pipe-label {
+  font-family: var(--rxjs-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rxjs-accent);
+  user-select: none;
+}
+
+// --- Drabinka operatorów ------
+
+.operators-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 16px; // wcięcie od nawiasu pipe(
+  border-left: 2px solid var(--rxjs-op-border);
+  margin: 4px 0 4px 6px;
+}
+
+.ladder-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.ladder-connector {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  color: var(--rxjs-text-tertiary);
+  user-select: none;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+// --- Chip operatora -----
+
+.operator-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1.5px solid var(--rxjs-op-border);
+  background: var(--rxjs-op-bg);
+  cursor: pointer;
+  transition:
+    border-color 0.13s,
+    background 0.13s,
+    box-shadow 0.13s;
+
+  &:hover:not(.--locked) {
+    border-color: var(--rxjs-accent);
+    background: rgba(var(--rxjs-accent-rgb), 0.1);
+  }
+
+  &.--focused {
+    border-color: var(--rxjs-accent);
+    box-shadow: 0 0 0 3px rgba(var(--rxjs-accent-rgb), 0.18);
+  }
+
+  &.--locked {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.op-name {
+  font-family: var(--rxjs-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rxjs-accent);
+}
+
+.op-code {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  color: var(--rxjs-text-secondary);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.op-remove {
+  background: none;
+  border: none;
+  padding: 0 0 0 4px;
+  color: var(--rxjs-text-tertiary);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.12s;
+
+  &:hover {
+    color: var(--rxjs-error);
+  }
+}
+
+// --- Empty state -----
+
+.no-operators {
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  color: var(--rxjs-text-tertiary);
+  font-style: italic;
+  padding: 4px 0 4px 16px;
+}
+
+// --- Add button ------
+
+.add-row {
+  display: flex;
+  align-items: center;
+  padding-left: 22px;
+  margin-top: 2px;
+}
+
+.add-operator-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1.5px dashed var(--rxjs-op-border);
+  border-radius: 6px;
+  color: var(--rxjs-text-tertiary);
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition:
+    border-color 0.13s,
+    color 0.13s;
+
+  &:hover {
+    border-color: var(--rxjs-accent);
+    color: var(--rxjs-accent);
+  }
+}
+
+// --- Zamknięcie pipe) ------
+
+.pipe-footer {
+  font-family: var(--rxjs-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rxjs-accent);
+  user-select: none;
+  margin-top: 2px;
+}

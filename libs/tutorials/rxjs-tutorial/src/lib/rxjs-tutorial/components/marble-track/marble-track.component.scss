@@ -1,0 +1,215 @@
+@use '../../styles/rxjs-tokens.scss' as tokens;
+@include tokens.apply();
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.track-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 4px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(.--locked) {
+    background: rgba(var(--rxjs-accent-rgb), 0.05);
+  }
+
+  &.--focused {
+    background: rgba(var(--rxjs-accent-rgb), 0.09);
+    border-radius: 8px;
+  }
+
+  &.--locked {
+    cursor: default;
+  }
+}
+
+// --- Label -------
+
+.track-label {
+  width: var(--rxjs-label-w);
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 12px;
+  font-family: var(--rxjs-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--rxjs-text-secondary);
+  user-select: none;
+}
+
+// --- Track area -----
+
+.track-line-area {
+  position: relative;
+  flex: 1;
+  height: 64px; // wyższy żeby zmieścić labele czasu
+  background: var(--rxjs-track-bg);
+  border: 1px solid var(--rxjs-border);
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+// Podświetlenie "upłynięty czas" — gradient od lewej
+.track-line-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    rgba(var(--rxjs-accent-rgb), 0.07) var(--rxjs-elapsed, 0%),
+    transparent var(--rxjs-elapsed, 0%)
+  );
+  pointer-events: none;
+  transition: background 0.05s;
+}
+
+.track-line {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  right: 24px;
+  height: 2px;
+  background: var(--rxjs-track-line);
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.track-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--rxjs-track-line);
+  border-right: 2px solid var(--rxjs-track-line);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+// --- Tick marks z labelami czasu ----
+
+.tick {
+  position: absolute;
+  top: calc(50% + 6px); // pod linią
+  width: 1px;
+  height: 6px;
+  background: var(--rxjs-tick-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  // label czasu
+  &::after {
+    content: attr(data-time);
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--rxjs-font-mono);
+    font-size: 9px;
+    color: var(--rxjs-text-tertiary);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+}
+
+// --- Marble ------
+
+.marble {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  opacity: 0.25;
+  border: 2px solid transparent;
+  transition:
+    opacity 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+  z-index: 1;
+
+  &.--active {
+    opacity: 1;
+  }
+
+  &.--focused {
+    box-shadow: 0 0 0 3px rgba(var(--rxjs-accent-rgb), 0.3);
+    transform: translate(-50%, -50%) scale(1.14);
+    z-index: 3;
+  }
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 2;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.--next {
+    background: var(--rxjs-marble-next-bg);
+    border-color: var(--rxjs-marble-next-border);
+    color: var(--rxjs-marble-next-text);
+    font-family: var(--rxjs-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &.--error {
+    background: var(--rxjs-marble-error-bg);
+    border-color: var(--rxjs-marble-error-border);
+    color: var(--rxjs-marble-error-text);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &.--complete {
+    width: 3px;
+    height: 32px;
+    border-radius: 2px;
+    border: none;
+    background: var(--rxjs-track-line);
+    opacity: 0.3;
+
+    &.--active {
+      opacity: 1;
+      background: var(--rxjs-accent);
+    }
+  }
+}
+
+// --- Complete marker (z completeTime na StreamData) ---
+
+.complete-marker {
+  position: absolute;
+  top: calc(50% - 16px);
+  width: 3px;
+  height: 32px;
+  border-radius: 2px;
+  background: var(--rxjs-track-line);
+  transform: translateX(-50%);
+  opacity: 0.3;
+  transition:
+    opacity 0.18s,
+    background 0.18s;
+
+  &.--active {
+    opacity: 1;
+    background: var(--rxjs-accent);
+  }
+}

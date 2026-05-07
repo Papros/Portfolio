@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
+  FooterComponent,
   NavigationBarComponent,
   SimpleMenuComponent,
 } from '@portfolio/shared-pack/components';
@@ -87,6 +88,7 @@ const routes: Routes = [
     CamelCaseFormatPipe,
     ThemeSelectorComponent,
     LanguageSelectorComponent,
+    FooterComponent,
   ],
   providers: [DocsSourceFacade, provideGithubDocsSource()],
 })

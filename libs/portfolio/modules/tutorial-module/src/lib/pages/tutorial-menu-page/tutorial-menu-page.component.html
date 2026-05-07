@@ -1,0 +1,50 @@
+<div class="menu-page">
+  <header class="page-header">
+    <h1 class="page-title">Tutorials</h1>
+  </header>
+
+  <div class="tutorial-grid">
+    @for (tutorial of tutorials; track tutorial.route) {
+      <div class="tutorial-card" [class.is-unavailable]="!tutorial.available">
+        <a class="card-link" [routerLink]="tutorial.route">
+          <ng-container
+            *ngTemplateOutlet="cardContent; context: { $implicit: tutorial }"
+          ></ng-container>
+        </a>
+      </div>
+    }
+  </div>
+
+  <lib-footer></lib-footer>
+</div>
+
+<ng-template #cardContent let-tutorial>
+  <div class="card-header">
+    <span class="card-title">{{ tutorial.title }}</span>
+    @if (!tutorial.available) {
+      <span class="card-soon">wkrótce</span>
+    }
+  </div>
+  <div class="tutorial-card-image">
+    @if (tutorial.image) {
+      <img
+        [src]="tutorial.image || placeholder"
+        [alt]="tutorial.title"
+        loading="lazy"
+      />
+      <mat-icon class="play-button">play_lesson</mat-icon>
+    } @else {
+      <div class="play-only">
+        <mat-icon>play_lesson</mat-icon>
+      </div>
+    }
+  </div>
+  <p class="card-desc">{{ tutorial.description }}</p>
+  <ul class="card-tags">
+    @for (tag of tutorial.tags; track tag) {
+      <li class="tag">{{ tag }}</li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template #cardContentFull let-tutorial> </ng-template>

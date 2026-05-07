@@ -4,3 +4,4 @@ export { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 export { NavigationAction } from './navigation-bar/navigation-bar.interface';
 export { SimpleMenuComponent } from './simple-menu/simple-menu.component';
 export { SimpleMenuAction } from './simple-menu/simple-menu.interface';
+export { FooterComponent } from './footer/footer.component';
