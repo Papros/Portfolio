@@ -1,0 +1,57 @@
+import { TemplateRef, Type } from '@angular/core';
+import {
+  HintDismissBehavior,
+  PulseVariant,
+  SpotlightVariant,
+  TooltipPlacement,
+  TourTrigger,
+  TourTriggerAction,
+} from './tour.enum';
+
+export interface TourStepContent {
+  title: string;
+  content?: string; // plain text or HTML string
+  template?: TemplateRef<unknown>; // custom template, overrides content
+  component?: Type<unknown>; // dynamic component, highest priority
+}
+
+export interface TourStep extends TourStepContent {
+  stepId: string;
+  order: number;
+  route?: string; // navigate before showing step
+  placement: TooltipPlacement;
+  pulse: PulseVariant;
+  spotlight: SpotlightVariant;
+  draggable: boolean; // allow drag if obscured
+  scrollIntoView: boolean;
+}
+
+export interface TourConfig {
+  tourId: string;
+  steps: TourStep[];
+  spotlight: SpotlightVariant; // tour-level default
+  pulse: PulseVariant;
+  persist: boolean; // save seen in storage, default true
+  allowKeyboard: boolean; // Escape=skip, arrows=prev/next
+  skipLabel: string;
+  nextLabel: string;
+  prevLabel: string;
+  finishLabel: string;
+  showProgress: boolean;
+}
+
+export interface HintConfig {
+  hintId: string;
+  trigger: TourTrigger;
+  triggerAction: TourTriggerAction;
+  dismiss: HintDismissBehavior;
+  autoCloseMs?: number; // only with AUTO dismiss
+  delayMs?: number; // with ON_DELAY trigger
+  idleMs?: number; // with ON_IDLE trigger
+  placement: TooltipPlacement;
+  pulse: PulseVariant;
+  spotlight: SpotlightVariant;
+  persist: boolean;
+  inviteText?: string; // text in invite tooltip
+  content: TourStepContent;
+}
