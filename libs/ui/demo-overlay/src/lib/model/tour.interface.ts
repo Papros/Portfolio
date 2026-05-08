@@ -53,5 +53,39 @@ export interface HintConfig {
   spotlight: SpotlightVariant;
   persist: boolean;
   inviteText?: string; // text in invite tooltip
-  content: TourStepContent;
+}
+
+export interface RegisteredStep {
+  stepId: string;
+  tourId: string;
+  order: number;
+  elementRef: { nativeElement: Element };
+  config: Partial<TourStep>;
+}
+
+export interface RegisteredHint {
+  hintId: string;
+  elementRef: { nativeElement: Element };
+  config: HintConfig;
+}
+
+export interface TourDefaults {
+  placement: TooltipPlacement;
+  pulse: PulseVariant;
+  spotlight: SpotlightVariant;
+  showProgress: boolean;
+  allowKeyboard: boolean;
+  skipLabel: string;
+  nextLabel: string;
+  prevLabel: string;
+  finishLabel: string;
+}
+
+export interface PiprTourGlobalConfig {
+  userId: string;
+  tours?: TourConfig[];
+  hints?: HintConfig[];
+  storage?: any;
+  navigation?: any;
+  defaults?: Partial<TourDefaults>;
 }

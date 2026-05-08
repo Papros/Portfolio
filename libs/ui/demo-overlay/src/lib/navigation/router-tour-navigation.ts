@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IPiprTourNavigation } from './navigation.token';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RouterTourNavigationService implements IPiprTourNavigation {
+  private readonly router = inject(Router);
+
   navigate(route: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return this.router.navigateByUrl(route);
   }
 }
