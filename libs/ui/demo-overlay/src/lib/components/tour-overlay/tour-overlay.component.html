@@ -1,1 +1,195 @@
-<p>tour-overlay works!</p>
+<!----- Spotlight backdrop (full variant) ---------->
+<ng-container *ngIf="isActive() || activeHintId()">
+  <div
+    class="backdrop"
+    [ngClass]="{
+      'backdrop--none':
+        (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
+        SpotlightVariant.NONE,
+      'backdrop--subtle':
+        (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
+        SpotlightVariant.SUBTLE,
+      'backdrop--full':
+        (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
+        SpotlightVariant.FULL,
+    }"
+    (click)="onDismissHintClickOutside()"
+  ></div>
+
+  <!-- Cutout over the anchor element for FULL spotlight -->
+  <div
+    *ngIf="
+      (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
+        SpotlightVariant.FULL && anchorRect() as r
+    "
+    class="spotlight-cutout"
+    [style.top.px]="r.top - 6"
+    [style.left.px]="r.left - 6"
+    [style.width.px]="r.width + 12"
+    [style.height.px]="r.height + 12"
+  ></div>
+</ng-container>
+
+<!----- Pulse ring on anchor ------------->
+<ng-container *ngIf="anchorRect() as r">
+  <div
+    *ngIf="
+      (activeStep()?.pulse ?? activeHintConfig()?.pulse) !== PulseVariant.NONE
+    "
+    class="pulse-ring"
+    [ngClass]="{
+      'pulse-ring--primary':
+        (activeStep()?.pulse ?? activeHintConfig()?.pulse) ===
+        PulseVariant.PRIMARY,
+      'pulse-ring--secondary':
+        (activeStep()?.pulse ?? activeHintConfig()?.pulse) ===
+        PulseVariant.SECONDARY,
+      'pulse-ring--accent':
+        (activeStep()?.pulse ?? activeHintConfig()?.pulse) ===
+        PulseVariant.ACCENT,
+    }"
+    [style.top.px]="r.top + r.height / 2 - 10"
+    [style.left.px]="r.left + r.width / 2 - 10"
+    [style.width.px]="20"
+    [style.height.px]="20"
+  ></div>
+</ng-container>
+
+<!----- Invite tooltip ---------------->
+<div
+  *ngIf="showInvite() && activeHintConfig() as hint"
+  class="invite-tooltip"
+  [style.top.px]="tooltipPos().top"
+  [style.left.px]="tooltipPos().left"
+>
+  <span class="invite-tooltip__text">{{ hint.inviteText }}</span>
+  <button class="invite-tooltip__btn" (click)="onInviteAccept()">
+    Show me
+  </button>
+  <button
+    class="invite-tooltip__dismiss"
+    (click)="onInviteDismiss()"
+    aria-label="Dismiss"
+  >
+    ✕
+  </button>
+</div>
+
+<!----- Tour tooltip --------------->
+<div
+  *ngIf="tooltipVisible() && isActive() && activeStep() as step"
+  class="tooltip"
+  [ngClass]="{
+    'tooltip--visible': tooltipVisible(),
+    'tooltip--draggable': step.draggable,
+  }"
+  [style.top.px]="tooltipPos().top"
+  [style.left.px]="tooltipPos().left"
+  [attr.role]="'dialog'"
+  [attr.aria-label]="step.title"
+  (mousedown)="onDragStart($event)"
+>
+  <!-- Header -->
+  <div class="tooltip__header">
+    <span class="tooltip__title">{{ step.title }}</span>
+    <button
+      class="tooltip__close"
+      (click)="tourService.skip()"
+      aria-label="Skip tour"
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path
+          d="M1 1l12 12M13 1L1 13"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Body: component > template > html string -->
+  <div
+    class="tooltip__body"
+    *ngIf="!step.component && !step.template && step.content"
+  >
+    <span [innerHTML]="step.content"></span>
+  </div>
+  <ng-container *ngIf="step.template && !step.component">
+    <ng-container *ngTemplateOutlet="step.template"></ng-container>
+  </ng-container>
+
+  <!-- Progress bar -->
+  <pipr-tour-progress
+    *ngIf="activeTour()?.showProgress"
+    [current]="currentIndex() + 1"
+    [total]="totalSteps"
+    [progress]="progress()"
+  ></pipr-tour-progress>
+
+  <!-- Footer -->
+  <div class="tooltip__footer">
+    <button
+      class="btn btn--ghost"
+      [disabled]="isFirstStep"
+      (click)="tourService.prev()"
+    >
+      {{ activeTour()?.prevLabel ?? 'Back' }}
+    </button>
+
+    <button class="btn btn--primary" (click)="tourService.next()">
+      {{ activeStepNextLabel }}
+    </button>
+
+    <button class="btn btn--skip" (click)="tourService.skip()">
+      {{ activeTour()?.skipLabel ?? 'Skip tour' }}
+    </button>
+  </div>
+</div>
+
+<!----- Hint tooltip --------------->
+<div
+  *ngIf="tooltipVisible() && !isActive() && activeHintConfig() as hint"
+  class="tooltip tooltip--visible"
+  [style.top.px]="tooltipPos().top"
+  [style.left.px]="tooltipPos().left"
+  [attr.role]="'tooltip'"
+  [attr.aria-label]="hint.title"
+>
+  <div class="tooltip__header">
+    <span class="tooltip__title">{{ hint.title }}</span>
+    <button
+      *ngIf="
+        hint.dismiss === HintDismissBehavior.ON_DISMISS_BUTTON ||
+        hint.dismiss === HintDismissBehavior.BOTH
+      "
+      class="tooltip__close"
+      (click)="onDismissHint()"
+      aria-label="Dismiss hint"
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path
+          d="M1 1l12 12M13 1L1 13"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="tooltip__body">
+    <span
+      *ngIf="!hint.component && !hint.template && hint.content"
+      [innerHTML]="hint.content"
+    ></span>
+
+    <ng-container *ngIf="hint.template && !hint.component">
+      <ng-container *ngTemplateOutlet="hint.template"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!hint.template && !hint.content">
+      [ERROR] No content or template found for guide
+    </ng-container>
+  </div>
+</div>

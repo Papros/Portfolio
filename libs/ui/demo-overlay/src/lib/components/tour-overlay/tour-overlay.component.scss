@@ -1,0 +1,297 @@
+// --- Host --------------------------------------------------------------------
+
+:host {
+  position: fixed;
+  z-index: var(--pipr-to-z-index, 9999);
+  pointer-events: none; // overlay itself doesn't capture — only .tooltip does
+}
+
+// --- Spotlight backdrop ------------------------------------------------------
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: auto;
+  transition: opacity 300ms ease;
+
+  &--none {
+    display: none;
+  }
+
+  &--subtle {
+    background: transparent;
+    pointer-events: none;
+  }
+
+  &--full {
+    background: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.spotlight-cutout {
+  position: fixed;
+  border-radius: var(--pipr-to-cutout-radius, 8px);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  transition: all 300ms ease;
+}
+
+// --- Tooltip -----------------------------------------------------------------
+
+.tooltip {
+  position: fixed;
+  pointer-events: auto;
+  min-width: var(--pipr-to-min-width, 240px);
+  max-width: var(--pipr-to-max-width, 360px);
+  background: var(--pipr-to-bg, #ffffff);
+  border: 1px solid var(--pipr-to-border, rgba(0, 0, 0, 0.1));
+  border-radius: var(--pipr-to-radius, 12px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+  user-select: none;
+
+  &--entering {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  &--leaving {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+
+  &--draggable {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--pipr-to-bg, #1e1e1e);
+    border-color: var(--pipr-to-border, rgba(255, 255, 255, 0.1));
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// --- Tooltip header ----------------------------------------------------------
+
+.tooltip__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.tooltip__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pipr-to-title-color, #111111);
+  line-height: 1.4;
+  flex: 1;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--pipr-to-title-color, #f0f0f0);
+  }
+}
+
+.tooltip__close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  color: var(--pipr-to-muted, #888888);
+  transition:
+    background 150ms,
+    color 150ms;
+  padding: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--pipr-to-title-color, #111111);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--pipr-to-title-color, #f0f0f0);
+    }
+  }
+}
+
+// --- Tooltip body -------------------------------------------------------------
+
+.tooltip__body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--pipr-to-body-color, #444444);
+  margin-bottom: 12px;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--pipr-to-body-color, #aaaaaa);
+  }
+}
+
+// --- Invite tooltip ----------------------------------------------------------
+
+.invite-tooltip {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pipr-to-bg, #ffffff);
+  border: 1px solid var(--pipr-to-border, rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 10px 14px;
+  font-size: 13px;
+  pointer-events: auto;
+
+  .invite-tooltip__text {
+    flex: 1;
+    color: var(--pipr-to-body-color, #444444);
+  }
+
+  .invite-tooltip__btn {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    color: var(--pipr-to-accent, #5c6bc0);
+    transition: background 150ms;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(92, 107, 192, 0.08);
+    }
+  }
+
+  .invite-tooltip__dismiss {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--pipr-to-muted, #888888);
+    padding: 2px;
+    line-height: 1;
+    font-size: 16px;
+  }
+}
+
+// --- Tour footer -------------------------------------------------------------
+
+.tooltip__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 150ms,
+    opacity 150ms;
+  line-height: 1;
+
+  &--primary {
+    background: var(--pipr-to-accent, #5c6bc0);
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      opacity: 0.88;
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--pipr-to-muted, #888888);
+    border: 1px solid var(--pipr-to-border, rgba(0, 0, 0, 0.15));
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+    }
+  }
+
+  &--skip {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    color: var(--pipr-to-muted, #888888);
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// --- Pulse animations --------------------------------------------------------
+
+@keyframes pipr-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pipr-pulse-ring 1.8s ease-out infinite;
+
+  &--primary {
+    border: 2px solid var(--pipr-pulse-primary, #5c6bc0);
+  }
+
+  &--secondary {
+    border: 2px solid var(--pipr-pulse-secondary, #26a69a);
+  }
+
+  &--accent {
+    border: 2px solid var(--pipr-pulse-accent, #ef5350);
+  }
+}

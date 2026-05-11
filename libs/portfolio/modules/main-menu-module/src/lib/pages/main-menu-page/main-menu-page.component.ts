@@ -7,6 +7,11 @@ import {
   ThemeSelectorComponent,
 } from '@portfolio/customization';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import {
+  PiprHintDirective,
+  TourTrigger,
+  TourTriggerAction,
+} from '@papros-it/demo-overlay';
 
 @Component({
   selector: 'lib-main-menu-page',
@@ -19,12 +24,16 @@ import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
     ThemeSelectorComponent,
     LanguageSelectorComponent,
     TranslocoModule,
+    PiprHintDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'main-menu', alias: 'mainMenu' })],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })
 export class MainMenuPageComponent {
+  readonly TourTrigger = TourTrigger;
+  readonly TourTriggerAction = TourTriggerAction;
+
   menuConfig = {
     gridWidth: 10,
     gridHeight: 10,

@@ -197,6 +197,8 @@ export class PiprTourService {
   triggerHint(hintId: string): void {
     if (this.isActive()) return;
 
+    console.log('Trigger hint: ', hintId);
+
     const hint = this.registeredHints.get(hintId);
     if (!hint) return;
 
@@ -226,7 +228,7 @@ export class PiprTourService {
     this.hintStatuses.set(hintId, HintStatus.PENDING);
   } // clear seen flag
 
-  // ─── Accessors for overlay ───────────────────────────────────────────────
+  // --- Accessors for overlay -----------------------------------------------
 
   getHintStatus(hintId: string): HintStatus {
     return this.hintStatuses.get(hintId) ?? HintStatus.PENDING;
@@ -235,6 +237,8 @@ export class PiprTourService {
   getActiveHintConfig(): HintConfig | null {
     const id = this.activeHintId();
     if (!id) return null;
+
+    console.log('config: ', this.registeredHints.get(id)?.config);
     return this.registeredHints.get(id)?.config ?? null;
   }
 
@@ -252,7 +256,7 @@ export class PiprTourService {
     );
   }
 
-  // ─── Private helpers ─────────────────────────────────────────────────────
+  // --- Private helpers -----------------------------------------------------
 
   private async showStep(step: TourStep): Promise<void> {
     const tour = this.activeTour()!;

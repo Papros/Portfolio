@@ -238,7 +238,18 @@
         </div>
       </section>
 
-      <lib-footer></lib-footer>
+      <lib-footer
+        [piprHint]="'cv-footer'"
+        [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
+        [triggerAction]="TourTriggerAction.START_AFTER_INVITE"
+        inviteText="Want to find more?"
+        title="Explore"
+        [template]="footerHint"
+      ></lib-footer>
+
+      <ng-template #footerHint>
+        <p>Click here to explore more of my work!</p>
+      </ng-template>
     </main>
 
     <div class="print-fab desktop-only print-fab--bw">

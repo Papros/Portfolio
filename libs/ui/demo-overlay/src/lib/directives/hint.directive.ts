@@ -4,6 +4,8 @@ import {
   inject,
   input,
   NgZone,
+  OnDestroy,
+  OnInit,
   TemplateRef,
   Type,
 } from '@angular/core';
@@ -18,8 +20,25 @@ import {
 import { PiprTourService } from '../service/tour.service';
 import { HintConfig } from '../model/tour.interface';
 
-@Directive({ selector: '[piprHint]' })
-export class PiprHintDirective {
+/**
+ * Registers a DOM element as a lazy hint anchor.
+ * The hint is shown according to the chosen `trigger` strategy and suppressed when a tour is active.
+ *
+ * Usage:
+ *
+ * ```html
+ *  <section
+ *   [piprHint]="'cv-section'"
+ *   [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
+ *   [triggerAction]="TourTriggerAction.START_AFTER_INVITE"
+ *   inviteText="Want a quick walkthrough of the CV section?"
+ *   title="Interactive CV"
+ *   content="You can export this as a PDF."
+ * ></section>
+ * ```
+ */
+@Directive({ selector: '[piprHint]', standalone: true })
+export class PiprHintDirective implements OnInit, OnDestroy {
   /** hintId — doubles as selector alias */
   readonly piprHint = input.required<string>();
   readonly trigger = input<TourTrigger>(TourTrigger.ON_VIEWPORT_ENTRY);
@@ -61,10 +80,10 @@ export class PiprHintDirective {
       spotlight: this.spotlight(),
       persist: this.persist(),
       inviteText: this.inviteText(),
-      //title: this.title(),
-      //content: this.content(),
-      //template: this.template(),
-      //component: this.component(),
+      title: this.title(),
+      content: this.content(),
+      template: this.template(),
+      component: this.component(), // dynamic component, highest priority
     };
 
     this.tourService.registerHint(this.piprHint(), this.elementRef, config);
@@ -76,7 +95,7 @@ export class PiprHintDirective {
     this.tourService.unregisterHint(this.piprHint());
   }
 
-  // ─── Trigger setup ───────────────────────────────────────────────────────
+  // --- Trigger setup -------------------------------------------------------
 
   private setupTrigger(): void {
     switch (this.trigger()) {
@@ -120,7 +139,7 @@ export class PiprHintDirective {
     }
   }
 
-  // ─── Strategies ──────────────────────────────────────────────────────────
+  // --- Strategies ----------------------------------------------------------
 
   private setupIntersectionObserver(): void {
     this.ngZone.runOutsideAngular(() => {

@@ -40,7 +40,7 @@ export interface TourConfig {
   showProgress: boolean;
 }
 
-export interface HintConfig {
+export interface HintConfig extends TourStepContent {
   hintId: string;
   trigger: TourTrigger;
   triggerAction: TourTriggerAction;

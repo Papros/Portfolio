@@ -29,6 +29,11 @@ import {
   ThemeSelectorComponent,
 } from '@portfolio/customization';
 import { FooterComponent } from '@portfolio/shared-pack/components';
+import {
+  PiprHintDirective,
+  TourTrigger,
+  TourTriggerAction,
+} from '@papros-it/demo-overlay';
 
 @Component({
   selector: 'lib-curriculum-vitae',
@@ -42,12 +47,16 @@ import { FooterComponent } from '@portfolio/shared-pack/components';
     ThemeSelectorComponent,
     LanguageSelectorComponent,
     FooterComponent,
+    PiprHintDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',
   styleUrl: './curriculum-vitae.component.scss',
 })
 export class CurriculumVitaeComponent implements OnInit {
+  readonly TourTrigger = TourTrigger;
+  readonly TourTriggerAction = TourTriggerAction;
+
   @Input()
   cvDate: CurriculumVitaeInterface | null = cvDefault;
 
