@@ -1,6 +1,6 @@
 export enum TourItemType {
   TOUR = 'tour', // sequential, exclusive, with progress bar
-  HINT = 'hint', // lazy, independent, subtle
+  HINT = 'hint', // lazy, independent
 }
 
 export enum TourTrigger {

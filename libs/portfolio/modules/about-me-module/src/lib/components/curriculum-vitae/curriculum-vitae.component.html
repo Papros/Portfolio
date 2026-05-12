@@ -4,6 +4,10 @@
     class="cv-container"
     data-section="cv"
     [class.dark-mode]="isDarkMode"
+    piprTourStep="CV_1"
+    [tourId]="TOUR_ID"
+    title="CV"
+    content="To moje CV. Przejdźmy przez nie sekcja po sekcji"
   >
     <aside class="cv-sidebar">
       <div class="sidebar-inner">
@@ -110,7 +114,15 @@
           </div>
         </div>
 
-        <div class="sidebar-section" *ngIf="sortedSkills.length > 0">
+        <div
+          class="sidebar-section"
+          *ngIf="sortedSkills.length > 0"
+          piprTourStep="CV_2"
+          [tourId]="TOUR_ID"
+          [order]="2"
+          title="Skills"
+          content="To stack technologiczny z którym jestem zaznajomiony, w kolejności poznanego zakresu. Najedź na technologię żeby zobaczyć w których projektach z niej korzystałem"
+        >
           <span class="sidebar-label">{{ t('sections.skills') }}</span>
           <div class="skills-grid">
             <span
@@ -173,7 +185,14 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="timeline">
+        <div
+          class="timeline"
+          piprTourStep="CV_3"
+          [tourId]="TOUR_ID"
+          [order]="3"
+          title="Skills"
+          content="W tej sekcji dowiesz się więcej o moim doświadczeniu, obok nazw firm masz znajdziesz link prowadzący do ich strony"
+        >
           <div
             *ngFor="let job of cvDate.jobHistory; let i = index"
             class="timeline-entry"
@@ -238,6 +257,15 @@
         </div>
       </section>
 
+      <div
+        piprTourStep="CV_4"
+        [tourId]="TOUR_ID"
+        [order]="4"
+        title="Więcej"
+        anchorSelector=".menu-action-anchor"
+        content="Po wszystkim zajrzysz do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje któe tworzę"
+      ></div>
+
       <lib-footer
         [piprHint]="'cv-footer'"
         [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
@@ -245,6 +273,8 @@
         inviteText="Want to find more?"
         title="Explore"
         [template]="footerHint"
+        anchorSelector=".menu-action-anchor"
+        [draggable]="true"
       ></lib-footer>
 
       <ng-template #footerHint>
@@ -253,8 +283,18 @@
     </main>
 
     <div class="print-fab desktop-only print-fab--bw">
+      <button
+        *ngIf="!tourActive"
+        class="print-fab"
+        (click)="startTour()"
+        [attr.aria-label]="t('actions.print')"
+        [attr.title]="t('actions.print')"
+      >
+        <mat-icon fontSet="material-icons-outlined"> help </mat-icon>
+      </button>
       <lib-language-selector></lib-language-selector>
       <lib-theme-selector></lib-theme-selector>
+
       <button
         class="print-fab__toggle"
         (click)="togglePrintMode()"

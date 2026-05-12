@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   HostBinding,
+  inject,
   Input,
   OnInit,
   signal,
@@ -31,6 +32,8 @@ import {
 import { FooterComponent } from '@portfolio/shared-pack/components';
 import {
   PiprHintDirective,
+  PiprTourService,
+  PiprTourStepDirective,
   TourTrigger,
   TourTriggerAction,
 } from '@papros-it/demo-overlay';
@@ -48,6 +51,7 @@ import {
     LanguageSelectorComponent,
     FooterComponent,
     PiprHintDirective,
+    PiprTourStepDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',
@@ -65,6 +69,14 @@ export class CurriculumVitaeComponent implements OnInit {
   readonly hoveredSkill = signal<string | null>(null);
   readonly printMode = signal<'color' | 'bw'>('color');
   readonly currentYear = new Date().getFullYear();
+
+  readonly tourService = inject(PiprTourService);
+
+  readonly TOUR_ID = 'CV-walkthrough';
+
+  get tourActive() {
+    return this.tourService.isActive();
+  }
 
   @HostBinding('class.dark-mode')
   get darkModeClass(): boolean {
@@ -106,6 +118,10 @@ export class CurriculumVitaeComponent implements OnInit {
         '(prefers-color-scheme: dark)',
       ).matches;
     }
+  }
+
+  startTour() {
+    this.tourService.startTour(this.TOUR_ID);
   }
 
   toggleTheme(): void {

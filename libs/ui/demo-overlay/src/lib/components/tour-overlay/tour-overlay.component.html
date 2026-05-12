@@ -151,10 +151,14 @@
 <div
   *ngIf="tooltipVisible() && !isActive() && activeHintConfig() as hint"
   class="tooltip tooltip--visible"
+  [ngClass]="{
+    'tooltip--draggable': hint.draggable,
+  }"
   [style.top.px]="tooltipPos().top"
   [style.left.px]="tooltipPos().left"
   [attr.role]="'tooltip'"
   [attr.aria-label]="hint.title"
+  (mousedown)="onDragStart($event)"
 >
   <div class="tooltip__header">
     <span class="tooltip__title">{{ hint.title }}</span>

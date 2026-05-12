@@ -228,6 +228,12 @@ export class PiprTourService {
     this.hintStatuses.set(hintId, HintStatus.PENDING);
   } // clear seen flag
 
+  resolveAnchorElement(host: Element, anchorSelector?: string): Element {
+    if (!anchorSelector) return host;
+    console.log('Resolve anchor: ', host.querySelector(anchorSelector));
+    return host.querySelector(anchorSelector) ?? host;
+  }
+
   // --- Accessors for overlay -----------------------------------------------
 
   getHintStatus(hintId: string): HintStatus {
@@ -245,14 +251,23 @@ export class PiprTourService {
   getActiveHintElement(): Element | null {
     const id = this.activeHintId();
     if (!id) return null;
-    return this.registeredHints.get(id)?.elementRef.nativeElement ?? null;
+    const registered = this.registeredHints.get(id);
+    if (!registered) return null;
+    console.log('getActiveHint: anchor? => ', registered.config.anchorSelector);
+    return this.resolveAnchorElement(
+      registered.elementRef.nativeElement,
+      registered.config.anchorSelector,
+    );
   }
 
   getActiveStepElement(): Element | null {
     const step = this.activeStep();
     if (!step) return null;
-    return (
-      this.registeredSteps.get(step.stepId)?.elementRef.nativeElement ?? null
+    const registered = this.registeredSteps.get(step.stepId);
+    if (!registered) return null;
+    return this.resolveAnchorElement(
+      registered.elementRef.nativeElement,
+      step.anchorSelector,
     );
   }
 
@@ -334,6 +349,7 @@ export class PiprTourService {
           spotlight: s.config.spotlight ?? this.config.defaults.spotlight,
           draggable: s.config.draggable ?? false,
           scrollIntoView: s.config.scrollIntoView ?? true,
+          anchorSelector: s.config.anchorSelector,
         }),
       );
 

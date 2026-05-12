@@ -21,14 +21,17 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
   readonly tourId = input.required<string>();
   readonly order = input<number>(0);
   readonly title = input.required<string>();
+
   readonly content = input<string | undefined>(undefined);
   readonly template = input<TemplateRef<unknown> | undefined>(undefined);
   readonly component = input<Type<unknown> | undefined>(undefined);
+  readonly anchorSelector = input<string | undefined>(undefined);
+
   readonly placement = input<TooltipPlacement | undefined>(undefined);
   readonly pulse = input<PulseVariant | undefined>(undefined);
   readonly spotlight = input<SpotlightVariant | undefined>(undefined);
   readonly route = input<string | undefined>(undefined);
-  readonly draggable = input<boolean>(false);
+  readonly draggable = input<boolean>(true);
   readonly scrollIntoView = input<boolean>(true);
 
   private readonly tourService = inject(PiprTourService);
@@ -51,6 +54,7 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
         route: this.route(),
         draggable: this.draggable(),
         scrollIntoView: this.scrollIntoView(),
+        anchorSelector: this.anchorSelector(),
       },
     );
   }

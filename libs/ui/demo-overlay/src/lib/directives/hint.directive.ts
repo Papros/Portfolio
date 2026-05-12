@@ -41,21 +41,27 @@ import { HintConfig } from '../model/tour.interface';
 export class PiprHintDirective implements OnInit, OnDestroy {
   /** hintId — doubles as selector alias */
   readonly piprHint = input.required<string>();
+
   readonly trigger = input<TourTrigger>(TourTrigger.ON_VIEWPORT_ENTRY);
   readonly triggerAction = input<TourTriggerAction>(TourTriggerAction.START);
+
   readonly dismiss = input<HintDismissBehavior>(HintDismissBehavior.BOTH);
   readonly autoCloseMs = input<number | undefined>(undefined);
   readonly delayMs = input<number | undefined>(undefined);
   readonly idleMs = input<number | undefined>(undefined);
+
   readonly placement = input<TooltipPlacement>(TooltipPlacement.BOTTOM);
   readonly pulse = input<PulseVariant>(PulseVariant.SECONDARY);
   readonly spotlight = input<SpotlightVariant>(SpotlightVariant.SUBTLE);
   readonly persist = input<boolean>(true);
+  readonly draggable = input<boolean>(false);
+
   readonly inviteText = input<string | undefined>(undefined);
   readonly title = input.required<string>();
   readonly content = input<string | undefined>(undefined);
   readonly template = input<TemplateRef<unknown> | undefined>(undefined);
   readonly component = input<Type<unknown> | undefined>(undefined);
+  readonly anchorSelector = input<string | undefined>(undefined);
 
   private readonly tourService = inject(PiprTourService);
   private readonly elementRef = inject<ElementRef<Element>>(ElementRef);
@@ -83,7 +89,9 @@ export class PiprHintDirective implements OnInit, OnDestroy {
       title: this.title(),
       content: this.content(),
       template: this.template(),
+      draggable: this.draggable(),
       component: this.component(), // dynamic component, highest priority
+      anchorSelector: this.anchorSelector(),
     };
 
     this.tourService.registerHint(this.piprHint(), this.elementRef, config);

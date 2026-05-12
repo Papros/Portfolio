@@ -124,20 +124,21 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
 
   private onHintChange(config: HintConfig): void {
     const el = this.tourService.getActiveHintElement();
+    console.log('El (hint) found: ', el);
 
     if (
       config.triggerAction === TourTriggerAction.START_AFTER_INVITE &&
       !this.showInvite()
     ) {
       this.showInvite.set(true);
-      this.updatePosition(el, config.placement, false);
+      this.updatePosition(el, config.placement, config.draggable);
       this.setupResizeObserver(el);
       this.cdr.markForCheck();
       return;
     }
 
     this.showInvite.set(false);
-    this.updatePosition(el, config.placement, false);
+    this.updatePosition(el, config.placement, config.draggable);
     this.setupResizeObserver(el);
     this.tooltipVisible.set(true);
     this.cdr.markForCheck();
@@ -241,6 +242,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
     const el = step
       ? this.tourService.getActiveStepElement()
       : this.tourService.getActiveHintElement();
+    console.log('El found: ', el);
     const placement =
       step?.placement ?? hint?.placement ?? TooltipPlacement.BOTTOM;
     this.updatePosition(el, placement, step?.draggable ?? false);
@@ -276,7 +278,10 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   // Drag&Drop
 
   onDragStart(e: MouseEvent): void {
-    if (!this.activeStep()?.draggable) return;
+    if (!this.activeStep()?.draggable && !this.activeHintConfig()?.draggable) {
+      return;
+    }
+
     this.isDragging.set(true);
     this.dragOffset = {
       x: e.clientX - this.tooltipPos().left,
