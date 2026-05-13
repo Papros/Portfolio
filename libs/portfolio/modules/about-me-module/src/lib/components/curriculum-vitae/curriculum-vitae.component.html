@@ -29,13 +29,13 @@
           <p class="profile-role">{{ subtitle }}</p>
 
           <div
-            class="print-fab mobile-only"
-            [class.print-fab--bw]="printMode() === 'bw'"
+            class="action-fab mobile-only"
+            [class.action-fab--bw]="printMode() === 'bw'"
           >
             <lib-language-selector></lib-language-selector>
             <lib-theme-selector></lib-theme-selector>
             <button
-              class="print-fab__toggle"
+              class="action-fab__toggle"
               (click)="togglePrintMode()"
               [attr.aria-label]="
                 printMode() === 'color'
@@ -53,13 +53,13 @@
               </mat-icon>
             </button>
             <button
-              class="print-fab__print"
+              class="action-fab__print"
               (click)="printCV()"
               [attr.aria-label]="t('actions.print')"
               [attr.title]="t('actions.print')"
             >
               <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-              <span class="print-fab__label">
+              <span class="action-fab__label">
                 {{
                   printMode() === 'bw'
                     ? t('actions.print_bw')
@@ -282,52 +282,55 @@
       </ng-template>
     </main>
 
-    <div class="print-fab desktop-only print-fab--bw">
+    <div class="action-fab desktop-only action-fab--bw">
       <button
         *ngIf="!tourActive"
-        class="print-fab"
+        class="action-fab__action"
         (click)="startTour()"
-        [attr.aria-label]="t('actions.print')"
-        [attr.title]="t('actions.print')"
+        [attr.aria-label]="t('actions.tutorial')"
+        [attr.title]="t('actions.tutorial')"
       >
         <mat-icon fontSet="material-icons-outlined"> help </mat-icon>
       </button>
+
       <lib-language-selector></lib-language-selector>
       <lib-theme-selector></lib-theme-selector>
 
-      <button
-        class="print-fab__toggle"
-        (click)="togglePrintMode()"
-        [attr.aria-label]="
-          printMode() === 'color'
-            ? t('actions.switch_bw')
-            : t('actions.switch_color')
-        "
-        [attr.title]="
-          printMode() === 'color'
-            ? t('actions.print_bw')
-            : t('actions.print_color')
-        "
-      >
-        <mat-icon fontSet="material-icons-outlined">
-          {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
-        </mat-icon>
-      </button>
-      <button
-        class="print-fab__print"
-        (click)="printCV()"
-        [attr.aria-label]="t('actions.print')"
-        [attr.title]="t('actions.print')"
-      >
-        <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-        <span class="print-fab__label">
-          {{
-            printMode() === 'bw'
+      <div class="action-fab__group">
+        <button
+          class="action-fab__toggle"
+          (click)="togglePrintMode()"
+          [attr.aria-label]="
+            printMode() === 'color'
+              ? t('actions.switch_bw')
+              : t('actions.switch_color')
+          "
+          [attr.title]="
+            printMode() === 'color'
               ? t('actions.print_bw')
               : t('actions.print_color')
-          }}
-        </span>
-      </button>
+          "
+        >
+          <mat-icon fontSet="material-icons-outlined">
+            {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
+          </mat-icon>
+        </button>
+        <button
+          class="action-fab__print"
+          (click)="printCV()"
+          [attr.aria-label]="t('actions.print')"
+          [attr.title]="t('actions.print')"
+        >
+          <mat-icon fontSet="material-icons-outlined">print</mat-icon>
+          <span class="action-fab__label">
+            {{
+              printMode() === 'bw'
+                ? t('actions.print_bw')
+                : t('actions.print_color')
+            }}
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 </ng-container>
