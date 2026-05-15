@@ -22,18 +22,14 @@
     background: transparent;
     pointer-events: none;
   }
-
-  &--full {
-    background: rgba(0, 0, 0, 0.55);
-  }
 }
 
-.spotlight-cutout {
+.spotlight-svg {
   position: fixed;
-  border-radius: var(--pipr-to-cutout-radius, 8px);
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  transition: all 300ms ease;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }
 
 // --- Tooltip -----------------------------------------------------------------

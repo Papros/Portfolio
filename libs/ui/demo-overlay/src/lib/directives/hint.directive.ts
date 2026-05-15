@@ -58,10 +58,16 @@ export class PiprHintDirective implements OnInit, OnDestroy {
 
   readonly inviteText = input<string | undefined>(undefined);
   readonly title = input.required<string>();
+
+  //Content render
   readonly content = input<string | undefined>(undefined);
   readonly template = input<TemplateRef<unknown> | undefined>(undefined);
   readonly component = input<Type<unknown> | undefined>(undefined);
-  readonly anchorSelector = input<string | undefined>(undefined);
+
+  //ElementRef
+  readonly anchorSelector = input<string | undefined>(undefined); // selector for child component, or for external component child if anchorId defined
+  readonly anchorId = input<string | undefined>(undefined); // anchor, external component
+  readonly pulseSelector = input<string | undefined>(undefined); // selector for child component, or for external component child if anchorId defined
 
   private readonly tourService = inject(PiprTourService);
   private readonly elementRef = inject<ElementRef<Element>>(ElementRef);
@@ -92,6 +98,8 @@ export class PiprHintDirective implements OnInit, OnDestroy {
       draggable: this.draggable(),
       component: this.component(), // dynamic component, highest priority
       anchorSelector: this.anchorSelector(),
+      pulseSelector: this.pulseSelector(),
+      anchorId: this.anchorId(),
     };
 
     this.tourService.registerHint(this.piprHint(), this.elementRef, config);

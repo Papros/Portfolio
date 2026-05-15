@@ -67,6 +67,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   // Positioning
   readonly tooltipPos = signal<TooltipPosition>({ top: -9999, left: -9999 });
   readonly anchorRect = signal<Rect | null>(null);
+  readonly pulseRect = signal<Rect | null>(null);
   readonly effectivePlacement = signal<TooltipPlacement>(
     TooltipPlacement.BOTTOM,
   );
@@ -79,14 +80,24 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   private cleanupKeyboard?: () => void;
 
   constructor() {
+    console.log('Creating overlay: ');
     effect(() => {
       const step = this.activeStep();
+      console.log('Effect for step: ', step?.stepId);
       if (step) {
         untracked(() => this.onStepChange(step));
       } else {
         this.tooltipVisible.set(false);
         this.anchorRect.set(null);
+        this.pulseRect.set(null);
       }
+
+      untracked(() => {
+        console.log('isActive: ', this.isActive());
+        console.log('activeStep: ', step);
+        console.log('tooltipVisible: ', this.tooltipVisible());
+        console.log('anchorRect: ', this.anchorRect());
+      });
     });
 
     effect(() => {
@@ -97,6 +108,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
         this.tooltipVisible.set(false);
         this.showInvite.set(false);
         this.anchorRect.set(null);
+        this.pulseRect.set(null);
       }
     });
   }
@@ -106,6 +118,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('Clear overlay');
     this.resizeObserver?.disconnect();
     this.cleanupKeyboard?.();
     window.removeEventListener('scroll', this.onScrollResize);
@@ -115,8 +128,18 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   // Helpers
 
   private onStepChange(step: TourStep): void {
+    console.log('stepchange: ', step.stepId);
     const el = this.tourService.getActiveStepElement();
-    this.updatePosition(el, step.placement, step.draggable);
+    console.log('onStepChange: EL: ', el);
+    const pulseEl = step.pulseSelector
+      ? this.tourService.getActiveStepPulseElement()
+      : undefined;
+    this.updatePosition(
+      el,
+      step.placement,
+      step.draggable,
+      pulseEl ?? undefined,
+    );
     this.setupResizeObserver(el);
     this.tooltipVisible.set(true);
     this.cdr.markForCheck();
@@ -124,21 +147,25 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
 
   private onHintChange(config: HintConfig): void {
     const el = this.tourService.getActiveHintElement();
-    console.log('El (hint) found: ', el);
+
+    const pulseEl =
+      (config.pulseSelector
+        ? this.tourService.getActiveHintPulseElement()
+        : undefined) ?? undefined;
 
     if (
       config.triggerAction === TourTriggerAction.START_AFTER_INVITE &&
       !this.showInvite()
     ) {
       this.showInvite.set(true);
-      this.updatePosition(el, config.placement, config.draggable);
+      this.updatePosition(el, config.placement, config.draggable, pulseEl);
       this.setupResizeObserver(el);
       this.cdr.markForCheck();
       return;
     }
 
     this.showInvite.set(false);
-    this.updatePosition(el, config.placement, config.draggable);
+    this.updatePosition(el, config.placement, config.draggable, pulseEl);
     this.setupResizeObserver(el);
     this.tooltipVisible.set(true);
     this.cdr.markForCheck();
@@ -150,6 +177,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
     el: Element | null,
     requested: TooltipPlacement,
     draggable: boolean,
+    pulseEl?: Element,
   ): void {
     if (!el || (draggable && this.isDragging())) return;
 
@@ -159,6 +187,14 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
       left: rect.left,
       width: rect.width,
       height: rect.height,
+    });
+
+    const pulseRect = pulseEl?.getBoundingClientRect() ?? rect;
+    this.pulseRect.set({
+      top: pulseRect.top,
+      left: pulseRect.left,
+      width: pulseRect.width,
+      height: pulseRect.height,
     });
 
     const placement =
@@ -188,8 +224,6 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
     let top = 0,
       left = 0;
 
-    console.log(`Calculating pos: vw = ${vw}; vh = ${vh};`);
-
     switch (placement) {
       case TooltipPlacement.BOTTOM:
         top = rect.bottom + TOOLTIP_OFFSET;
@@ -208,8 +242,6 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
         left = rect.left - TOOLTIP_OFFSET;
         break;
     }
-
-    console.log(`Calculating pos2: top = ${top}; left = ${left};`);
 
     return {
       top: Math.max(TOOLTIP_MARGIN, Math.min(vh - TOOLTIP_MARGIN, top)),
@@ -242,10 +274,19 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
     const el = step
       ? this.tourService.getActiveStepElement()
       : this.tourService.getActiveHintElement();
-    console.log('El found: ', el);
+
+    const pulseEl = step
+      ? this.tourService.getActiveStepPulseElement()
+      : this.tourService.getActiveHintPulseElement();
+
     const placement =
       step?.placement ?? hint?.placement ?? TooltipPlacement.BOTTOM;
-    this.updatePosition(el, placement, step?.draggable ?? false);
+    this.updatePosition(
+      el,
+      placement,
+      step?.draggable ?? false,
+      pulseEl ?? undefined,
+    );
     this.cdr.markForCheck();
   }
 

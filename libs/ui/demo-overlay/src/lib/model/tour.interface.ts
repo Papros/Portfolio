@@ -24,7 +24,9 @@ export interface TourStep extends TourStepContent {
   spotlight: SpotlightVariant;
   draggable: boolean; // allow drag if obscured
   scrollIntoView: boolean;
-  anchorSelector?: string;
+  anchorSelector?: string; // selector to element in host children
+  pulseSelector?: string;
+  anchorId?: string; // selector for elements in registry
 }
 
 export interface TourConfig {
@@ -56,6 +58,8 @@ export interface HintConfig extends TourStepContent {
   draggable: boolean;
   inviteText?: string; // text in invite tooltip
   anchorSelector?: string; //child component being focus
+  pulseSelector?: string;
+  anchorId?: string; // selector for elements in registry
 }
 
 export interface RegisteredStep {

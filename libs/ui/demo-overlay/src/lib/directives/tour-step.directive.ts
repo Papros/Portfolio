@@ -26,6 +26,8 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
   readonly template = input<TemplateRef<unknown> | undefined>(undefined);
   readonly component = input<Type<unknown> | undefined>(undefined);
   readonly anchorSelector = input<string | undefined>(undefined);
+  readonly pulseSelector = input<string | undefined>(undefined);
+  readonly anchorId = input<string | undefined>(undefined);
 
   readonly placement = input<TooltipPlacement | undefined>(undefined);
   readonly pulse = input<PulseVariant | undefined>(undefined);
@@ -55,8 +57,14 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
         draggable: this.draggable(),
         scrollIntoView: this.scrollIntoView(),
         anchorSelector: this.anchorSelector(),
+        pulseSelector: this.pulseSelector(),
+        anchorId: this.anchorId(),
       },
     );
+
+    if (this.anchorId()) {
+      console.log('Register step witch external anchor: ', this.anchorId());
+    }
   }
 
   ngOnDestroy(): void {

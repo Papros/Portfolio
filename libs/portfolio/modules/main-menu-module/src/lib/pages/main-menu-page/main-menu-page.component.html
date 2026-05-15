@@ -1,5 +1,6 @@
 <div
   class="shelf-container"
+  piprAnchor="main-menu-grid"
   *transloco="let t; scope: 'main-menu'; prefix: 'mainMenu'"
 >
   <lib-grid-menu [menuConfig]="menuConfig">
@@ -38,7 +39,7 @@
     </ng-template>
 
     <ng-template libGridSlot="componentGallery">
-      <a href="/Portfolio/components" class="tile-card">
+      <a href="/Portfolio/components" class="tile-card design-system-tile">
         <mat-icon class="tile-watermark">widgets</mat-icon>
         <span class="tile-label">{{ t('design_system.title') }}</span>
       </a>
@@ -123,6 +124,19 @@
     </ng-template>
   </lib-grid-menu>
 </div>
+
+<div
+  piprTourStep="CV_9"
+  [tourId]="TOUR_ID"
+  [order]="9"
+  [placement]="TooltipPlacement.TOP"
+  title="Design system"
+  anchorId="main-menu-grid"
+  anchorSelector=".design-system-tile"
+  pulseSelector=".design-system-tile"
+  route="/menu"
+  content="Tutaj możesz zobaczyć próbki mojego design system"
+></div>
 
 <ng-template #comingSoon>
   <div class="disabled-outer" *transloco="let t; prefix: 'main-menu'">

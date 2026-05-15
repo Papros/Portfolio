@@ -31,9 +31,12 @@ import {
 } from '@portfolio/customization';
 import { FooterComponent } from '@portfolio/shared-pack/components';
 import {
+  PiprAnchorDirective,
   PiprHintDirective,
   PiprTourService,
   PiprTourStepDirective,
+  PulseVariant,
+  TooltipPlacement,
   TourTrigger,
   TourTriggerAction,
 } from '@papros-it/demo-overlay';
@@ -52,6 +55,7 @@ import {
     FooterComponent,
     PiprHintDirective,
     PiprTourStepDirective,
+    PiprAnchorDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',
@@ -77,6 +81,9 @@ export class CurriculumVitaeComponent implements OnInit {
   get tourActive() {
     return this.tourService.isActive();
   }
+
+  readonly PulseVariant = PulseVariant;
+  readonly TooltipPlacement = TooltipPlacement;
 
   @HostBinding('class.dark-mode')
   get darkModeClass(): boolean {
@@ -121,7 +128,7 @@ export class CurriculumVitaeComponent implements OnInit {
   }
 
   startTour() {
-    this.tourService.startTour(this.TOUR_ID);
+    this.tourService.restartTour(this.TOUR_ID);
   }
 
   toggleTheme(): void {

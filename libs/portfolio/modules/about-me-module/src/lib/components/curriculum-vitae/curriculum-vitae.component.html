@@ -5,6 +5,8 @@
     data-section="cv"
     [class.dark-mode]="isDarkMode"
     piprTourStep="CV_1"
+    [placement]="TooltipPlacement.TOP"
+    [pulse]="PulseVariant.NONE"
     [tourId]="TOUR_ID"
     title="CV"
     content="To moje CV. Przejdźmy przez nie sekcja po sekcji"
@@ -185,14 +187,7 @@
           <div class="section-line"></div>
         </div>
 
-        <div
-          class="timeline"
-          piprTourStep="CV_3"
-          [tourId]="TOUR_ID"
-          [order]="3"
-          title="Skills"
-          content="W tej sekcji dowiesz się więcej o moim doświadczeniu, obok nazw firm masz znajdziesz link prowadzący do ich strony"
-        >
+        <div class="timeline" piprAnchor="cv-timeline">
           <div
             *ngFor="let job of cvDate.jobHistory; let i = index"
             class="timeline-entry"
@@ -257,25 +252,7 @@
         </div>
       </section>
 
-      <div
-        piprTourStep="CV_4"
-        [tourId]="TOUR_ID"
-        [order]="4"
-        title="Więcej"
-        anchorSelector=".menu-action-anchor"
-        content="Po wszystkim zajrzysz do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje któe tworzę"
-      ></div>
-
-      <lib-footer
-        [piprHint]="'cv-footer'"
-        [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
-        [triggerAction]="TourTriggerAction.START_AFTER_INVITE"
-        inviteText="Want to find more?"
-        title="Explore"
-        [template]="footerHint"
-        anchorSelector=".menu-action-anchor"
-        [draggable]="true"
-      ></lib-footer>
+      <lib-footer piprAnchor="menu-action"></lib-footer>
 
       <ng-template #footerHint>
         <p>Click here to explore more of my work!</p>
@@ -332,5 +309,90 @@
         </button>
       </div>
     </div>
+
+    <div
+      piprTourStep="CV_3"
+      [tourId]="TOUR_ID"
+      [order]="3"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      title="Timeline"
+      anchorId="cv-timeline"
+      content="W tej sekcji dowiesz się więcej o moim doświadczeniu"
+    ></div>
+
+    <div
+      piprTourStep="CV_4"
+      [tourId]="TOUR_ID"
+      [order]="4"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Entry details: Date range"
+      anchorId="cv-timeline"
+      anchorSelector=".timeline-entry:first-of-type"
+      pulseSelector=".timeline-entry:first-of-type .tl-left"
+      content="Zakres wpółpracy z firmą"
+    ></div>
+
+    <div
+      piprTourStep="CV_5"
+      [tourId]="TOUR_ID"
+      [order]="5"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      title="Entry details: Description"
+      anchorId="cv-timeline"
+      anchorSelector=".timeline-entry:first-of-type > .tl-content"
+      content="Opis projektu i wykorzystywany stack-technologiczny"
+    ></div>
+
+    <div
+      piprTourStep="CV_6"
+      [tourId]="TOUR_ID"
+      [order]="6"
+      [pulse]="PulseVariant.SECONDARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Entry details: Link"
+      anchorId="cv-timeline"
+      anchorSelector=".timeline-entry:first-of-type > .tl-content"
+      pulseSelector=".timeline-entry:first-of-type .tl-header .tl-link"
+      content="Link do strony firmy"
+    ></div>
+
+    <div
+      piprTourStep="CV_7"
+      [tourId]="TOUR_ID"
+      [order]="7"
+      [placement]="TooltipPlacement.TOP"
+      title="More:"
+      anchorId="menu-action"
+      pulseSelector=".menu-action-anchor"
+      content="Po wszystkim zajrzysz do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje które tworzę"
+    ></div>
+
+    <div
+      piprTourStep="CV_8"
+      [tourId]="TOUR_ID"
+      [order]="8"
+      [placement]="TooltipPlacement.TOP"
+      title="Thank you"
+      anchorId="menu-action"
+      anchorSelector=".footer-option a"
+      pulseSelector=".footer-option mat-icon"
+      content="Wybierz tę opcję żeby przejśc dalej"
+    ></div>
+
+    <div
+      piprTourStep="CV_9"
+      [tourId]="TOUR_ID"
+      [order]="9"
+      [placement]="TooltipPlacement.TOP"
+      title="Design system"
+      anchorId="main-menu-grid"
+      anchorSelector=".design-system-tile"
+      pulseSelector=".design-system-tile"
+      route="/menu"
+      content="Tutaj możesz zobaczyć próbki mojego design system"
+    ></div>
   </div>
 </ng-container>

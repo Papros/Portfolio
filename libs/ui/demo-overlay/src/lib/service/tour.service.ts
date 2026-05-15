@@ -5,7 +5,7 @@ import {
   Injectable,
   signal,
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { filter, firstValueFrom, Observable, Subject, take } from 'rxjs';
 import { HintStatus, TourStatus } from '../model/tour.enum';
 import {
   TourConfig,
@@ -47,6 +47,8 @@ export class PiprTourService {
   private readonly registeredSteps = new Map<string, RegisteredStep>();
   private readonly registeredHints = new Map<string, RegisteredHint>();
   private readonly hintStatuses = new Map<string, HintStatus>();
+  private readonly anchorRegistry = new Map<string, Element>();
+  private anchorRegistered$ = new Subject<string>();
 
   // -- Registration --
   registerStep(
@@ -63,12 +65,15 @@ export class PiprTourService {
       elementRef,
       config,
     });
+
+    console.log('Register step: ');
   }
 
   unregisterStep(stepId: string): void {
     this.registeredSteps.delete(stepId);
 
-    // If active step is destroyed mid-tour, move forward gracefully
+    console.log('Unregister: ', stepId);
+    // If active step is destroyed mid-tour,  move forward gracefully
     if (this.activeStep()?.stepId === stepId && this.isActive()) {
       this.next();
     }
@@ -90,6 +95,21 @@ export class PiprTourService {
     if (this.activeHintId() === hintId) {
       this.activeHintId.set(null);
     }
+  }
+
+  registerAnchor(anchorId: string, anchorElement: Element): void {
+    console.log('Register: ', anchorId);
+    console.log('elem: ', anchorElement);
+    this.anchorRegistry.set(anchorId, anchorElement);
+    this.anchorRegistered$.next(anchorId);
+  }
+
+  unregisterAnchor(anchorId: string): void {
+    this.anchorRegistry.delete(anchorId);
+  }
+
+  resolveAnchorRegistry(anchorId: string): Element | null {
+    return this.anchorRegistry.get(anchorId) ?? null;
   }
 
   // -- Tour control --
@@ -197,8 +217,6 @@ export class PiprTourService {
   triggerHint(hintId: string): void {
     if (this.isActive()) return;
 
-    console.log('Trigger hint: ', hintId);
-
     const hint = this.registeredHints.get(hintId);
     if (!hint) return;
 
@@ -228,10 +246,34 @@ export class PiprTourService {
     this.hintStatuses.set(hintId, HintStatus.PENDING);
   } // clear seen flag
 
-  resolveAnchorElement(host: Element, anchorSelector?: string): Element {
-    if (!anchorSelector) return host;
-    console.log('Resolve anchor: ', host.querySelector(anchorSelector));
-    return host.querySelector(anchorSelector) ?? host;
+  resolveAnchorElement(
+    host: Element,
+    anchorSelector?: string,
+    anchorId?: string,
+  ): Element {
+    if (!anchorId && !anchorSelector) return host;
+
+    let baseElement: Element = host;
+
+    if (anchorId) {
+      const resolved = this.resolveAnchorRegistry(anchorId);
+
+      if (resolved) {
+        baseElement = resolved;
+      }
+    }
+
+    if (!anchorSelector) {
+      return baseElement;
+    }
+
+    const found = baseElement.querySelector(anchorSelector);
+    if (!found) {
+      console.log(
+        `GuideError: Selector ${anchorSelector} defined but element not found`,
+      );
+    }
+    return found ?? baseElement;
   }
 
   // --- Accessors for overlay -----------------------------------------------
@@ -244,7 +286,6 @@ export class PiprTourService {
     const id = this.activeHintId();
     if (!id) return null;
 
-    console.log('config: ', this.registeredHints.get(id)?.config);
     return this.registeredHints.get(id)?.config ?? null;
   }
 
@@ -253,21 +294,59 @@ export class PiprTourService {
     if (!id) return null;
     const registered = this.registeredHints.get(id);
     if (!registered) return null;
-    console.log('getActiveHint: anchor? => ', registered.config.anchorSelector);
+
     return this.resolveAnchorElement(
       registered.elementRef.nativeElement,
       registered.config.anchorSelector,
+      registered.config.anchorId,
+    );
+  }
+
+  getActiveHintPulseElement(): Element | null {
+    const id = this.activeHintId();
+    if (!id) return null;
+    const registered = this.registeredHints.get(id);
+    if (!registered) return null;
+
+    return this.resolveAnchorElement(
+      registered.elementRef.nativeElement,
+      registered.config.pulseSelector ?? registered.config.anchorSelector,
+      registered.config.anchorId,
     );
   }
 
   getActiveStepElement(): Element | null {
+    console.log('getActiveStepElement: ');
+    const step = this.activeStep();
+    console.log('> active step: ', step);
+    if (!step) return null;
+    const registered = this.registeredSteps.get(step.stepId);
+    if (!registered) return null;
+    console.log('> registered: ', registered);
+
+    const resolved = this.resolveAnchorElement(
+      registered.elementRef.nativeElement,
+      step.anchorSelector,
+      step.anchorId,
+    );
+
+    if (!resolved) {
+      console.log('>! Anchor not found for: ', step.stepId, ' > ', step);
+    }
+    console.log('/getActiveStepElement ');
+    return resolved;
+  }
+
+  getActiveStepPulseElement(): Element | null {
     const step = this.activeStep();
     if (!step) return null;
     const registered = this.registeredSteps.get(step.stepId);
     if (!registered) return null;
+
     return this.resolveAnchorElement(
       registered.elementRef.nativeElement,
-      step.anchorSelector,
+      step.pulseSelector ?? step.anchorSelector,
+      step.anchorId,
     );
   }
 
@@ -278,9 +357,22 @@ export class PiprTourService {
 
     if (step.route) {
       await this.navigation.navigate(step.route);
+      console.log('Navigated mid tour: ', step.route);
+
+      if (step.anchorId) {
+        console.log('wait for component... ', step.anchorId);
+        const anchor = await this.waitForComponent(step.anchorId);
+        console.log('registred component:', anchor);
+      }
+
+      console.log('tour: ', this.tourStatus());
+      console.log('Active: ', this.isActive());
+
+      this.tourStatus.set(TourStatus.ACTIVE);
     }
 
     const effective = this.resolveStep(step, tour);
+    console.log('showStep: ', step);
     this.activeStep.set(effective);
 
     this.eventsSubject.next({
@@ -295,6 +387,19 @@ export class PiprTourService {
         .nativeElement;
       el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  private waitForComponent(anchorId: string): Promise<string> {
+    if (this.registeredSteps.has(anchorId)) {
+      return Promise.resolve(anchorId);
+    }
+
+    return firstValueFrom(
+      this.anchorRegistered$.pipe(
+        filter((id) => id === anchorId),
+        take(1),
+      ),
+    );
   }
 
   private resolveStep(step: TourStep, tour: TourConfig): TourStep {
@@ -350,6 +455,8 @@ export class PiprTourService {
           draggable: s.config.draggable ?? false,
           scrollIntoView: s.config.scrollIntoView ?? true,
           anchorSelector: s.config.anchorSelector,
+          pulseSelector: s.config.pulseSelector,
+          anchorId: s.config.anchorId,
         }),
       );
 

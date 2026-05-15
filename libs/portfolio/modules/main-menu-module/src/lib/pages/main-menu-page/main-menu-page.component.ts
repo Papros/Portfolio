@@ -8,7 +8,9 @@ import {
 } from '@portfolio/customization';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import {
+  PiprAnchorDirective,
   PiprHintDirective,
+  PiprTourStepDirective,
   TourTrigger,
   TourTriggerAction,
 } from '@papros-it/demo-overlay';
@@ -25,6 +27,8 @@ import {
     LanguageSelectorComponent,
     TranslocoModule,
     PiprHintDirective,
+    PiprAnchorDirective,
+    PiprTourStepDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'main-menu', alias: 'mainMenu' })],
   templateUrl: './main-menu-page.component.html',

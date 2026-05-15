@@ -9,29 +9,46 @@
       'backdrop--subtle':
         (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
         SpotlightVariant.SUBTLE,
-      'backdrop--full':
-        (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
-        SpotlightVariant.FULL,
     }"
     (click)="onDismissHintClickOutside()"
   ></div>
 
   <!-- Cutout over the anchor element for FULL spotlight -->
-  <div
+  <ng-container
     *ngIf="
       (activeStep()?.spotlight ?? activeHintConfig()?.spotlight) ===
         SpotlightVariant.FULL && anchorRect() as r
     "
-    class="spotlight-cutout"
-    [style.top.px]="r.top - 6"
-    [style.left.px]="r.left - 6"
-    [style.width.px]="r.width + 12"
-    [style.height.px]="r.height + 12"
-  ></div>
+  >
+    <svg class="spotlight-svg" (click)="onDismissHintClickOutside()">
+      <defs>
+        <mask [attr.id]="'spotlight-mask-' + activeHintId()">
+          <rect width="100%" height="100%" fill="white" />
+
+          <rect
+            [attr.x]="r.left - 6"
+            [attr.y]="r.top - 6"
+            [attr.width]="r.width + 12"
+            [attr.height]="r.height + 12"
+            rx="8"
+            ry="8"
+            fill="black"
+          />
+        </mask>
+      </defs>
+
+      <rect
+        width="100%"
+        height="100%"
+        fill="rgba(0,0,0,0.55)"
+        [attr.mask]="'url(#spotlight-mask-' + activeHintId() + ')'"
+      />
+    </svg>
+  </ng-container>
 </ng-container>
 
 <!----- Pulse ring on anchor ------------->
-<ng-container *ngIf="anchorRect() as r">
+<ng-container *ngIf="pulseRect() as r">
   <div
     *ngIf="
       (activeStep()?.pulse ?? activeHintConfig()?.pulse) !== PulseVariant.NONE

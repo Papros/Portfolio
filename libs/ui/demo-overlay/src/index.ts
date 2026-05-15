@@ -10,6 +10,7 @@ export * from './lib/service/tour.service';
 // Directives
 export * from './lib/directives/hint.directive';
 export * from './lib/directives/tour-step.directive';
+export * from './lib/directives/anchor.directive';
 // Provider
 export { providePiprTour } from './lib//config/tour.provider';
 // overlay/progress — internal rendering detail
