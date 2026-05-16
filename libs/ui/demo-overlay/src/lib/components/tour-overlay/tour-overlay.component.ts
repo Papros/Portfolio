@@ -97,8 +97,13 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
         console.log('activeStep: ', step);
         console.log('tooltipVisible: ', this.tooltipVisible());
         console.log('anchorRect: ', this.anchorRect());
+        console.log('activeTour: ', this.activeTour());
       });
     });
+    effect(() => {
+      const tour = this.activeTour();
+      console.log('tour changed: ', this.activeTour())
+    })
 
     effect(() => {
       const hint = this.activeHintConfig();

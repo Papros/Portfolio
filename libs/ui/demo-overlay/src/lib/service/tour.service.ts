@@ -50,6 +50,8 @@ export class PiprTourService {
   private readonly anchorRegistry = new Map<string, Element>();
   private anchorRegistered$ = new Subject<string>();
 
+  private isNavigating = false;
+
   // -- Registration --
   registerStep(
     stepId: string,
@@ -71,9 +73,9 @@ export class PiprTourService {
 
   unregisterStep(stepId: string): void {
     this.registeredSteps.delete(stepId);
-
-    console.log('Unregister: ', stepId);
-    // If active step is destroyed mid-tour,  move forward gracefully
+ 
+    if (this.isNavigating) return;
+ 
     if (this.activeStep()?.stepId === stepId && this.isActive()) {
       this.next();
     }
@@ -139,11 +141,14 @@ export class PiprTourService {
   }
 
   async next(): Promise<void> {
+    console.log('NEXT: tour: ', this.activeTour(),' isActive: ', this.isActive());
     const tour = this.activeTour();
     if (!tour || !this.isActive()) return;
 
     const nextIndex = this.currentIndex() + 1;
     if (nextIndex >= tour.steps.length) {
+      console.log('[tour] nextIndex: ', nextIndex)
+      console.log('[tour] tour.steps.length: ', tour.steps.length)
       this.completeTour();
       return;
     }
@@ -173,6 +178,7 @@ export class PiprTourService {
       tourId: tour.tourId,
       stepId,
     });
+    console.log('[tour] skip');
     this.resetTourState();
   }
 
@@ -354,39 +360,54 @@ export class PiprTourService {
 
   private async showStep(step: TourStep): Promise<void> {
     const tour = this.activeTour()!;
-
+ 
     if (step.route) {
-      await this.navigation.navigate(step.route);
-      console.log('Navigated mid tour: ', step.route);
-
-      if (step.anchorId) {
-        console.log('wait for component... ', step.anchorId);
-        const anchor = await this.waitForComponent(step.anchorId);
-        console.log('registred component:', anchor);
+      // Raise guard BEFORE navigation — prevents unregisterStep() on the
+      // departing route from triggering next() / completeTour().
+      this.isNavigating = true;
+      try {
+        await this.navigation.navigate(step.route);
+      } finally {
+        // Always lower — even if navigation is cancelled or throws.
+        this.isNavigating = false;
       }
-
-      console.log('tour: ', this.tourStatus());
-      console.log('Active: ', this.isActive());
-
+ 
+      // Wait for the arriving route's anchor to register if needed.
+      if (step.anchorId && !this.anchorRegistry.has(step.anchorId)) {
+        await this.waitForAnchor(step.anchorId);
+      }
+ 
+      // Re-assert ACTIVE: router events can reset signals during transition.
       this.tourStatus.set(TourStatus.ACTIVE);
     }
-
+ 
     const effective = this.resolveStep(step, tour);
-    console.log('showStep: ', step);
     this.activeStep.set(effective);
-
+ 
     this.eventsSubject.next({
       type: 'stepChanged',
       tourId: tour.tourId,
       stepId: step.stepId,
       index: this.currentIndex(),
     });
-
+ 
     if (effective.scrollIntoView) {
-      const el = this.registeredSteps.get(step.stepId)?.elementRef
-        .nativeElement;
-      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const host = this.registeredSteps.get(step.stepId)?.elementRef.nativeElement;
+      host?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  private waitForAnchor(anchorId: string): Promise<string> {
+    if (this.anchorRegistry.has(anchorId)) {
+      return Promise.resolve(anchorId);
+    }
+ 
+    return firstValueFrom(
+      this.anchorRegistered$.pipe(
+        filter(id => id === anchorId),
+        take(1),
+      ),
+    );
   }
 
   private waitForComponent(anchorId: string): Promise<string> {
@@ -422,10 +443,12 @@ export class PiprTourService {
 
     this.tourStatus.set(TourStatus.COMPLETED);
     this.eventsSubject.next({ type: 'tourCompleted', tourId: tour.tourId });
+    console.log('[tour] complete');
     this.resetTourState();
   }
 
   private resetTourState(): void {
+    console.log('Restart tour');
     this.activeTour.set(null);
     this.activeStep.set(null);
     this.currentIndex.set(0);
