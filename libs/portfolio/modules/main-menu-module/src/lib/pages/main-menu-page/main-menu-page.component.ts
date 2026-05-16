@@ -11,6 +11,7 @@ import {
   PiprAnchorDirective,
   PiprHintDirective,
   PiprTourStepDirective,
+  TooltipPlacement,
   TourTrigger,
   TourTriggerAction,
 } from '@papros-it/demo-overlay';
@@ -37,6 +38,8 @@ import {
 export class MainMenuPageComponent {
   readonly TourTrigger = TourTrigger;
   readonly TourTriggerAction = TourTriggerAction;
+  readonly TooltipPlacement = TooltipPlacement;
+  readonly TOUR_ID = 'CV-walkthrough';
 
   menuConfig = {
     gridWidth: 10,
