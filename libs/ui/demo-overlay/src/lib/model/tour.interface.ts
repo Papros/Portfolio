@@ -18,23 +18,43 @@ export interface TourStepContent {
 export interface TourStep extends TourStepContent {
   stepId: string;
   order: number;
-  route?: string; // navigate before showing step
+  /** Route to navigate before showing this step */
+  route?: string;
   placement: TooltipPlacement;
   pulse: PulseVariant;
   spotlight: SpotlightVariant;
+  /** Allow dragging the tooltip if it obscures the anchored element */
   draggable: boolean; // allow drag if obscured
   scrollIntoView: boolean;
+   /**
+   * Optional CSS selector resolved relative to the directive host.
+   * When set, the pulse ring and tooltip are positioned around the
+   * matching child element instead of the host itself.
+   *
+   * @example anchorSelector=".nav__settings-btn"
+   */
   anchorSelector?: string; // selector to element in host children
   pulseSelector?: string;
+  /**
+   * Named anchor registered via `[piprAnchor]` directive anywhere in the tree.
+   * Takes priority over `anchorSelector`. Use this when the target element lives
+   * inside a child component or a component library you don't own.
+   *
+   * @example anchorId="menu-action"
+   * @see PiprAnchorDirective
+   */
   anchorId?: string; // selector for elements in registry
 }
 
 export interface TourConfig {
   tourId: string;
   steps: TourStep[];
-  spotlight: SpotlightVariant; // tour-level default
+  /** Tour-level defaults — overridden per step */
+  spotlight: SpotlightVariant;
   pulse: PulseVariant;
-  persist: boolean; // save seen in storage, default true
+   /** Save "seen" state to storage. Default: true */
+  persist: boolean;
+  /** Escape=skip, arrows=prev/next */
   allowKeyboard: boolean; // Escape=skip, arrows=prev/next
   skipLabel: string;
   nextLabel: string;
@@ -48,30 +68,52 @@ export interface HintConfig extends TourStepContent {
   trigger: TourTrigger;
   triggerAction: TourTriggerAction;
   dismiss: HintDismissBehavior;
-  autoCloseMs?: number; // only with AUTO dismiss
-  delayMs?: number; // with ON_DELAY trigger
-  idleMs?: number; // with ON_IDLE trigger
+  /** Only used with HintDismissBehavior.AUTO */
+  autoCloseMs?: number;
+  /** Only used with TourTrigger.ON_DELAY */
+  delayMs?: number;
+  /** Only used with TourTrigger.ON_IDLE */
+  idleMs?: number;
   placement: TooltipPlacement;
   pulse: PulseVariant;
   spotlight: SpotlightVariant;
+  /** Save "seen" state to storage. Default: true */
   persist: boolean;
   draggable: boolean;
-  inviteText?: string; // text in invite tooltip
-  anchorSelector?: string; //child component being focus
+  /** Text shown in the invite tooltip before the user opts in */
+  inviteText?: string;
+  /**
+   * Optional CSS selector resolved relative to the directive host.
+   * When set, the pulse ring and tooltip are positioned around the
+   * matching child element instead of the host itself.
+   *
+   * @example anchorSelector="button.submit"
+   */
+  anchorSelector?: string;
   pulseSelector?: string;
-  anchorId?: string; // selector for elements in registry
+  /**
+   * Named anchor registered via `[piprAnchor]` directive anywhere in the tree.
+   * Takes priority over `anchorSelector`. Use this when the target element lives
+   * inside a child component or a component library you don't own.
+   *
+   * @example anchorId="menu-action"
+   * @see PiprAnchorDirective
+   */
+  anchorId?: string;
 }
 
 export interface RegisteredStep {
   stepId: string;
   tourId: string;
   order: number;
+  /** Host element — the element the directive is attached to */
   elementRef: { nativeElement: Element };
   config: Partial<TourStep>;
 }
 
 export interface RegisteredHint {
   hintId: string;
+  /** Host element — the element the directive is attached to */
   elementRef: { nativeElement: Element };
   config: HintConfig;
 }
@@ -95,4 +137,5 @@ export interface PiprTourGlobalConfig {
   storage?: any;
   navigation?: any;
   defaults?: Partial<TourDefaults>;
+  onUnexpectedNavigation?: 'skip' | 'pause' | 'ignore';
 }

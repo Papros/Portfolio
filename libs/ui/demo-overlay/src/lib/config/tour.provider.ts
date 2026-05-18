@@ -64,6 +64,7 @@ export function providePiprTour(
     storage: config.storage ?? (undefined as any), // resolved via token below
     navigation: config.navigation ?? (undefined as any),
     defaults: { ...DEFAULT_TOUR_DEFAULTS, ...(config.defaults ?? {}) },
+    onUnexpectedNavigation: config.onUnexpectedNavigation ?? 'ignore'
   };
 
   return makeEnvironmentProviders([

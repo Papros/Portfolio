@@ -61,10 +61,6 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
         anchorId: this.anchorId(),
       },
     );
-
-    if (this.anchorId()) {
-      console.log('Register step witch external anchor: ', this.anchorId());
-    }
   }
 
   ngOnDestroy(): void {

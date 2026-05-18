@@ -1,6 +1,5 @@
 <div
   class="shelf-container"
-  piprAnchor="main-menu-grid"
   *transloco="let t; scope: 'main-menu'; prefix: 'mainMenu'"
 >
   <lib-grid-menu [menuConfig]="menuConfig">
@@ -56,12 +55,6 @@
       <a
         href="/Portfolio/about"
         class="tile-card"
-        [piprHint]="'cv-link'"
-        [trigger]="TourTrigger.ON_ROUTE_ACTIVATION"
-        [triggerAction]="TourTriggerAction.START"
-        inviteText="Want a quick walkthrough of the CV section?"
-        title="Interactive CV"
-        content="You can export this as a PDF."
       >
         <mat-icon class="tile-watermark">badge</mat-icon>
         <span class="tile-label">{{ t('cv.title') }}</span>
@@ -124,19 +117,6 @@
     </ng-template>
   </lib-grid-menu>
 </div>
-
-<div
-  piprTourStep="CV_9"
-  [tourId]="TOUR_ID"
-  [order]="1"
-  [placement]="TooltipPlacement.TOP"
-  title="Design system"
-  anchorId="main-menu-grid"
-  anchorSelector=".design-system-tile"
-  pulseSelector=".design-system-tile"
-  route="/menu"
-  content="Tutaj możesz zobaczyć próbki mojego design system"
-></div>
 
 <ng-template #comingSoon>
   <div class="disabled-outer" *transloco="let t; prefix: 'main-menu'">

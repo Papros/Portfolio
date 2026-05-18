@@ -6,4 +6,5 @@ export const PIPR_TOUR_NAVIGATION = new InjectionToken<IPiprTourNavigation>(
 
 export interface IPiprTourNavigation {
   navigate(route: string): Promise<boolean>;
+  getCurrentRoute(): string;
 }

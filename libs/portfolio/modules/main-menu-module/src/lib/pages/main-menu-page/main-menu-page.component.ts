@@ -27,19 +27,12 @@ import {
     ThemeSelectorComponent,
     LanguageSelectorComponent,
     TranslocoModule,
-    PiprHintDirective,
-    PiprAnchorDirective,
-    PiprTourStepDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'main-menu', alias: 'mainMenu' })],
   templateUrl: './main-menu-page.component.html',
   styleUrl: './main-menu-page.component.scss',
 })
 export class MainMenuPageComponent {
-  readonly TourTrigger = TourTrigger;
-  readonly TourTriggerAction = TourTriggerAction;
-  readonly TooltipPlacement = TooltipPlacement;
-  readonly TOUR_ID = 'CV-walkthrough';
 
   menuConfig = {
     gridWidth: 10,

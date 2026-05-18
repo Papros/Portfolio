@@ -4,12 +4,14 @@
     class="cv-container"
     data-section="cv"
     [class.dark-mode]="isDarkMode"
+
     piprTourStep="CV_1"
     [placement]="TooltipPlacement.TOP"
     [pulse]="PulseVariant.NONE"
     [tourId]="TOUR_ID"
+    [order]="1"
     title="CV"
-    content="To moje CV. Przejdźmy przez nie sekcja po sekcji"
+    content="CV zwykle nie wymaga tłumaczenia. Potraktuj to jako demo systemu Tour będącego elementem mojego design-system."
   >
     <aside class="cv-sidebar">
       <div class="sidebar-inner">
@@ -123,7 +125,7 @@
           [tourId]="TOUR_ID"
           [order]="2"
           title="Skills"
-          content="To stack technologiczny z którym jestem zaznajomiony, w kolejności poznanego zakresu. Najedź na technologię żeby zobaczyć w których projektach z niej korzystałem"
+          content="To stack technologiczny z którym jestem zaznajomiony, technologie uszeregowane są w kolejności poznanego zakresu. Najedź na technologię żeby zobaczyć w których projektach z niej korzystałem"
         >
           <span class="sidebar-label">{{ t('sections.skills') }}</span>
           <div class="skills-grid">
@@ -318,26 +320,13 @@
       [placement]="TooltipPlacement.LEFT"
       title="Timeline"
       anchorId="cv-timeline"
-      content="W tej sekcji dowiesz się więcej o moim doświadczeniu"
+      content="Sekcja timeline zawiera opisy projektów w których pracowałem."
     ></div>
 
     <div
       piprTourStep="CV_4"
       [tourId]="TOUR_ID"
       [order]="4"
-      [pulse]="PulseVariant.PRIMARY"
-      [placement]="TooltipPlacement.LEFT"
-      title="Entry details: Date range"
-      anchorId="cv-timeline"
-      anchorSelector=".timeline-entry:first-of-type"
-      pulseSelector=".timeline-entry:first-of-type .tl-left"
-      content="Zakres wpółpracy z firmą"
-    ></div>
-
-    <div
-      piprTourStep="CV_5"
-      [tourId]="TOUR_ID"
-      [order]="5"
       [pulse]="PulseVariant.NONE"
       [placement]="TooltipPlacement.LEFT"
       title="Entry details: Description"
@@ -347,52 +336,27 @@
     ></div>
 
     <div
-      piprTourStep="CV_6"
+      piprTourStep="CV_5"
       [tourId]="TOUR_ID"
-      [order]="6"
+      [order]="5"
       [pulse]="PulseVariant.SECONDARY"
       [placement]="TooltipPlacement.LEFT"
       title="Entry details: Link"
       anchorId="cv-timeline"
       anchorSelector=".timeline-entry:first-of-type > .tl-content"
       pulseSelector=".timeline-entry:first-of-type .tl-header .tl-link"
-      content="Link do strony firmy"
+      content="Zawiera również link do strony firmy"
     ></div>
 
     <div
-      piprTourStep="CV_7"
+      piprTourStep="CV_6"
       [tourId]="TOUR_ID"
-      [order]="7"
+      [order]="6"
       [placement]="TooltipPlacement.TOP"
       title="More:"
       anchorId="menu-action"
       pulseSelector=".menu-action-anchor"
-      content="Po wszystkim zajrzysz do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje które tworzę"
-    ></div>
-
-    <div
-      piprTourStep="CV_8"
-      [tourId]="TOUR_ID"
-      [order]="8"
-      [placement]="TooltipPlacement.TOP"
-      title="Thank you"
-      anchorId="menu-action"
-      anchorSelector=".footer-option a"
-      pulseSelector=".footer-option mat-icon"
-      content="Wybierz tę opcję żeby przejśc dalej"
-    ></div>
-
-    <div
-      piprTourStep="CV_9"
-      [tourId]="TOUR_ID"
-      [order]="9"
-      [placement]="TooltipPlacement.TOP"
-      title="Design system"
-      anchorId="main-menu-grid"
-      anchorSelector=".design-system-tile"
-      pulseSelector=".design-system-tile"
-      route="/menu"
-      content="Tutaj możesz zobaczyć próbki mojego design system"
+      content="Po wszystkim koniecznie zajrzyj do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje które tworzę"
     ></div>
   </div>
 </ng-container>

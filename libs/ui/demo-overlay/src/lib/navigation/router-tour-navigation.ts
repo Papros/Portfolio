@@ -9,4 +9,8 @@ export class RouterTourNavigationService implements IPiprTourNavigation {
   navigate(route: string): Promise<boolean> {
     return this.router.navigateByUrl(route);
   }
+
+  getCurrentRoute(): string {
+    return this.router.url.split('?')[0];
+  }
 }

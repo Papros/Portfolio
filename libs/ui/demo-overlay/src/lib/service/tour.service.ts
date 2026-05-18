@@ -5,7 +5,7 @@ import {
   Injectable,
   signal,
 } from '@angular/core';
-import { filter, firstValueFrom, Observable, Subject, take } from 'rxjs';
+import { filter, firstValueFrom, map, Observable, race, Subject, take, timer } from 'rxjs';
 import { HintStatus, TourStatus } from '../model/tour.enum';
 import {
   TourConfig,
@@ -18,12 +18,16 @@ import { TourEvent } from '../model/tour.events';
 import { PIPR_TOUR_NAVIGATION } from '../navigation/navigation.token';
 import { PIPR_TOUR_STORAGE } from '../storage/tour-storage.token';
 import { PIPR_TOUR_CONFIG } from '../config/tour.provider';
+import { NavigationEnd, Router } from '@angular/router';
+
+export type UnexpectedNavigationBehavior = 'skip' | 'pause' | 'ignore';
 
 @Injectable({ providedIn: 'root' })
 export class PiprTourService {
   private readonly config = inject(PIPR_TOUR_CONFIG);
   private readonly storage = inject(PIPR_TOUR_STORAGE);
   private readonly navigation = inject(PIPR_TOUR_NAVIGATION);
+  private readonly router     = inject(Router);
 
   // -- State signals (read-only outside service) --
   readonly activeTour = signal<TourConfig | null>(null);
@@ -48,9 +52,12 @@ export class PiprTourService {
   private readonly registeredHints = new Map<string, RegisteredHint>();
   private readonly hintStatuses = new Map<string, HintStatus>();
   private readonly anchorRegistry = new Map<string, Element>();
-  private anchorRegistered$ = new Subject<string>();
+  private readonly anchorRegistered$ = new Subject<string>();
 
   private isNavigating = false;
+  private unwatchNavigation?: () => void;
+
+  private readonly resolvedRoutes = new Map<string, string>();
 
   // -- Registration --
   registerStep(
@@ -68,7 +75,6 @@ export class PiprTourService {
       config,
     });
 
-    console.log('Register step: ');
   }
 
   unregisterStep(stepId: string): void {
@@ -100,8 +106,6 @@ export class PiprTourService {
   }
 
   registerAnchor(anchorId: string, anchorElement: Element): void {
-    console.log('Register: ', anchorId);
-    console.log('elem: ', anchorElement);
     this.anchorRegistry.set(anchorId, anchorElement);
     this.anchorRegistered$.next(anchorId);
   }
@@ -132,23 +136,22 @@ export class PiprTourService {
       steps: [...tour.steps].sort((a, b) => a.order - b.order),
     };
 
+    this.resolvedRoutes.clear();
     this.activeTour.set(sorted);
     this.currentIndex.set(0);
     this.tourStatus.set(TourStatus.ACTIVE);
     this.eventsSubject.next({ type: 'tourStarted', tourId });
 
+     this.watchForUnexpectedNavigation();
     this.showStep(sorted.steps[0]);
   }
 
   async next(): Promise<void> {
-    console.log('NEXT: tour: ', this.activeTour(),' isActive: ', this.isActive());
     const tour = this.activeTour();
     if (!tour || !this.isActive()) return;
 
     const nextIndex = this.currentIndex() + 1;
     if (nextIndex >= tour.steps.length) {
-      console.log('[tour] nextIndex: ', nextIndex)
-      console.log('[tour] tour.steps.length: ', tour.steps.length)
       this.completeTour();
       return;
     }
@@ -178,7 +181,6 @@ export class PiprTourService {
       tourId: tour.tourId,
       stepId,
     });
-    console.log('[tour] skip');
     this.resetTourState();
   }
 
@@ -322,13 +324,10 @@ export class PiprTourService {
   }
 
   getActiveStepElement(): Element | null {
-    console.log('getActiveStepElement: ');
     const step = this.activeStep();
-    console.log('> active step: ', step);
     if (!step) return null;
     const registered = this.registeredSteps.get(step.stepId);
     if (!registered) return null;
-    console.log('> registered: ', registered);
 
     const resolved = this.resolveAnchorElement(
       registered.elementRef.nativeElement,
@@ -336,10 +335,6 @@ export class PiprTourService {
       step.anchorId,
     );
 
-    if (!resolved) {
-      console.log('>! Anchor not found for: ', step.stepId, ' > ', step);
-    }
-    console.log('/getActiveStepElement ');
     return resolved;
   }
 
@@ -374,7 +369,7 @@ export class PiprTourService {
  
       // Wait for the arriving route's anchor to register if needed.
       if (step.anchorId && !this.anchorRegistry.has(step.anchorId)) {
-        await this.waitForAnchor(step.anchorId);
+        await this.waitForAnchor(step.anchorId, 3000);
       }
  
       // Re-assert ACTIVE: router events can reset signals during transition.
@@ -397,28 +392,54 @@ export class PiprTourService {
     }
   }
 
-  private waitForAnchor(anchorId: string): Promise<string> {
+  /**
+   * Subscribes to NavigationEnd while a tour is active.
+   * Handles the case where the user navigates away manually
+   * (browser back, link click) while a routed step is active.
+   *
+   * Steps without a route constraint are unaffected.
+   */
+  private watchForUnexpectedNavigation(): void {
+    this.unwatchNavigation?.();
+ 
+    const behavior: UnexpectedNavigationBehavior =
+      this.config.onUnexpectedNavigation ?? 'skip';
+ 
+    if (behavior === 'ignore') return;
+ 
+    const sub = this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+    ).subscribe(e => {
+      if (this.isNavigating) return;
+      if (!this.isActive()) return;
+ 
+      const expectedRoute = this.activeStep()?.route;
+      if (!expectedRoute) return;
+ 
+      const currentUrl   = (e as NavigationEnd).urlAfterRedirects.split('?')[0];
+      const normalise    = (u: string) => '/' + u.replace(/^\//, '');
+ 
+      if (normalise(currentUrl) !== normalise(expectedRoute)) {
+        behavior === 'pause' ? this.pause() : this.skip();
+      }
+    });
+ 
+    this.unwatchNavigation = () => sub.unsubscribe();
+  }
+
+  private waitForAnchor(anchorId: string, timeoutMs: number): Promise<boolean> {
     if (this.anchorRegistry.has(anchorId)) {
-      return Promise.resolve(anchorId);
+      return Promise.resolve(true);
     }
  
     return firstValueFrom(
-      this.anchorRegistered$.pipe(
-        filter(id => id === anchorId),
-        take(1),
-      ),
-    );
-  }
-
-  private waitForComponent(anchorId: string): Promise<string> {
-    if (this.registeredSteps.has(anchorId)) {
-      return Promise.resolve(anchorId);
-    }
-
-    return firstValueFrom(
-      this.anchorRegistered$.pipe(
-        filter((id) => id === anchorId),
-        take(1),
+      race(
+        this.anchorRegistered$.pipe(
+          filter(id => id === anchorId),
+          take(1),
+          map(() => true),
+        ),
+        timer(timeoutMs).pipe(map(() => false)),
       ),
     );
   }
@@ -443,12 +464,14 @@ export class PiprTourService {
 
     this.tourStatus.set(TourStatus.COMPLETED);
     this.eventsSubject.next({ type: 'tourCompleted', tourId: tour.tourId });
-    console.log('[tour] complete');
     this.resetTourState();
   }
 
   private resetTourState(): void {
-    console.log('Restart tour');
+    this.unwatchNavigation?.();
+    this.unwatchNavigation = undefined;
+    this.resolvedRoutes.clear();
+
     this.activeTour.set(null);
     this.activeStep.set(null);
     this.currentIndex.set(0);

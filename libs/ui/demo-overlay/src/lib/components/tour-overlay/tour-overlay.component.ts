@@ -80,10 +80,8 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   private cleanupKeyboard?: () => void;
 
   constructor() {
-    console.log('Creating overlay: ');
     effect(() => {
       const step = this.activeStep();
-      console.log('Effect for step: ', step?.stepId);
       if (step) {
         untracked(() => this.onStepChange(step));
       } else {
@@ -91,19 +89,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
         this.anchorRect.set(null);
         this.pulseRect.set(null);
       }
-
-      untracked(() => {
-        console.log('isActive: ', this.isActive());
-        console.log('activeStep: ', step);
-        console.log('tooltipVisible: ', this.tooltipVisible());
-        console.log('anchorRect: ', this.anchorRect());
-        console.log('activeTour: ', this.activeTour());
-      });
     });
-    effect(() => {
-      const tour = this.activeTour();
-      console.log('tour changed: ', this.activeTour())
-    })
 
     effect(() => {
       const hint = this.activeHintConfig();
@@ -123,7 +109,6 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Clear overlay');
     this.resizeObserver?.disconnect();
     this.cleanupKeyboard?.();
     window.removeEventListener('scroll', this.onScrollResize);
@@ -133,9 +118,7 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
   // Helpers
 
   private onStepChange(step: TourStep): void {
-    console.log('stepchange: ', step.stepId);
     const el = this.tourService.getActiveStepElement();
-    console.log('onStepChange: EL: ', el);
     const pulseEl = step.pulseSelector
       ? this.tourService.getActiveStepPulseElement()
       : undefined;
