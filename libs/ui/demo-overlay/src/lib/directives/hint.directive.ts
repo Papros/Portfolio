@@ -54,7 +54,7 @@ export class PiprHintDirective implements OnInit, OnDestroy {
   readonly pulse = input<PulseVariant>(PulseVariant.SECONDARY);
   readonly spotlight = input<SpotlightVariant>(SpotlightVariant.SUBTLE);
   readonly persist = input<boolean>(true);
-  readonly draggable = input<boolean>(false);
+  readonly draggable = input<boolean>(true);
 
   readonly inviteText = input<string | undefined>(undefined);
   readonly title = input.required<string>();

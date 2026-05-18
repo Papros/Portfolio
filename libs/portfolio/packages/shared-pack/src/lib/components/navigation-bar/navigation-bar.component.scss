@@ -25,9 +25,9 @@ mat-toolbar {
       padding: 6px 8px;
       border-radius: 25px;
 
-      span {
-        padding-bottom: 10px;
-      }
+      display: flex;
+      align-items: center;
+      gap: 6px;
 
       &:hover {
         background-color: get-color(accent-vibrant-dark);
@@ -47,5 +47,28 @@ mat-toolbar {
 
   .navigation-container {
     flex: 1;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: get-color(text-primary);
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+}
+
+::ng-deep .mobile-only {
+  display: none !important;
+
+  @media (max-width: 767px) {
+    display: inline-flex;
   }
 }

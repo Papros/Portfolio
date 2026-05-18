@@ -34,7 +34,7 @@ interface TooltipPosition {
   left: number;
 }
 
-const TOOLTIP_OFFSET = 12;
+const TOOLTIP_OFFSET = 100;
 const TOOLTIP_MARGIN = 120;
 
 @Component({
@@ -212,6 +212,9 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
     let top = 0,
       left = 0;
 
+      console.log(`Calc: bottom: `, rect.bottom,' top: ', rect.top, ' left: ', rect.left, ' right: ', rect.right);
+      console.log(`Width: ${rect.width}; Height: ${rect.height}`)
+
     switch (placement) {
       case TooltipPlacement.BOTTOM:
         top = rect.bottom + TOOLTIP_OFFSET;
@@ -230,6 +233,11 @@ export class TourOverlayComponent implements AfterViewInit, OnDestroy {
         left = rect.left - TOOLTIP_OFFSET;
         break;
     }
+
+    console.log("Resoult: ", {
+      top: Math.max(TOOLTIP_MARGIN, Math.min(vh - TOOLTIP_MARGIN, top)),
+      left: Math.max(TOOLTIP_MARGIN, Math.min(vw - TOOLTIP_MARGIN, left)),
+    })
 
     return {
       top: Math.max(TOOLTIP_MARGIN, Math.min(vh - TOOLTIP_MARGIN, top)),

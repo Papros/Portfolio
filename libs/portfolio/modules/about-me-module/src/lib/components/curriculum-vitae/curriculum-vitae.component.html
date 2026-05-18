@@ -8,10 +8,11 @@
     piprTourStep="CV_1"
     [placement]="TooltipPlacement.TOP"
     [pulse]="PulseVariant.NONE"
+    anchorSelector=".cv-header"
     [tourId]="TOUR_ID"
     [order]="1"
-    title="CV"
-    content="CV zwykle nie wymaga tłumaczenia. Potraktuj to jako demo systemu Tour będącego elementem mojego design-system."
+    title="Intro"
+    content="CV zwykle nie wymaga tłumaczenia. Potraktuj to jako demo systemu Tour będącego elementem mojego design-system. </br></br> Jeśli nie jesteś zainteresowany/ana -> śmiało możesz zamknąć tutorial [x]"
   >
     <aside class="cv-sidebar">
       <div class="sidebar-inner">
@@ -124,7 +125,7 @@
           piprTourStep="CV_2"
           [tourId]="TOUR_ID"
           [order]="2"
-          title="Skills"
+          title="Techstack"
           content="To stack technologiczny z którym jestem zaznajomiony, technologie uszeregowane są w kolejności poznanego zakresu. Najedź na technologię żeby zobaczyć w których projektach z niej korzystałem"
         >
           <span class="sidebar-label">{{ t('sections.skills') }}</span>
@@ -159,7 +160,7 @@
           </div>
         </div>
 
-        <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby?.length">
+        <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby.length">
           <span class="sidebar-label">{{ t('sections.interests') }}</span>
           <div class="hobby-list">
             <div *ngFor="let h of cvDate.hobby" class="hobby-item">
@@ -253,6 +254,16 @@
           </div>
         </div>
       </section>
+
+      <div
+        [piprHint]="'cv-section'"
+        [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
+        title="Do not stop here!"
+        [persist]="false"
+        [placement]="TooltipPlacement.TOP"
+        anchorId="menu-action"
+        anchorSelector=".menu-action-anchor"
+        content="Click to find more about my work!"></div>
 
       <lib-footer piprAnchor="menu-action"></lib-footer>
 
@@ -353,7 +364,7 @@
       [tourId]="TOUR_ID"
       [order]="6"
       [placement]="TooltipPlacement.TOP"
-      title="More:"
+      title="Thank you!"
       anchorId="menu-action"
       pulseSelector=".menu-action-anchor"
       content="Po wszystkim koniecznie zajrzyj do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje które tworzę"
