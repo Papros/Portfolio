@@ -1,0 +1,52 @@
+<div class="demo-layout">
+      <header
+        class="demo-header"
+        [piprTourStep]="'header'"
+        [tourId]="'basic-tour'"
+        [order]="1"
+        title="Welcome"
+        content="This is the top navigation bar of the application."
+      >
+        <span class="demo-logo">MyApp</span>
+        <nav class="demo-nav">
+          <a>Home</a>
+          <a>Projects</a>
+          <a>Contact</a>
+        </nav>
+      </header>
+
+      <main class="demo-main">
+        <section
+          class="demo-card"
+          [piprTourStep]="'content'"
+          [tourId]="'basic-tour'"
+          [order]="2"
+          title="Main content"
+          content="Your projects and recent activity appear here."
+        >
+          <h3>Recent projects</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+
+        <aside
+          class="demo-sidebar"
+          [piprTourStep]="'sidebar'"
+          [tourId]="'basic-tour'"
+          [order]="3"
+          title="Sidebar"
+          content="Use the sidebar to filter and navigate between sections."
+          [placement]="TooltipPlacement.LEFT"
+        >
+          <ul>
+            <li>All projects</li>
+            <li>Archived</li>
+            <li>Settings</li>
+          </ul>
+        </aside>
+      </main>
+
+      <div class="demo-actions">
+        <button class="btn-primary" (click)="start()">Start tour</button>
+        <button class="btn-ghost" (click)="restart()">Restart tour</button>
+      </div>
+    </div>
