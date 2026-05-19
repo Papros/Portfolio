@@ -22,6 +22,6 @@ export const COMPONENT_META: ComponentMeta[] = [
       'Onboarding guide system with sequential tours and lazy contextual hints. ' +
       'Supports spotlight effects, custom templates, cross-route navigation, ' +
       'multiple trigger strategies, and a fully overridable persistence layer.',
-    thumbnail: 'assets/images/component-demo/pipr-tour-icon.png',
+    thumbnail: 'assets/images/component-demo/demo-overlay-icon.png',
   }
 ];

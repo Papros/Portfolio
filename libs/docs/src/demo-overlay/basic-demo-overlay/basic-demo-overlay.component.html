@@ -1,52 +1,61 @@
 <div class="demo-layout">
-      <header
-        class="demo-header"
-        [piprTourStep]="'header'"
-        [tourId]="'basic-tour'"
-        [order]="1"
-        title="Welcome"
-        content="This is the top navigation bar of the application."
-      >
-        <span class="demo-logo">MyApp</span>
-        <nav class="demo-nav">
-          <a>Home</a>
-          <a>Projects</a>
-          <a>Contact</a>
-        </nav>
-      </header>
+ 
+  <header
+    class="demo-header"
+    piprTourStep="basic-1"
+    [tourId]="TOUR_ID"
+    [order]="1"
+    title="Navigation"
+    content="This is the top navigation bar. Use it to explore different sections."
+    [placement]="TooltipPlacement.BOTTOM"
+    [spotlight]="SpotlightVariant.FULL"
+    [pulse]="PulseVariant.PRIMARY"
+  >
+    <span class="logo">MyApp</span>
+    <nav>
+      <a>Home</a>
+      <a>Projects</a>
+      <a>Contact</a>
+    </nav>
+  </header>
 
-      <main class="demo-main">
-        <section
-          class="demo-card"
-          [piprTourStep]="'content'"
-          [tourId]="'basic-tour'"
-          [order]="2"
-          title="Main content"
-          content="Your projects and recent activity appear here."
-        >
-          <h3>Recent projects</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </section>
+  <main class="demo-main">
+    <section
+      class="demo-card"
+      piprTourStep="basic-2"
+      [tourId]="TOUR_ID"
+      [order]="2"
+      title="Main content"
+      content="Your projects and recent activity appear in this area."
+      [placement]="TooltipPlacement.RIGHT"
+      [spotlight]="SpotlightVariant.SUBTLE"
+      [pulse]="PulseVariant.SECONDARY"
+    >
+      <h3>Recent projects</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </section>
 
-        <aside
-          class="demo-sidebar"
-          [piprTourStep]="'sidebar'"
-          [tourId]="'basic-tour'"
-          [order]="3"
-          title="Sidebar"
-          content="Use the sidebar to filter and navigate between sections."
-          [placement]="TooltipPlacement.LEFT"
-        >
-          <ul>
-            <li>All projects</li>
-            <li>Archived</li>
-            <li>Settings</li>
-          </ul>
-        </aside>
-      </main>
+    <aside
+      class="demo-sidebar"
+      piprTourStep="basic-3"
+      [tourId]="TOUR_ID"
+      [order]="3"
+      title="Sidebar"
+      content="Use the sidebar to filter and navigate between sections."
+      [placement]="TooltipPlacement.LEFT"
+      [spotlight]="SpotlightVariant.FULL"
+      [pulse]="PulseVariant.ACCENT"
+    >
+      <ul>
+        <li>All projects</li>
+        <li>Archived</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+  </main>
 
-      <div class="demo-actions">
-        <button class="btn-primary" (click)="start()">Start tour</button>
-        <button class="btn-ghost" (click)="restart()">Restart tour</button>
-      </div>
-    </div>
+  <div class="demo-actions">
+    <button class="btn-primary" (click)="start()">Start tour</button>
+    <button class="btn-ghost"   (click)="restart()">Restart tour</button>
+  </div>
+</div>

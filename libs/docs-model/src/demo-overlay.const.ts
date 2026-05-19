@@ -1,6 +1,6 @@
 import { ComponentDoc } from './component-details.interface';
 
-import { TourBasicExampleComponent } from '@docs/demo-overlay';
+import { HintInviteExampleComponent, HintTriggersExampleComponent, TourAnchorSelectorExampleComponent, TourBasicExampleComponent, TourCustomTemplateExampleComponent, TourEventsExampleComponent, TourRoutingExampleComponent, TourSpotlightExampleComponent } from '@docs/demo-overlay';
 // import { TourRoutingExampleComponent }         from '@docs/pipr-tour/tour-routing-example.component';
 // import { TourSpotlightExampleComponent }       from '@docs/pipr-tour/tour-spotlight-example.component';
 // import { TourCustomTemplateExampleComponent }  from '@docs/pipr-tour/tour-custom-template-example.component';
@@ -15,10 +15,11 @@ export const demoOverlayDoc: ComponentDoc = {
     id: 'demo-overlay',
     title: 'Tour & Hint',
     description:
-      'Onboarding guide system with sequential tours and lazy contextual hints. ' +
-      'Supports spotlight effects, custom templates, cross-route navigation, ' +
-      'multiple trigger strategies, and a fully overridable persistence layer.',
-    thumbnail: 'assets/images/component-demo/pipr-tour-icon.png',
+      'Two-mode onboarding system. Tours are sequential, exclusive step queues ' +
+      'with progress tracking and optional cross-route navigation. Hints are lazy, ' +
+      'independent contextual tooltips triggered by viewport entry, hover, delay, ' +
+      'idle time, or programmatically.',
+    thumbnail: 'assets/images/component-demo/demo-overlay-icon.png',
   },
   overview: {
     sections: [
@@ -27,12 +28,13 @@ export const demoOverlayDoc: ComponentDoc = {
         id: 'overview',
         title: 'Overview',
         content: `
-**pipr-tour** is a two-mode onboarding system:
+**pipr-tour** is a two-mode onboarding system built for Angular 17+.
 
-- **Tour** — a sequential, exclusive queue of steps. One active at a time. Rendered with a progress indicator, keyboard navigation, and optional cross-route navigation.
-- **Hint** — lazy, independent contextual tooltips. Each hint activates on its own trigger (viewport entry, hover, delay, idle, or manually) and is suppressed automatically when a tour is running.
+**Tour** — a sequential, exclusive queue of steps controlled by \`PiprTourService\`. Only one tour runs at a time. Each step is registered via \`[piprTourStep]\` and can navigate to a different route before appearing. Keyboard navigation (← → Escape) is supported out of the box.
 
-Both modes share the same overlay infrastructure (spotlight, pulse ring, tooltip) and the same persistence interface — seen state is stored per \`userId\` and defaults to \`localStorage\`.
+**Hint** — lazy, independent contextual tooltips. Each hint has its own trigger strategy (\`ON_VIEWPORT_ENTRY\`, \`ON_HOVER\`, \`ON_DELAY\`, \`ON_IDLE\`, \`MANUAL\`) and is automatically suppressed while a tour is running.
+ 
+Both modes share the same overlay infrastructure: spotlight backdrop, animated pulse ring, and a composable tooltip that accepts plain text, a \`TemplateRef\`, or a dynamic component as content.
         `.trim(),
       },
       {
@@ -40,15 +42,16 @@ Both modes share the same overlay infrastructure (spotlight, pulse ring, tooltip
         id: 'setup',
         title: 'Setup',
         content: `
-Register the system once in your \`app.config.ts\`:
-
+Register the system once in \`app.config.ts\`:
+ 
 \`\`\`ts
-import { providePiprTour } from '@pipr/tour';
-
+import { providePiprTour, SpotlightVariant, PulseVariant } from '@pipr/tour';
+ 
 export const appConfig: ApplicationConfig = {
   providers: [
     providePiprTour({
-      userId: 'browser',            // or inject your auth userId
+      userId: 'browser',            // or your auth user ID
+      onUnexpectedNavigation: 'skip', // 'skip' | 'pause' | 'ignore'
       defaults: {
         spotlight:     SpotlightVariant.FULL,
         pulse:         PulseVariant.PRIMARY,
@@ -63,8 +66,8 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 \`\`\`
-
-\`providePiprTour()\` mounts \`PiprTourOverlayComponent\` directly to \`document.body\` via \`APP_INITIALIZER\` and \`createComponent()\`, so it is never affected by ancestor \`overflow: hidden\` or \`z-index\` stacking contexts.
+ 
+\`providePiprTour()\` mounts \`PiprTourOverlayComponent\` directly to \`document.body\` via \`APP_INITIALIZER\`, so it is never affected by ancestor \`overflow: hidden\` or \`z-index\` stacking contexts.
         `.trim(),
       },
       {
@@ -261,7 +264,7 @@ providePiprTour({
     ],
   },
 
-  // ─── API ──────────────────────────────────────────────────────────────────
+  // - API ----------------------
 
   api: {
     inputs: [
@@ -411,7 +414,7 @@ providePiprTour({
     outputs: [],
   },
 
-  // ─── Examples index ───────────────────────────────────────────────────────
+  // - Examples index -------------------
 
   examples: [
     {
@@ -425,49 +428,49 @@ providePiprTour({
       id: 'tour-spotlight',
       title: 'Spotlight variants',
       description: 'All SpotlightVariant + PulseVariant combinations side by side.',
-      component: TourBasicExampleComponent, //component: TourSpotlightExampleComponent,
+      component: TourSpotlightExampleComponent,
       source: { ts: true, html: true },
     },
     {
       id: 'tour-custom-template',
       title: 'Custom templates',
       description: 'TemplateRef content — rich HTML, media placeholder, checklist.',
-      component: TourBasicExampleComponent, //component: TourCustomTemplateExampleComponent,
+      component: TourCustomTemplateExampleComponent,
       source: { ts: true, html: true, scss: true },
     },
     {
       id: 'tour-routing',
       title: 'Cross-route tour',
       description: 'Steps with [route] input triggering router navigation.',
-      component: TourBasicExampleComponent, //component: TourRoutingExampleComponent,
+      component: TourRoutingExampleComponent,
       source: { ts: true, html: true },
     },
     {
       id: 'tour-anchor-selector',
       title: 'Anchor selector',
       description: 'Directive on container, pulse and tooltip on a child element.',
-      component: TourBasicExampleComponent, //component: TourAnchorSelectorExampleComponent,
+      component: TourAnchorSelectorExampleComponent,
       source: { ts: true, html: true, scss: true },
     },
     {
       id: 'hint-triggers',
       title: 'Hint trigger strategies',
       description: 'All five TourTrigger values demonstrated side by side.',
-      component: TourBasicExampleComponent, //component: HintTriggersExampleComponent,
+      component: HintTriggersExampleComponent,
       source: { ts: true, html: true, scss: true },
     },
     {
       id: 'hint-invite',
       title: 'Hint invite flow',
       description: 'START_AFTER_INVITE with anchorSelector targeting inner elements.',
-      component: TourBasicExampleComponent, //component: HintInviteExampleComponent,
+      component: HintInviteExampleComponent,
       source: { ts: true, html: true, scss: true },
     },
     {
       id: 'tour-events',
       title: 'Events stream',
       description: 'Live events$ log + MemoryTourStorage custom implementation.',
-      component: TourBasicExampleComponent, //component: TourEventsExampleComponent,
+      component: TourEventsExampleComponent,
       source: { ts: true, html: true, scss: true },
     },
   ],

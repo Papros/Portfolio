@@ -10,9 +10,13 @@ import { PiprTourService, TourTrigger, SpotlightVariant, PulseVariant } from '@p
   styleUrls: ['./basic-demo-overlay.component.scss'],
 })
 export class TourBasicExampleComponent {
+  public readonly TOUR_ID          = 'basic-tour';
+  public readonly TooltipPlacement = TooltipPlacement;
+  public readonly SpotlightVariant = SpotlightVariant;
+  public readonly PulseVariant     = PulseVariant;
+ 
   private readonly tourService = inject(PiprTourService);
-  protected readonly TooltipPlacement = TooltipPlacement;
-  
-  start():   void { this.tourService.startTour('basic-tour'); }
-  restart(): void { this.tourService.restartTour('basic-tour'); }
+ 
+  start():   void { this.tourService.startTour(this.TOUR_ID); }
+  restart(): void { this.tourService.restartTour(this.TOUR_ID); }
 }
