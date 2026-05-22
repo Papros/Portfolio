@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 const { join } = require('path');
 
 module.exports = {
