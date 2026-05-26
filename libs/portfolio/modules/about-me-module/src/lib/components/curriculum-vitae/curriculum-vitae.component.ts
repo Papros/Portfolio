@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   HostBinding,
+  inject,
   Input,
   OnInit,
   signal,
@@ -29,6 +30,16 @@ import {
   ThemeSelectorComponent,
 } from '@portfolio/customization';
 import { FooterComponent } from '@portfolio/shared-pack/components';
+import {
+  PiprAnchorDirective,
+  PiprHintDirective,
+  PiprTourService,
+  PiprTourStepDirective,
+  PulseVariant,
+  TooltipPlacement,
+  TourTrigger,
+  TourTriggerAction,
+} from '@papros-it/demo-overlay';
 
 @Component({
   selector: 'lib-curriculum-vitae',
@@ -42,12 +53,18 @@ import { FooterComponent } from '@portfolio/shared-pack/components';
     ThemeSelectorComponent,
     LanguageSelectorComponent,
     FooterComponent,
+    PiprHintDirective,
+    PiprTourStepDirective,
+    PiprAnchorDirective,
   ],
   providers: [provideTranslocoScope({ scope: 'cv', alias: 'cv' })],
   templateUrl: './curriculum-vitae.component.html',
   styleUrl: './curriculum-vitae.component.scss',
 })
 export class CurriculumVitaeComponent implements OnInit {
+  readonly TourTrigger = TourTrigger;
+  readonly TourTriggerAction = TourTriggerAction;
+
   @Input()
   cvDate: CurriculumVitaeInterface | null = cvDefault;
 
@@ -56,6 +73,17 @@ export class CurriculumVitaeComponent implements OnInit {
   readonly hoveredSkill = signal<string | null>(null);
   readonly printMode = signal<'color' | 'bw'>('color');
   readonly currentYear = new Date().getFullYear();
+
+  readonly tourService = inject(PiprTourService);
+
+  readonly TOUR_ID = 'CV-walkthrough';
+
+  get tourActive() {
+    return this.tourService.isActive();
+  }
+
+  readonly PulseVariant = PulseVariant;
+  readonly TooltipPlacement = TooltipPlacement;
 
   @HostBinding('class.dark-mode')
   get darkModeClass(): boolean {
@@ -97,6 +125,10 @@ export class CurriculumVitaeComponent implements OnInit {
         '(prefers-color-scheme: dark)',
       ).matches;
     }
+  }
+
+  startTour() {
+    this.tourService.restartTour(this.TOUR_ID);
   }
 
   toggleTheme(): void {

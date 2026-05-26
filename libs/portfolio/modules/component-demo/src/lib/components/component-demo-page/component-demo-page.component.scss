@@ -106,29 +106,6 @@ lib-navigation-bar {
   }
 }
 
-.mobile-menu-btn {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: get-color(text-primary);
-
-  @media (max-width: 767px) {
-    display: flex;
-  }
-}
-
-::ng-deep .mobile-only {
-  display: none;
-
-  @media (max-width: 767px) {
-    display: inline-flex;
-  }
-}
-
 [data-section='design-system'] {
   ::ng-deep lib-simple-menu {
     .simple-menu-container {

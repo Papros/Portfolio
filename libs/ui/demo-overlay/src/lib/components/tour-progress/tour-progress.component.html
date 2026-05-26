@@ -1,0 +1,25 @@
+<div
+  class="progress"
+  role="progressbar"
+  [attr.aria-valuenow]="current()"
+  [attr.aria-valuemax]="total()"
+>
+  <ng-container *ngIf="total() <= 10; else barMode">
+    <div class="progress__dots">
+      <span
+        *ngFor="let _ of dots; let i = index"
+        class="progress__dot"
+        [class.progress__dot--active]="i + 1 === current()"
+        [class.progress__dot--done]="i + 1 < current()"
+      ></span>
+    </div>
+    <span class="progress__label">{{ current() }} / {{ total() }}</span>
+  </ng-container>
+
+  <ng-template #barMode>
+    <div class="progress__bar-track">
+      <div class="progress__bar-fill" [style.width.%]="progress() * 100"></div>
+    </div>
+    <span class="progress__label">{{ current() }} / {{ total() }}</span>
+  </ng-template>
+</div>

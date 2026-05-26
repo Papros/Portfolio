@@ -576,7 +576,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 @media (max-width: 768px) {
-  .print-fab {
+  .action-fab {
     position: static !important;
     bottom: auto;
     right: auto;
@@ -591,12 +591,12 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
     }
   }
 
-  .print-fab__toggle {
+  .action-fab__toggle {
     width: 30px;
     height: 30px;
   }
 
-  .print-fab__print {
+  .action-fab__print {
     height: 30px;
     padding: 0 10px;
     font-size: 11px;
@@ -608,7 +608,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
     grid-template-columns: 1fr;
   }
 
-  .print-fab.desktop-only {
+  .action-fab.desktop-only {
     display: none;
   }
 
@@ -686,7 +686,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 // === Floating print buttons ===================================================
-.print-fab {
+.action-fab {
   position: fixed;
   top: 32px;
   right: 32px;
@@ -710,34 +710,50 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   }
 }
 
-.print-fab__toggle {
+.action-fab__group {
+  display: flex;
+  flex-direction: row;
+
+  .action-fab__toggle {
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+  }
+
+  .action-fab__print {
+    border-radius: 0 10px 10px 0;
+    border-left: none;
+  }
+
+  .action-fab__toggle,
+  .action-fab__print {
+    height: 36px;
+    padding: 0 14px;
+    background: get-color(neutral-bg);
+    border-color: get-color(neutral-border);
+    color: get-color(text-primary);
+    font-size: 13px;
+    font-weight: 500;
+
+    &:hover {
+      background: get-color(accent-vibrant-dark);
+    }
+  }
+}
+
+.action-fab__action {
   width: 36px;
   height: 36px;
   justify-content: center;
-  background: get-color(neutral-card);
-  border-color: get-color(neutral-border-hover);
-  color: get-color(neutral-border);
+  background: get-color(neutral-bg-deep);
+  border-color: get-color(neutral-border);
+  color: get-color(text-primary);
 
   &:hover {
     background: get-color(accent-vibrant-dark);
   }
 }
 
-.print-fab__print {
-  height: 36px;
-  padding: 0 14px;
-  background: get-color(neutral-card);
-  border-color: get-color(neutral-border-hover);
-  color: get-color(neutral-border);
-  font-size: 13px;
-  font-weight: 500;
-
-  &:hover {
-    background: get-color(accent-vibrant-dark);
-  }
-}
-
-.print-fab__label {
+.action-fab__label {
   font-size: 13px;
 }
 
@@ -748,7 +764,7 @@ $cv-font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
   }
 
   .hobby-section,
-  .print-fab,
+  .action-fab,
   .avatar-wrap,
   .print-none {
     display: none !important;

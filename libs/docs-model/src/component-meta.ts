@@ -15,4 +15,13 @@ export const COMPONENT_META: ComponentMeta[] = [
       'A segmented control for selecting one value from a fixed set. Supports icons, projected content, and collapsible expand modes.',
     thumbnail: 'assets/images/component-demo/multistate-slider-icon.png',
   },
+  {
+    id: 'demo-overlay',
+    title: 'Tour & Hint',
+    description:
+      'Onboarding guide system with sequential tours and lazy contextual hints. ' +
+      'Supports spotlight effects, custom templates, cross-route navigation, ' +
+      'multiple trigger strategies, and a fully overridable persistence layer.',
+    thumbnail: 'assets/images/component-demo/demo-overlay-icon.png',
+  }
 ];

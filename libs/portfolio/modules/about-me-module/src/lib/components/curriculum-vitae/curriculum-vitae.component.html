@@ -4,6 +4,15 @@
     class="cv-container"
     data-section="cv"
     [class.dark-mode]="isDarkMode"
+
+    piprTourStep="CV_1"
+    [placement]="TooltipPlacement.TOP"
+    [pulse]="PulseVariant.NONE"
+    anchorSelector=".cv-header"
+    [tourId]="TOUR_ID"
+    [order]="1"
+    title="Intro"
+    content="CV zwykle nie wymaga tłumaczenia. Potraktuj to jako demo systemu Tour będącego elementem mojego design-system. </br></br> Jeśli nie jesteś zainteresowany/ana -> śmiało możesz zamknąć tutorial [x]"
   >
     <aside class="cv-sidebar">
       <div class="sidebar-inner">
@@ -25,13 +34,13 @@
           <p class="profile-role">{{ subtitle }}</p>
 
           <div
-            class="print-fab mobile-only"
-            [class.print-fab--bw]="printMode() === 'bw'"
+            class="action-fab mobile-only"
+            [class.action-fab--bw]="printMode() === 'bw'"
           >
             <lib-language-selector></lib-language-selector>
             <lib-theme-selector></lib-theme-selector>
             <button
-              class="print-fab__toggle"
+              class="action-fab__toggle"
               (click)="togglePrintMode()"
               [attr.aria-label]="
                 printMode() === 'color'
@@ -49,13 +58,13 @@
               </mat-icon>
             </button>
             <button
-              class="print-fab__print"
+              class="action-fab__print"
               (click)="printCV()"
               [attr.aria-label]="t('actions.print')"
               [attr.title]="t('actions.print')"
             >
               <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-              <span class="print-fab__label">
+              <span class="action-fab__label">
                 {{
                   printMode() === 'bw'
                     ? t('actions.print_bw')
@@ -110,7 +119,15 @@
           </div>
         </div>
 
-        <div class="sidebar-section" *ngIf="sortedSkills.length > 0">
+        <div
+          class="sidebar-section"
+          *ngIf="sortedSkills.length > 0"
+          piprTourStep="CV_2"
+          [tourId]="TOUR_ID"
+          [order]="2"
+          title="Techstack"
+          content="To stack technologiczny z którym jestem zaznajomiony, technologie uszeregowane są w kolejności poznanego zakresu. Najedź na technologię żeby zobaczyć w których projektach z niej korzystałem"
+        >
           <span class="sidebar-label">{{ t('sections.skills') }}</span>
           <div class="skills-grid">
             <span
@@ -143,7 +160,7 @@
           </div>
         </div>
 
-        <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby?.length">
+        <div class="sidebar-section hobby-section" *ngIf="cvDate.hobby.length">
           <span class="sidebar-label">{{ t('sections.interests') }}</span>
           <div class="hobby-list">
             <div *ngFor="let h of cvDate.hobby" class="hobby-item">
@@ -173,7 +190,7 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="timeline">
+        <div class="timeline" piprAnchor="cv-timeline">
           <div
             *ngFor="let job of cvDate.jobHistory; let i = index"
             class="timeline-entry"
@@ -238,45 +255,119 @@
         </div>
       </section>
 
-      <lib-footer></lib-footer>
+      <div
+        [piprHint]="'cv-section'"
+        [trigger]="TourTrigger.ON_VIEWPORT_ENTRY"
+        title="Do not stop here!"
+        [persist]="false"
+        [placement]="TooltipPlacement.TOP"
+        anchorId="menu-action"
+        anchorSelector=".menu-action-anchor"
+        content="Click to find more about my work!"></div>
+
+      <lib-footer piprAnchor="menu-action"></lib-footer>
+
+      <ng-template #footerHint>
+        <p>Click here to explore more of my work!</p>
+      </ng-template>
     </main>
 
-    <div class="print-fab desktop-only print-fab--bw">
+    <div class="action-fab desktop-only action-fab--bw">
+      <button
+        *ngIf="!tourActive"
+        class="action-fab__action"
+        (click)="startTour()"
+        [attr.aria-label]="t('actions.tutorial')"
+        [attr.title]="t('actions.tutorial')"
+      >
+        <mat-icon fontSet="material-icons-outlined"> help </mat-icon>
+      </button>
+
       <lib-language-selector></lib-language-selector>
       <lib-theme-selector></lib-theme-selector>
-      <button
-        class="print-fab__toggle"
-        (click)="togglePrintMode()"
-        [attr.aria-label]="
-          printMode() === 'color'
-            ? t('actions.switch_bw')
-            : t('actions.switch_color')
-        "
-        [attr.title]="
-          printMode() === 'color'
-            ? t('actions.print_bw')
-            : t('actions.print_color')
-        "
-      >
-        <mat-icon fontSet="material-icons-outlined">
-          {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
-        </mat-icon>
-      </button>
-      <button
-        class="print-fab__print"
-        (click)="printCV()"
-        [attr.aria-label]="t('actions.print')"
-        [attr.title]="t('actions.print')"
-      >
-        <mat-icon fontSet="material-icons-outlined">print</mat-icon>
-        <span class="print-fab__label">
-          {{
-            printMode() === 'bw'
+
+      <div class="action-fab__group">
+        <button
+          class="action-fab__toggle"
+          (click)="togglePrintMode()"
+          [attr.aria-label]="
+            printMode() === 'color'
+              ? t('actions.switch_bw')
+              : t('actions.switch_color')
+          "
+          [attr.title]="
+            printMode() === 'color'
               ? t('actions.print_bw')
               : t('actions.print_color')
-          }}
-        </span>
-      </button>
+          "
+        >
+          <mat-icon fontSet="material-icons-outlined">
+            {{ printMode() === 'color' ? 'home' : 'dark_mode' }}
+          </mat-icon>
+        </button>
+        <button
+          class="action-fab__print"
+          (click)="printCV()"
+          [attr.aria-label]="t('actions.print')"
+          [attr.title]="t('actions.print')"
+        >
+          <mat-icon fontSet="material-icons-outlined">print</mat-icon>
+          <span class="action-fab__label">
+            {{
+              printMode() === 'bw'
+                ? t('actions.print_bw')
+                : t('actions.print_color')
+            }}
+          </span>
+        </button>
+      </div>
     </div>
+
+    <div
+      piprTourStep="CV_3"
+      [tourId]="TOUR_ID"
+      [order]="3"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      title="Timeline"
+      anchorId="cv-timeline"
+      content="Sekcja timeline zawiera opisy projektów w których pracowałem."
+    ></div>
+
+    <div
+      piprTourStep="CV_4"
+      [tourId]="TOUR_ID"
+      [order]="4"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      title="Entry details: Description"
+      anchorId="cv-timeline"
+      anchorSelector=".timeline-entry:first-of-type > .tl-content"
+      content="Opis projektu i wykorzystywany stack-technologiczny"
+    ></div>
+
+    <div
+      piprTourStep="CV_5"
+      [tourId]="TOUR_ID"
+      [order]="5"
+      [pulse]="PulseVariant.SECONDARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Entry details: Link"
+      anchorId="cv-timeline"
+      anchorSelector=".timeline-entry:first-of-type > .tl-content"
+      pulseSelector=".timeline-entry:first-of-type .tl-header .tl-link"
+      content="Zawiera również link do strony firmy"
+    ></div>
+
+    <div
+      piprTourStep="CV_6"
+      [tourId]="TOUR_ID"
+      [order]="6"
+      [placement]="TooltipPlacement.TOP"
+      title="Thank you!"
+      anchorId="menu-action"
+      pulseSelector=".menu-action-anchor"
+      content="Po wszystkim koniecznie zajrzyj do menu. Znajdziesz tam więcej moich prac - próbki design systemu i inne aplikacje które tworzę"
+    ></div>
   </div>
 </ng-container>

@@ -17,10 +17,13 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@angular/build:unit-test",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
-        "jestConfig": "libs/portfolio/modules/about-me-module/jest.config.ts"
+        "tsConfig": "libs/portfolio/modules/about-me-module/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "lint": {
