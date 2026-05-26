@@ -33,7 +33,6 @@ export const appConfig: ApplicationConfig = {
       inject(ThemeService);
     }),
     ...persistenceProviders,
-    provideHttpClient(),
     provideTransloco({
       config: {
         availableLangs: ['en', 'pl'],
