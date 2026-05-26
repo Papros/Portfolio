@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=/Portfolio/" />
+    <script>
+      const segmentCount = 1;
+      const locationParts = window.location.pathname.split('/');
+      const redirect =
+        window.location.origin +
+        '/' +
+        locationParts.slice(1, segmentCount + 1).join('/') +
+        '/?redirect=' +
+        locationParts.slice(segmentCount + 1).join('/');
+      window.location.replace(redirect);
+    </script>
+  </head>
+</html>
