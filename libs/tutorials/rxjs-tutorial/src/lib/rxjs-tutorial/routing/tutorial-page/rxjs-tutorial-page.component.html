@@ -15,7 +15,7 @@
         @for (ch of challenges; track ch.id) {
           <button
             class="dot"
-            [class.is-active]="ch.id === challenge()?.id"
+            [class.is-active]="ch.id === challenge().id"
             [title]="ch.title"
             (click)="goTo(ch.id)"
           ></button>

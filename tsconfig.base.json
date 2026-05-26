@@ -4,7 +4,7 @@
     "rootDir": ".",
     "sourceMap": false,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -21,6 +21,8 @@
       "@environments": ["apps/portfolio/src/environments/index.ts"],
       "@papros-it": ["libs/ui/index.ts"],
       "@papros-it/*": ["libs/ui/*/src/index.ts"],
+      "@papros-it/demo-overlay": ["libs/ui/demo-overlay/src/index.ts"],
+      "@pipr-it/demo-overlay": ["libs/ui/demo-overlay/src/index.ts"],
       "@portfolio/about-me-module": [
         "libs/portfolio/modules/about-me-module/src/index.ts"
       ],

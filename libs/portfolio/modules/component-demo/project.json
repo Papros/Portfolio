@@ -7,10 +7,13 @@
   "tags": [],
   "targets": {
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@angular/build:unit-test",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
-        "jestConfig": "libs/portfolio/modules/component-demo/jest.config.ts"
+        "tsConfig": "libs/portfolio/modules/component-demo/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "lint": {

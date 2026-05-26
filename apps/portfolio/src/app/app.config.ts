@@ -14,6 +14,7 @@ import { ThemeService } from '@portfolio/customization';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import { APP_BASE_HREF } from '@angular/common';
+import { providePiprTour } from '@papros-it/demo-overlay';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,6 +41,9 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
+    }),
+    providePiprTour({
+      userId: 'browser',
     }),
   ],
 };

@@ -92,5 +92,6 @@
       "style": "scss"
     }
   },
-  "useLegacyCache": true
+  "useLegacyCache": true,
+  "analytics": false
 }
