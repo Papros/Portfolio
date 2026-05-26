@@ -41,7 +41,7 @@ jobs:
         run: npx nx lint portfolio --skip-nx-cloud
 
       - name: Test
-        run: npx nx test portfolio --skip-nx-cloud
+        run: npx nx test portfolio
 
       # Version update for Angular app
       - name: Inject build version

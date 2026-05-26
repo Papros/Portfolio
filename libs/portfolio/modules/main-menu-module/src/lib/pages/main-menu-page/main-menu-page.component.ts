@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridMenuComponent, GridSlotDirective } from '@papros-it/grid-menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,8 @@ import {
   TourTrigger,
   TourTriggerAction,
 } from '@papros-it/demo-overlay';
+import { auditTime, catchError, debounceTime, distinctUntilChanged, repeat, retry, Subject, switchMap, takeUntil, throttle, throttleTime } from 'rxjs';
+import { race, raceWith } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-main-menu-page',

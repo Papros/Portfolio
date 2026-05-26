@@ -7,12 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser-esbuild",
+      "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portfolio",
         "index": "apps/portfolio/src/index.html",
-        "main": "apps/portfolio/src/main.ts",
+        "browser": "apps/portfolio/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/portfolio/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -57,9 +57,7 @@
           "extractLicenses": true
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
@@ -92,10 +90,11 @@
       "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@angular/build:unit-test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/portfolio/jest.config.ts"
+        "tsConfig": "apps/portfolio/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "serve-static": {
