@@ -3,8 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      const path = window.location.pathname.replace('/Portfolio', '');
-      window.location.replace('/Portfolio' + path + window.location.search + window.location.hash);
+      var segmentCount = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.host +
+        l.pathname.split('/').slice(0, segmentCount + 1).join('/') +
+        '/?redirect=' + encodeURIComponent(
+          l.pathname.split('/').slice(segmentCount + 1).join('/') +
+          l.search + l.hash
+        )
+      );
     </script>
   </head>
 </html>
