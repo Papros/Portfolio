@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var redirect = new URLSearchParams(window.location.search).get('redirect');
+        if (redirect) {
+          var base = '/Portfolio';
+          history.replaceState(
+            null, '',
+            base + '/' + decodeURIComponent(redirect)
+          );
+        }
+      })();
+    </script>
     <meta charset="utf-8" />
     <title>Portfolio</title>
     <base href="/Portfolio" />
