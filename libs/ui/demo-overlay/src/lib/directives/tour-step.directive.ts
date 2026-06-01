@@ -36,6 +36,9 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
   readonly draggable = input<boolean>(true);
   readonly scrollIntoView = input<boolean>(true);
 
+  readonly setup = input<(() => void) | undefined>(undefined)
+  readonly cleanup = input<(() => void) | undefined>(undefined)
+
   private readonly tourService = inject(PiprTourService);
   private readonly elementRef = inject<ElementRef<Element>>(ElementRef);
 
@@ -59,8 +62,14 @@ export class PiprTourStepDirective implements OnInit, OnDestroy {
         anchorSelector: this.anchorSelector(),
         pulseSelector: this.pulseSelector(),
         anchorId: this.anchorId(),
+        setup: this.setup(),
+        cleanup: this.cleanup()
       },
     );
+
+    if(this.setup() || this.cleanup()) {
+      console.log('SETUP | CELANUP CALLBACK DEFINED IN: ', this.piprTourStep());
+    }
   }
 
   ngOnDestroy(): void {

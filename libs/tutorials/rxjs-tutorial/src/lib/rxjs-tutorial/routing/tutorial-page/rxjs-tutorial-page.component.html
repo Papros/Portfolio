@@ -1,8 +1,18 @@
-<div class="rxjs-page">
+<div class="rxjs-page" *transloco="let t; scope: 'cv'; prefix: 'cv'">
   <nav class="top-nav">
     <a class="nav-back" href="/Portfolio/tutorials">← Tutorials</a>
 
     <div class="challenge-nav">
+
+      <button
+        class="action-fab__action"
+        (click)="startTour()"
+        [attr.aria-label]="t('actions.tutorial')"
+        [attr.title]="t('actions.tutorial')"
+      >
+        <mat-icon fontSet="material-icons-outlined"> help </mat-icon>
+      </button>
+      
       <button
         class="nav-btn"
         [disabled]="!hasPrev"
@@ -32,7 +42,7 @@
     </div>
   </nav>
 
-  <div class="challenge-area">
+  <div class="challenge-area" piprAnchor="rxjs-challenge">
     <lib-challenge-container
       [initChallenge]="challenge()!"
       [nextChallenge]="meta().next"
@@ -41,3 +51,93 @@
     />
   </div>
 </div>
+
+ <div id="tutorial-hooks">
+  <div
+      piprTourStep="RXJS_1"
+      [tourId]="TOUR_ID"
+      [order]="1"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".canvas-panel"
+      content="Ten kurs ma przybliżyć działanie selektorów RxJS"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_2"
+      [tourId]="TOUR_ID"
+      [order]="2"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".track-wrapper:first-of-type"
+      content="Na symulację składa się: marble track, na którym prezentowane są dane wejściowe"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_3"
+      [tourId]="TOUR_ID"
+      [order]="3"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".track-wrapper:first-of-type"
+      pulseSelector=".marble"
+      content="Marble odzwierciedla pojedyńczą emisję danych, pozycja na osi odzwierciedla czas emicji"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_4"
+      [tourId]="TOUR_ID"
+      [order]="4"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".track-wrapper:first-of-type"
+      pulseSelector=".complete-marker"
+      content="Stream może mieć znacznik complete, istotny w niektórych zadaniach. </br></br> Stream 'complete' nie wyemituje już danych"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_5"
+      [tourId]="TOUR_ID"
+      [order]="5"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".pipe-wrapper"
+      pulseSelector=".operator-chip"
+      content="Kolejnym elementem symulacji są operatory:</br>to zestaw funkcji przetwarzających stream. </br></br><b>map</b> dostarcza kod który zostanie wywołany dla każdej przychodzącej wartości</br>Podczas kursu poznasz wiele innych operatorów"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_6"
+      [tourId]="TOUR_ID"
+      [order]="6"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".canvas-panel > lib-marble-track"
+      content="Dolny track to wynik przetwarzania danych. </br> Każde zadanie wymaga:</br> dopasowania danych wejściowych,</br> dobrania odpowiadnich operatorów,</br> lub dopasowania wyjścia"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_7"
+      [tourId]="TOUR_ID"
+      [order]="7"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.RIGHT"
+      title="Basics"
+      anchorId="rxjs-challenge"
+      anchorSelector=".canvas-panel"
+      pulseSelector=".track-wrapper.--locked > mat-icon"
+      content="Cel zadania podany będzie w opisie pod tutułem. Jeśli track oznaczony jest kłódką, jego edycja nie jest przewidziana w ramach tego zadania"
+    ></div>
+  </div>

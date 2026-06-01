@@ -162,3 +162,94 @@
     />
   </div>
 </div>
+
+<div>
+  <div
+      piprTourStep="RXJS_8"
+      [tourId]="TOUR_ID"
+      [order]="8"
+      [pulse]="PulseVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      title="Basics"
+      anchorId="rxjs-challenge-form"
+      [setup]="formTourSourceSetup"
+      content="W sekcji bocznej możesz edytować dane: </br> Otweirasz ją klikając track lub bezpośrednio marble na nim"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_9"
+      [tourId]="TOUR_ID"
+      [order]="9"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Basics"
+      anchorId="rxjs-challenge-form"
+      pulseSelector=".form-row:nth-of-type(3)"
+      content="Label pełni też rolę value która przekazywana jest do operatorów"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_10"
+      [tourId]="TOUR_ID"
+      [order]="10"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Operatory"
+      anchorId="rxjs-challenge-form"
+      pulseSelector=".op-chips"
+      [setup]="formTourOperatorSetup"
+      content="Operatory możesz edytować klikając na nie, następnie wybierajac typ operatora którego chcesz dodać"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_11"
+      [tourId]="TOUR_ID"
+      [order]="11"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Operatory"
+      anchorId="rxjs-challenge-form"
+      pulseSelector=".form-row"
+      [cleanup]="formTourCleanup"
+      content="Musisz uzupełnić też kod operatora, możesz pisać tu składnią JavaScript"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_12"
+      [tourId]="TOUR_ID"
+      [order]="12"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Resoults"
+      anchorId="rxjs-challenge"
+      pulseSelector=".check-btn"
+      [setup]="formTourResoultSetup"
+      content="Po wszystkim sprawdź wynik klikając: <b>'Sprawdź'</b></br>"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_13"
+      [tourId]="TOUR_ID"
+      [order]="13"
+      [pulse]="PulseVariant.PRIMARY"
+      [placement]="TooltipPlacement.LEFT"
+      title="Resoults"
+      anchorId="rxjs-challenge"
+      pulseSelector=".feedback-bar"
+      [cleanup]="formTourCleanup"
+      content="Zobaczysz swój wynik i ewentualny feedback </br></br> Sprawdzana jest poprawnośc sekwencja, kolejność i zakończenie emisji.</br></br>Sygnatury czasowe mogą odbiegać od inputu i różnić się między kolejnymi uruchomieniami symulacji!"
+    ></div>
+
+    <div
+      piprTourStep="RXJS_14"
+      [tourId]="TOUR_ID"
+      [order]="14"
+      [pulse]="PulseVariant.NONE"
+      [spotlight]="SpotlightVariant.NONE"
+      [placement]="TooltipPlacement.LEFT"
+      anchorId="rxjs-challenge"
+      pulseSelector=".feedback-bar"
+      title="Thank you!"
+      content="To koniec instrukcji, powodzenia!"
+    ></div>
+</div>

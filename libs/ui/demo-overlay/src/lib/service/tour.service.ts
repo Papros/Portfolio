@@ -74,7 +74,6 @@ export class PiprTourService {
       elementRef,
       config,
     });
-
   }
 
   unregisterStep(stepId: string): void {
@@ -142,13 +141,17 @@ export class PiprTourService {
     this.tourStatus.set(TourStatus.ACTIVE);
     this.eventsSubject.next({ type: 'tourStarted', tourId });
 
-     this.watchForUnexpectedNavigation();
+    this.watchForUnexpectedNavigation();
     this.showStep(sorted.steps[0]);
   }
 
   async next(): Promise<void> {
     const tour = this.activeTour();
     if (!tour || !this.isActive()) return;
+
+    if(this.activeStep()?.cleanup) {
+      this.activeStep()?.cleanup?.();
+    }
 
     const nextIndex = this.currentIndex() + 1;
     if (nextIndex >= tour.steps.length) {
@@ -378,6 +381,11 @@ export class PiprTourService {
  
     const effective = this.resolveStep(step, tour);
     this.activeStep.set(effective);
+    
+
+     if(this.activeStep()?.setup) {
+      this.activeStep()?.setup?.();
+    }
  
     this.eventsSubject.next({
       type: 'stepChanged',
@@ -503,6 +511,8 @@ export class PiprTourService {
           anchorSelector: s.config.anchorSelector,
           pulseSelector: s.config.pulseSelector,
           anchorId: s.config.anchorId,
+          cleanup: s.config.cleanup,
+          setup: s.config.setup,
         }),
       );
 
