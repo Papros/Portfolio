@@ -19,10 +19,11 @@ import {
   StreamEvent,
 } from '../../interfaces/challenge.interface';
 import { OPERATOR_METADATA } from '../../interfaces/operator-meta.const';
+import { PiprAnchorDirective } from '@papros-it/demo-overlay';
 
 @Component({
   selector: 'lib-data-form',
-  imports: [CommonModule],
+  imports: [CommonModule, PiprAnchorDirective,],
   templateUrl: './data-form.component.html',
   styleUrl: './data-form.component.scss',
 })

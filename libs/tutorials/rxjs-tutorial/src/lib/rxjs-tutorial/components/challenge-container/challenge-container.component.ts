@@ -29,6 +29,7 @@ import {
   ChallengeResoults,
 } from '../../service/challenge-interpreter.service';
 import { MatIconModule } from '@angular/material/icon';
+import { TourTrigger, TourTriggerAction, SpotlightVariant, PulseVariant, TooltipPlacement, PiprAnchorDirective, PiprHintDirective, PiprTourStepDirective } from '@papros-it/demo-overlay';
 
 @Component({
   selector: 'lib-challenge-container',
@@ -39,6 +40,7 @@ import { MatIconModule } from '@angular/material/icon';
     PipeContainerComponent,
     DataFormComponent,
     MatIconModule,
+    PiprTourStepDirective,
   ],
   providers: [ChallengeInterpreterService],
   templateUrl: './challenge-container.component.html',
@@ -66,6 +68,14 @@ export class ChallengeContainerComponent implements OnDestroy {
   private playInterval: ReturnType<typeof setInterval> | null = null;
 
   panelFocus = signal<PanelFocus>(null);
+
+  //readonly tourService = inject(PiprTourService);
+  readonly TOUR_ID = 'rxjs-tutorial-walkthrough';
+  readonly TourTrigger = TourTrigger;
+  readonly TourTriggerAction = TourTriggerAction;
+  readonly SpotlightVariant = SpotlightVariant;
+  readonly PulseVariant     = PulseVariant;
+  readonly TooltipPlacement = TooltipPlacement;
 
   constructor() {
     effect(() => {
@@ -303,6 +313,25 @@ export class ChallengeContainerComponent implements OnDestroy {
         message: 'Nieoczekiwany błąd interpretera.',
       });
     }
+  }
+
+  //guide
+
+  formTourSourceSetup = () => {
+    this.panelFocus.set({ kind: 'source', index: 0});
+  }
+
+  formTourOperatorSetup = () => {
+    this.panelFocus.set({ kind: 'pipe', operatorIndex: 0});
+  }
+
+  formTourResoultSetup = () => {
+    this.checkAnswer();
+  }
+
+  formTourCleanup = () => {
+    this.panelFocus.set(null);
+    this.resoultFeedback.set(null);
   }
 
   // cleanup

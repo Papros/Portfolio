@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { HintDismissBehavior, IPiprTourStorage, PiprAnchorDirective, PiprHintDirective, PiprTourService, PiprTourStepDirective, PulseVariant, SpotlightVariant, TooltipPlacement, TourEvent, TourTrigger, TourTriggerAction } from '@papros-it/demo-overlay';
 import { Subscription } from 'rxjs';
 
@@ -21,7 +21,7 @@ interface LogEntry { type: string; detail: string; time: string; }
 @Component({
   selector: 'pipr-tour-events-example',
   standalone: true,
-  imports: [PiprTourStepDirective, NgFor, NgClass],
+  imports: [PiprTourStepDirective, NgFor, NgClass, CommonModule],
   template: `
     <div class="demo-layout">
       <p class="note">

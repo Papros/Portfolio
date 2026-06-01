@@ -6,10 +6,35 @@ import { map, Observable } from 'rxjs';
 import { RxJSChallenge } from '../../interfaces/challenge.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChallengeContainerComponent } from '../../components/challenge-container/challenge-container.component';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  PiprAnchorDirective,
+  PiprHintDirective,
+  PiprTourService,
+  PiprTourStepDirective,
+  PulseVariant,
+  SpotlightVariant,
+  TooltipPlacement,
+  TourTrigger,
+  TourTriggerAction,
+} from '@papros-it/demo-overlay';
+import {
+  provideTranslocoScope,
+  TranslocoModule,
+  TranslocoService,
+} from '@jsverse/transloco';
+import {
+  LanguageSelectorComponent,
+  ThemeSelectorComponent,
+} from '@portfolio/customization';
 
 @Component({
   selector: 'lib-rxjs-tutorial-page',
-  imports: [CommonModule, ChallengeContainerComponent],
+  imports: [CommonModule, ChallengeContainerComponent, MatIconModule, TranslocoModule, ThemeSelectorComponent,
+    LanguageSelectorComponent, PiprHintDirective,
+    PiprTourStepDirective,
+    PiprAnchorDirective,],
+  providers: [provideTranslocoScope({ scope: 'rxjs_tutorial', alias: 'rxjs' })],
   templateUrl: './rxjs-tutorial-page.component.html',
   styleUrl: './rxjs-tutorial-page.component.scss',
 })
@@ -18,6 +43,14 @@ export class RxjsTutorialPageComponent {
   private router = inject(Router);
 
   readonly challenges = ALL_CHALLENGES;
+
+  readonly tourService = inject(PiprTourService);
+  readonly TOUR_ID = 'rxjs-tutorial-walkthrough';
+  readonly TourTrigger = TourTrigger;
+  readonly TourTriggerAction = TourTriggerAction;
+  readonly SpotlightVariant = SpotlightVariant;
+  readonly PulseVariant     = PulseVariant;
+  readonly TooltipPlacement = TooltipPlacement;
 
   readonly challenge = toSignal(
     this.route.data.pipe(
@@ -48,6 +81,10 @@ export class RxjsTutorialPageComponent {
     ),
     { initialValue: 0 },
   );
+
+  startTour() {
+    this.tourService.restartTour(this.TOUR_ID);
+  }
 
   goTo(id: number): void {
     this.router.navigate(['..', id], { relativeTo: this.route });

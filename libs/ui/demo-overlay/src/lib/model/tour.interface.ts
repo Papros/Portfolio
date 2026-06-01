@@ -44,6 +44,10 @@ export interface TourStep extends TourStepContent {
    * @see PiprAnchorDirective
    */
   anchorId?: string; // selector for elements in registry
+  /** Function called before step activate */
+  setup?: () => void; // function called before step activate
+  /** Function called after step deactivated */
+  cleanup?: () => void; // function called after step deactivated
 }
 
 export interface TourConfig {
